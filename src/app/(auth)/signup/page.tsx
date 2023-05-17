@@ -116,6 +116,9 @@ export default function SignUp() {
           Repetir Senha
         </label>
       </div>
+      <button className="px-32 py-5 bg-button-sign rounded-xl mt-32">
+        CADATRAR
+      </button>
     </div>
   );
 }

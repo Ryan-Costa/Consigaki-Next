@@ -21,6 +21,9 @@ module.exports = {
       fontFamily: {
         karla: ['Karla', 'sans-serif'],
       },
+      translate: {
+        '88': '352px',
+      }
     },
     
   },
