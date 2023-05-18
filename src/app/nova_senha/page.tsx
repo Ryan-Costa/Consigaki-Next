@@ -131,22 +131,22 @@ export default function NewPassword() {
             src="/images/nova_senha.png"
             className="h-auto w-auto"
             priority
-            width={500}
-            height={500}
+            width={520}
+            height={520}
             alt="logo image"
           ></Image>
           <Image
             src="/images/bg-img-senha.png"
             className="absolute right-96 top-0 h-auto w-auto"
-            width={378}
-            height={367}
+            width={370}
+            height={370}
             alt="logo image"
           ></Image>
           <Image
             src="/images/bg-img-senha-2.png"
             className="absolute bottom-0 right-0 h-auto w-auto"
-            width={378}
-            height={367}
+            width={370}
+            height={370}
             alt="logo image"
           ></Image>
         </div>

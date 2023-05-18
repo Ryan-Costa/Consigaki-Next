@@ -17,6 +17,7 @@ module.exports = {
         deg3: '#ff0ffc',
         'click-here': '#EFC03F',
         'button-sign': '#2B3155',
+        'validate-text': '#2B3155',
       },
       fontFamily: {
         karla: ['Karla', 'sans-serif'],
