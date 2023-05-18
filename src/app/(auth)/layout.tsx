@@ -10,27 +10,27 @@ interface AuthLayoutProps {
 }
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  const [activeLink, setActiveLink] = useState("signin");
+  const [activeLink, setActiveLink] = useState("login");
 
   const handleLinkClick = (link: any) => {
     setActiveLink(link);
   };
 
   return (
-    <div className="bg-gradient-to-r from-deg2 to-deg1 w-full h-screen px-96 py-60 font-bold">
-      <nav className="text-white flex gap-16 justify-start mb-16">
+    <div className="h-screen w-full px-96 py-60 font-bold">
+      <nav className="mb-16 flex justify-start gap-16 text-white">
         <Link
-          href="/signin"
-          className={`nav ${activeLink === "signin" ? "active" : ""}`}
-          onClick={() => handleLinkClick("signin")}
+          href="/login"
+          className={`nav ${activeLink === "login" ? "active" : ""}`}
+          onClick={() => handleLinkClick("login")}
           passHref
         >
           LOGIN
         </Link>
         <Link
-          href="/signup"
-          className={`nav ${activeLink === "signup" ? "active" : ""}`}
-          onClick={() => handleLinkClick("signup")}
+          href="/cadastro"
+          className={`nav ${activeLink === "cadastro" ? "active" : ""}`}
+          onClick={() => handleLinkClick("cadastro")}
           passHref
         >
           CADASTRO

@@ -23,6 +23,9 @@ module.exports = {
       },
       translate: {
         '88': '352px',
+      },
+      spacing: {
+        '492': '492px'
       }
     },
     
