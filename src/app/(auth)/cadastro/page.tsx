@@ -219,7 +219,7 @@ export default function SignUp() {
           </div>
           <button
             type="submit"
-            className="mt-32 rounded-xl bg-button-sign px-32 py-5 uppercase opacity-80"
+            className="mb-32 mt-32 rounded-xl bg-button-sign px-32 py-5 uppercase opacity-80"
           >
             Cadastrar
           </button>

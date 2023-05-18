@@ -41,8 +41,10 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         <div className="">
           <Image
             src="/images/logo.png"
-            width={378}
-            height={367}
+            className="h-auto w-auto"
+            priority
+            width={500}
+            height={500}
             alt="logo image"
           ></Image>
         </div>

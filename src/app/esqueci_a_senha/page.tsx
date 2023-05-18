@@ -100,20 +100,22 @@ export default function ForgotPassword() {
         <div className="z-1 relative flex h-full w-5/12 items-center justify-center bg-white">
           <Image
             src="/images/cadeado.png"
+            className="h-auto w-auto"
+            priority
             width={500}
             height={500}
             alt="logo image"
           ></Image>
           <Image
             src="/images/bg-img-senha.png"
-            className="absolute right-96 top-0"
+            className="absolute right-96 top-0 h-auto w-auto"
             width={378}
             height={367}
             alt="logo image"
           ></Image>
           <Image
             src="/images/bg-img-senha-2.png"
-            className="absolute bottom-0 right-0"
+            className="absolute bottom-0 right-0 h-auto w-auto"
             width={378}
             height={367}
             alt="logo image"
