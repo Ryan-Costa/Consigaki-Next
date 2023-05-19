@@ -3,14 +3,10 @@
 import { FieldCpf } from "@/components/fieldCpf";
 import Link from "next/link";
 import { IconePass, IconeUser } from "../../../../public/icons";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-export const metadata = {
-  title: "Login",
-};
 
 const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
 
@@ -32,6 +28,11 @@ const createUserFormSchema = z.object({
 
 type CreateUserFormData = z.infer<typeof createUserFormSchema>;
 
+const defaultValues = {
+  cpf: "",
+  password: "",
+};
+
 export default function SignIn() {
   const [output, setOutput] = useState("");
   const {
@@ -40,37 +41,38 @@ export default function SignIn() {
     formState: { errors },
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
+    defaultValues,
   });
 
-  function createUser(data: any) {
+  const createUser: SubmitHandler<typeof defaultValues> = (data) => {
     setOutput(JSON.stringify(data, null, 2));
-  }
+  };
+
   return (
-    <>
-      <div className="mr-64 flex w-492 flex-col gap-6">
-        <form
-          onSubmit={handleSubmit(createUser)}
-          className="flex w-full flex-col"
-        >
-          <div className="relative z-0 mb-28 flex flex-col gap-1">
-            <input
-              type="text"
-              maxLength={14}
-              className={`
+    <div className="mr-64 flex w-492 flex-col gap-6">
+      <form
+        onSubmit={handleSubmit(createUser)}
+        className="flex w-full flex-col"
+      >
+        <div className="relative z-0 mb-28 flex flex-col gap-1">
+          <input
+            type="text"
+            maxLength={14}
+            className={`
                 peer block w-full appearance-none border-0 border-b-2 
                 border-white bg-transparent px-0 py-2.5 
                 text-sm text-white focus:border-white 
                 focus:outline-none focus:ring-0
               `}
-              placeholder=" "
-              {...register("cpf")}
-            />
-            {errors.cpf && (
-              <span className="text-sm text-red-500">{errors.cpf.message}</span>
-            )}
-            <label
-              htmlFor="pass"
-              className={`
+            placeholder=" "
+            {...register("cpf")}
+          />
+          {errors.cpf && (
+            <span className="text-sm text-red-500">{errors.cpf.message}</span>
+          )}
+          <label
+            htmlFor="pass"
+            className={`
               align-center absolute top-2 -z-10 flex origin-[0]
               -translate-y-6 scale-75 transform gap-2 text-lg text-white 
               duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
@@ -78,31 +80,31 @@ export default function SignIn() {
               peer-focus:-translate-y-6 peer-focus:scale-100
               peer-focus:text-white
             `}
-            >
-              {IconeUser} CPF
-            </label>
-          </div>
+          >
+            {IconeUser} CPF
+          </label>
+        </div>
 
-          <div className="relative z-0 mb-8 flex flex-col gap-1">
-            <input
-              type="password"
-              className={`
+        <div className="relative z-0 mb-8 flex flex-col gap-1">
+          <input
+            type="password"
+            className={`
               peer block w-full appearance-none border-0 border-b-2 
               border-white bg-transparent px-0 py-2.5 
               text-sm text-white focus:border-white 
               focus:outline-none focus:ring-0
             `}
-              placeholder=" "
-              {...register("password")}
-            />
-            {errors.password && (
-              <span className="text-sm text-red-500">
-                {errors.password.message}
-              </span>
-            )}
-            <label
-              htmlFor="pass"
-              className={`
+            placeholder=" "
+            {...register("password")}
+          />
+          {errors.password && (
+            <span className="text-sm text-red-500">
+              {errors.password.message}
+            </span>
+          )}
+          <label
+            htmlFor="pass"
+            className={`
               align-center absolute top-2 -z-10 flex origin-[0]
               -translate-y-6 scale-75 transform gap-2 text-lg text-white 
               duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
@@ -110,35 +112,34 @@ export default function SignIn() {
               peer-focus:-translate-y-6 peer-focus:scale-100
               peer-focus:text-white
             `}
-            >
-              {IconePass} Senha
-            </label>
-          </div>
-
-          <div className="mb-6 flex gap-2">
-            <p>Não é cadastrado?</p>
-            <Link href="/cadastro" className="text-click-here">
-              Clique Aqui
-            </Link>
-          </div>
-          <div className="mb-20">
-            <Link
-              href="/esqueci_a_senha"
-              className="font-karla font-bold text-click-here underline"
-            >
-              Esqueceu sua senha?
-            </Link>
-          </div>
-
-          <button
-            type="submit"
-            className="button-sign flex justify-center rounded-xl bg-button-sign px-40 py-5 opacity-80"
           >
-            Entrar
-          </button>
-        </form>
-        <pre>{output}</pre>
-      </div>
-    </>
+            {IconePass} Senha
+          </label>
+        </div>
+
+        <div className="mb-6 flex gap-2">
+          <p>Não é cadastrado?</p>
+          <Link href="/signup" className="text-click-here">
+            Clique Aqui
+          </Link>
+        </div>
+        <div className="mb-20">
+          <Link
+            href="/forgotpassword"
+            className="font-karla font-bold text-click-here underline"
+          >
+            Esqueceu sua senha?
+          </Link>
+        </div>
+
+        <button
+          type="submit"
+          className="flex justify-center rounded-xl bg-dark-blue px-40 py-5 opacity-80 hover:opacity-100"
+        >
+          Entrar
+        </button>
+      </form>
+      <pre>{output}</pre>
+    </div>
   );
 }

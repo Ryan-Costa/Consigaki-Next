@@ -7,7 +7,7 @@ export default function Validate() {
       <div
         className={`${styles.container} flex h-screen w-screen flex-col items-center justify-center`}
       >
-        <h1 className="mb-24 text-4xl font-bold text-validate-text">
+        <h1 className="mb-24 text-4xl font-bold text-dark-blue">
           Estamos validando algumas informações suas, um instante
         </h1>
         <Image

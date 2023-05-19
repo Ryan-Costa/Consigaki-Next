@@ -1,3 +1,4 @@
+import theme from './src/styles/theme/index'
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -8,28 +9,6 @@ module.exports = {
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  theme: {
-    extend: {
-      colors: {
-        transparent: 'transparent',
-        deg1: '#002a7c',
-        deg2: '#000008',
-        deg3: '#ff0ffc',
-        'click-here': '#EFC03F',
-        'button-sign': '#2B3155',
-        'validate-text': '#2B3155',
-      },
-      fontFamily: {
-        karla: ['Karla', 'sans-serif'],
-      },
-      translate: {
-        '88': '352px',
-      },
-      spacing: {
-        '492': '492px'
-      }
-    },
-    
-  },
+  theme,
   plugins: [],
 };

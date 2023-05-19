@@ -6,25 +6,22 @@ import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const createUserFormSchema = z.object({
-  password: z.string().min(6, "A senha precisa de no mínimo 6 caracteres"),
-  confirmPassword: z
-    .string()
-    .min(6, "A senha precisa de no mínimo 6 caracteres"),
+  cpf: z.string().nonempty("O CPF é obrigatório"),
 });
 
 type CreateUserFormData = z.infer<typeof createUserFormSchema>;
 
-export default function NewPassword() {
+export default function ForgotPassword() {
   const [output, setOutput] = useState("");
 
-  // const router = useRouter();
+  const router = useRouter();
 
-  // const handleClick = () => {
-  //   router.push("/nova_senha");
-  // };
+  const handleClick = () => {
+    router.push("/newpassword");
+  };
 
   const {
     register,
@@ -45,8 +42,8 @@ export default function NewPassword() {
             <h1 className="text-2xl font-bold uppercase tracking-tight text-white">
               Recuperação de senha
             </h1>
-            <p className="mt-6 text-base font-normal text-white">
-              Preencha corretamente
+            <p className="text-base font-bold text-white">
+              Insira o seu CPF para continuar com a alteração de senha
             </p>
 
             <form onSubmit={handleSubmit(createUser)}>
@@ -61,11 +58,11 @@ export default function NewPassword() {
                 focus:outline-none focus:ring-0
               `}
                   placeholder=" "
-                  {...register("password")}
+                  {...register("cpf")}
                 />
-                {errors.password && (
+                {errors.cpf && (
                   <span className="text-sm text-red-500">
-                    {errors.password.message}
+                    {errors.cpf.message}
                   </span>
                 )}
                 <label
@@ -79,60 +76,33 @@ export default function NewPassword() {
                     peer-focus:text-white
                   `}
                 >
-                  {IconePass} Senha
+                  {IconeUser} CPF
                 </label>
               </div>
-              <div className="relative z-0 mb-5 mt-28 flex w-96 flex-col gap-1">
-                <input
-                  type="text"
-                  maxLength={11}
-                  className={`
-                peer block w-full appearance-none border-0 border-b-2 
-                border-white bg-transparent px-0 py-2.5 
-                text-sm text-white focus:border-white 
-                focus:outline-none focus:ring-0
-              `}
-                  placeholder=" "
-                  {...register("confirmPassword")}
-                />
-                {errors.confirmPassword && (
-                  <span className="text-sm text-red-500">
-                    {errors.confirmPassword.message}
-                  </span>
-                )}
-                <label
-                  htmlFor="pass"
-                  className={`
-                    align-center absolute top-2 -z-10 flex origin-[0]
-                    -translate-y-6 scale-75 transform gap-2 text-lg text-white 
-                    duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
-                    peer-focus:left-0 
-                    peer-focus:-translate-y-6 peer-focus:scale-100
-                    peer-focus:text-white
-                  `}
-                >
-                  {IconePass} Repita sua senha
-                </label>
-              </div>
+              <p className="text-base font-medium text-white">
+                Você recebera um link de confirmação em seu email.
+              </p>
 
+              {/* <Link href="/nova_senha"> */}
               <button
                 type="submit"
-                // onClick={handleClick}
-                className="mt-24 rounded-xl bg-button-sign px-36 py-6 uppercase tracking-wide text-white opacity-80"
+                onClick={handleClick}
+                className="mt-24 rounded-xl bg-dark-blue px-36 py-6 uppercase tracking-wide text-white opacity-80 hover:opacity-100"
               >
-                Continuar
+                Enviar
               </button>
+              {/* </Link> */}
             </form>
             <pre className="text-white">{output}</pre>
           </div>
         </div>
         <div className="z-1 relative flex h-full w-5/12 items-center justify-center bg-white">
           <Image
-            src="/images/nova_senha.png"
+            src="/images/cadeado.png"
             className="h-auto w-auto"
             priority
-            width={520}
-            height={520}
+            width={452}
+            height={452}
             alt="logo image"
           ></Image>
           <Image

@@ -2,15 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ReactNode, useState } from "react";
-import "./style.css";
 
 interface AuthLayoutProps {
   children: ReactNode;
 }
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  const [activeLink, setActiveLink] = useState("login");
+  const pathname = usePathname();
+  console.log(pathname);
+  const [activeLink, setActiveLink] = useState(pathname.replace("/", ""));
 
   const handleLinkClick = (link: any) => {
     setActiveLink(link);
@@ -20,17 +22,18 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
     <div className="h-screen w-full px-96 py-60 font-bold">
       <nav className="mb-16 flex justify-start gap-16 text-white">
         <Link
-          href="/login"
-          className={`nav ${activeLink === "login" ? "active" : ""}`}
-          onClick={() => handleLinkClick("login")}
+          href="/signin"
+          className={`nav ${activeLink === "signin" ? "active" : ""}`}
+          onClick={() => handleLinkClick("signin")}
           passHref
         >
           LOGIN
         </Link>
+
         <Link
-          href="/cadastro"
-          className={`nav ${activeLink === "cadastro" ? "active" : ""}`}
-          onClick={() => handleLinkClick("cadastro")}
+          href="/signup"
+          className={`nav ${activeLink === "signup" ? "active" : ""}`}
+          onClick={() => handleLinkClick("signup")}
           passHref
         >
           CADASTRO
@@ -46,7 +49,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
             width={500}
             height={500}
             alt="logo image"
-          ></Image>
+          />
         </div>
       </div>
     </div>
