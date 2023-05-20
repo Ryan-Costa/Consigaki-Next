@@ -37,7 +37,14 @@ const theme = {
       '88': '352px',
     },
     spacing: {
-      '492': '492px'
+      '492': '492px',
+      '625': '625px',
+      'default-height': '768px',
+      '2xl-width': '1152px',
+      'xl-width': '960px',
+      'lg-width': '768px',
+      'md-width:': '576px',
+      'sm-width': '486px',
     }
   },
 };

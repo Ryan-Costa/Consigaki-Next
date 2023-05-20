@@ -31,7 +31,17 @@ export default function AppLayout({ children }: AppLayoutProps) {
               <p className="text-2xl font-bold text-white">ConsigAki</p>
             </div>
           </header>
-          {/* <section className="bg-black">{children}</section> */}
+          <section
+            className={`
+                  md:w-md-width 
+                  m-auto 
+                  my-7
+                  h-default-height
+                  sm:w-sm-width lg:w-lg-width xl:w-xl-width 2xl:w-2xl-width
+            `}
+          >
+            {children}
+          </section>
         </div>
       </div>
     </>
