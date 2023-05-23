@@ -1,7 +1,18 @@
+"use client";
+
 import Chart from "@/components/Chart";
 import Chart2 from "@/components/Chart2";
+import { fetchUser } from "@/services/client";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    (async () => {
+      // const response = await fetchUser("45642");
+      // console.log(response);
+    })();
+  }, []);
+
   return (
     <>
       <div className="h-full w-full ">

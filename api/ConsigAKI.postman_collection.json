@@ -1,0 +1,976 @@
+{
+	"info": {
+		"_postman_id": "8a87a413-acea-4153-979a-8ba5f9863f78",
+		"name": "ConsigAKI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "994486",
+		"_collection_link": "https://pmenos.postman.co/workspace/David~6e49c433-1716-4097-88a8-d1d58e190f1d/collection/994486-8a87a413-acea-4153-979a-8ba5f9863f78?action=share&creator=994486&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "getUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findUserAppByCpf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/85749508315/app",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"85749508315",
+								"app"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findUserByCpf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/99479362368",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"99479362368"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendToken",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/46693528309/send-token",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"46693528309",
+								"send-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirmToken",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codeToken\": \"824931\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/62/confirm-token",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"62",
+								"confirm-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPassword",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"senhaConsigaki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/62/create-password",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"62",
+								"create-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/60",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"60"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"46693528309\",\r\n    \"name\": \"ryan\",\r\n    \"email\": \"ryan@consigaki.com\",\r\n    \"birthDate\": \"1974-06-04\",\r\n    \"phoneNumber\": \"85992240457\",\r\n    \"codeTokenType\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserAgreements",
+			"item": [
+				{
+					"name": "getUserAgreements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/user-agreements",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user-agreements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createUserAgreements",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"agreementId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user-agreements",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user-agreements"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AWS",
+			"item": [
+				{
+					"name": "uploadS3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "uploaded_file",
+									"type": "file",
+									"src": "/C:/Users/david/Downloads/cli.gif"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/upload/2/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"upload",
+								"2",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "messengeSNS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "uploaded_file",
+									"type": "file",
+									"src": "/C:/Users/david/OneDrive/Assinatura.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/sns",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"sns"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "messengeSES",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "uploaded_file",
+									"type": "file",
+									"src": "/C:/Users/david/OneDrive/Assinatura.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/SES",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"SES"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AgreementProducts",
+			"item": [
+				{
+					"name": "getAgreementProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/agreement-products/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"agreement-products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Simulation",
+			"item": [
+				{
+					"name": "maximumAmount",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/simulation/500/maximum-amount",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"simulation",
+								"500",
+								"maximum-amount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "requestedAmount",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/simulation/5000/requested-amount",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"simulation",
+								"5000",
+								"requested-amount"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "loginApp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"85749508315\",\r\n    \"password\": \"senhaTeste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/login-app",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"login-app"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"46693528309\",\r\n    \"password\": \"senhaConsigaki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"davidbessapontes@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Loans",
+			"item": [
+				{
+					"name": "getLoansUserRequested",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/loans/requested",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"loans",
+								"requested"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLoansUserPending",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/loans/pending",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"loans",
+								"pending"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLoansUserPaid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/loans/paid",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"loans",
+								"paid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createLoansUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"agreementId\": 1, \r\n    \"userId\": 2,\r\n    \"providerId\": 1,\r\n    \"productId\": 1,\r\n    \"amouunt\": 1000,\r\n    \"installment\": 79,\r\n    \"fee\": 96,\r\n    \"term\": 2.09\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/loans",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"loans"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "KinBox",
+			"item": []
+		},
+		{
+			"name": "CapitalConsigAPI",
+			"item": []
+		},
+		{
+			"name": "Notifications",
+			"item": []
+		},
+		{
+			"name": "Providers",
+			"item": [
+				{
+					"name": "getAllProviders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"page\": 0,\r\n    \"size\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/providers",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"providers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createProvider",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"TESTE DAVID5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/providers",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"providers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProvider",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"TESTE DAVID30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/providers/4",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"providers",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProvider",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/providers/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"providers",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProvider",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"page\": 0,\r\n    \"size\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/providers/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"providers",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "getAllProducts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"page\": 0,\r\n    \"size\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/products",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"EMPRÉSTIMO\",\r\n    \"type\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/products",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"CARTAO\",\r\n    \"type\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/products/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProduct",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"page\": 0,\r\n    \"size\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/products/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Agreements",
+			"item": [
+				{
+					"name": "getAgreements",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"page\": 0,\r\n    \"size\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/agreements",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"agreements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createAgreements",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"TESTE DAVID5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/agreements",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"agreements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAgreements",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"TEdSTE D3AVID311\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/agreements/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"agreements",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAgreements",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/agreements/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"agreements",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getagreements",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"page\": 0,\r\n    \"size\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/agreements/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"agreements",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

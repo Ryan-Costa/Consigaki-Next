@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { ReactNode } from "react";
 
-import { Karla } from "@next/font/google";
 import Sidebar from "@/components/Sidebar";
+import { Karla } from "@next/font/google";
 const karla = Karla({ subsets: ["latin"] });
 
 interface AppLayoutProps {

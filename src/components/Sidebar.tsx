@@ -46,7 +46,7 @@ const Sidebar = () => {
               <ul className="dropdown-menu bg-aside p-2">
                 <li>
                   <Link
-                    href="#"
+                    href="/home"
                     className="flex items-center gap-2 px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
                   >
                     {IconHome} Dashboard
@@ -62,7 +62,7 @@ const Sidebar = () => {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/providers"
                     className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
                   >
                     {IconCalender} Consignatárias
