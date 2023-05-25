@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import { IconArrow, IconEdit } from "../../public/icons";
-import EditScreen from "./EditScreen";
 import Modal from "./Modal";
 
 interface CustomModalProps {
   searchTerm: string;
   handleEdit: (item: ItemProps) => void;
+  type: "agreements" | "providers" | "users";
 }
 
 interface ItemProps {
@@ -21,6 +21,7 @@ interface ItemProps {
 export default function CustomTable({
   searchTerm,
   handleEdit,
+  type,
 }: CustomModalProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -35,10 +36,73 @@ export default function CustomTable({
     setIsModalOpen(false);
   };
 
-  const tableData = [
+  const ProvidersData = [
     {
       codigo: "0001",
-      razaoSocial: "Ryan",
+      razaoSocial: "Marcos",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "01/01/2023",
+    },
+    {
+      codigo: "0002",
+      razaoSocial: "João",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0003",
+      razaoSocial: "Marcelo",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0004",
+      razaoSocial: "Rodrigo",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0005",
+      razaoSocial: "Antonio",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0006",
+      razaoSocial: "Alice",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0007",
+      razaoSocial: "Fernanda",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0008",
+      razaoSocial: "Angelo",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0009",
+      razaoSocial: "Maria",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0010",
+      razaoSocial: "José",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+  ];
+
+  const AgreementsData = [
+    {
+      codigo: "0001",
+      razaoSocial: "Raquel",
       cnpj: "11.000.000/0001-00",
       cadastro: "01/01/2023",
     },
@@ -62,43 +126,117 @@ export default function CustomTable({
     },
     {
       codigo: "0005",
-      razaoSocial: "Empresa E",
+      razaoSocial: "Jeferson",
       cnpj: "11.000.000/0001-00",
       cadastro: "02/01/2023",
     },
     {
       codigo: "0006",
-      razaoSocial: "Empresa F",
+      razaoSocial: "Thiago",
       cnpj: "11.000.000/0001-00",
       cadastro: "02/01/2023",
     },
     {
       codigo: "0007",
-      razaoSocial: "Empresa G",
+      razaoSocial: "Breno",
       cnpj: "11.000.000/0001-00",
       cadastro: "02/01/2023",
     },
     {
       codigo: "0008",
-      razaoSocial: "Empresa H",
+      razaoSocial: "Gabriel",
       cnpj: "11.000.000/0001-00",
       cadastro: "02/01/2023",
     },
     {
       codigo: "0009",
-      razaoSocial: "Empresa I",
+      razaoSocial: "Fred",
       cnpj: "11.000.000/0001-00",
       cadastro: "02/01/2023",
     },
     {
       codigo: "0010",
-      razaoSocial: "Empresa J",
+      razaoSocial: "Fábio",
       cnpj: "11.000.000/0001-00",
       cadastro: "02/01/2023",
     },
   ];
 
-  const filteredData = tableData.filter((item) =>
+  const UsersData = [
+    {
+      codigo: "0001",
+      razaoSocial: "Ryan",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "01/01/2023",
+    },
+    {
+      codigo: "0002",
+      razaoSocial: "Themis",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0003",
+      razaoSocial: "Jamile",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0004",
+      razaoSocial: "Ivana",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0005",
+      razaoSocial: "Karine",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0006",
+      razaoSocial: "Adriel",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0007",
+      razaoSocial: "Mateus",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0008",
+      razaoSocial: "Sergio",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0009",
+      razaoSocial: "Yasmin",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+    {
+      codigo: "0010",
+      razaoSocial: "Heberth",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
+    },
+  ];
+
+  let tableData;
+
+  tableData =
+    type === "providers"
+      ? ProvidersData
+      : type === "agreements"
+      ? AgreementsData
+      : type === "users"
+      ? UsersData
+      : null;
+
+  const filteredData = tableData!.filter((item) =>
     item.razaoSocial.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -113,30 +251,99 @@ export default function CustomTable({
 
   return (
     <div>
-      <table className="mt-8 w-full text-left">
-        <thead>
-          <tr>
-            <th className="p-4 text-left">Código</th>
-            <th className="p-4 text-left">Razão Social</th>
-            <th className="p-4 text-left">CNPJ</th>
-            <th className="p-4 text-left">Cadastro</th>
-            <th className="p-4 text-left">Editar</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentItems.map((item, index) => (
-            <tr key={index} className="border-y">
-              <td className="p-4 text-left">{item.codigo}</td>
-              <td className="p-4 text-left">{item.razaoSocial}</td>
-              <td className="p-4 text-left">{item.cnpj}</td>
-              <td className="p-4 text-left">{item.cadastro}</td>
-              <td className="p-4 text-left">
-                <a onClick={() => handleEdit(item)}>{IconEdit}</a>
-              </td>
+      {type === "agreements" ? (
+        <table className="mt-8 w-full text-left">
+          <thead>
+            <tr>
+              <th className="p-4 text-left">Código</th>
+              <th className="p-4 text-left">Nome Convênios</th>
+              <th className="p-4 text-left">CNPJ</th>
+              <th className="p-4 text-left">Cadastro</th>
+              <th className="p-4 text-left">Editar</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentItems.map((item, index) => (
+              <tr key={index} className="border-y">
+                <td className="p-4 text-left">{item.codigo}</td>
+                <td className="p-4 text-left">{item.razaoSocial}</td>
+                <td className="p-4 text-left">{item.cnpj}</td>
+                <td className="p-4 text-left">{item.cadastro}</td>
+                <td className="p-4 text-left">
+                  <a
+                    onClick={() => handleEdit(item)}
+                    className="cursor-pointer"
+                  >
+                    {IconEdit}
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : type === "providers" ? (
+        <table className="mt-8 w-full text-left">
+          <thead>
+            <tr>
+              <th className="p-4 text-left">Código</th>
+              <th className="p-4 text-left">Razão Social</th>
+              <th className="p-4 text-left">CNPJ</th>
+              <th className="p-4 text-left">Cadastro</th>
+              <th className="p-4 text-left">Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentItems.map((item, index) => (
+              <tr key={index} className="border-y">
+                <td className="p-4 text-left">{item.codigo}</td>
+                <td className="p-4 text-left">{item.razaoSocial}</td>
+                <td className="p-4 text-left">{item.cnpj}</td>
+                <td className="p-4 text-left">{item.cadastro}</td>
+                <td className="p-4 text-left">
+                  <a
+                    onClick={() => handleEdit(item)}
+                    className="cursor-pointer"
+                  >
+                    {IconEdit}
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : type === "users" ? (
+        <table className="mt-8 w-full text-left">
+          <thead>
+            <tr>
+              <th className="p-4 text-left">Código</th>
+              <th className="p-4 text-left">Nome Usuário</th>
+              <th className="p-4 text-left">CNPJ</th>
+              <th className="p-4 text-left">Cadastro</th>
+              <th className="p-4 text-left">Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentItems.map((item, index) => (
+              <tr key={index} className="border-y">
+                <td className="p-4 text-left">{item.codigo}</td>
+                <td className="p-4 text-left">{item.razaoSocial}</td>
+                <td className="p-4 text-left">{item.cnpj}</td>
+                <td className="p-4 text-left">{item.cadastro}</td>
+                <td className="p-4 text-left">
+                  <a
+                    onClick={() => handleEdit(item)}
+                    className="cursor-pointer"
+                  >
+                    {IconEdit}
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>Tabela desconhecida</p>
+      )}
       <div className="mt-8 flex gap-2">
         <button
           className="flex h-8 w-8 -rotate-90 cursor-pointer items-center justify-center rounded-sm bg-goldenrod"

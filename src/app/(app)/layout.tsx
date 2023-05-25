@@ -23,10 +23,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
             <div className="flex items-center px-6">
               <Image
                 src="/images/logo-2.png"
-                className="mr-2"
+                className="mr-2 h-auto w-auto"
                 alt="logo"
-                width={44}
-                height={44}
+                width={43.74}
+                height={42.98}
               />
               <p className="text-2xl font-bold text-white">ConsigAki</p>
             </div>

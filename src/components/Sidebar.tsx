@@ -70,7 +70,7 @@ const Sidebar = () => {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/agreements"
                     className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
                   >
                     {IconStoreAlt} Convênios
@@ -78,7 +78,7 @@ const Sidebar = () => {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/users"
                     className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
                   >
                     {IconWallet} Usuários

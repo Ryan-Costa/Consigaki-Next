@@ -20,7 +20,7 @@ interface ItemProps {
   cadastro: string;
 }
 
-export default function Providers() {
+export default function Agreements() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
@@ -64,7 +64,7 @@ export default function Providers() {
               <>
                 <div className="flex w-full justify-between">
                   <h2 className="flex gap-2 text-lg font-bold">
-                    Consignatárias {IconPartners}
+                    Convênios {IconPartners}
                   </h2>
                   <div className="flex gap-5 ">
                     <div className="flex w-60 items-center justify-center rounded-20 border border-black px-7">
@@ -87,13 +87,13 @@ export default function Providers() {
                     onClick={handleAdd}
                     className="rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none"
                   >
-                    + Adicionar Consignatária
+                    + Adicionar Convênio
                   </button>
                 </div>
                 <CustomTable
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}
-                  type={"providers"}
+                  type={"agreements"}
                 />
               </>
             )}

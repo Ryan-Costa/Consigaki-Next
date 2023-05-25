@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import { IconArrowBack, IconPartners } from "../../public/icons";
 import { Inter } from "@next/font/google";
 import ToggleSwitch from "./ToggleSwitch";
+// import { useForm } from "react-hook-form";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -14,13 +15,16 @@ interface Item {
   cadastro: string;
 }
 
-interface EditScreenProps {
+interface EditProviderProps {
   item: Item;
   onClose: () => void;
 }
 
-export default function EditScreen({ item, onClose }: EditScreenProps) {
+export default function EditProvider({ item, onClose }: EditProviderProps) {
   const [editedItem, setEditedItem] = useState<Item>(item);
+  // const { control, handleSubmit } = useForm({
+  //   defaultValues: {},
+  // });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -37,6 +41,7 @@ export default function EditScreen({ item, onClose }: EditScreenProps) {
   const handleGoBack = () => {
     // window.location.reload();
     onClose();
+    console.log("voltei");
   };
 
   return (
