@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
-import { IconArrowBack, IconPartners } from "../../public/icons";
+import { IconArrowBack, IconPartners } from "../../../public/icons";
 import { Inter } from "@next/font/google";
-import ToggleSwitch from "./ToggleSwitch";
+import ToggleSwitch from "../ToggleSwitch";
 // import { useForm } from "react-hook-form";
 const inter = Inter({
   subsets: ["latin"],
@@ -15,12 +15,12 @@ interface Item {
   cadastro: string;
 }
 
-interface EditProviderProps {
+interface EditProps {
   item: Item;
   onClose: () => void;
 }
 
-export default function EditProvider({ item, onClose }: EditProviderProps) {
+export default function EditProvider({ item, onClose }: EditProps) {
   const [editedItem, setEditedItem] = useState<Item>(item);
   // const { control, handleSubmit } = useForm({
   //   defaultValues: {},
@@ -110,7 +110,7 @@ export default function EditProvider({ item, onClose }: EditProviderProps) {
       </div>
       <ToggleSwitch />
       <div className="mt-10 w-full rounded-sm">
-        <button className="w-full rounded-sm bg-goldenrod py-4 font-bold hover:bg-green-goldenrod">
+        <button className="w-full rounded-sm bg-goldenrod py-4 text-2xl font-bold hover:bg-green-goldenrod">
           Salvar
         </button>
       </div>

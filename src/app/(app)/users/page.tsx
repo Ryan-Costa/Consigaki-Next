@@ -1,13 +1,15 @@
 "use client";
 
-import CustomTable from "@/components/CustomTable";
-import EditProvider from "@/components/EditProvider";
+import TableAgreementsUsers from "@/components/table/TableAgreementsUsers";
+import EditUser from "@/components/usersComponents/EditUser";
+import AddUser from "@/components/usersComponents/AddUser";
+
 import SearchInput from "@/components/SearchInput";
 import { useState } from "react";
 import { IconPartners } from "../../../../public/icons";
 
 import { Roboto } from "@next/font/google";
-import AddProvider from "@/components/AddProvider";
+import { DropdownTable } from "@/components/dropdown/DropdownTable";
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -16,7 +18,6 @@ const roboto = Roboto({
 interface ItemProps {
   codigo: string;
   razaoSocial: string;
-  cnpj: string;
   cadastro: string;
 }
 
@@ -24,7 +25,7 @@ export default function Agreements() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
-  const [addProvider, setAddProvider] = useState(false);
+  const [heAddUser, setHeAddUser] = useState(false);
 
   const handleSearch = (value: string) => {
     setSearchTerm(value);
@@ -39,44 +40,37 @@ export default function Agreements() {
     setIsEditing(false);
   };
 
-  const handleAdd = () => {
-    setAddProvider(true);
+  const handleAddition = () => {
+    setHeAddUser(true);
+  };
+
+  const handleCloseAdditionScreen = () => {
+    setHeAddUser(false);
   };
 
   return (
     <>
       <div
-        className={`${roboto.className} h-full w-full rounded-md bg-white px-6 py-14`}
+        className={`${
+          roboto.className
+        } h-full w-full rounded-md bg-white px-6 ${
+          heAddUser ? "py-9" : "py-14"
+        }`}
       >
-        {addProvider ? (
-          <AddProvider
-            item={selectedItem!}
-            handleClose={handleCloseEditScreen}
-          />
+        {heAddUser ? (
+          <AddUser item={selectedItem!} onClose={handleCloseAdditionScreen} />
         ) : (
           <>
             {isEditing ? (
-              <EditProvider
-                item={selectedItem!}
-                onClose={handleCloseEditScreen}
-              />
+              <EditUser item={selectedItem!} onClose={handleCloseEditScreen} />
             ) : (
               <>
                 <div className="flex w-full justify-between">
-                  <h2 className="flex gap-2 text-lg font-bold">
+                  <h2 className="flex items-center gap-2 text-2xl font-bold">
                     Usuários {IconPartners}
                   </h2>
                   <div className="flex gap-5 ">
-                    <div className="flex w-60 items-center justify-center rounded-20 border border-black px-7">
-                      <select
-                        name="teste"
-                        id="1"
-                        className="h-full w-full font-bold outline-none"
-                      >
-                        <option value="1">Ativo</option>
-                        <option value="0">Inativo</option>
-                      </select>
-                    </div>
+                    <DropdownTable />
                     <div className="flex items-center justify-center">
                       <SearchInput onSearch={handleSearch} />
                     </div>
@@ -84,13 +78,13 @@ export default function Agreements() {
                 </div>
                 <div className="mt-8">
                   <button
-                    onClick={handleAdd}
+                    onClick={handleAddition}
                     className="rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none"
                   >
                     + Adicionar Usuário
                   </button>
                 </div>
-                <CustomTable
+                <TableAgreementsUsers
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}
                   type={"users"}

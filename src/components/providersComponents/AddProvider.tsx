@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
-import { IconArrowBack, IconPartners } from "../../public/icons";
+import { IconArrowBack, IconPartners } from "../../../public/icons";
 import { Inter } from "@next/font/google";
-import ToggleSwitch from "./ToggleSwitch";
+import ToggleSwitch from "../ToggleSwitch";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -12,12 +12,12 @@ interface Item {
   cnpj: string;
 }
 
-interface AddProviderProps {
+interface AddProps {
   item: Item;
-  handleClose: () => void;
+  onClose: () => void;
 }
 
-export default function AddProvider({ item, handleClose }: AddProviderProps) {
+export default function AddProvider({ item, onClose }: AddProps) {
   const [savedItem, setSavedItem] = useState<Item>(item);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,19 +33,18 @@ export default function AddProvider({ item, handleClose }: AddProviderProps) {
   };
 
   const handleGoBack = () => {
-    // window.location.reload();
-    // handleClose();
+    onClose();
     console.log("voltei");
   };
 
   return (
     <div>
-      <button className="" onClick={handleClose}>
+      <button className="" onClick={handleGoBack}>
         {IconArrowBack}
       </button>
 
       <div className="mt-12 flex gap-2">
-        <h1 className="text-lg font-bold">Informações da Consignatária</h1>
+        <h1 className="text-lg font-bold">Adicionar Consignatária</h1>
         {IconPartners}
       </div>
       <p
@@ -109,7 +108,7 @@ export default function AddProvider({ item, handleClose }: AddProviderProps) {
       </div>
       <ToggleSwitch />
       <div className="mt-10 w-full rounded-sm">
-        <button className="w-full rounded-sm bg-goldenrod py-4 font-bold hover:bg-green-goldenrod">
+        <button className="w-full rounded-sm bg-goldenrod py-4 text-2xl font-bold hover:bg-green-goldenrod">
           Salvar
         </button>
       </div>

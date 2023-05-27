@@ -35,6 +35,7 @@ const theme = {
         "linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))",
       "text-regular": "#525252",
       "green-goldenrod": "#D0A83A",
+      "modal-primary": "#EFF3F7",
     },
     fontFamily: {
       karla: ["Karla", "sans-serif"],
@@ -43,8 +44,6 @@ const theme = {
       "88": "352px",
     },
     spacing: {
-      "492": "492px",
-      "625": "625px",
       "default-height": "768px",
       "2xl-width": "1152px",
       "xl-width": "960px",
@@ -54,6 +53,16 @@ const theme = {
     },
     borderRadius: {
       "20": "20px",
+    },
+    width: {
+      "300": "300px",
+      "492": "492px",
+      "625": "625px",
+      "660": "660px",
+    },
+    height: {
+      "150": "150px",
+      "310": "310px",
     },
   },
 };

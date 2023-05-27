@@ -62,6 +62,14 @@ const Sidebar = () => {
                 </li>
                 <li>
                   <Link
+                    href="/products"
+                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
+                  >
+                    {IconStore} Produtos
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/providers"
                     className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
                   >

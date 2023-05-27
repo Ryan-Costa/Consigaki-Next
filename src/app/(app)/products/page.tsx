@@ -1,8 +1,8 @@
 "use client";
 
-import TableAgreementsUsers from "@/components/table/TableAgreementsUsers";
-import EditAgreement from "@/components/agreementsComponents/EditAgreement";
-import AddAgreement from "@/components/agreementsComponents/AddAgreement";
+import TableProducts from "@/components/table/TableProducts";
+import AddProduct from "@/components/productsComponents/AddProduct";
+import EditProduct from "@/components/productsComponents/EditProduct";
 
 import SearchInput from "@/components/SearchInput";
 import { useState } from "react";
@@ -17,15 +17,16 @@ const roboto = Roboto({
 
 interface ItemProps {
   codigo: string;
-  nome: string;
+  razaoSocial: string;
+  cnpj: string;
   cadastro: string;
 }
 
-export default function Agreements() {
+export default function Providers() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
-  const [heAddAgreement, setHeAddAgreement] = useState(false);
+  const [heAddProduct, setHeAddProduct] = useState(false);
 
   const handleSearch = (value: string) => {
     setSearchTerm(value);
@@ -41,28 +42,31 @@ export default function Agreements() {
   };
 
   const handleAddition = () => {
-    setHeAddAgreement(true);
+    setHeAddProduct(true);
   };
 
   const handleCloseAdditionScreen = () => {
-    setHeAddAgreement(false);
+    setHeAddProduct(false);
   };
 
   return (
     <>
       <div
-        className={`${roboto.className} h-full w-full rounded-md bg-white px-6 
-        ${heAddAgreement || isEditing ? "py-9" : "py-14"}`}
+        className={`${
+          roboto.className
+        } h-full w-full rounded-md bg-white px-6 ${
+          heAddProduct ? "py-9" : "py-14"
+        }`}
       >
-        {heAddAgreement ? (
-          <AddAgreement
+        {heAddProduct ? (
+          <AddProduct
             item={selectedItem!}
             onClose={handleCloseAdditionScreen}
           />
         ) : (
           <>
             {isEditing ? (
-              <EditAgreement
+              <EditProduct
                 item={selectedItem!}
                 onClose={handleCloseEditScreen}
               />
@@ -70,7 +74,7 @@ export default function Agreements() {
               <>
                 <div className="flex w-full justify-between">
                   <h2 className="flex items-center gap-2 text-2xl font-bold">
-                    Convênios {IconPartners}
+                    Produtos {IconPartners}
                   </h2>
                   <div className="flex gap-5 ">
                     <DropdownTable />
@@ -84,13 +88,13 @@ export default function Agreements() {
                     onClick={handleAddition}
                     className="rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none"
                   >
-                    + Adicionar Convênios
+                    + Adicionar Produto
                   </button>
                 </div>
-                <TableAgreementsUsers
+                <TableProducts
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}
-                  type={"agreements"}
+                  type={"providers"}
                 />
               </>
             )}

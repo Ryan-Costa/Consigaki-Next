@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 
 import Sidebar from "@/components/Sidebar";
 import { Karla } from "@next/font/google";
+import Topbar from "@/components/TopBar";
 const karla = Karla({ subsets: ["latin"] });
 
 interface AppLayoutProps {
@@ -19,24 +20,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
           <Sidebar />
         </aside>
         <div className="flex w-full flex-col">
-          <header className="flex h-20 w-full bg-dark-blue shadow-2xl">
-            <div className="flex items-center px-6">
-              <Image
-                src="/images/logo-2.png"
-                className="mr-2 h-auto w-auto"
-                alt="logo"
-                width={43.74}
-                height={42.98}
-              />
-              <p className="text-2xl font-bold text-white">ConsigAki</p>
-            </div>
-          </header>
+          <Topbar />
           <section
             className={`
-                  md:w-md-width 
-                  m-auto 
-                  my-7
-                  h-default-height
+                  md:w-md-width
+                  m-auto
+                  my-7 
+                  h-full
                   sm:w-sm-width lg:w-lg-width xl:w-xl-width 2xl:w-2xl-width
             `}
           >
