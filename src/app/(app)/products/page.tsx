@@ -9,7 +9,7 @@ import { useState } from "react";
 import { IconPartners } from "../../../../public/icons";
 
 import { Roboto } from "@next/font/google";
-import { DropdownTable } from "@/components/dropdown/DropdownTable";
+import { Dropdown } from "@/components/Dropdown";
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -77,7 +77,7 @@ export default function Providers() {
                     Produtos {IconPartners}
                   </h2>
                   <div className="flex gap-5 ">
-                    <DropdownTable />
+                    <Dropdown type="table" />
                     <div className="flex items-center justify-center">
                       <SearchInput onSearch={handleSearch} />
                     </div>

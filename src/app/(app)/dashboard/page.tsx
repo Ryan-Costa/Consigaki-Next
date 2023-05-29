@@ -5,7 +5,7 @@ import Chart2 from "@/components/Chart2";
 import { fetchUser } from "@/services/client";
 import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function Dashboard() {
   useEffect(() => {
     (async () => {
       // const response = await fetchUser("45642");

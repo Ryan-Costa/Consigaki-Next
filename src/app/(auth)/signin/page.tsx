@@ -1,6 +1,5 @@
 "use client";
 
-import { FieldCpf } from "@/components/fieldCpf";
 import Link from "next/link";
 import { IconePass, IconeUser } from "../../../../public/icons";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -21,7 +20,7 @@ const createUserFormSchema = z.object({
     .email("Formato de e-mail inválido")
     .toLowerCase()
     .refine((email) => {
-      return email.endsWith("@bancopan.com");
+      return email.endsWith("@consigaki.com");
     }, "O e-mail precisa ser do Banco Pan"),
   password: z.string().min(6, "A senha precisa de no mínimo 6 caracteres"),
 });

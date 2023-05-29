@@ -17,7 +17,7 @@ const createUserFormSchema = z.object({
     .email("Formato de e-mail inválido")
     .toLowerCase()
     .refine((email) => {
-      return email.endsWith("@bancopan.com");
+      return email.endsWith("@consigaki.com");
     }, "O e-mail precisa ser do Banco Pan"),
   confirmEmail: z
     .string()

@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { IconArrow } from "../../public/icons";
 import {
-  IconArrow,
-  IconCalender,
-  IconHome,
-  IconInsumo,
-  IconStore,
-  IconStoreAlt,
-  IconWallet,
-} from "../../public/icons";
+  RiHome5Line,
+  RiCalendarTodoLine,
+  RiStore2Line,
+  RiWalletLine,
+} from "react-icons/Ri";
+
+import { BsBox } from "react-icons/Bs";
 
 const Sidebar = () => {
   const [isOpen1, setIsOpen1] = useState(false);
@@ -46,50 +46,50 @@ const Sidebar = () => {
               <ul className="dropdown-menu bg-aside p-2">
                 <li>
                   <Link
-                    href="/home"
-                    className="flex items-center gap-2 px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
+                    href="/dashboard"
+                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    {IconHome} Dashboard
+                    <RiHome5Line /> Dashboard
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#"
-                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
+                    href="/loans"
+                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    {IconStore} Esteira
+                    <RiStore2Line /> Esteira
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/products"
-                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
+                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    {IconStore} Produtos
+                    <RiStore2Line /> Produtos
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/providers"
-                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
+                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    {IconCalender} Consignatárias
+                    <RiCalendarTodoLine /> Consignatárias
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/agreements"
-                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
+                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    {IconStoreAlt} Convênios
+                    <RiStore2Line /> Convênios
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/users"
-                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
+                    className="flex items-center gap-2   from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    {IconWallet} Usuários
+                    <RiWalletLine /> Usuários
                   </Link>
                 </li>
               </ul>
@@ -115,34 +115,34 @@ const Sidebar = () => {
               <ul className="dropdown-menu bg-aside p-2">
                 <li>
                   <Link
-                    href="#"
-                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
+                    href="/reports"
+                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    {IconInsumo} Relatório-01
+                    <BsBox /> Relatório-01
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#"
-                    className="flex items-center gap-2 px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
+                    href="/reports"
+                    className="flex items-center gap-2 from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    {IconInsumo} Relatório-02
+                    <BsBox /> Relatório-02
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#"
-                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
+                    href="/reports"
+                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    {IconInsumo} Relatório-03
+                    <BsBox /> Relatório-03
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#"
-                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-gray-100"
+                    href="/reports"
+                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    {IconInsumo} Relatório-04
+                    <BsBox /> Relatório-04
                   </Link>
                 </li>
               </ul>

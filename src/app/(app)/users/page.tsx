@@ -7,9 +7,9 @@ import AddUser from "@/components/usersComponents/AddUser";
 import SearchInput from "@/components/SearchInput";
 import { useState } from "react";
 import { IconPartners } from "../../../../public/icons";
+import { Dropdown } from "@/components/Dropdown";
 
 import { Roboto } from "@next/font/google";
-import { DropdownTable } from "@/components/dropdown/DropdownTable";
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -17,11 +17,11 @@ const roboto = Roboto({
 
 interface ItemProps {
   codigo: string;
-  razaoSocial: string;
+  nome: string;
   cadastro: string;
 }
 
-export default function Agreements() {
+export default function Users() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
@@ -70,7 +70,7 @@ export default function Agreements() {
                     Usuários {IconPartners}
                   </h2>
                   <div className="flex gap-5 ">
-                    <DropdownTable />
+                    <Dropdown type="table" />
                     <div className="flex items-center justify-center">
                       <SearchInput onSearch={handleSearch} />
                     </div>

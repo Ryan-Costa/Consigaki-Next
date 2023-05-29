@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 interface Item {
-  razaoSocial: string;
+  nome: string;
 }
 
 interface AddProps {
@@ -57,7 +57,7 @@ export default function AddUser({ item, onClose }: AddProps) {
             Razão Social
           </label>
           <input
-            name="razaoSocial"
+            name="nome"
             type="text"
             placeholder="---------- -------- -------"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"

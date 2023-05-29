@@ -12,6 +12,7 @@ const theme = {
       aside: "#FFFAFA",
       "--bs-blue": "#6c6ff5",
       "--bs-indigo": "#564ab1",
+      "greyish-blue": "#54679F",
       "--bs-purple": "#8851ff",
       "--bs-pink": "#e83e8c",
       "--bs-red": "#ff5d5d",

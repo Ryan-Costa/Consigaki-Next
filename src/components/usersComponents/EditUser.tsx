@@ -10,7 +10,7 @@ const inter = Inter({
 
 interface Item {
   codigo: string;
-  razaoSocial: string;
+  nome: string;
   cadastro: string;
 }
 
@@ -63,10 +63,10 @@ export default function EditUser({ item, onClose }: EditProps) {
             Razão Social
           </label>
           <input
-            name="razaoSocial"
+            name="nome"
             type="text"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.razaoSocial}
+            value={editedItem.nome}
             onChange={handleInputChange}
           />
         </div>
