@@ -2,8 +2,8 @@ import Image from "next/image";
 import { ReactNode } from "react";
 
 import Sidebar from "@/components/Sidebar";
-import { Karla } from "@next/font/google";
 import Topbar from "@/components/TopBar";
+import { Karla } from "@next/font/google";
 const karla = Karla({ subsets: ["latin"] });
 
 interface AppLayoutProps {
@@ -14,9 +14,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <>
       <div
-        className={`${karla.className} flex h-screen w-full bg-layout-app text-word-app`}
+        className={`${karla.className} flex min-h-screen w-full bg-layout-app text-word-app`}
       >
-        <aside className="h-full w-60 bg-aside shadow-2xl">
+        <aside className="min-h-screen w-60 bg-aside shadow-2xl">
           <Sidebar />
         </aside>
         <div className="flex w-full flex-col">

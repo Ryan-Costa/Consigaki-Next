@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { IconArrow, IconEdit } from "../../../public/icons";
-import Modal from "../Modal";
+import Modal from "../Modal/ModalBanner";
 
 interface CustomModalProps {
   searchTerm: string;

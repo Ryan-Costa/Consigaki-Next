@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import { IconClose } from "../../../public/icons";
-import Modal from "../Modal";
+import ModalBanner from "../Modal/ModalBanner";
+import ModalProduct from "../Modal/ModalProduct";
 
 export function TableEditAgreement() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOpenModalBanner, setIsOpenModalBanner] = useState(false);
+  const [isOpenModalProduct, setIsOpenModalProduct] = useState(false);
   const [agreementsData, setAgreementsData] = useState([
     {
       nome: "Empréstimo",
@@ -24,12 +26,20 @@ export function TableEditAgreement() {
     setAgreementsData(updateData);
   };
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  const handleOpenModalBanner = () => {
+    setIsOpenModalBanner(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleCloseModalBanner = () => {
+    setIsOpenModalBanner(false);
+  };
+
+  const handleOpenModalProduct = () => {
+    setIsOpenModalProduct(true);
+  };
+
+  const handleCloseModalProduct = () => {
+    setIsOpenModalProduct(false);
   };
 
   return (
@@ -49,7 +59,7 @@ export function TableEditAgreement() {
               <td className="w-1/6 p-4 text-left">{item.nome}</td>
               <td className="w-3/6 p-4 text-left">
                 <button
-                  onClick={handleOpenModal}
+                  onClick={handleOpenModalBanner}
                   className="font-semibold underline"
                 >
                   {item.banner}
@@ -63,21 +73,27 @@ export function TableEditAgreement() {
                 >
                   {IconClose}
                 </a>
+                <ModalBanner
+                  isOpen={isOpenModalBanner}
+                  onRequestClose={handleCloseModalBanner}
+                />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      {/* <div className="w-full bg-gray-400">
+      <div className="w-full">
         <button
-          className="mt-9 w-40 rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none"
-          onClick={handleOpenModal}
+          className="mt-9 rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none"
+          onClick={handleOpenModalProduct}
         >
           + Adicionar Produto
         </button>
+        <ModalProduct
+          isOpen={isOpenModalProduct}
+          onRequestClose={handleCloseModalProduct}
+        />
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} /> */}
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </>
   );
 }

@@ -2,8 +2,13 @@
 
 import Image from "next/image";
 import ReactModal from "react-modal";
-import { IconPartners } from "../../public/icons";
-import ToggleSwitch from "./ToggleSwitch";
+import { IconPartners } from "../../../public/icons";
+import ToggleSwitch from "../ToggleSwitch";
+import { Roboto } from "@next/font/google";
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 interface ModalProps {
   isOpen: boolean;
@@ -35,8 +40,8 @@ const Modal = ({ isOpen, onRequestClose }: ModalProps) => {
         },
       }}
     >
-      <div className="flex h-full w-full flex-col ">
-        <div className="flex items-center gap-2 ">
+      <div className={`${roboto.className} flex h-full w-full flex-col`}>
+        <div className="mt-10 flex items-center gap-2">
           <h2 className="text-2xl font-bold">Detalhes da imagem </h2>
           {IconPartners}
           <span
