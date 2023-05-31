@@ -1,53 +1,53 @@
-"use client";
+'use client'
 
-import TableProviders from "@/components/table/TableProviders";
-import AddProvider from "@/components/providersComponents/AddProvider";
-import EditProvider from "@/components/providersComponents/EditProvider";
+import TableProviders from '@/components/table/TableProviders'
+import AddProvider from '@/components/providersComponents/AddProvider'
+import EditProvider from '@/components/providersComponents/EditProvider'
 
-import SearchInput from "@/components/SearchInput";
-import { useState } from "react";
-import { IconPartners } from "../../../../public/icons";
-import { Dropdown } from "@/components/Dropdown";
+import SearchInput from '@/components/SearchInput'
+import { useState } from 'react'
+import { IconPartners } from '../../../../public/icons'
+import { Dropdown } from '@/components/Dropdown'
 
-import { Roboto } from "@next/font/google";
+import { Roboto } from '@next/font/google'
 const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface ItemProps {
-  codigo: string;
-  razaoSocial: string;
-  cnpj: string;
-  cadastro: string;
+  codigo: string
+  razaoSocial: string
+  cnpj: string
+  cadastro: string
 }
 
 export default function Providers() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
-  const [heAddProvider, setHeAddProvider] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isEditing, setIsEditing] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null)
+  const [heAddProvider, setHeAddProvider] = useState(false)
 
   const handleSearch = (value: string) => {
-    setSearchTerm(value);
-  };
+    setSearchTerm(value)
+  }
 
   const handleEdit = (item: ItemProps) => {
-    setSelectedItem(item);
-    setIsEditing(true);
-  };
+    setSelectedItem(item)
+    setIsEditing(true)
+  }
 
   const handleCloseEditScreen = () => {
-    setIsEditing(false);
-  };
+    setIsEditing(false)
+  }
 
   const handleAddition = () => {
-    setHeAddProvider(true);
-  };
+    setHeAddProvider(true)
+  }
 
   const handleCloseAdditionScreen = () => {
-    setHeAddProvider(false);
-  };
+    setHeAddProvider(false)
+  }
 
   return (
     <>
@@ -55,7 +55,7 @@ export default function Providers() {
         className={`${
           roboto.className
         } h-full w-full rounded-md bg-white px-6 ${
-          heAddProvider ? "py-9" : "py-14"
+          heAddProvider ? 'py-9' : 'py-14'
         }`}
       >
         {heAddProvider ? (
@@ -94,7 +94,7 @@ export default function Providers() {
                 <TableProviders
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}
-                  type={"providers"}
+                  type={'providers'}
                 />
               </>
             )}
@@ -102,5 +102,5 @@ export default function Providers() {
         )}
       </div>
     </>
-  );
+  )
 }

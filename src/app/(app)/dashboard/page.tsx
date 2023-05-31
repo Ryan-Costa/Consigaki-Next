@@ -1,17 +1,16 @@
-"use client";
+'use client'
 
-import Chart from "@/components/Chart";
-import Chart2 from "@/components/Chart2";
-import { fetchUser } from "@/services/client";
-import { useEffect, useState } from "react";
+import Chart from '@/components/Chart'
+// import { fetchUser } from '@/services/client'
+import { useEffect } from 'react'
 
 export default function Dashboard() {
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       // const response = await fetchUser("45642");
       // console.log(response);
-    })();
-  }, []);
+    })()
+  }, [])
 
   return (
     <>
@@ -41,11 +40,12 @@ export default function Dashboard() {
               Dados anual de vendas
             </h2>
             <div className="w-full rounded-xl bg-white px-6 py-4 shadow-lg">
-              <Chart2 />
+              <p className="text-md font-semibold">Análise anual de vendas</p>
+              <Chart />
             </div>
           </div>
         </div>
       </div>
     </>
-  );
+  )
 }

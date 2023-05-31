@@ -1,47 +1,47 @@
-import React, { useState, ChangeEvent } from "react";
-import { IconArrowBack, IconPartners } from "../../../public/icons";
-import { Inter } from "@next/font/google";
-import ToggleSwitch from "../ToggleSwitch";
+import React, { useState, ChangeEvent } from 'react'
+import { IconArrowBack, IconPartners } from '../../../public/icons'
+import { Inter } from '@next/font/google'
+import ToggleSwitch from '../ToggleSwitch'
 // import { useForm } from "react-hook-form";
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface Item {
-  codigo: string;
-  razaoSocial: string;
-  cadastro: string;
+  codigo: string
+  razaoSocial: string
+  cadastro: string
 }
 
 interface EditProps {
-  item: Item;
-  onClose: () => void;
+  item: Item
+  onClose: () => void
 }
 
 export default function EditProduct({ item, onClose }: EditProps) {
-  const [editedItem, setEditedItem] = useState<Item>(item);
+  const [editedItem, setEditedItem] = useState<Item>(item)
   // const { control, handleSubmit } = useForm({
   //   defaultValues: {},
   // });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setEditedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
-  const handleSave = () => {
-    console.log("Item editado:", editedItem);
-  };
+  // const handleSave = () => {
+  //   console.log('Item editado:', editedItem)
+  // }
 
   const handleGoBack = () => {
     // window.location.reload();
-    onClose();
-    console.log("voltei");
-  };
+    onClose()
+    console.log('voltei')
+  }
 
   return (
     <div>
@@ -140,5 +140,5 @@ export default function EditProduct({ item, onClose }: EditProps) {
       </label>
       <button onClick={handleSave}>Salvar</button> */}
     </div>
-  );
+  )
 }

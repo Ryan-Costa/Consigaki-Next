@@ -1,48 +1,48 @@
-"use client";
+'use client'
 
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/
 const createUserFormSchema = z.object({
   cpf: z
     .string()
-    .nonempty("O CPF é obrigatório")
-    .regex(cpfRegex, "CPF inválido"),
+    .nonempty('O CPF é obrigatório')
+    .regex(cpfRegex, 'CPF inválido'),
   email: z
     .string()
-    .nonempty("O e-mail é obrigatório")
-    .email("Formato de e-mail inválido")
+    .nonempty('O e-mail é obrigatório')
+    .email('Formato de e-mail inválido')
     .toLowerCase()
     .refine((email) => {
-      return email.endsWith("@consigaki.com");
-    }, "O e-mail precisa ser do Banco Pan"),
+      return email.endsWith('@consigaki.com')
+    }, 'O e-mail precisa ser do Banco Pan'),
   confirmEmail: z
     .string()
-    .nonempty("A confirmação de e-mail é obrigatória")
+    .nonempty('A confirmação de e-mail é obrigatória')
     .toLowerCase(),
-  password: z.string().min(6, "A senha precisa de no mínimo 6 caracteres"),
+  password: z.string().min(6, 'A senha precisa de no mínimo 6 caracteres'),
   confirmPassword: z
     .string()
-    .min(6, "A senha precisa de no mínimo 6 caracteres"),
-});
+    .min(6, 'A senha precisa de no mínimo 6 caracteres'),
+})
 
-type CreateUserFormData = z.infer<typeof createUserFormSchema>;
+type CreateUserFormData = z.infer<typeof createUserFormSchema>
 
 export default function SignUp() {
-  const [output, setOutput] = useState("");
+  const [output, setOutput] = useState('')
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
-  });
+  })
 
   function createUser(data: any) {
-    setOutput(JSON.stringify(data, null, 2));
+    setOutput(JSON.stringify(data, null, 2))
   }
 
   return (
@@ -62,7 +62,7 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
             `}
             placeholder=" "
-            {...register("cpf")}
+            {...register('cpf')}
           />
           {errors.cpf && (
             <span className="text-sm text-red-500">{errors.cpf.message}</span>
@@ -91,7 +91,7 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
             `}
             placeholder=" "
-            {...register("email")}
+            {...register('email')}
           />
           {errors.email && (
             <span className="text-sm text-red-500">{errors.email.message}</span>
@@ -120,7 +120,7 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
             `}
             placeholder=" "
-            {...register("confirmEmail")}
+            {...register('confirmEmail')}
           />
           {errors.confirmEmail && (
             <span className="text-sm text-red-500">
@@ -151,7 +151,7 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
               `}
             placeholder=" "
-            {...register("password")}
+            {...register('password')}
           />
           {errors.password && (
             <span className="text-sm text-red-500">
@@ -182,7 +182,7 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
               `}
             placeholder=" "
-            {...register("confirmPassword")}
+            {...register('confirmPassword')}
           />
           {errors.confirmPassword && (
             <span className="text-sm text-red-500">
@@ -211,5 +211,5 @@ export default function SignUp() {
       </form>
       <pre>{output}</pre>
     </div>
-  );
+  )
 }

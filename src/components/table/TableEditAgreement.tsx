@@ -1,46 +1,46 @@
-"use client";
-import { useState } from "react";
-import { IconClose } from "../../../public/icons";
-import ModalBanner from "../Modal/ModalBanner";
-import ModalProduct from "../Modal/ModalProduct";
+'use client'
+import { useState } from 'react'
+import { IconClose } from '../../../public/icons'
+import ModalBanner from '../Modal/ModalBanner'
+import ModalProduct from '../Modal/ModalProduct'
 
 export function TableEditAgreement() {
-  const [isOpenModalBanner, setIsOpenModalBanner] = useState(false);
-  const [isOpenModalProduct, setIsOpenModalProduct] = useState(false);
+  const [isOpenModalBanner, setIsOpenModalBanner] = useState(false)
+  const [isOpenModalProduct, setIsOpenModalProduct] = useState(false)
   const [agreementsData, setAgreementsData] = useState([
     {
-      nome: "Empréstimo",
-      banner: "http://aws.s3.imagem.com/teste",
-      ativo: "Sim",
+      nome: 'Empréstimo',
+      banner: 'http://aws.s3.imagem.com/teste',
+      ativo: 'Sim',
     },
     {
-      nome: "Empréstimo",
-      banner: "http://aws.s3.imagem.com/teste",
-      ativo: "Não",
+      nome: 'Empréstimo',
+      banner: 'http://aws.s3.imagem.com/teste',
+      ativo: 'Não',
     },
-  ]);
+  ])
 
   const handleDelete = (index: any) => {
-    const updateData = [...agreementsData];
-    updateData.splice(index, 1);
-    setAgreementsData(updateData);
-  };
+    const updateData = [...agreementsData]
+    updateData.splice(index, 1)
+    setAgreementsData(updateData)
+  }
 
   const handleOpenModalBanner = () => {
-    setIsOpenModalBanner(true);
-  };
+    setIsOpenModalBanner(true)
+  }
 
   const handleCloseModalBanner = () => {
-    setIsOpenModalBanner(false);
-  };
+    setIsOpenModalBanner(false)
+  }
 
   const handleOpenModalProduct = () => {
-    setIsOpenModalProduct(true);
-  };
+    setIsOpenModalProduct(true)
+  }
 
   const handleCloseModalProduct = () => {
-    setIsOpenModalProduct(false);
-  };
+    setIsOpenModalProduct(false)
+  }
 
   return (
     <>
@@ -55,7 +55,7 @@ export function TableEditAgreement() {
         </thead>
         <tbody>
           {agreementsData.map((item, index) => (
-            <tr className="border-y">
+            <tr className="border-y" key={item.nome}>
               <td className="w-1/6 p-4 text-left">{item.nome}</td>
               <td className="w-3/6 p-4 text-left">
                 <button
@@ -95,5 +95,5 @@ export function TableEditAgreement() {
         />
       </div>
     </>
-  );
+  )
 }

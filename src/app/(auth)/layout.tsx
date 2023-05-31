@@ -1,30 +1,30 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ReactNode, useState } from "react";
+import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { ReactNode, useState } from 'react'
 
 interface AuthLayoutProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  const pathname = usePathname();
-  console.log(pathname);
-  const [activeLink, setActiveLink] = useState(pathname.replace("/", ""));
+  const pathname = usePathname()
+  console.log(pathname)
+  const [activeLink, setActiveLink] = useState(pathname.replace('/', ''))
 
   const handleLinkClick = (link: any) => {
-    setActiveLink(link);
-  };
+    setActiveLink(link)
+  }
 
   return (
     <div className="h-screen w-full px-96 py-60 font-bold">
       <nav className="mb-16 flex justify-start gap-16 text-white">
         <Link
           href="/signin"
-          className={`nav ${activeLink === "signin" ? "active" : ""}`}
-          onClick={() => handleLinkClick("signin")}
+          className={`nav ${activeLink === 'signin' ? 'active' : ''}`}
+          onClick={() => handleLinkClick('signin')}
           passHref
         >
           LOGIN
@@ -32,8 +32,8 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 
         <Link
           href="/signup"
-          className={`nav ${activeLink === "signup" ? "active" : ""}`}
-          onClick={() => handleLinkClick("signup")}
+          className={`nav ${activeLink === 'signup' ? 'active' : ''}`}
+          onClick={() => handleLinkClick('signup')}
           passHref
         >
           CADASTRO
@@ -53,5 +53,5 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,56 +1,60 @@
-import React, { useState } from "react";
-import { IconUpload } from "../../public/icons";
-import { Inter } from "@next/font/google";
-import Image from "next/image";
+import React, { useState } from 'react'
+import { IconUpload } from '../../public/icons'
+import { Inter } from '@next/font/google'
+import Image from 'next/image'
 
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 const ImageUpload: React.FC = () => {
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null)
+  const [previewImage, setPreviewImage] = useState<string | null>(null)
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0] || null;
-    setSelectedImage(file);
+    const file = event.target.files?.[0] || null
+    setSelectedImage(file)
 
     if (file) {
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onloadend = () => {
-        setPreviewImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+        setPreviewImage(reader.result as string)
+      }
+      reader.readAsDataURL(file)
     } else {
-      setPreviewImage(null);
+      setPreviewImage(null)
     }
-  };
+  }
 
   const handleFormSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (selectedImage) {
-      const formData = new FormData();
-      formData.append("image", selectedImage);
+      const formData = new FormData()
+      formData.append('image', selectedImage)
 
-      fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => {})
-        .catch((error) => {});
+      try {
+        fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        })
+          .then(() => {})
+          .catch(() => {})
+      } catch (error) {
+        console.error('Erro ao fazer o upload da imagem')
+      }
     }
-  };
+  }
 
   return (
     <form onSubmit={handleFormSubmit}>
       <div className="mb-5 mt-4 flex h-32 w-80 border-spacing-1 items-center justify-center border border-gray-200">
         {previewImage ? (
-          <img
+          <Image
             src={previewImage}
             alt="Preview"
-            style={{ maxWidth: "320px", maxHeight: "128px" }}
+            style={{ maxWidth: '320px', maxHeight: '128px' }}
           />
         ) : (
           <Image
@@ -77,7 +81,7 @@ const ImageUpload: React.FC = () => {
         />
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default ImageUpload;
+export default ImageUpload

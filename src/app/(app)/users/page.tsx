@@ -1,52 +1,52 @@
-"use client";
+'use client'
 
-import TableAgreementsUsers from "@/components/table/TableAgreementsUsers";
-import EditUser from "@/components/usersComponents/EditUser";
-import AddUser from "@/components/usersComponents/AddUser";
+import TableAgreementsUsers from '@/components/table/TableAgreementsUsers'
+import EditUser from '@/components/usersComponents/EditUser'
+import AddUser from '@/components/usersComponents/AddUser'
 
-import SearchInput from "@/components/SearchInput";
-import { useState } from "react";
-import { IconPartners } from "../../../../public/icons";
-import { Dropdown } from "@/components/Dropdown";
+import SearchInput from '@/components/SearchInput'
+import { useState } from 'react'
+import { IconPartners } from '../../../../public/icons'
+import { Dropdown } from '@/components/Dropdown'
 
-import { Roboto } from "@next/font/google";
+import { Roboto } from '@next/font/google'
 const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface ItemProps {
-  codigo: string;
-  nome: string;
-  cadastro: string;
+  codigo: string
+  nome: string
+  cadastro: string
 }
 
 export default function Users() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
-  const [heAddUser, setHeAddUser] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isEditing, setIsEditing] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null)
+  const [heAddUser, setHeAddUser] = useState(false)
 
   const handleSearch = (value: string) => {
-    setSearchTerm(value);
-  };
+    setSearchTerm(value)
+  }
 
   const handleEdit = (item: ItemProps) => {
-    setSelectedItem(item);
-    setIsEditing(true);
-  };
+    setSelectedItem(item)
+    setIsEditing(true)
+  }
 
   const handleCloseEditScreen = () => {
-    setIsEditing(false);
-  };
+    setIsEditing(false)
+  }
 
   const handleAddition = () => {
-    setHeAddUser(true);
-  };
+    setHeAddUser(true)
+  }
 
   const handleCloseAdditionScreen = () => {
-    setHeAddUser(false);
-  };
+    setHeAddUser(false)
+  }
 
   return (
     <>
@@ -54,7 +54,7 @@ export default function Users() {
         className={`${
           roboto.className
         } h-full w-full rounded-md bg-white px-6 ${
-          heAddUser ? "py-9" : "py-14"
+          heAddUser ? 'py-9' : 'py-14'
         }`}
       >
         {heAddUser ? (
@@ -87,7 +87,7 @@ export default function Users() {
                 <TableAgreementsUsers
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}
-                  type={"users"}
+                  type={'users'}
                 />
               </>
             )}
@@ -95,5 +95,5 @@ export default function Users() {
         )}
       </div>
     </>
-  );
+  )
 }

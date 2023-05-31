@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 export default function Reports() {
   return (
@@ -7,5 +7,5 @@ export default function Reports() {
         <h1>RELATÓRIOS</h1>
       </div>
     </>
-  );
+  )
 }

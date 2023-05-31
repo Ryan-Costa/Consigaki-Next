@@ -1,6 +1,16 @@
-import Link from "next/link";
+'use client'
+
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function Home() {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.replace('/signin')
+  }, [])
+
   return (
     <div>
       <h1 className="text-white">ConsigAki</h1>
@@ -8,5 +18,5 @@ export default function Home() {
         app
       </Link>
     </div>
-  );
+  )
 }

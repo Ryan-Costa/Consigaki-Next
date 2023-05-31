@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { useState } from "react";
-import { IconArrowDown } from "../../public/icons";
+import Image from 'next/image'
+import { useState } from 'react'
+import { IconArrowDown } from '../../public/icons'
 
 export default function Topbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
-  const handleOpen = () => setIsOpen((prev) => !prev);
+  const handleOpen = () => setIsOpen((prev) => !prev)
   return (
     <>
       <header className="flex h-20 w-full items-center justify-between bg-dark-blue shadow-2xl">
@@ -26,10 +26,10 @@ export default function Topbar() {
             className="flex items-center gap-4 text-white"
             onClick={handleOpen}
           >
-            Olá, Davi Bessa Pontes{" "}
+            Olá, Davi Bessa Pontes{' '}
             <span
               className={`transition-transform duration-300 ${
-                isOpen ? "rotate-180 transform " : ""
+                isOpen ? 'rotate-180 transform ' : ''
               }`}
             >
               {IconArrowDown}
@@ -54,5 +54,5 @@ export default function Topbar() {
         </div>
       </header>
     </>
-  );
+  )
 }

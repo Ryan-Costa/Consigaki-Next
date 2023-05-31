@@ -1,13 +1,12 @@
-import Image from "next/image";
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
-import Sidebar from "@/components/Sidebar";
-import Topbar from "@/components/TopBar";
-import { Karla } from "@next/font/google";
-const karla = Karla({ subsets: ["latin"] });
+import Sidebar from '@/components/Sidebar'
+import Topbar from '@/components/TopBar'
+import { Karla } from '@next/font/google'
+const karla = Karla({ subsets: ['latin'] })
 
 interface AppLayoutProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export default function AppLayout({ children }: AppLayoutProps) {
@@ -35,5 +34,5 @@ export default function AppLayout({ children }: AppLayoutProps) {
         </div>
       </div>
     </>
-  );
+  )
 }

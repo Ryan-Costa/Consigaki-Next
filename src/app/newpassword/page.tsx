@@ -1,24 +1,23 @@
-"use client";
-import Link from "next/link";
-import { IconePass, IconeUser } from "../../../public/icons";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
+'use client'
+import { IconePass } from '../../../public/icons'
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Image from 'next/image'
 // import { useRouter } from "next/router";
 
 const createUserFormSchema = z.object({
-  password: z.string().min(6, "A senha precisa de no mínimo 6 caracteres"),
+  password: z.string().min(6, 'A senha precisa de no mínimo 6 caracteres'),
   confirmPassword: z
     .string()
-    .min(6, "A senha precisa de no mínimo 6 caracteres"),
-});
+    .min(6, 'A senha precisa de no mínimo 6 caracteres'),
+})
 
-type CreateUserFormData = z.infer<typeof createUserFormSchema>;
+type CreateUserFormData = z.infer<typeof createUserFormSchema>
 
 export default function NewPassword() {
-  const [output, setOutput] = useState("");
+  const [output, setOutput] = useState('')
 
   // const router = useRouter();
 
@@ -32,10 +31,10 @@ export default function NewPassword() {
     formState: { errors },
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
-  });
+  })
 
   function createUser(data: any) {
-    setOutput(JSON.stringify(data, null, 2));
+    setOutput(JSON.stringify(data, null, 2))
   }
   return (
     <>
@@ -61,7 +60,7 @@ export default function NewPassword() {
                 focus:outline-none focus:ring-0
               `}
                   placeholder=" "
-                  {...register("password")}
+                  {...register('password')}
                 />
                 {errors.password && (
                   <span className="text-sm text-red-500">
@@ -93,7 +92,7 @@ export default function NewPassword() {
                 focus:outline-none focus:ring-0
               `}
                   placeholder=" "
-                  {...register("confirmPassword")}
+                  {...register('confirmPassword')}
                 />
                 {errors.confirmPassword && (
                   <span className="text-sm text-red-500">
@@ -152,5 +151,5 @@ export default function NewPassword() {
         </div>
       </div>
     </>
-  );
+  )
 }

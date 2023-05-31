@@ -1,15 +1,15 @@
-import axios from "axios";
+import axios from 'axios'
 
 const config = {
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-};
+}
 
-const _axios = axios.create(config);
+const _axios = axios.create(config)
 
 export async function fetchUser(id: string) {
-  return axios.get("/user/", {
+  return axios.get('/user/', {
     params: { id },
-  });
+  })
 }
 
 // _axios.interceptors.request.use(
@@ -23,4 +23,4 @@ export async function fetchUser(id: string) {
 //   (error) => error
 // );
 
-export default _axios;
+export default _axios

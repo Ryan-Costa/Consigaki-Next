@@ -1,39 +1,39 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { IconePass, IconeUser } from "../../../../public/icons";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import Link from 'next/link'
+import { IconePass, IconeUser } from '../../../../public/icons'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { useState } from 'react'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/
 
 const createUserFormSchema = z.object({
   cpf: z
     .string()
-    .nonempty("O CPF é obrigatório")
-    .regex(cpfRegex, "CPF inválido"),
+    .nonempty('O CPF é obrigatório')
+    .regex(cpfRegex, 'CPF inválido'),
   email: z
     .string()
-    .nonempty("O e-mail é obrigatório")
-    .email("Formato de e-mail inválido")
+    .nonempty('O e-mail é obrigatório')
+    .email('Formato de e-mail inválido')
     .toLowerCase()
     .refine((email) => {
-      return email.endsWith("@consigaki.com");
-    }, "O e-mail precisa ser do Banco Pan"),
-  password: z.string().min(6, "A senha precisa de no mínimo 6 caracteres"),
-});
+      return email.endsWith('@consigaki.com')
+    }, 'O e-mail precisa ser do Banco Pan'),
+  password: z.string().min(6, 'A senha precisa de no mínimo 6 caracteres'),
+})
 
-type CreateUserFormData = z.infer<typeof createUserFormSchema>;
+type CreateUserFormData = z.infer<typeof createUserFormSchema>
 
 const defaultValues = {
-  cpf: "",
-  password: "",
-};
+  cpf: '',
+  password: '',
+}
 
 export default function SignIn() {
-  const [output, setOutput] = useState("");
+  const [output, setOutput] = useState('')
   const {
     register,
     handleSubmit,
@@ -41,11 +41,11 @@ export default function SignIn() {
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
     defaultValues,
-  });
+  })
 
   const createUser: SubmitHandler<typeof defaultValues> = (data) => {
-    setOutput(JSON.stringify(data, null, 2));
-  };
+    setOutput(JSON.stringify(data, null, 2))
+  }
 
   return (
     <div className="mr-64 flex w-492 flex-col gap-6">
@@ -64,7 +64,7 @@ export default function SignIn() {
                 focus:outline-none focus:ring-0
               `}
             placeholder=" "
-            {...register("cpf")}
+            {...register('cpf')}
           />
           {errors.cpf && (
             <span className="text-sm text-red-500">{errors.cpf.message}</span>
@@ -94,7 +94,7 @@ export default function SignIn() {
               focus:outline-none focus:ring-0
             `}
             placeholder=" "
-            {...register("password")}
+            {...register('password')}
           />
           {errors.password && (
             <span className="text-sm text-red-500">
@@ -140,5 +140,5 @@ export default function SignIn() {
       </form>
       <pre>{output}</pre>
     </div>
-  );
+  )
 }

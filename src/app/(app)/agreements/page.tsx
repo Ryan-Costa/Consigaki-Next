@@ -1,58 +1,58 @@
-"use client";
+'use client'
 
-import TableAgreementsUsers from "@/components/table/TableAgreementsUsers";
-import EditAgreement from "@/components/agreementsComponents/EditAgreement";
-import AddAgreement from "@/components/agreementsComponents/AddAgreement";
+import TableAgreementsUsers from '@/components/table/TableAgreementsUsers'
+import EditAgreement from '@/components/agreementsComponents/EditAgreement'
+import AddAgreement from '@/components/agreementsComponents/AddAgreement'
 
-import SearchInput from "@/components/SearchInput";
-import { useState } from "react";
-import { IconPartners } from "../../../../public/icons";
+import SearchInput from '@/components/SearchInput'
+import { useState } from 'react'
+import { IconPartners } from '../../../../public/icons'
 
-import { Roboto } from "@next/font/google";
-import { Dropdown } from "@/components/Dropdown";
+import { Roboto } from '@next/font/google'
+import { Dropdown } from '@/components/Dropdown'
 const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface ItemProps {
-  codigo: string;
-  nome: string;
-  cadastro: string;
+  codigo: string
+  nome: string
+  cadastro: string
 }
 
 export default function Agreements() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
-  const [heAddAgreement, setHeAddAgreement] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isEditing, setIsEditing] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null)
+  const [heAddAgreement, setHeAddAgreement] = useState(false)
 
   const handleSearch = (value: string) => {
-    setSearchTerm(value);
-  };
+    setSearchTerm(value)
+  }
 
   const handleEdit = (item: ItemProps) => {
-    setSelectedItem(item);
-    setIsEditing(true);
-  };
+    setSelectedItem(item)
+    setIsEditing(true)
+  }
 
   const handleCloseEditScreen = () => {
-    setIsEditing(false);
-  };
+    setIsEditing(false)
+  }
 
   const handleAddition = () => {
-    setHeAddAgreement(true);
-  };
+    setHeAddAgreement(true)
+  }
 
   const handleCloseAdditionScreen = () => {
-    setHeAddAgreement(false);
-  };
+    setHeAddAgreement(false)
+  }
 
   return (
     <>
       <div
         className={`${roboto.className} h-full w-full rounded-md bg-white px-6 
-        ${heAddAgreement || isEditing ? "py-9" : "py-14"}`}
+        ${heAddAgreement || isEditing ? 'py-9' : 'py-14'}`}
       >
         {heAddAgreement ? (
           <AddAgreement
@@ -90,7 +90,7 @@ export default function Agreements() {
                 <TableAgreementsUsers
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}
-                  type={"agreements"}
+                  type={'agreements'}
                 />
               </>
             )}
@@ -98,5 +98,5 @@ export default function Agreements() {
         )}
       </div>
     </>
-  );
+  )
 }

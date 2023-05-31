@@ -1,16 +1,16 @@
-import { ReactNode } from "react";
-import { Metadata } from "next";
-import "../styles/global/globals.css";
+import { ReactNode } from 'react'
+import { Metadata } from 'next'
+import '../styles/global/globals.css'
 
-import { Karla } from "@next/font/google";
-const karla = Karla({ subsets: ["latin"] });
+import { Karla } from '@next/font/google'
+const karla = Karla({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: "ConsigAki",
-    template: "%s | ConsigAki",
+    default: 'ConsigAki',
+    template: '%s | ConsigAki',
   },
-};
+}
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -20,5 +20,5 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {children}
       </body>
     </html>
-  );
+  )
 }

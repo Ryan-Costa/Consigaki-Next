@@ -1,40 +1,40 @@
-import React, { useState, ChangeEvent } from "react";
-import { IconArrowBack, IconPartners } from "../../../public/icons";
-import { Inter } from "@next/font/google";
-import ToggleSwitch from "../ToggleSwitch";
+import React, { useState, ChangeEvent } from 'react'
+import { IconArrowBack, IconPartners } from '../../../public/icons'
+import { Inter } from '@next/font/google'
+import ToggleSwitch from '../ToggleSwitch'
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface Item {
-  nome: string;
+  nome: string
 }
 
 interface AddProps {
-  item: Item;
-  onClose: () => void;
+  item: Item
+  onClose: () => void
 }
 
 export default function AddUser({ item, onClose }: AddProps) {
-  const [savedItem, setSavedItem] = useState<Item>(item);
+  const [savedItem, setSavedItem] = useState<Item>(item)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setSavedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSave = () => {
-    console.log("Item editado:", savedItem);
-  };
+    console.log('Item editado:', savedItem)
+  }
 
   const handleGoBack = () => {
-    onClose();
-    console.log("voltei");
-  };
+    onClose()
+    console.log('voltei')
+  }
 
   return (
     <div>
@@ -54,12 +54,25 @@ export default function AddUser({ item, onClose }: AddProps) {
       <div className="mt-6 flex gap-6">
         <div className="flex w-full flex-col gap-2">
           <label htmlFor="" className="font-semibold">
-            Razão Social
+            Nome
           </label>
           <input
             name="nome"
             type="text"
-            placeholder="---------- -------- -------"
+            placeholder="David Bessa Pontes"
+            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
+            // value={setSavedItem.razaoSocial}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="flex w-full flex-col gap-2">
+          <label htmlFor="" className="font-semibold">
+            E-mail
+          </label>
+          <input
+            name="nome"
+            type="text"
+            placeholder="OrpelNet@Gmail.acom"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
             // value={setSavedItem.razaoSocial}
             onChange={handleInputChange}
@@ -67,20 +80,42 @@ export default function AddUser({ item, onClose }: AddProps) {
         </div>
       </div>
       <div className="mb-6 mt-6 flex gap-6">
-        <div className="flex flex-col gap-2">
+        <div className="flex w-full flex-col gap-2">
           <label htmlFor="" className="font-semibold">
-            Cadastro
+            CPF
           </label>
           <input
             name="cadastro"
             type="text"
-            placeholder="00/00/0000"
+            placeholder="000.000.000-00"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
             // value={setSavedItem.cadastro}
             onChange={handleInputChange}
           />
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex w-full flex-col gap-2">
+          <label htmlFor="" className="font-semibold">
+            Celular
+          </label>
+          <input
+            name="alterado"
+            type="text"
+            placeholder="(00) 0 0000-0000"
+            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
+          />
+        </div>
+        <div className="flex w-full flex-col gap-2">
+          <label htmlFor="" className="font-semibold">
+            Alterado
+          </label>
+          <input
+            name="alterado"
+            type="text"
+            placeholder="00/00/0000"
+            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
+          />
+        </div>
+        <div className="flex w-full flex-col gap-2">
           <label htmlFor="" className="font-semibold">
             Alterado
           </label>
@@ -94,7 +129,10 @@ export default function AddUser({ item, onClose }: AddProps) {
       </div>
       <ToggleSwitch />
       <div className="mt-10 w-full rounded-sm">
-        <button className="w-full rounded-sm bg-goldenrod py-4 text-2xl font-bold hover:bg-green-goldenrod">
+        <button
+          className="w-full rounded-sm bg-goldenrod py-4 text-2xl font-bold hover:bg-green-goldenrod"
+          onClick={handleSave}
+        >
           Salvar
         </button>
       </div>
@@ -137,5 +175,5 @@ export default function AddUser({ item, onClose }: AddProps) {
       </label>
       <button onClick={handleSave}>Salvar</button> */}
     </div>
-  );
+  )
 }

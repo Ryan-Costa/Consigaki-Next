@@ -1,27 +1,26 @@
-"use client";
-import Link from "next/link";
-import { IconePass, IconeUser } from "../../../public/icons";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+'use client'
+import { IconeUser } from '../../../public/icons'
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 const createUserFormSchema = z.object({
-  cpf: z.string().nonempty("O CPF é obrigatório"),
-});
+  cpf: z.string().nonempty('O CPF é obrigatório'),
+})
 
-type CreateUserFormData = z.infer<typeof createUserFormSchema>;
+type CreateUserFormData = z.infer<typeof createUserFormSchema>
 
 export default function ForgotPassword() {
-  const [output, setOutput] = useState("");
+  const [output, setOutput] = useState('')
 
-  const router = useRouter();
+  const router = useRouter()
 
   const handleClick = () => {
-    router.push("/newpassword");
-  };
+    router.push('/newpassword')
+  }
 
   const {
     register,
@@ -29,10 +28,10 @@ export default function ForgotPassword() {
     formState: { errors },
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
-  });
+  })
 
   function createUser(data: any) {
-    setOutput(JSON.stringify(data, null, 2));
+    setOutput(JSON.stringify(data, null, 2))
   }
   return (
     <>
@@ -58,7 +57,7 @@ export default function ForgotPassword() {
                 focus:outline-none focus:ring-0
               `}
                   placeholder=" "
-                  {...register("cpf")}
+                  {...register('cpf')}
                 />
                 {errors.cpf && (
                   <span className="text-sm text-red-500">
@@ -122,5 +121,5 @@ export default function ForgotPassword() {
         </div>
       </div>
     </>
-  );
+  )
 }

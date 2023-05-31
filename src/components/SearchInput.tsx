@@ -1,20 +1,20 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { IconSearch } from "../../public/icons";
+import React, { useState } from 'react'
+import { IconSearch } from '../../public/icons'
 
 interface SearchInputProps {
-  onSearch: (value: string) => void;
+  onSearch: (value: string) => void
 }
 
 export default function SearchInput({ onSearch }: SearchInputProps) {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setSearchValue(value);
-    onSearch(value);
-  };
+    const value = event.target.value
+    setSearchValue(value)
+    onSearch(value)
+  }
 
   return (
     <div className="relative">
@@ -31,5 +31,5 @@ export default function SearchInput({ onSearch }: SearchInputProps) {
         </div>
       )}
     </div>
-  );
+  )
 }

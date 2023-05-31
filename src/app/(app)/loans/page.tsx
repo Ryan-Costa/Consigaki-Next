@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 export default function Loans() {
   return (
@@ -7,5 +7,5 @@ export default function Loans() {
         <h1>ESTEIRAS</h1>
       </div>
     </>
-  );
+  )
 }
