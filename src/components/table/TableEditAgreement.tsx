@@ -1,8 +1,8 @@
 'use client'
 import { useState } from 'react'
 import { IconClose } from '../../../public/icons'
-import ModalBanner from '../Modal/ModalBanner'
-import ModalProduct from '../Modal/ModalProduct'
+import ModalBanner from '../modal/ModalBanner'
+import ModalProduct from '../modal/ModalProduct'
 
 export function TableEditAgreement() {
   const [isOpenModalBanner, setIsOpenModalBanner] = useState(false)

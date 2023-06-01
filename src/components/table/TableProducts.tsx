@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { IconArrow, IconEdit } from '../../../public/icons'
-import Modal from '../Modal/ModalBanner'
+import Modal from '../modal/ModalBanner'
 
 interface ItemProps {
   codigo: string

@@ -1,40 +1,42 @@
-import React, { useState, ChangeEvent } from 'react'
-import { IconArrowBack, IconPartners } from '../../../public/icons'
-import { Inter } from '@next/font/google'
-import ToggleSwitch from '../ToggleSwitch'
+import React, { useState, ChangeEvent } from "react";
+import { IconArrowBack, IconPartners } from "../../../public/icons";
+import { Inter } from "@next/font/google";
+import ToggleSwitch from "../ToggleSwitch";
+import { Dropdown } from "../Dropdown";
 const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 interface Item {
-  nome: string
+  nome: string;
 }
 
 interface AddProps {
-  item: Item
-  onClose: () => void
+  item: Item;
+  onClose: () => void;
 }
 
 export default function AddUser({ item, onClose }: AddProps) {
-  const [savedItem, setSavedItem] = useState<Item>(item)
+  const [savedItem, setSavedItem] = useState<Item>(item);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setSavedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSave = () => {
-    console.log('Item editado:', savedItem)
-  }
+    onClose();
+    console.log("Item editado:", savedItem);
+  };
 
   const handleGoBack = () => {
-    onClose()
-    console.log('voltei')
-  }
+    onClose();
+    console.log("voltei");
+  };
 
   return (
     <div>
@@ -106,7 +108,7 @@ export default function AddUser({ item, onClose }: AddProps) {
         </div>
         <div className="flex w-full flex-col gap-2">
           <label htmlFor="" className="font-semibold">
-            Alterado
+            Data de nascimento
           </label>
           <input
             name="alterado"
@@ -117,13 +119,50 @@ export default function AddUser({ item, onClose }: AddProps) {
         </div>
         <div className="flex w-full flex-col gap-2">
           <label htmlFor="" className="font-semibold">
-            Alterado
+            Perfil
+          </label>
+          <Dropdown
+            defaultValue="Selecione"
+            type="form"
+            options={["Cliente", "Suporte", "Administrador"]}
+          />
+        </div>
+      </div>
+      <div className="mb-6 mt-6 flex gap-6">
+        <div className="flex w-full flex-col gap-2">
+          <label htmlFor="" className="font-semibold">
+            Acesso
+          </label>
+          <Dropdown
+            defaultValue="Login liberado"
+            type="form"
+            options={["Login bloqueado", "Login liberado"]}
+          />
+        </div>
+        <div className="flex w-full flex-col gap-2">
+          <label htmlFor="" className="font-semibold">
+            Cadastro
           </label>
           <input
-            name="alterado"
+            name="cadastro"
             type="text"
             placeholder="00/00/0000"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
+            // value={setSavedItem.cadastro}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="flex w-full flex-col gap-2">
+          <label htmlFor="" className="font-semibold">
+            Alterado
+          </label>
+          <input
+            name="cadastro"
+            type="text"
+            placeholder="00/00/0000"
+            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
+            // value={setSavedItem.cadastro}
+            onChange={handleInputChange}
           />
         </div>
       </div>
@@ -175,5 +214,5 @@ export default function AddUser({ item, onClose }: AddProps) {
       </label>
       <button onClick={handleSave}>Salvar</button> */}
     </div>
-  )
+  );
 }

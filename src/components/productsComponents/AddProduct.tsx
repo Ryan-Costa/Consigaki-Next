@@ -1,41 +1,42 @@
-import React, { useState, ChangeEvent } from 'react'
-import { IconArrowBack, IconPartners } from '../../../public/icons'
-import { Inter } from '@next/font/google'
-import ToggleSwitch from '../ToggleSwitch'
+import React, { useState, ChangeEvent } from "react";
+import { IconArrowBack, IconPartners } from "../../../public/icons";
+import { Inter } from "@next/font/google";
+import ToggleSwitch from "../ToggleSwitch";
 const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 interface Item {
-  razaoSocial: string
-  cnpj: string
+  razaoSocial: string;
+  cnpj: string;
 }
 
 interface AddProps {
-  item: Item
-  onClose: () => void
+  item: Item;
+  onClose: () => void;
 }
 
 export default function AddProduct({ item, onClose }: AddProps) {
-  const [savedItem, setSavedItem] = useState<Item>(item)
+  const [savedItem, setSavedItem] = useState<Item>(item);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setSavedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSave = () => {
-    console.log('Item editado:', savedItem)
-  }
+    onClose();
+    console.log("Item editado:", savedItem);
+  };
 
   const handleGoBack = () => {
-    onClose()
-    console.log('voltei')
-  }
+    onClose();
+    console.log("voltei");
+  };
 
   return (
     <div>
@@ -141,5 +142,5 @@ export default function AddProduct({ item, onClose }: AddProps) {
       </label>
       <button onClick={handleSave}>Salvar</button> */}
     </div>
-  )
+  );
 }

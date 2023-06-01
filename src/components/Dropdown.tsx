@@ -1,51 +1,73 @@
-import React, { useState } from 'react'
-import { IconArrow } from '../../public/icons'
+import React, { useState } from "react";
+import { IconArrow } from "../../public/icons";
 
 type DropdownProps = {
-  type: 'modal' | 'table'
-}
+  type: "modal" | "table" | "form";
+  options: string[];
+  defaultValue: string;
+};
 
-export const Dropdown: React.FC<DropdownProps> = ({ type }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const handleOpen = () => setIsOpen((prev) => !prev)
+export const Dropdown: React.FC<DropdownProps> = ({
+  type,
+  options,
+  defaultValue,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState<string | null>(null);
+
+  const handleOpen = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleSelectItem = (value: string) => {
+    setSelectedValue(value);
+  };
   return (
     <div
       className={`flex ${
-        type === 'modal' ? 'h-12' : 'h-42'
-      }  w-60 items-center justify-center ${
-        type === 'modal' ? 'rounded-xl' : 'rounded-20'
-      } border border-black px-7`}
+        type === "modal"
+          ? "h-12 w-60 rounded-xl border-black px-7"
+          : type === "table"
+          ? "h-42 w-60 rounded-20 border-black px-7"
+          : type === "form"
+          ? "w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
+          : null
+      } items-center justify-center border`}
     >
       <button
-        className="relative flex w-full items-center justify-between font-bold"
+        className={`relative flex w-full items-center justify-between font-bold ${
+          type === "form" ? "text-text-select" : "text-black"
+        }`}
         onClick={handleOpen}
       >
-        {type === 'modal' ? 'Selecione' : 'Ativo'}
+        {!selectedValue ? defaultValue : selectedValue}
         <span
           className={`transition-transform duration-300 ${
-            isOpen ? 'rotate-40 transform ' : 'rotate-180'
+            isOpen ? "rotate-40 transform " : "rotate-180"
           }`}
         >
           {IconArrow}
         </span>
         {isOpen && (
           <div className="absolute -right-8 top-9 box-border flex w-60 list-none flex-col rounded-b-2xl bg-white text-left text-black shadow-lg">
-            <li className="box-border cursor-pointer px-5 py-4 font-bold hover:border-l-2 hover:border-blue-700">
-              {type === 'modal' ? 'Cartão' : 'Opção 1'}
-            </li>
-            <li className="box-border cursor-pointer px-5 py-4 font-bold hover:border-l-2 hover:border-blue-700">
-              {type === 'modal' ? 'Empréstimo' : 'Opção 2'}
-            </li>
-            <li className="box-border cursor-pointer px-5 py-4 font-bold hover:border-l-2 hover:border-blue-700">
-              {type === 'modal' ? 'Previdência' : 'Opção 3'}
-            </li>
-            <li className="box-border cursor-pointer px-5 py-4 font-bold hover:border-l-2 hover:border-blue-700">
-              {type === 'modal' ? 'Seguro' : 'Opção 4'}
-            </li>
+            {options.map((option, index) => (
+              <li
+                key={index}
+                className={`box-border cursor-pointer px-5 py-4 font-bold hover:border-l-2 hover:border-blue-700 ${
+                  selectedValue === option ? "selected" : ""
+                }`}
+                onClick={() => {
+                  handleSelectItem(option);
+                }}
+              >
+                {option}
+              </li>
+            ))}
+
             <li className="h-4"></li>
           </div>
         )}
       </button>
     </div>
-  )
-}
+  );
+};

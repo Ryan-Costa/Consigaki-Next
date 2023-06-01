@@ -1,53 +1,53 @@
-'use client'
+"use client";
 
-import TableProducts from '@/components/table/TableProducts'
-import AddProduct from '@/components/productsComponents/AddProduct'
-import EditProduct from '@/components/productsComponents/EditProduct'
+import TableProducts from "@/components/table/TableProducts";
+import AddProduct from "@/components/productsComponents/AddProduct";
+import EditProduct from "@/components/productsComponents/EditProduct";
 
-import SearchInput from '@/components/SearchInput'
-import { useState } from 'react'
-import { IconPartners } from '../../../../public/icons'
+import SearchInput from "@/components/SearchInput";
+import { useState } from "react";
+import { IconPartners } from "../../../../public/icons";
 
-import { Roboto } from '@next/font/google'
-import { Dropdown } from '@/components/Dropdown'
+import { Roboto } from "@next/font/google";
+import { Dropdown } from "@/components/Dropdown";
 const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 interface ItemProps {
-  codigo: string
-  razaoSocial: string
-  cnpj: string
-  cadastro: string
+  codigo: string;
+  razaoSocial: string;
+  cnpj: string;
+  cadastro: string;
 }
 
 export default function Providers() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [isEditing, setIsEditing] = useState(false)
-  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null)
-  const [heAddProduct, setHeAddProduct] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
+  const [heAddProduct, setHeAddProduct] = useState(false);
 
   const handleSearch = (value: string) => {
-    setSearchTerm(value)
-  }
+    setSearchTerm(value);
+  };
 
   const handleEdit = (item: ItemProps) => {
-    setSelectedItem(item)
-    setIsEditing(true)
-  }
+    setSelectedItem(item);
+    setIsEditing(true);
+  };
 
   const handleCloseEditScreen = () => {
-    setIsEditing(false)
-  }
+    setIsEditing(false);
+  };
 
   const handleAddition = () => {
-    setHeAddProduct(true)
-  }
+    setHeAddProduct(true);
+  };
 
   const handleCloseAdditionScreen = () => {
-    setHeAddProduct(false)
-  }
+    setHeAddProduct(false);
+  };
 
   return (
     <>
@@ -55,7 +55,7 @@ export default function Providers() {
         className={`${
           roboto.className
         } h-full w-full rounded-md bg-white px-6 ${
-          heAddProduct ? 'py-9' : 'py-14'
+          heAddProduct ? "py-9" : "py-14"
         }`}
       >
         {heAddProduct ? (
@@ -77,7 +77,11 @@ export default function Providers() {
                     Produtos {IconPartners}
                   </h2>
                   <div className="flex gap-5 ">
-                    <Dropdown type="table" />
+                    <Dropdown
+                      defaultValue="Ativo"
+                      type="table"
+                      options={["Opção 1", "Opção 2", "Opção 3", "Opção 4"]}
+                    />
                     <div className="flex items-center justify-center">
                       <SearchInput onSearch={handleSearch} />
                     </div>
@@ -94,7 +98,7 @@ export default function Providers() {
                 <TableProducts
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}
-                  type={'providers'}
+                  type={"providers"}
                 />
               </>
             )}
@@ -102,5 +106,5 @@ export default function Providers() {
         )}
       </div>
     </>
-  )
+  );
 }

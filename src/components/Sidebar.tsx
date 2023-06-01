@@ -2,15 +2,14 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { IconArrow } from '../../public/icons'
 import {
-  RiHome5Line,
-  RiCalendarTodoLine,
-  RiStore2Line,
-  RiWalletLine,
-} from 'react-icons/Ri'
-
-import { BsBox } from 'react-icons/Bs'
+  IconArrow,
+  IconCalender,
+  IconHome,
+  IconInsumo,
+  IconStore,
+  IconWallet,
+} from '../../public/icons'
 
 const Sidebar = () => {
   const [isOpen1, setIsOpen1] = useState(false)
@@ -49,7 +48,7 @@ const Sidebar = () => {
                     href="/dashboard"
                     className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    <RiHome5Line /> Dashboard
+                    {IconHome} Dashboard
                   </Link>
                 </li>
                 <li>
@@ -57,7 +56,7 @@ const Sidebar = () => {
                     href="/loans"
                     className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    <RiStore2Line /> Esteira
+                    {IconStore} Esteira
                   </Link>
                 </li>
                 <li>
@@ -65,7 +64,7 @@ const Sidebar = () => {
                     href="/products"
                     className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    <RiStore2Line /> Produtos
+                    {IconStore} Produtos
                   </Link>
                 </li>
                 <li>
@@ -73,7 +72,7 @@ const Sidebar = () => {
                     href="/providers"
                     className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    <RiCalendarTodoLine /> Consignatárias
+                    {IconCalender} Consignatárias
                   </Link>
                 </li>
                 <li>
@@ -81,7 +80,7 @@ const Sidebar = () => {
                     href="/agreements"
                     className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    <RiStore2Line /> Convênios
+                    {IconStore} Convênios
                   </Link>
                 </li>
                 <li>
@@ -89,7 +88,7 @@ const Sidebar = () => {
                     href="/users"
                     className="flex items-center gap-2   from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    <RiWalletLine /> Usuários
+                    {IconWallet} Usuários
                   </Link>
                 </li>
               </ul>
@@ -118,7 +117,7 @@ const Sidebar = () => {
                     href="/reports"
                     className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    <BsBox /> Relatório-01
+                    {IconInsumo} Relatório-01
                   </Link>
                 </li>
                 <li>
@@ -126,7 +125,7 @@ const Sidebar = () => {
                     href="/reports"
                     className="flex items-center gap-2 from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    <BsBox /> Relatório-02
+                    {IconInsumo} Relatório-02
                   </Link>
                 </li>
                 <li>
@@ -134,7 +133,7 @@ const Sidebar = () => {
                     href="/reports"
                     className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    <BsBox /> Relatório-03
+                    {IconInsumo} Relatório-03
                   </Link>
                 </li>
                 <li>
@@ -142,7 +141,7 @@ const Sidebar = () => {
                     href="/reports"
                     className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
                   >
-                    <BsBox /> Relatório-04
+                    {IconInsumo} Relatório-04
                   </Link>
                 </li>
               </ul>

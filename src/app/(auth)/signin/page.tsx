@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { useState } from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import ClickHere from '@/components/ClickHere'
 
 const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/
 
@@ -115,13 +116,7 @@ export default function SignIn() {
             {IconePass} Senha
           </label>
         </div>
-
-        <div className="mb-6 flex gap-2">
-          <p>Não é cadastrado?</p>
-          <Link href="/signup" className="text-click-here">
-            Clique Aqui
-          </Link>
-        </div>
+        <ClickHere />
         <div className="mb-20">
           <Link
             href="/forgotpassword"
