@@ -3,22 +3,20 @@ import { IconArrowBack, IconPartners } from "../../../public/icons";
 import { Inter } from "@next/font/google";
 import ToggleSwitch from "../ToggleSwitch";
 import { Dropdown } from "../Dropdown";
+import { UserProps } from "@/interfaces/userProps";
+import ButtonSave from "../common/ButtonSave";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
 
-interface Item {
-  nome: string;
-}
-
 interface AddProps {
-  item: Item;
+  item: UserProps;
   onClose: () => void;
 }
 
 export default function AddUser({ item, onClose }: AddProps) {
-  const [savedItem, setSavedItem] = useState<Item>(item);
+  const [savedItem, setSavedItem] = useState<UserProps>(item);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -167,52 +165,7 @@ export default function AddUser({ item, onClose }: AddProps) {
         </div>
       </div>
       <ToggleSwitch />
-      <div className="mt-10 w-full rounded-sm">
-        <button
-          className="w-full rounded-sm bg-goldenrod py-4 text-2xl font-bold hover:bg-green-goldenrod"
-          onClick={handleSave}
-        >
-          Salvar
-        </button>
-      </div>
-      {/* <h2>Editar Item</h2>
-      <label>
-        Código:
-        <input
-          type="text"
-          name="codigo"
-          value={editedItem.codigo}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Razão Social:
-        <input
-          type="text"
-          name="razaoSocial"
-          value={editedItem.razaoSocial}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        CNPJ:
-        <input
-          type="text"
-          name="cnpj"
-          value={editedItem.cnpj}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Cadastro:
-        <input
-          type="text"
-          name="cadastro"
-          value={editedItem.cadastro}
-          onChange={handleInputChange}
-        />
-      </label>
-      <button onClick={handleSave}>Salvar</button> */}
+      <ButtonSave handleSave={handleSave} />
     </div>
   );
 }

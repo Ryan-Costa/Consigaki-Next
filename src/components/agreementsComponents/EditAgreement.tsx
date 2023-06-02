@@ -109,44 +109,6 @@ export default function EditAgreement({ item, onClose }: EditProps) {
         Produtos {IconPartners}
       </h2>
       <TableEditAgreement />
-      {/* <h2>Editar Item</h2>
-      <label>
-        Código:
-        <input
-          type="text"
-          name="codigo"
-          value={editedItem.codigo}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Razão Social:
-        <input
-          type="text"
-          name="razaoSocial"
-          value={editedItem.razaoSocial}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        CNPJ:
-        <input
-          type="text"
-          name="cnpj"
-          value={editedItem.cnpj}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Cadastro:
-        <input
-          type="text"
-          name="cadastro"
-          value={editedItem.cadastro}
-          onChange={handleInputChange}
-        />
-      </label>
-      <button onClick={handleSave}>Salvar</button> */}
     </div>
   );
 }

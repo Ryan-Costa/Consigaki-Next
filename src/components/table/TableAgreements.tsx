@@ -1,18 +1,13 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { IconArrow, IconEdit } from '../../../public/icons'
-import Modal from '../modal/ModalBanner'
-
-interface ItemProps {
-  codigo: string
-  nome: string
-  cadastro: string
-}
+import { AgreementsProps } from "@/interfaces/agreementsProps";
+import { useState } from "react";
+import { IconArrow, IconEdit } from "../../../public/icons";
+import Modal from "../modal/ModalBanner";
 interface CustomModalProps {
-  searchTerm: string
-  handleEdit: (item: ItemProps) => void
-  type: 'agreements' | 'users'
+  searchTerm: string;
+  handleEdit: (item: AgreementsProps) => void;
+  type: "agreements" | "users";
 }
 
 export default function TableAgreementsUsers({
@@ -20,144 +15,88 @@ export default function TableAgreementsUsers({
   handleEdit,
   type,
 }: CustomModalProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 5
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   // const handleOpenModal = () => {
   //   setIsModalOpen(true)
   // }
 
   const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
+    setIsModalOpen(false);
+  };
 
-  const AgreementsData = [
+  const agreementsData = [
     {
-      codigo: '0001',
-      nome: 'Raquel',
-      cadastro: '01/01/2023',
+      codigo: "0001",
+      nome: "Raquel",
+      cadastro: "01/01/2023",
     },
     {
-      codigo: '0002',
-      nome: 'Lucas',
-      cadastro: '02/01/2023',
+      codigo: "0002",
+      nome: "Lucas",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0003',
-      nome: 'Junior',
-      cadastro: '02/01/2023',
+      codigo: "0003",
+      nome: "Junior",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0004',
-      nome: 'Rafael',
-      cadastro: '02/01/2023',
+      codigo: "0004",
+      nome: "Rafael",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0005',
-      nome: 'Jeferson',
-      cadastro: '02/01/2023',
+      codigo: "0005",
+      nome: "Jeferson",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0006',
-      nome: 'Thiago',
-      cadastro: '02/01/2023',
+      codigo: "0006",
+      nome: "Thiago",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0007',
-      nome: 'Breno',
-      cadastro: '02/01/2023',
+      codigo: "0007",
+      nome: "Breno",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0008',
-      nome: 'Gabriel',
-      cadastro: '02/01/2023',
+      codigo: "0008",
+      nome: "Gabriel",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0009',
-      nome: 'Fred',
-      cadastro: '02/01/2023',
+      codigo: "0009",
+      nome: "Fred",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0010',
-      nome: 'Fábio',
-      cadastro: '02/01/2023',
+      codigo: "0010",
+      nome: "Fábio",
+      cadastro: "02/01/2023",
     },
-  ]
+  ];
 
-  const UsersData = [
-    {
-      codigo: '0001',
-      nome: 'Ryan',
-      cadastro: '01/01/2023',
-    },
-    {
-      codigo: '0002',
-      nome: 'Themis',
-      cadastro: '02/01/2023',
-    },
-    {
-      codigo: '0003',
-      nome: 'Jamile',
-      cadastro: '02/01/2023',
-    },
-    {
-      codigo: '0004',
-      nome: 'Ivana',
-      cadastro: '02/01/2023',
-    },
-    {
-      codigo: '0005',
-      nome: 'Karine',
-      cadastro: '02/01/2023',
-    },
-    {
-      codigo: '0006',
-      nome: 'Adriel',
-      cadastro: '02/01/2023',
-    },
-    {
-      codigo: '0007',
-      nome: 'Mateus',
-      cadastro: '02/01/2023',
-    },
-    {
-      codigo: '0008',
-      nome: 'Sergio',
-      cadastro: '02/01/2023',
-    },
-    {
-      codigo: '0009',
-      nome: 'Yasmin',
-      cadastro: '02/01/2023',
-    },
-    {
-      codigo: '0010',
-      nome: 'Heberth',
-      cadastro: '02/01/2023',
-    },
-  ]
+  const filteredData = agreementsData!.filter((item) =>
+    item.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const tableData =
-    type === 'agreements' ? AgreementsData : type === 'users' ? UsersData : null
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  const filteredData = tableData!.filter((item) =>
-    item.nome.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
-
-  const indexOfLastItem = currentPage * itemsPerPage
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage
-
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber)
-  }
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div>
-      {type === 'agreements' ? (
+      {type === "agreements" ? (
         <table className="mt-8 w-full text-left">
           <thead>
             <tr>
@@ -185,7 +124,7 @@ export default function TableAgreementsUsers({
             ))}
           </tbody>
         </table>
-      ) : type === 'users' ? (
+      ) : type === "users" ? (
         <table className="mt-8 w-full text-left">
           <thead>
             <tr>
@@ -230,7 +169,7 @@ export default function TableAgreementsUsers({
             <div
               key={index}
               className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${
-                index + 1 === currentPage ? 'bg-deg1 text-white' : ''
+                index + 1 === currentPage ? "bg-deg1 text-white" : ""
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
@@ -249,5 +188,5 @@ export default function TableAgreementsUsers({
       </div>
       <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </div>
-  )
+  );
 }

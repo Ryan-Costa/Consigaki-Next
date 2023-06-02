@@ -1,6 +1,6 @@
 "use client";
 
-import TableAgreementsUsers from "@/components/table/TableAgreementsUsers";
+import TableAgreements from "@/components/table/TableAgreements";
 import EditAgreement from "@/components/agreementsComponents/EditAgreement";
 import AddAgreement from "@/components/agreementsComponents/AddAgreement";
 
@@ -91,7 +91,7 @@ export default function Agreements() {
                     + Adicionar Convênio
                   </button>
                 </div>
-                <TableAgreementsUsers
+                <TableAgreements
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}
                   type={"agreements"}

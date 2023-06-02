@@ -1,6 +1,6 @@
 "use client";
 
-import TableAgreementsUsers from "@/components/table/TableAgreementsUsers";
+import TableUsers from "@/components/table/TableUsers";
 import EditUser from "@/components/usersComponents/EditUser";
 import AddUser from "@/components/usersComponents/AddUser";
 
@@ -8,6 +8,7 @@ import SearchInput from "@/components/SearchInput";
 import { useState } from "react";
 import { IconPartners } from "../../../../public/icons";
 import { Dropdown } from "@/components/Dropdown";
+import { UserProps } from "@/interfaces/userProps";
 
 import { Roboto } from "@next/font/google";
 const roboto = Roboto({
@@ -15,23 +16,17 @@ const roboto = Roboto({
   weight: ["400", "700"],
 });
 
-interface ItemProps {
-  codigo: string;
-  nome: string;
-  cadastro: string;
-}
-
 export default function Users() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
+  const [selectedItem, setSelectedItem] = useState<UserProps | null>(null);
   const [heAddUser, setHeAddUser] = useState(false);
 
   const handleSearch = (value: string) => {
     setSearchTerm(value);
   };
 
-  const handleEdit = (item: ItemProps) => {
+  const handleEdit = (item: UserProps) => {
     setSelectedItem(item);
     setIsEditing(true);
   };
@@ -88,7 +83,7 @@ export default function Users() {
                     + Adicionar Usuário
                   </button>
                 </div>
-                <TableAgreementsUsers
+                <TableUsers
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}
                   type={"users"}

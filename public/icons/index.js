@@ -148,6 +148,21 @@ export const IconArrowDown = (
   </svg>
 );
 
+export const IconArrowRight = (
+  <svg
+    width="24"
+    height="18"
+    viewBox="0 0 14 8"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M7 2.828L2.05 7.778L0.636002 6.364L7 0L13.364 6.364L11.95 7.778L7 2.828Z"
+      fill="#ffffff"
+    />
+  </svg>
+);
+
 export const IconArrowBack = (
   <svg
     width="30"

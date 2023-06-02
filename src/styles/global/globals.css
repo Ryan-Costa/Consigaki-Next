@@ -10,4 +10,12 @@
   .nav.active:after {
     @apply absolute -bottom-[5px] left-0 h-[3px] w-[100%] rounded-xl bg-white content-[''];
   }
+
+  .btn {
+    @apply relative tracking-[1px];
+  }
+
+  .btn.active:after {
+    @apply absolute -bottom-[2px] left-0 h-[2px] w-[100%] rounded-xl bg-black content-[''];
+  }
 }
