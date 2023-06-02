@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
+import Link from "next/link";
+import { useState } from "react";
 import {
   IconArrow,
   IconCalender,
@@ -9,19 +9,19 @@ import {
   IconInsumo,
   IconStore,
   IconWallet,
-} from '../../public/icons'
+} from "../../public/icons";
 
 const Sidebar = () => {
-  const [isOpen1, setIsOpen1] = useState(false)
-  const [isOpen2, setIsOpen2] = useState(false)
+  const [isOpen1, setIsOpen1] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
 
   const toggleDropdown1 = () => {
-    setIsOpen1(!isOpen1)
-  }
+    setIsOpen1(!isOpen1);
+  };
 
   const toggleDropdown2 = () => {
-    setIsOpen2(!isOpen2)
-  }
+    setIsOpen2(!isOpen2);
+  };
 
   return (
     <div className="sidebar mt-6 w-60 bg-aside">
@@ -35,7 +35,7 @@ const Sidebar = () => {
               Serviços
               <span
                 className={`transition-transform duration-300 ${
-                  !isOpen1 ? 'rotate-180 transform' : ''
+                  !isOpen1 ? "rotate-180 transform" : ""
                 }`}
               >
                 {IconArrow}
@@ -46,7 +46,7 @@ const Sidebar = () => {
                 <li>
                   <Link
                     href="/dashboard"
-                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
+                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-slate-200"
                   >
                     {IconHome} Dashboard
                   </Link>
@@ -54,7 +54,7 @@ const Sidebar = () => {
                 <li>
                   <Link
                     href="/loans"
-                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
+                    className="flex items-center gap-2   px-2 py-1 text-xl font-normal text-word-app  hover:bg-slate-200"
                   >
                     {IconStore} Esteira
                   </Link>
@@ -62,7 +62,7 @@ const Sidebar = () => {
                 <li>
                   <Link
                     href="/products"
-                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
+                    className="flex items-center gap-2   px-2 py-1 text-xl font-normal text-word-app  hover:bg-slate-200"
                   >
                     {IconStore} Produtos
                   </Link>
@@ -70,7 +70,7 @@ const Sidebar = () => {
                 <li>
                   <Link
                     href="/providers"
-                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
+                    className="flex items-center gap-2   px-2 py-1 text-xl font-normal text-word-app  hover:bg-slate-200"
                   >
                     {IconCalender} Consignatárias
                   </Link>
@@ -78,7 +78,7 @@ const Sidebar = () => {
                 <li>
                   <Link
                     href="/agreements"
-                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
+                    className="flex items-center gap-2   px-2 py-1 text-xl font-normal text-word-app  hover:bg-slate-200"
                   >
                     {IconStore} Convênios
                   </Link>
@@ -86,7 +86,7 @@ const Sidebar = () => {
                 <li>
                   <Link
                     href="/users"
-                    className="flex items-center gap-2   from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
+                    className="flex items-center gap-2    px-2 py-1 text-xl font-normal text-word-app hover:bg-slate-200"
                   >
                     {IconWallet} Usuários
                   </Link>
@@ -104,7 +104,7 @@ const Sidebar = () => {
               Relatórios
               <span
                 className={`transition-transform duration-300 ${
-                  !isOpen2 ? 'rotate-180 transform' : ''
+                  !isOpen2 ? "rotate-180 transform" : ""
                 }`}
               >
                 {IconArrow}
@@ -115,7 +115,7 @@ const Sidebar = () => {
                 <li>
                   <Link
                     href="/reports"
-                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
+                    className=" flex items-center   gap-2 px-2 py-1 text-xl font-normal  text-word-app hover:bg-slate-200"
                   >
                     {IconInsumo} Relatório-01
                   </Link>
@@ -123,7 +123,7 @@ const Sidebar = () => {
                 <li>
                   <Link
                     href="/reports"
-                    className="flex items-center gap-2 from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
+                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app  hover:bg-slate-200"
                   >
                     {IconInsumo} Relatório-02
                   </Link>
@@ -131,7 +131,7 @@ const Sidebar = () => {
                 <li>
                   <Link
                     href="/reports"
-                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
+                    className="flex items-center gap-2   px-2 py-1 text-xl font-normal text-word-app  hover:bg-slate-200"
                   >
                     {IconInsumo} Relatório-03
                   </Link>
@@ -139,7 +139,7 @@ const Sidebar = () => {
                 <li>
                   <Link
                     href="/reports"
-                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
+                    className="flex items-center gap-2   px-2 py-1 text-xl font-normal text-word-app  hover:bg-slate-200"
                   >
                     {IconInsumo} Relatório-04
                   </Link>
@@ -150,7 +150,7 @@ const Sidebar = () => {
         </li>
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
