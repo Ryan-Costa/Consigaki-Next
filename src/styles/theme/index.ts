@@ -29,7 +29,7 @@ const theme = {
       "line-gray": "#C8C8C8",
       "--bs-gray-dark": "#271050",
       "--bs-secondary": "#8ca3bd",
-      "--bs-info": "#4f9dff",
+      "bs-info": "#4f9dff",
       "--bs-success": "#6fbe36",
       "--bs-warning": "#ff9b2d",
       "--bs-light": "#eff2f7",

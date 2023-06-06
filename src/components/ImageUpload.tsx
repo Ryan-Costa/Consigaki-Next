@@ -8,7 +8,11 @@ const inter = Inter({
   weight: ["400", "700"],
 });
 
-const ImageUpload: React.FC = () => {
+type ImageUploadProps = {
+  type: "modal" | "profile";
+};
+
+const ImageUpload: React.FC<ImageUploadProps> = ({ type }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
@@ -49,23 +53,38 @@ const ImageUpload: React.FC = () => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <div className="mb-5 mt-4 flex h-32 w-80 border-spacing-1 items-center justify-center border border-gray-200">
+      <div
+        className={`mb-5 mt-4 flex ${
+          type === "modal" ? "h-[128px] w-[320px]" : "h-[138px] w-[150px]"
+        } border-spacing-1 items-center justify-center border border-gray-200`}
+      >
         {previewImage ? (
-          <Image
-            src={previewImage}
-            alt="Preview"
-            width={320}
-            height={128}
-            style={{ maxWidth: "320px", maxHeight: "128px" }}
-          />
-        ) : (
+          type === "modal" ? (
+            <Image
+              src={previewImage}
+              alt="Preview"
+              width={320}
+              height={128}
+              style={{ maxWidth: "320px", maxHeight: "128px" }}
+            />
+          ) : (
+            <Image src={previewImage} alt="Preview" width={150} height={138} />
+          )
+        ) : type === "modal" ? (
           <Image
             src="/images/bg-upload-image.png"
             alt="bg-image-upload"
             width={320}
             height={128}
           />
-        )}
+        ) : type === "profile" ? (
+          <Image
+            src="/images/bg-download-image.png"
+            alt="bg-image-upload"
+            width={150}
+            height={138}
+          />
+        ) : null}
       </div>
       <div className="flex h-8 w-150 cursor-pointer items-center rounded bg-bs-teal-2">
         <div className="border-r p-2">{IconUpload}</div>

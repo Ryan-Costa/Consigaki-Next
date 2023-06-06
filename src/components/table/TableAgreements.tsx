@@ -30,59 +30,59 @@ export default function TableAgreementsUsers({
 
   const agreementsData = [
     {
-      codigo: "0001",
-      nome: "Raquel",
-      cadastro: "01/01/2023",
+      code: "0001",
+      name: "Raquel",
+      register: "01/01/2023",
     },
     {
-      codigo: "0002",
-      nome: "Lucas",
-      cadastro: "02/01/2023",
+      code: "0002",
+      name: "Lucas",
+      register: "02/01/2023",
     },
     {
-      codigo: "0003",
-      nome: "Junior",
-      cadastro: "02/01/2023",
+      code: "0003",
+      name: "Junior",
+      register: "02/01/2023",
     },
     {
-      codigo: "0004",
-      nome: "Rafael",
-      cadastro: "02/01/2023",
+      code: "0004",
+      name: "Rafael",
+      register: "02/01/2023",
     },
     {
-      codigo: "0005",
-      nome: "Jeferson",
-      cadastro: "02/01/2023",
+      code: "0005",
+      name: "Jeferson",
+      register: "02/01/2023",
     },
     {
-      codigo: "0006",
-      nome: "Thiago",
-      cadastro: "02/01/2023",
+      code: "0006",
+      name: "Thiago",
+      register: "02/01/2023",
     },
     {
-      codigo: "0007",
-      nome: "Breno",
-      cadastro: "02/01/2023",
+      code: "0007",
+      name: "Breno",
+      register: "02/01/2023",
     },
     {
-      codigo: "0008",
-      nome: "Gabriel",
-      cadastro: "02/01/2023",
+      code: "0008",
+      name: "Gabriel",
+      register: "02/01/2023",
     },
     {
-      codigo: "0009",
-      nome: "Fred",
-      cadastro: "02/01/2023",
+      code: "0009",
+      name: "Fred",
+      register: "02/01/2023",
     },
     {
-      codigo: "0010",
-      nome: "Fábio",
-      cadastro: "02/01/2023",
+      code: "0010",
+      name: "Fábio",
+      register: "02/01/2023",
     },
   ];
 
   const filteredData = agreementsData!.filter((item) =>
-    item.nome.toLowerCase().includes(searchTerm.toLowerCase())
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -109,9 +109,9 @@ export default function TableAgreementsUsers({
           <tbody>
             {currentItems.map((item, index) => (
               <tr key={index} className="border-y">
-                <td className="p-4 text-left">{item.codigo}</td>
-                <td className="p-4 text-left">{item.nome}</td>
-                <td className="p-4 text-left">{item.cadastro}</td>
+                <td className="p-4 text-left">{item.code}</td>
+                <td className="p-4 text-left">{item.name}</td>
+                <td className="p-4 text-left">{item.register}</td>
                 <td className="p-4 text-left">
                   <a
                     onClick={() => handleEdit(item)}
@@ -137,9 +137,9 @@ export default function TableAgreementsUsers({
           <tbody>
             {currentItems.map((item, index) => (
               <tr key={index} className="border-y">
-                <td className="p-4 text-left">{item.codigo}</td>
-                <td className="p-4 text-left">{item.nome}</td>
-                <td className="p-4 text-left">{item.cadastro}</td>
+                <td className="p-4 text-left">{item.code}</td>
+                <td className="p-4 text-left">{item.name}</td>
+                <td className="p-4 text-left">{item.register}</td>
                 <td className="p-4 text-left">
                   <a
                     onClick={() => handleEdit(item)}

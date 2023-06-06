@@ -6,9 +6,9 @@ import AddLoans from "@/components/loansComponents/AddLoans";
 import EditLoans from "@/components/loansComponents/EditLoans";
 import SearchInput from "@/components/SearchInput";
 import { ILoans } from "@/interfaces/IProps";
-import { Roboto } from "@next/font/google";
 import { useState } from "react";
 import { IconPartners } from "../../../../public/icons";
+import { Roboto } from "@next/font/google";
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "700"],

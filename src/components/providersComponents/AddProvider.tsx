@@ -50,7 +50,7 @@ export default function AddProvider({ item, onClose }: AddProps) {
         {IconPartners}
       </div>
       <p
-        className={`${inter.className} text-sm tracking-tight text-text-regular`}
+        className={`${inter.className} text-base tracking-tight text-text-regular`}
       >
         Prencha todos os campos
       </p>

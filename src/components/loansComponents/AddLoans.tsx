@@ -4,6 +4,7 @@ import { Inter } from "@next/font/google";
 import ToggleSwitch from "../ToggleSwitch";
 import { ILoans } from "@/interfaces/IProps";
 import ButtonSave from "../common/ButtonSave";
+import { Input } from "../common/Input";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,7 +19,9 @@ interface AddProductsProps {
 export default function AddProduct({ item, onClose }: AddProductsProps) {
   const [savedItem, setSavedItem] = useState<ILoans>(item);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setSavedItem((prevItem) => ({
       ...prevItem,
@@ -43,54 +46,39 @@ export default function AddProduct({ item, onClose }: AddProductsProps) {
       </button>
 
       <div className="mt-12 flex gap-2">
-        <h1 className="text-lg font-bold">Adicionar Produto</h1>
+        <h1 className="text-lg font-bold">Adicionar Esteira</h1>
         {IconPartners}
       </div>
       <p
-        className={`${inter.className} text-sm tracking-tight text-text-regular`}
+        className={`${inter.className} text-base tracking-tight text-text-regular`}
       >
         Prencha todos os campos
       </p>
       <div className="mt-6 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Razão Social
-          </label>
-          <input
-            name="razaoSocial"
-            type="text"
-            placeholder="---------- -------- -------"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={setSavedItem.razaoSocial}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Razão Social"
+          name="razaoSocial"
+          type="text"
+          placeholder="---------- -------- -------"
+          className="w-full"
+          onChange={handleInputChange}
+        />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Cadastro
-          </label>
-          <input
-            name="cadastro"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={setSavedItem.cadastro}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Alterado
-          </label>
-          <input
-            name="alterado"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-          />
-        </div>
+        <Input
+          label="Cadastro"
+          name="cadastro"
+          type="text"
+          placeholder="00/00/0000"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Alterado"
+          name="alterado"
+          type="text"
+          placeholder="00/00/0000"
+          onChange={handleInputChange}
+        />
       </div>
       <ToggleSwitch />
       <ButtonSave handleSave={handleSave} />

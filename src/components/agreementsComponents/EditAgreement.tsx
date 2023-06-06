@@ -4,25 +4,22 @@ import { Inter } from "@next/font/google";
 import ToggleSwitch from "../ToggleSwitch";
 import { TableEditAgreement } from "../table/TableEditAgreement";
 import ButtonSave from "../common/ButtonSave";
+import { AgreementsProps } from "@/interfaces/IProps";
+import { Input } from "../common/Input";
+
 // import { useForm } from "react-hook-form";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
 
-interface Item {
-  codigo: string;
-  nome: string;
-  cadastro: string;
-}
-
 interface EditProps {
-  item: Item;
+  item: AgreementsProps;
   onClose: () => void;
 }
 
 export default function EditAgreement({ item, onClose }: EditProps) {
-  const [editedItem, setEditedItem] = useState<Item>(item);
+  const [editedItem, setEditedItem] = useState<AgreementsProps>(item);
   // const { control, handleSubmit } = useForm({
   //   defaultValues: {},
   // });
@@ -55,47 +52,29 @@ export default function EditAgreement({ item, onClose }: EditProps) {
         {IconPartners}
       </div>
       <p
-        className={`${inter.className} text-sm tracking-tight text-text-regular`}
+        className={`${inter.className} text-base tracking-tight text-text-regular`}
       >
         Prencha todos os campos
       </p>
       <div className="mt-6 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Nome
-          </label>
-          <input
-            name="nome"
-            type="text"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.nome}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Nome"
+          name="nome"
+          type="text"
+          className="w-full"
+          value={editedItem.name}
+          onChange={handleInputChange}
+        />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Cadastro
-          </label>
-          <input
-            name="cadastro"
-            type="text"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.cadastro}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Alterado
-          </label>
-          <input
-            name="alterado"
-            type="text"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-          />
-        </div>
+        <Input
+          label="Cadastro"
+          name="cadastro"
+          type="text"
+          value={editedItem.register}
+          onChange={handleInputChange}
+        />
+        <Input label="Alterado" name="alterado" type="text" />
       </div>
       <ToggleSwitch />
       <ButtonSave handleSave={handleSave} />

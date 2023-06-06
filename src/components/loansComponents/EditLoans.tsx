@@ -10,6 +10,7 @@ import { Inter } from "@next/font/google";
 import { Roboto } from "@next/font/google";
 import DocumentDownload from "../DocumentDownload";
 import ButtonSave from "../common/ButtonSave";
+import { Input } from "../common/Input";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -32,7 +33,7 @@ export default function EditLoans({ item, onClose }: EditLoansProps) {
   // });
 
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement & HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setEditedItem((prevItem) => ({
@@ -70,71 +71,49 @@ export default function EditLoans({ item, onClose }: EditLoansProps) {
       </div>
 
       <div className="mt-5 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Nome
-          </label>
-          <input
-            name="name"
-            type="text"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.userId}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            E-mail
-          </label>
-          <input
-            name="mail"
-            type="text"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.userId}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Nome"
+          name="name"
+          type="text"
+          className="w-full"
+          value={editedItem.userId}
+          onChange={handleInputChange}
+        />
+        <Input
+          label="E-mail"
+          name="mail"
+          type="text"
+          className="w-full"
+          value={editedItem.userId}
+          onChange={handleInputChange}
+        />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            CPF
-          </label>
-          <input
-            name="CPF"
-            type="text"
-            placeholder="000.000.000-00"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.cpf}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Celular
-          </label>
-          <input
-            name="celular"
-            type="text"
-            placeholder="(00) 0 0000-0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.cellPhoner}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Data de nascimento
-          </label>
-          <input
-            name="dataNascimento"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.dateBirth}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="CPF"
+          name="cpf"
+          type="text"
+          className="w-full"
+          value={editedItem.cpf}
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Celular"
+          name="celular"
+          type="text"
+          placeholder="(00) 0 0000-0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Data de nascimento"
+          name="dataNascimento"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+
         <div className="flex w-full flex-col gap-2">
           <label htmlFor="" className="font-semibold">
             Perfil
@@ -157,225 +136,149 @@ export default function EditLoans({ item, onClose }: EditLoansProps) {
             options={["Login bloqueado", "Login liberado"]}
           />
         </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Cadastro
-          </label>
-          <input
-            name="cadastro"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.register}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Alterado
-          </label>
-          <input
-            name="alterado"
-            type="text"
-            placeholder="00/00/0000"
-            readOnly
-            disabled
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.register}
-          />
-        </div>
+        <Input
+          label="Cadastro"
+          name="cadastro"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Alterado"
+          name="alterado"
+          type="text"
+          placeholder="00/00/0000"
+          readOnly={true}
+          disabled={true}
+          className="w-full"
+          onChange={handleInputChange}
+        />
       </div>
       <div className="mt-5 flex items-center gap-2">
         <p className="text-base font-bold">Operação</p>
         <div className="h-[1px] w-full bg-line-gray" />
       </div>
       <div className="mt-5 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Convênio
-          </label>
-          <input
-            name="convênio"
-            type="text"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.productId}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Matrícula
-          </label>
-          <input
-            name="matricula"
-            type="text"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.registration}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Convênio"
+          name="convenio"
+          type="text"
+          className="w-full"
+          value={editedItem.productId}
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Matrícula"
+          name="matricula"
+          type="text"
+          className="w-full"
+          value={editedItem.registration}
+          onChange={handleInputChange}
+        />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Cargo
-          </label>
-          <input
-            name="cargo"
-            type="text"
-            placeholder="000.000.000-00"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.cpf}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Vínculo
-          </label>
-          <input
-            name="vinculo"
-            type="text"
-            placeholder="(00) 0 0000-0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.cellPhoner}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Consignatária
-          </label>
-          <input
-            name="consignataria"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.providerId}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Liberado
-          </label>
-          <input
-            name="liberado"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.dateBirth}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Cargo"
+          name="cargo"
+          type="text"
+          placeholder="000.000.000-00"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Vínculo"
+          name="vinculo"
+          type="text"
+          placeholder="(00) 0 0000-0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Consignatária"
+          name="consignataria"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          value={editedItem.providerId}
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Liberado"
+          name="liberado"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Parcela
-          </label>
-          <input
-            name="parcela"
-            type="text"
-            placeholder="00"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.fee}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Prazo
-          </label>
-          <input
-            name="prazo"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.cellPhoner}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Taxa
-          </label>
-          <input
-            name="taxa"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.providerId}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            ADF
-          </label>
-          <input
-            name="adf"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.dateBirth}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Parcela"
+          name="parcela"
+          type="text"
+          placeholder="00"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Prazo"
+          name="prazo"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Taxa"
+          name="taxa"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="ADF"
+          name="adf"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Data Averbação
-          </label>
-          <input
-            name="dataAverbacao"
-            type="text"
-            placeholder="000.000.000-00"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.cpf}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Data Solicitação
-          </label>
-          <input
-            name="dataSolicitacao"
-            type="text"
-            placeholder="(00) 0 0000-0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.cellPhoner}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Data Pagamento
-          </label>
-          <input
-            name="dataPagamento"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.providerId}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Status
-          </label>
-          <input
-            name="status"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={editedItem.dateBirth}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Data Averbação"
+          name="dataAverbacao"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Data Solicitação"
+          name="dataSolicitacao"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Data Pagamento"
+          name="dataPagamento"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Status"
+          name="status"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
         <div className="flex w-full flex-col gap-2">
@@ -396,7 +299,9 @@ export default function EditLoans({ item, onClose }: EditLoansProps) {
         <div className="h-[1px] w-full bg-line-gray" />
       </div>
       <div className="mt-5 flex items-center gap-2">
-        <h1 className={`${roboto.className} w-1/3 text-2xl font-bold`}>
+        <h1
+          className={`${roboto.className} whitespace-nowrap text-2xl font-bold`}
+        >
           Fotos dos documentos
         </h1>
         <div className="h-[1px] w-full bg-line-gray" />
