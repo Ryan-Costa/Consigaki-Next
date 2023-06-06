@@ -8,7 +8,7 @@ import SearchInput from "@/components/SearchInput";
 import { useState } from "react";
 import { IconPartners } from "../../../../public/icons";
 import { Dropdown } from "@/components/Dropdown";
-import { UserProps } from "@/interfaces/userProps";
+import { UserProps } from "@/interfaces/IProps";
 
 import { Roboto } from "@next/font/google";
 const roboto = Roboto({

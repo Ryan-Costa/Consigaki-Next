@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import { IconArrowBack, IconPartners } from "../../../public/icons";
 import { Inter } from "@next/font/google";
 import ToggleSwitch from "../ToggleSwitch";
+import ButtonSave from "../common/ButtonSave";
 // import { useForm } from "react-hook-form";
 const inter = Inter({
   subsets: ["latin"],
@@ -51,7 +52,7 @@ export default function EditProvider({ item, onClose }: EditProps) {
         {IconArrowBack}
       </button>
       <div className="mt-12 flex gap-2">
-        <h1 className="text-lg font-bold">Informações da Consignatária</h1>
+        <h1 className="text-2xl font-bold">Editar Consignatária</h1>
         {IconPartners}
       </div>
       <p
@@ -110,52 +111,7 @@ export default function EditProvider({ item, onClose }: EditProps) {
         </div>
       </div>
       <ToggleSwitch />
-      <div className="mt-10 w-full rounded-sm">
-        <button
-          className="w-full rounded-sm bg-goldenrod py-4 text-2xl font-bold hover:bg-green-goldenrod"
-          onClick={handleSave}
-        >
-          Salvar
-        </button>
-      </div>
-      {/* <h2>Editar Item</h2>
-      <label>
-        Código:
-        <input
-          type="text"
-          name="codigo"
-          value={editedItem.codigo}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Razão Social:
-        <input
-          type="text"
-          name="razaoSocial"
-          value={editedItem.razaoSocial}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        CNPJ:
-        <input
-          type="text"
-          name="cnpj"
-          value={editedItem.cnpj}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Cadastro:
-        <input
-          type="text"
-          name="cadastro"
-          value={editedItem.cadastro}
-          onChange={handleInputChange}
-        />
-      </label>
-      <button onClick={handleSave}>Salvar</button> */}
+      <ButtonSave handleSave={handleSave} />
     </div>
   );
 }

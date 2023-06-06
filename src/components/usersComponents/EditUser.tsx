@@ -1,12 +1,10 @@
 import React, { useState, ChangeEvent } from "react";
 import { IconArrowBack, IconPartners } from "../../../public/icons";
 import { Inter } from "@next/font/google";
-import ToggleSwitch from "../ToggleSwitch";
 import { Dropdown } from "../Dropdown";
-import { UserProps } from "@/interfaces/userProps";
+import { UserProps } from "@/interfaces/IProps";
 import { TableEditUsers } from "../table/TableEditUsers";
 import ButtonSave from "../common/ButtonSave";
-// import { useForm } from "react-hook-form";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -20,7 +18,7 @@ interface EditProps {
 export default function EditUser({ item, onClose }: EditProps) {
   const [editedItem, setEditedItem] = useState<UserProps>(item);
   const [activeSection, setActiveSection] = useState<string>("agreements");
-  const [activeButton, setActiveButton] = useState("");
+  const [activeButton, setActiveButton] = useState("agreements");
   // const { control, handleSubmit } = useForm({
   //   defaultValues: {},
   // });
@@ -100,7 +98,7 @@ export default function EditUser({ item, onClose }: EditProps) {
       </button>
 
       <div className="mt-12 flex gap-2">
-        <h1 className="text-lg font-bold">Informações do Usuário</h1>
+        <h1 className="text-2xl font-bold">Editar Usuário</h1>
         {IconPartners}
       </div>
       <p
@@ -118,7 +116,7 @@ export default function EditUser({ item, onClose }: EditProps) {
             type="text"
             placeholder="David Bessa Pontes"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.nome}
+            value={editedItem.name}
             onChange={handleInputChange}
           />
         </div>
@@ -131,7 +129,7 @@ export default function EditUser({ item, onClose }: EditProps) {
             type="text"
             placeholder="OrpelNet@Gmail.acom"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.email}
+            value={editedItem.mail}
             onChange={handleInputChange}
           />
         </div>
@@ -159,7 +157,7 @@ export default function EditUser({ item, onClose }: EditProps) {
             type="text"
             placeholder="(00) 0 0000-0000"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.celular}
+            value={editedItem.cellPhoner}
             onChange={handleInputChange}
           />
         </div>
@@ -172,7 +170,7 @@ export default function EditUser({ item, onClose }: EditProps) {
             type="text"
             placeholder="00/00/0000"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.dataNascimento}
+            value={editedItem.dateBirth}
             onChange={handleInputChange}
           />
         </div>
@@ -181,7 +179,7 @@ export default function EditUser({ item, onClose }: EditProps) {
             Perfil
           </label>
           <Dropdown
-            defaultValue="Selecione"
+            defaultValue="Suporte"
             type="form"
             options={["Cliente", "Suporte", "Administrador"]}
           />
@@ -207,7 +205,7 @@ export default function EditUser({ item, onClose }: EditProps) {
             type="text"
             placeholder="00/00/0000"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.cadastro}
+            value={editedItem.register}
             onChange={handleInputChange}
           />
         </div>
@@ -222,8 +220,7 @@ export default function EditUser({ item, onClose }: EditProps) {
             readOnly
             disabled
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.cadastro}
-            onChange={handleInputChange}
+            value={editedItem.register}
           />
         </div>
       </div>
@@ -245,7 +242,7 @@ export default function EditUser({ item, onClose }: EditProps) {
           CONVÊNIOS
         </button>
         <button
-          className={`btn text-xl font-bold ${
+          className={`btn z-0 text-xl font-bold ${
             activeButton === "requests" ? "active" : ""
           }`}
           onClick={() => {

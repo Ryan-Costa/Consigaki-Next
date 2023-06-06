@@ -2,25 +2,22 @@ import React, { useState, ChangeEvent } from "react";
 import { IconArrowBack, IconPartners } from "../../../public/icons";
 import { Inter } from "@next/font/google";
 import ToggleSwitch from "../ToggleSwitch";
+import { IProducts } from "@/interfaces/IProps";
+import ButtonSave from "../common/ButtonSave";
+
 // import { useForm } from "react-hook-form";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
 
-interface Item {
-  codigo: string;
-  razaoSocial: string;
-  cadastro: string;
-}
-
 interface EditProps {
-  item: Item;
+  item: IProducts;
   onClose: () => void;
 }
 
 export default function EditProduct({ item, onClose }: EditProps) {
-  const [editedItem, setEditedItem] = useState<Item>(item);
+  const [editedItem, setEditedItem] = useState<IProducts>(item);
   // const { control, handleSubmit } = useForm({
   //   defaultValues: {},
   // });
@@ -50,7 +47,7 @@ export default function EditProduct({ item, onClose }: EditProps) {
         {IconArrowBack}
       </button>
       <div className="mt-12 flex gap-2">
-        <h1 className="text-lg font-bold">Informações da Consignatária</h1>
+        <h1 className="text-2xl font-bold">Editar produto</h1>
         {IconPartners}
       </div>
       <p
@@ -67,7 +64,7 @@ export default function EditProduct({ item, onClose }: EditProps) {
             name="razaoSocial"
             type="text"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.razaoSocial}
+            value={editedItem.companyName}
             onChange={handleInputChange}
           />
         </div>
@@ -81,7 +78,7 @@ export default function EditProduct({ item, onClose }: EditProps) {
             name="cadastro"
             type="text"
             className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.cadastro}
+            value={editedItem.register}
             onChange={handleInputChange}
           />
         </div>
@@ -97,52 +94,7 @@ export default function EditProduct({ item, onClose }: EditProps) {
         </div>
       </div>
       <ToggleSwitch />
-      <div className="mt-10 w-full rounded-sm">
-        <button
-          className="w-full rounded-sm bg-goldenrod py-4 text-2xl font-bold hover:bg-green-goldenrod"
-          onClick={handleSave}
-        >
-          Salvar
-        </button>
-      </div>
-      {/* <h2>Editar Item</h2>
-      <label>
-        Código:
-        <input
-          type="text"
-          name="codigo"
-          value={editedItem.codigo}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Razão Social:
-        <input
-          type="text"
-          name="razaoSocial"
-          value={editedItem.razaoSocial}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        CNPJ:
-        <input
-          type="text"
-          name="cnpj"
-          value={editedItem.cnpj}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Cadastro:
-        <input
-          type="text"
-          name="cadastro"
-          value={editedItem.cadastro}
-          onChange={handleInputChange}
-        />
-      </label>
-      <button onClick={handleSave}>Salvar</button> */}
+      <ButtonSave handleSave={handleSave} />
     </div>
   );
 }

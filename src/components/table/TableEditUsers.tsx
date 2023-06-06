@@ -92,7 +92,7 @@ export function TableEditUsers() {
           className="mt-9 rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none"
           // onClick={}
         >
-          + Adicionar Produto
+          + Adicionar Convênio
         </button>
       </div>
     </>

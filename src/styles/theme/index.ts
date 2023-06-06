@@ -26,6 +26,7 @@ const theme = {
       "--bs-white": "#fff",
       "--bs-gray": "#8ca3bd",
       "bs-gray": "#9FA2AB",
+      "line-gray": "#C8C8C8",
       "--bs-gray-dark": "#271050",
       "--bs-secondary": "#8ca3bd",
       "--bs-info": "#4f9dff",

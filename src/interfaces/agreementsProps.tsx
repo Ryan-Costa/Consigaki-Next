@@ -1,5 +1,5 @@
 export interface AgreementsProps {
-  codigo: string;
-  nome: string;
-  cadastro: string;
+  codigo: string
+  nome: string
+  cadastro: string
 }

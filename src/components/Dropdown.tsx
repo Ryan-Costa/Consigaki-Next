@@ -49,7 +49,11 @@ export const Dropdown: React.FC<DropdownProps> = ({
           {IconArrow}
         </span>
         {isOpen && (
-          <div className="absolute -right-8 top-9 box-border flex w-60 list-none flex-col rounded-b-2xl bg-white text-left text-black shadow-lg">
+          <div
+            className={`absolute -right-6 top-9 z-10 box-border flex ${
+              type != "form" ? "w-60" : "w-full"
+            } list-none flex-col rounded-b-2xl bg-white text-left text-black shadow-lg`}
+          >
             {options.map((option, index) => (
               <li
                 key={index}

@@ -1,6 +1,6 @@
 "use client";
 
-import { UserProps } from "@/interfaces/userProps";
+import { UserProps } from "@/interfaces/IProps";
 import { useState } from "react";
 import { IconArrow, IconEdit } from "../../../public/icons";
 import Modal from "../modal/ModalBanner";

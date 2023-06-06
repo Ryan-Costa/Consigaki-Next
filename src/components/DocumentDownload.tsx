@@ -8,7 +8,7 @@ const inter = Inter({
   weight: ["400", "700"],
 });
 
-const ImageUpload: React.FC = () => {
+const DocumentDownload: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
@@ -49,21 +49,22 @@ const ImageUpload: React.FC = () => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <div className="mb-5 mt-4 flex h-32 w-80 border-spacing-1 items-center justify-center border border-gray-200">
+      <div className="mb-5 flex h-[138px] w-[150px] border-spacing-1 items-center justify-center border border-gray-200 object-cover">
         {previewImage ? (
           <Image
             src={previewImage}
             alt="Preview"
-            width={320}
-            height={128}
-            style={{ maxWidth: "320px", maxHeight: "128px" }}
+            className="object-cover"
+            width={150}
+            height={138}
           />
         ) : (
           <Image
-            src="/images/bg-upload-image.png"
+            src="/images/bg-download-image.png"
             alt="bg-image-upload"
-            width={320}
-            height={128}
+            className="object-contain"
+            width={150}
+            height={138}
           />
         )}
       </div>
@@ -73,7 +74,7 @@ const ImageUpload: React.FC = () => {
           htmlFor="file-upload"
           className={`${inter.className} cursor-pointer px-8 py-2 text-xs text-white`}
         >
-          UPLOAD
+          DOWNLOAD
         </label>
         <input
           id="file-upload"
@@ -86,4 +87,4 @@ const ImageUpload: React.FC = () => {
   );
 };
 
-export default ImageUpload;
+export default DocumentDownload;

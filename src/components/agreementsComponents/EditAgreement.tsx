@@ -3,6 +3,7 @@ import { IconArrowBack, IconPartners } from "../../../public/icons";
 import { Inter } from "@next/font/google";
 import ToggleSwitch from "../ToggleSwitch";
 import { TableEditAgreement } from "../table/TableEditAgreement";
+import ButtonSave from "../common/ButtonSave";
 // import { useForm } from "react-hook-form";
 const inter = Inter({
   subsets: ["latin"],
@@ -97,14 +98,7 @@ export default function EditAgreement({ item, onClose }: EditProps) {
         </div>
       </div>
       <ToggleSwitch />
-      <div className="mt-10 w-full rounded-sm">
-        <button
-          className="w-full rounded-sm bg-goldenrod py-4 text-2xl font-bold hover:bg-green-goldenrod"
-          onClick={handleSave}
-        >
-          Salvar
-        </button>
-      </div>
+      <ButtonSave handleSave={handleSave} />
       <h2 className="mt-6 flex items-center gap-2 text-2xl font-bold">
         Produtos {IconPartners}
       </h2>

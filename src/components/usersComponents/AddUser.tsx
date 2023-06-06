@@ -3,7 +3,7 @@ import { IconArrowBack, IconPartners } from "../../../public/icons";
 import { Inter } from "@next/font/google";
 import ToggleSwitch from "../ToggleSwitch";
 import { Dropdown } from "../Dropdown";
-import { UserProps } from "@/interfaces/userProps";
+import { UserProps } from "@/interfaces/IProps";
 import ButtonSave from "../common/ButtonSave";
 const inter = Inter({
   subsets: ["latin"],
@@ -43,7 +43,7 @@ export default function AddUser({ item, onClose }: AddProps) {
       </button>
 
       <div className="mt-12 flex gap-2">
-        <h1 className="text-lg font-bold">Adicionar Usuário</h1>
+        <h1 className="text-2xl font-bold">Adicionar Usuário</h1>
         {IconPartners}
       </div>
       <p

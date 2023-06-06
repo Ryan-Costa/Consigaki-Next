@@ -8,31 +8,26 @@ import SearchInput from "@/components/SearchInput";
 import { useState } from "react";
 import { IconPartners } from "../../../../public/icons";
 
-import { Roboto } from "@next/font/google";
 import { Dropdown } from "@/components/Dropdown";
+import { IProducts } from "@/interfaces/IProps";
+import { Roboto } from "@next/font/google";
+
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
 
-interface ItemProps {
-  codigo: string;
-  razaoSocial: string;
-  cnpj: string;
-  cadastro: string;
-}
-
 export default function Providers() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
+  const [selectedItem, setSelectedItem] = useState<IProducts | null>(null);
   const [heAddProduct, setHeAddProduct] = useState(false);
 
   const handleSearch = (value: string) => {
     setSearchTerm(value);
   };
 
-  const handleEdit = (item: ItemProps) => {
+  const handleEdit = (item: IProducts) => {
     setSelectedItem(item);
     setIsEditing(true);
   };

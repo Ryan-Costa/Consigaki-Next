@@ -1,46 +1,43 @@
-"use client";
+'use client'
 
-import React from "react";
-import ReactModal from "react-modal";
-import { IconArrowRight } from "../../../public/icons";
-import { Karla } from "@next/font/google";
+import React from 'react'
+import ReactModal from 'react-modal'
+import { IconArrowRight } from '../../../public/icons'
+import { Karla } from '@next/font/google'
 
 const karla = Karla({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface ModalProps {
-  isOpen: boolean;
-  onRequestClose: () => void;
-  handleDelete: () => void;
+  isOpen: boolean
+  onRequestClose: () => void
+  handleDelete: () => void
 }
 
 const Modal = ({ isOpen, onRequestClose, handleDelete }: ModalProps) => {
-  const handleFormSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-  };
   return (
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       style={{
         overlay: {
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         },
         content: {
-          width: "560px",
-          height: "250px",
-          padding: "40px 105px 20px",
-          borderRadius: "20px",
-          boxShadow: "4px 4px 4px 4px rgba(43, 49, 85, 0.6)",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          backgroundColor: "#FFFFFF",
+          width: '560px',
+          height: '250px',
+          padding: '40px 105px 20px',
+          borderRadius: '20px',
+          boxShadow: '4px 4px 4px 4px rgba(43, 49, 85, 0.6)',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#FFFFFF',
         },
       }}
     >
@@ -65,8 +62,8 @@ const Modal = ({ isOpen, onRequestClose, handleDelete }: ModalProps) => {
           <button
             className="text-sm font-bold text-dark-blue"
             onClick={() => {
-              handleDelete();
-              onRequestClose();
+              handleDelete()
+              onRequestClose()
             }}
           >
             Sim, excluir
@@ -74,7 +71,7 @@ const Modal = ({ isOpen, onRequestClose, handleDelete }: ModalProps) => {
         </div>
       </div>
     </ReactModal>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal
