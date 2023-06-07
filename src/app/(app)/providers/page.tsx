@@ -10,6 +10,7 @@ import { IconPartners } from '../../../../public/icons'
 import { Dropdown } from '@/components/Dropdown'
 
 import { Roboto } from '@next/font/google'
+import { ButtonAdd } from '@/components/common/ButtonAdd'
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],
@@ -87,14 +88,10 @@ export default function Providers() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-8">
-                  <button
-                    onClick={handleAddition}
-                    className="rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none"
-                  >
-                    + Adicionar Consignatária
-                  </button>
-                </div>
+                <ButtonAdd
+                  name="Consignatária"
+                  handleAddition={handleAddition}
+                />
                 <TableProviders
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}

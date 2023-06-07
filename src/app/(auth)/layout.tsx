@@ -19,7 +19,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   }
 
   return (
-    <div className="h-screen w-full px-96 py-60 font-bold">
+    <div className="min-h-screen min-w-full px-96 py-60 font-bold">
       <nav className="mb-16 flex justify-start gap-16 text-white">
         <Link
           href="/signin"

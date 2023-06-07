@@ -1,45 +1,38 @@
-"use client";
+'use client'
 
-import TableLoans from "@/components/table/TableLoans";
-import { Dropdown } from "@/components/Dropdown";
-import AddLoans from "@/components/loansComponents/AddLoans";
-import EditLoans from "@/components/loansComponents/EditLoans";
-import SearchInput from "@/components/SearchInput";
-import { ILoans } from "@/interfaces/IProps";
-import { useState } from "react";
-import { IconPartners } from "../../../../public/icons";
-import { Roboto } from "@next/font/google";
+import { TableLoans } from '@/components/table/TableLoans'
+import { Dropdown } from '@/components/Dropdown'
+import AddLoans from '@/components/loansComponents/AddLoans'
+import EditLoans from '@/components/loansComponents/EditLoans'
+import SearchInput from '@/components/SearchInput'
+import { ILoans } from '@/interfaces/IProps'
+import { useState } from 'react'
+import { IconPartners } from '../../../../public/icons'
+import { Roboto } from '@next/font/google'
+import { ButtonAdd } from '@/components/common/ButtonAdd'
 const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 export default function Loans() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ILoans | null>(null);
-  const [heAddProduct, setHeAddProduct] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isEditing, setIsEditing] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<ILoans | null>(null)
+  const [isAdding, setIsAdding] = useState(false)
 
-  const handleSearch = (value: string) => {
-    setSearchTerm(value);
-  };
+  const handleSearch = (value: string) => setSearchTerm(value)
 
   const handleEdit = (item: ILoans) => {
-    setSelectedItem(item);
-    setIsEditing(true);
-  };
+    setSelectedItem(item)
+    setIsEditing(true)
+  }
 
-  const handleCloseEditScreen = () => {
-    setIsEditing(false);
-  };
+  const handleCloseEditScreen = () => setIsEditing(false)
 
-  const handleAddition = () => {
-    setHeAddProduct(true);
-  };
+  const handleAddition = () => setIsAdding(true)
 
-  const handleCloseAdditionScreen = () => {
-    setHeAddProduct(false);
-  };
+  const handleCloseAdditionScreen = () => setIsAdding(false)
 
   return (
     <>
@@ -47,10 +40,10 @@ export default function Loans() {
         className={`${
           roboto.className
         } h-full w-full rounded-md bg-white px-6 ${
-          heAddProduct ? "py-9" : "py-14"
+          isAdding ? 'py-9' : 'py-14'
         }`}
       >
-        {heAddProduct ? (
+        {isAdding ? (
           <AddLoans item={selectedItem!} onClose={handleCloseAdditionScreen} />
         ) : (
           <>
@@ -66,31 +59,20 @@ export default function Loans() {
                     <Dropdown
                       defaultValue="Ativo"
                       type="table"
-                      options={["Opção 1", "Opção 2", "Opção 3", "Opção 4"]}
+                      options={['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4']}
                     />
                     <div className="flex items-center justify-center">
                       <SearchInput onSearch={handleSearch} />
                     </div>
                   </div>
                 </div>
-                <div className="mt-8">
-                  <button
-                    onClick={handleAddition}
-                    className="rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none"
-                  >
-                    + Adicionar Esteira
-                  </button>
-                </div>
-                <TableLoans
-                  searchTerm={searchTerm}
-                  handleEdit={handleEdit}
-                  type={"loans"}
-                />
+                <ButtonAdd name="Esteira" handleAddition={handleAddition} />
+                <TableLoans searchTerm={searchTerm} handleEdit={handleEdit} />
               </>
             )}
           </>
         )}
       </div>
     </>
-  );
+  )
 }

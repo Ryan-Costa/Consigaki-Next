@@ -1,15 +1,15 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react'
 
 interface InputProps {
-  label: string;
-  name: string;
-  type: string;
-  placeholder?: string;
-  readOnly?: boolean;
-  disabled?: boolean;
-  value?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  className?: string;
+  label: string
+  name: string
+  type: string
+  placeholder?: string
+  readOnly?: boolean
+  disabled?: boolean
+  value?: string
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  className?: string
 }
 
 export function Input(props: InputProps) {
@@ -27,5 +27,5 @@ export function Input(props: InputProps) {
         onChange={props.onChange}
       />
     </div>
-  );
+  )
 }

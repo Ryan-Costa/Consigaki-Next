@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { IconClose } from '../../../public/icons'
+import { ButtonAdd } from '../common/ButtonAdd'
 import ModalBanner from '../modal/ModalBanner'
 import ModalProduct from '../modal/ModalProduct'
 
@@ -82,18 +83,15 @@ export function TableEditAgreement() {
           ))}
         </tbody>
       </table>
-      <div className="w-full">
-        <button
-          className="mt-9 rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none"
-          onClick={handleOpenModalProduct}
-        >
-          + Adicionar Produto
-        </button>
-        <ModalProduct
-          isOpen={isOpenModalProduct}
-          onRequestClose={handleCloseModalProduct}
-        />
-      </div>
+      <ButtonAdd
+        name="Produto"
+        type="tableAgreement"
+        handleOpenModalProduct={handleOpenModalProduct}
+      />
+      <ModalProduct
+        isOpen={isOpenModalProduct}
+        onRequestClose={handleCloseModalProduct}
+      />
     </>
   )
 }

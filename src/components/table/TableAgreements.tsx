@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import { AgreementsProps } from "@/interfaces/IProps";
-import { useState } from "react";
-import { IconArrow, IconEdit } from "../../../public/icons";
-import Modal from "../modal/ModalBanner";
+import { AgreementsProps } from '@/interfaces/IProps'
+import { useState } from 'react'
+import { IconArrow, IconEdit } from '../../../public/icons'
+import Modal from '../modal/ModalBanner'
 interface CustomModalProps {
-  searchTerm: string;
-  handleEdit: (item: AgreementsProps) => void;
-  type: "agreements" | "users";
+  searchTerm: string
+  handleEdit: (item: AgreementsProps) => void
+  type: 'agreements' | 'users'
 }
 
 export default function TableAgreementsUsers({
@@ -15,88 +15,88 @@ export default function TableAgreementsUsers({
   handleEdit,
   type,
 }: CustomModalProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 5
 
   // const handleOpenModal = () => {
   //   setIsModalOpen(true)
   // }
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+    setIsModalOpen(false)
+  }
 
   const agreementsData = [
     {
-      code: "0001",
-      name: "Raquel",
-      register: "01/01/2023",
+      code: '0001',
+      name: 'Raquel',
+      register: '01/01/2023',
     },
     {
-      code: "0002",
-      name: "Lucas",
-      register: "02/01/2023",
+      code: '0002',
+      name: 'Lucas',
+      register: '02/01/2023',
     },
     {
-      code: "0003",
-      name: "Junior",
-      register: "02/01/2023",
+      code: '0003',
+      name: 'Junior',
+      register: '02/01/2023',
     },
     {
-      code: "0004",
-      name: "Rafael",
-      register: "02/01/2023",
+      code: '0004',
+      name: 'Rafael',
+      register: '02/01/2023',
     },
     {
-      code: "0005",
-      name: "Jeferson",
-      register: "02/01/2023",
+      code: '0005',
+      name: 'Jeferson',
+      register: '02/01/2023',
     },
     {
-      code: "0006",
-      name: "Thiago",
-      register: "02/01/2023",
+      code: '0006',
+      name: 'Thiago',
+      register: '02/01/2023',
     },
     {
-      code: "0007",
-      name: "Breno",
-      register: "02/01/2023",
+      code: '0007',
+      name: 'Breno',
+      register: '02/01/2023',
     },
     {
-      code: "0008",
-      name: "Gabriel",
-      register: "02/01/2023",
+      code: '0008',
+      name: 'Gabriel',
+      register: '02/01/2023',
     },
     {
-      code: "0009",
-      name: "Fred",
-      register: "02/01/2023",
+      code: '0009',
+      name: 'Fred',
+      register: '02/01/2023',
     },
     {
-      code: "0010",
-      name: "Fábio",
-      register: "02/01/2023",
+      code: '0010',
+      name: 'Fábio',
+      register: '02/01/2023',
     },
-  ];
+  ]
 
   const filteredData = agreementsData!.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
 
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+    setCurrentPage(pageNumber)
+  }
 
   return (
     <div>
-      {type === "agreements" ? (
+      {type === 'agreements' ? (
         <table className="mt-8 w-full text-left">
           <thead>
             <tr>
@@ -124,7 +124,7 @@ export default function TableAgreementsUsers({
             ))}
           </tbody>
         </table>
-      ) : type === "users" ? (
+      ) : type === 'users' ? (
         <table className="mt-8 w-full text-left">
           <thead>
             <tr>
@@ -169,7 +169,7 @@ export default function TableAgreementsUsers({
             <div
               key={index}
               className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${
-                index + 1 === currentPage ? "bg-deg1 text-white" : ""
+                index + 1 === currentPage ? 'bg-deg1 text-white' : ''
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
@@ -188,5 +188,5 @@ export default function TableAgreementsUsers({
       </div>
       <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </div>
-  );
+  )
 }

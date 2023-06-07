@@ -1,31 +1,31 @@
-"use client";
+'use client'
 
-import ButtonSave from "@/components/common/ButtonSave";
-import ImageUpload from "@/components/ImageUpload";
-import { Inter } from "@next/font/google";
-import { Roboto } from "@next/font/google";
-import { useRouter } from "next/navigation";
-import { IconArrowBack, IconInsumo } from "../../../../public/icons";
+import { ButtonSave } from '@/components/common/ButtonSave'
+import ImageUpload from '@/components/ImageUpload'
+import { Inter, Roboto } from '@next/font/google'
+
+import { useRouter } from 'next/navigation'
+import { IconArrowBack, IconInsumo } from '../../../../public/icons'
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 export default function Profile() {
-  const router = useRouter();
+  const router = useRouter()
 
   const handleSave = () => {
-    router.push("/dashboard");
-  };
+    router.push('/dashboard')
+  }
 
   const handleGoBack = () => {
-    router.back();
-  };
+    router.back()
+  }
   return (
     <>
       <div
@@ -132,5 +132,5 @@ export default function Profile() {
         <ButtonSave handleSave={handleSave} />
       </div>
     </>
-  );
+  )
 }

@@ -1,32 +1,31 @@
-"use client";
+'use client'
 
-import ButtonSave from "@/components/common/ButtonSave";
-import ImageUpload from "@/components/ImageUpload";
-import { Inter } from "@next/font/google";
-import { Roboto } from "@next/font/google";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { IconArrowBack, IconInsumo } from "../../../../public/icons";
+import { ButtonSave } from '@/components/common/ButtonSave'
+import { Inter, Roboto } from '@next/font/google'
+
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { IconArrowBack, IconInsumo } from '../../../../public/icons'
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 export default function ChangePassword() {
-  const router = useRouter();
+  const router = useRouter()
 
   const handleSave = () => {
-    router.push("/dashboard");
-  };
+    router.push('/dashboard')
+  }
 
   const handleGoBack = () => {
-    router.back();
-  };
+    router.back()
+  }
   return (
     <>
       <div
@@ -58,7 +57,7 @@ export default function ChangePassword() {
             <p
               className={`${roboto.className} text-base tracking-tight text-text-regular`}
             >
-              Caso tenha esquecido sua senha{" "}
+              Caso tenha esquecido sua senha{' '}
               <Link href="/forgotpassword" className="text-blue-600">
                 clique aqui
               </Link>
@@ -110,5 +109,5 @@ export default function ChangePassword() {
         <ButtonSave handleSave={handleSave} />
       </div>
     </>
-  );
+  )
 }

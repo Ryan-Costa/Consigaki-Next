@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import { UserProps } from "@/interfaces/IProps";
-import { useState } from "react";
-import { IconArrow, IconEdit } from "../../../public/icons";
-import Modal from "../modal/ModalBanner";
+import { UserProps } from '@/interfaces/IProps'
+import { useState } from 'react'
+import { IconArrow, IconEdit } from '../../../public/icons'
+import Modal from '../modal/ModalBanner'
 interface CustomModalProps {
-  searchTerm: string;
-  handleEdit: (item: UserProps) => void;
-  type: "agreements" | "users";
+  searchTerm: string
+  handleEdit: (item: UserProps) => void
+  type: 'agreements' | 'users'
 }
 
 export default function TableAgreementsUsers({
@@ -15,128 +15,128 @@ export default function TableAgreementsUsers({
   handleEdit,
   type,
 }: CustomModalProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 5
 
   // const handleOpenModal = () => {
   //   setIsModalOpen(true)
   // }
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+    setIsModalOpen(false)
+  }
 
   const usersData = [
     {
-      codigo: "0001",
-      nome: "Ryan",
-      cpf: "999.999.999-99",
-      email: "ryan@gmail.com",
-      celular: "859999-9999",
-      dataNascimento: "10/10/2000",
-      cadastro: "01/01/2023",
+      codigo: '0001',
+      nome: 'Ryan',
+      cpf: '999.999.999-99',
+      email: 'ryan@gmail.com',
+      celular: '859999-9999',
+      dataNascimento: '10/10/2000',
+      cadastro: '01/01/2023',
     },
     {
-      codigo: "0002",
-      nome: "Themis",
-      cpf: "999.999.999-99",
-      email: "ryan@gmail.com",
-      celular: "859999-9999",
-      dataNascimento: "10/10/2000",
-      cadastro: "02/01/2023",
+      codigo: '0002',
+      nome: 'Themis',
+      cpf: '999.999.999-99',
+      email: 'ryan@gmail.com',
+      celular: '859999-9999',
+      dataNascimento: '10/10/2000',
+      cadastro: '02/01/2023',
     },
     {
-      codigo: "0003",
-      nome: "Jamile",
-      cpf: "999.999.999-99",
-      email: "ryan@gmail.com",
-      celular: "859999-9999",
-      dataNascimento: "10/10/2000",
-      cadastro: "02/01/2023",
+      codigo: '0003',
+      nome: 'Jamile',
+      cpf: '999.999.999-99',
+      email: 'ryan@gmail.com',
+      celular: '859999-9999',
+      dataNascimento: '10/10/2000',
+      cadastro: '02/01/2023',
     },
     {
-      codigo: "0004",
-      nome: "Ivana",
-      cpf: "999.999.999-99",
-      email: "ryan@gmail.com",
-      celular: "859999-9999",
-      dataNascimento: "10/10/2000",
-      cadastro: "02/01/2023",
+      codigo: '0004',
+      nome: 'Ivana',
+      cpf: '999.999.999-99',
+      email: 'ryan@gmail.com',
+      celular: '859999-9999',
+      dataNascimento: '10/10/2000',
+      cadastro: '02/01/2023',
     },
     {
-      codigo: "0005",
-      nome: "Karine",
-      cpf: "999.999.999-99",
-      email: "ryan@gmail.com",
-      celular: "859999-9999",
-      dataNascimento: "10/10/2000",
-      cadastro: "02/01/2023",
+      codigo: '0005',
+      nome: 'Karine',
+      cpf: '999.999.999-99',
+      email: 'ryan@gmail.com',
+      celular: '859999-9999',
+      dataNascimento: '10/10/2000',
+      cadastro: '02/01/2023',
     },
     {
-      codigo: "0006",
-      nome: "Adriel",
-      cpf: "999.999.999-99",
-      email: "ryan@gmail.com",
-      celular: "859999-9999",
-      dataNascimento: "10/10/2000",
-      cadastro: "02/01/2023",
+      codigo: '0006',
+      nome: 'Adriel',
+      cpf: '999.999.999-99',
+      email: 'ryan@gmail.com',
+      celular: '859999-9999',
+      dataNascimento: '10/10/2000',
+      cadastro: '02/01/2023',
     },
     {
-      codigo: "0007",
-      nome: "Mateus",
-      cpf: "999.999.999-99",
-      email: "ryan@gmail.com",
-      celular: "859999-9999",
-      dataNascimento: "10/10/2000",
-      cadastro: "02/01/2023",
+      codigo: '0007',
+      nome: 'Mateus',
+      cpf: '999.999.999-99',
+      email: 'ryan@gmail.com',
+      celular: '859999-9999',
+      dataNascimento: '10/10/2000',
+      cadastro: '02/01/2023',
     },
     {
-      codigo: "0008",
-      nome: "Sergio",
-      cpf: "999.999.999-99",
-      email: "ryan@gmail.com",
-      celular: "859999-9999",
-      dataNascimento: "10/10/2000",
-      cadastro: "02/01/2023",
+      codigo: '0008',
+      nome: 'Sergio',
+      cpf: '999.999.999-99',
+      email: 'ryan@gmail.com',
+      celular: '859999-9999',
+      dataNascimento: '10/10/2000',
+      cadastro: '02/01/2023',
     },
     {
-      codigo: "0009",
-      nome: "Yasmin",
-      cpf: "999.999.999-99",
-      email: "ryan@gmail.com",
-      celular: "859999-9999",
-      dataNascimento: "10/10/2000",
-      cadastro: "02/01/2023",
+      codigo: '0009',
+      nome: 'Yasmin',
+      cpf: '999.999.999-99',
+      email: 'ryan@gmail.com',
+      celular: '859999-9999',
+      dataNascimento: '10/10/2000',
+      cadastro: '02/01/2023',
     },
     {
-      codigo: "0010",
-      nome: "Heberth",
-      cpf: "999.999.999-99",
-      email: "ryan@gmail.com",
-      celular: "859999-9999",
-      dataNascimento: "10/10/2000",
-      cadastro: "02/01/2023",
+      codigo: '0010',
+      nome: 'Heberth',
+      cpf: '999.999.999-99',
+      email: 'ryan@gmail.com',
+      celular: '859999-9999',
+      dataNascimento: '10/10/2000',
+      cadastro: '02/01/2023',
     },
-  ];
+  ]
 
   const filteredData = usersData!.filter((item) =>
-    item.nome.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    item.nome.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
 
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+    setCurrentPage(pageNumber)
+  }
 
   return (
     <div>
-      {type === "agreements" ? (
+      {type === 'agreements' ? (
         <table className="mt-8 w-full text-left">
           <thead>
             <tr>
@@ -164,7 +164,7 @@ export default function TableAgreementsUsers({
             ))}
           </tbody>
         </table>
-      ) : type === "users" ? (
+      ) : type === 'users' ? (
         <table className="mt-8 w-full text-left">
           <thead>
             <tr>
@@ -209,7 +209,7 @@ export default function TableAgreementsUsers({
             <div
               key={index}
               className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${
-                index + 1 === currentPage ? "bg-deg1 text-white" : ""
+                index + 1 === currentPage ? 'bg-deg1 text-white' : ''
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
@@ -228,5 +228,5 @@ export default function TableAgreementsUsers({
       </div>
       <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </div>
-  );
+  )
 }

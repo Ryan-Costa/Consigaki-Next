@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 export default function DropdownTopbar() {
   return (
@@ -14,5 +14,5 @@ export default function DropdownTopbar() {
       </li>
       <li className="h-4"></li>
     </div>
-  );
+  )
 }

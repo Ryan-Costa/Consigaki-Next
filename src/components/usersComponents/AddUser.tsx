@@ -1,40 +1,40 @@
-import React, { useState, ChangeEvent } from "react";
-import { IconArrowBack, IconPartners } from "../../../public/icons";
-import { Inter } from "@next/font/google";
-import ToggleSwitch from "../ToggleSwitch";
-import { Dropdown } from "../Dropdown";
-import { UserProps } from "@/interfaces/IProps";
-import ButtonSave from "../common/ButtonSave";
+import React, { useState, ChangeEvent } from 'react'
+import { IconArrowBack, IconPartners } from '../../../public/icons'
+import { Inter } from '@next/font/google'
+import ToggleSwitch from '../ToggleSwitch'
+import { Dropdown } from '../Dropdown'
+import { UserProps } from '@/interfaces/IProps'
+import { ButtonSave } from '../common/ButtonSave'
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface AddProps {
-  item: UserProps;
-  onClose: () => void;
+  item: UserProps
+  onClose: () => void
 }
 
 export default function AddUser({ item, onClose }: AddProps) {
-  const [savedItem, setSavedItem] = useState<UserProps>(item);
+  const [savedItem, setSavedItem] = useState<UserProps>(item)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setSavedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSave = () => {
-    onClose();
-    console.log("Item editado:", savedItem);
-  };
+    onClose()
+    console.log('Item editado:', savedItem)
+  }
 
   const handleGoBack = () => {
-    onClose();
-    console.log("voltei");
-  };
+    onClose()
+    console.log('voltei')
+  }
 
   return (
     <div>
@@ -122,7 +122,7 @@ export default function AddUser({ item, onClose }: AddProps) {
           <Dropdown
             defaultValue="Selecione"
             type="form"
-            options={["Cliente", "Suporte", "Administrador"]}
+            options={['Cliente', 'Suporte', 'Administrador']}
           />
         </div>
       </div>
@@ -134,7 +134,7 @@ export default function AddUser({ item, onClose }: AddProps) {
           <Dropdown
             defaultValue="Login liberado"
             type="form"
-            options={["Login bloqueado", "Login liberado"]}
+            options={['Login bloqueado', 'Login liberado']}
           />
         </div>
         <div className="flex w-full flex-col gap-2">
@@ -167,5 +167,5 @@ export default function AddUser({ item, onClose }: AddProps) {
       <ToggleSwitch />
       <ButtonSave handleSave={handleSave} />
     </div>
-  );
+  )
 }
