@@ -1,48 +1,48 @@
-'use client'
+"use client";
 
-import TableUsers from '@/components/table/TableUsers'
-import EditUser from '@/components/usersComponents/EditUser'
-import AddUser from '@/components/usersComponents/AddUser'
+import TableUsers from "@/components/table/TableUsers";
+import EditUser from "@/components/usersComponents/EditUser";
+import AddUser from "@/components/usersComponents/AddUser";
 
-import SearchInput from '@/components/SearchInput'
-import { useState } from 'react'
-import { IconPartners } from '../../../../public/icons'
-import { Dropdown } from '@/components/Dropdown'
-import { UserProps } from '@/interfaces/IProps'
+import SearchInput from "@/components/SearchInput";
+import { useState } from "react";
+import { IconPartners } from "../../../../public/icons";
+import { Dropdown } from "@/components/Dropdown";
+import { UserProps } from "@/interfaces/IProps";
 
-import { Roboto } from 'next/font/google'
-import { ButtonAdd } from '@/components/common/ButtonAdd'
+import { Roboto } from "next/font/google";
+import { ButtonAdd } from "@/components/common/ButtonAdd";
 const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default function Users() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [isEditing, setIsEditing] = useState(false)
-  const [selectedItem, setSelectedItem] = useState<UserProps | null>(null)
-  const [heAddUser, setHeAddUser] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<UserProps | null>(null);
+  const [heAddUser, setHeAddUser] = useState(false);
 
   const handleSearch = (value: string) => {
-    setSearchTerm(value)
-  }
+    setSearchTerm(value);
+  };
 
   const handleEdit = (item: UserProps) => {
-    setSelectedItem(item)
-    setIsEditing(true)
-  }
+    setSelectedItem(item);
+    setIsEditing(true);
+  };
 
   const handleCloseEditScreen = () => {
-    setIsEditing(false)
-  }
+    setIsEditing(false);
+  };
 
   const handleAddition = () => {
-    setHeAddUser(true)
-  }
+    setHeAddUser(true);
+  };
 
   const handleCloseAdditionScreen = () => {
-    setHeAddUser(false)
-  }
+    setHeAddUser(false);
+  };
 
   return (
     <>
@@ -50,7 +50,7 @@ export default function Users() {
         className={`${
           roboto.className
         } h-full w-full rounded-md bg-white px-6 ${
-          heAddUser ? 'py-9' : 'py-14'
+          heAddUser ? "py-9" : "py-14"
         }`}
       >
         {heAddUser ? (
@@ -69,7 +69,7 @@ export default function Users() {
                     <Dropdown
                       defaultValue="Ativo"
                       type="table"
-                      options={['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4']}
+                      options={["Opção 1", "Opção 2", "Opção 3", "Opção 4"]}
                     />
                     <div className="flex items-center justify-center">
                       <SearchInput onSearch={handleSearch} />
@@ -80,7 +80,7 @@ export default function Users() {
                 <TableUsers
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}
-                  type={'users'}
+                  type={"users"}
                 />
               </>
             )}
@@ -88,5 +88,5 @@ export default function Users() {
         )}
       </div>
     </>
-  )
+  );
 }
