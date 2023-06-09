@@ -4,7 +4,7 @@ import TableProviders from '@/components/table/TableProviders'
 import AddProvider from '@/components/providersComponents/AddProvider'
 import EditProvider from '@/components/providersComponents/EditProvider'
 
-import SearchInput from '@/components/SearchInput'
+import { SearchInput } from '@/components/SearchInput'
 import { useState } from 'react'
 import { IconPartners } from '../../../../public/icons'
 import { Dropdown } from '@/components/Dropdown'

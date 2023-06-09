@@ -7,7 +7,7 @@ import '../styles/global/globals.css'
 import { Karla } from 'next/font/google'
 import { usePathname } from 'next/navigation'
 import { checkIsPublicRoute } from '@/functions/check-is-public-route'
-import PrivateRoute from '@/components/PrivateRoute'
+import PrivateRoute from '@/components/privateRoute'
 const karla = Karla({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -21,8 +21,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname()
 
   const isPublicPage = checkIsPublicRoute(pathname!)
-
-  console.log(isPublicPage)
 
   return (
     <html lang="en" className={karla.className}>

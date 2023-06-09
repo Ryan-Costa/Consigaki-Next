@@ -4,7 +4,7 @@ import TableAgreements from '@/components/table/TableAgreements'
 import EditAgreement from '@/components/agreementsComponents/EditAgreement'
 import AddAgreement from '@/components/agreementsComponents/AddAgreement'
 
-import SearchInput from '@/components/SearchInput'
+import { SearchInput } from '@/components/SearchInput'
 import { useState } from 'react'
 import { IconPartners } from '../../../../public/icons'
 

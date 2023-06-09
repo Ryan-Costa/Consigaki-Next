@@ -7,7 +7,7 @@ interface SearchInputProps {
   onSearch: (value: string) => void
 }
 
-export default function SearchInput({ onSearch }: SearchInputProps) {
+export function SearchInput({ onSearch }: SearchInputProps) {
   const [searchValue, setSearchValue] = useState('')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
