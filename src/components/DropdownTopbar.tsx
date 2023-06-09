@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 export default function DropdownTopbar() {
   return (
@@ -7,12 +7,12 @@ export default function DropdownTopbar() {
         <Link href="/profile">Dados pessoais</Link>
       </li>
       <li className="box-border cursor-pointer px-5 py-4 font-bold hover:border-l-2 hover:border-blue-700">
-        <Link href="/changePassword">Alterar senha</Link>
+        <Link href="/change-password">Alterar senha</Link>
       </li>
       <li className="box-border cursor-pointer px-5 py-4 font-bold hover:border-l-2 hover:border-blue-700">
         <Link href="/signin">Logout</Link>
       </li>
       <li className="h-4"></li>
     </div>
-  );
+  )
 }

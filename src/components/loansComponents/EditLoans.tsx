@@ -5,7 +5,7 @@ import { ILoans } from '@/interfaces/IProps'
 import { Dropdown } from '../Dropdown'
 // import { useForm } from "react-hook-form";
 
-import { Inter, Roboto } from '@next/font/google'
+import { Inter, Roboto } from 'next/font/google'
 
 import DocumentDownload from '../DocumentDownload'
 import { ButtonSave } from '../common/ButtonSave'

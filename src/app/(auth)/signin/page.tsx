@@ -119,7 +119,7 @@ export default function SignIn() {
         <ClickHere />
         <div className="mb-20">
           <Link
-            href="/forgotpassword"
+            href="/forget-password"
             className="font-karla font-bold text-click-here underline"
           >
             Esqueceu sua senha?

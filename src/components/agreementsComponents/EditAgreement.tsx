@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from 'react'
 import { IconArrowBack, IconPartners } from '../../../public/icons'
-import { Inter } from '@next/font/google'
+import { Inter } from 'next/font/google'
 import ToggleSwitch from '../ToggleSwitch'
 import { TableEditAgreement } from '../table/TableEditAgreement'
 import { ButtonSave } from '../common/ButtonSave'

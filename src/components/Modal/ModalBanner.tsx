@@ -4,7 +4,7 @@ import Image from 'next/image'
 import ReactModal from 'react-modal'
 import { IconPartners } from '../../../public/icons'
 import ToggleSwitch from '../ToggleSwitch'
-import { Roboto } from '@next/font/google'
+import { Roboto } from 'next/font/google'
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],

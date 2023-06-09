@@ -13,13 +13,13 @@ const createUserFormSchema = z.object({
 
 type CreateUserFormData = z.infer<typeof createUserFormSchema>
 
-export default function ForgotPassword() {
+export default function ForgetPassword() {
   const [output, setOutput] = useState('')
 
   const router = useRouter()
 
   const handleClick = () => {
-    router.push('/newpassword')
+    router.push('/new-password')
   }
 
   const {

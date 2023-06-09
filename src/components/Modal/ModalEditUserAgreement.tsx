@@ -3,7 +3,7 @@
 import React from 'react'
 import ReactModal from 'react-modal'
 import { IconPartners } from '../../../public/icons'
-import { Roboto, Inter } from '@next/font/google'
+import { Roboto, Inter } from 'next/font/google'
 
 import { Dropdown } from '../Dropdown'
 const roboto = Roboto({

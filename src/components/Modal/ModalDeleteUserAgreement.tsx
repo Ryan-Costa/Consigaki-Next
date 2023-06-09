@@ -3,7 +3,7 @@
 import React from 'react'
 import ReactModal from 'react-modal'
 import { IconArrowRight } from '../../../public/icons'
-import { Karla } from '@next/font/google'
+import { Karla } from 'next/font/google'
 
 const karla = Karla({
   subsets: ['latin'],

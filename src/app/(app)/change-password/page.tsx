@@ -1,7 +1,7 @@
 'use client'
 
 import { ButtonSave } from '@/components/common/ButtonSave'
-import { Inter, Roboto } from '@next/font/google'
+import { Inter, Roboto } from 'next/font/google'
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -58,7 +58,7 @@ export default function ChangePassword() {
               className={`${roboto.className} text-base tracking-tight text-text-regular`}
             >
               Caso tenha esquecido sua senha{' '}
-              <Link href="/forgotpassword" className="text-blue-600">
+              <Link href="/forget-password" className="text-blue-600">
                 clique aqui
               </Link>
             </p>

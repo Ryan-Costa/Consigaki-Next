@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 import Sidebar from '@/components/Sidebar'
 import Topbar from '@/components/TopBar'
-import { Karla } from '@next/font/google'
+import { Karla } from 'next/font/google'
 const karla = Karla({ subsets: ['latin'] })
 
 interface AppLayoutProps {

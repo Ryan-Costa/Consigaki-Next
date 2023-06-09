@@ -10,7 +10,7 @@ import { IconPartners } from '../../../../public/icons'
 import { Dropdown } from '@/components/Dropdown'
 import { UserProps } from '@/interfaces/IProps'
 
-import { Roboto } from '@next/font/google'
+import { Roboto } from 'next/font/google'
 import { ButtonAdd } from '@/components/common/ButtonAdd'
 const roboto = Roboto({
   subsets: ['latin'],

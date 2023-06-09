@@ -8,7 +8,7 @@ import SearchInput from '@/components/SearchInput'
 import { ILoans } from '@/interfaces/IProps'
 import { useState } from 'react'
 import { IconPartners } from '../../../../public/icons'
-import { Roboto } from '@next/font/google'
+import { Roboto } from 'next/font/google'
 import { ButtonAdd } from '@/components/common/ButtonAdd'
 const roboto = Roboto({
   subsets: ['latin'],

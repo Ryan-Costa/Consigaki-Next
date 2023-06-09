@@ -2,7 +2,7 @@
 
 import { ButtonSave } from '@/components/common/ButtonSave'
 import ImageUpload from '@/components/ImageUpload'
-import { Inter, Roboto } from '@next/font/google'
+import { Inter, Roboto } from 'next/font/google'
 
 import { useRouter } from 'next/navigation'
 import { IconArrowBack, IconInsumo } from '../../../../public/icons'
