@@ -67,7 +67,7 @@ export default function EditUser({ item, onClose }: EditProps) {
   const sectionContent =
     activeSection === "agreements" ? (
       <>
-        <div className="mt-4 bg-gray-200">
+        <div className="mt-4">
           <TableEditUsers />
         </div>
       </>

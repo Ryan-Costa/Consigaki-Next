@@ -1,14 +1,13 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { IconArrow, IconEdit } from '../../../public/icons'
-import Modal from '../modal/ModalBanner'
-import { IProducts } from '@/interfaces/IProps'
+import { useState } from "react";
+import { IconArrow, IconEdit } from "../../../public/icons";
+import { IProducts } from "@/interfaces/IProps";
 
 interface CustomModalProps {
-  searchTerm: string
-  handleEdit: (item: IProducts) => void
-  data: IProducts[]
+  searchTerm: string;
+  handleEdit: (item: IProducts) => void;
+  data: IProducts[];
 }
 
 export default function TableProducts({
@@ -16,31 +15,21 @@ export default function TableProducts({
   handleEdit,
   data,
 }: CustomModalProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 9
-
-  // const handleOpenModal = () => {
-  //   setIsModalOpen(true);
-  // };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
 
   const filteredData = data!.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const indexOfLastItem = currentPage * itemsPerPage
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber)
-  }
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div>
@@ -86,7 +75,7 @@ export default function TableProducts({
             <div
               key={index}
               className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${
-                index + 1 === currentPage ? 'bg-deg1 text-white' : ''
+                index + 1 === currentPage ? "bg-deg1 text-white" : ""
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
@@ -103,7 +92,6 @@ export default function TableProducts({
           {IconArrow}
         </button>
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </div>
-  )
+  );
 }

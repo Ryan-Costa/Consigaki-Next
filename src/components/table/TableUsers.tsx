@@ -1,13 +1,12 @@
-'use client'
+"use client";
 
-import { UserProps } from '@/interfaces/IProps'
-import { useState } from 'react'
-import { IconArrow, IconEdit } from '../../../public/icons'
-import Modal from '../modal/ModalBanner'
+import { UserProps } from "@/interfaces/IProps";
+import { useState } from "react";
+import { IconArrow, IconEdit } from "../../../public/icons";
 interface CustomModalProps {
-  searchTerm: string
-  handleEdit: (item: UserProps) => void
-  type: 'agreements' | 'users'
+  searchTerm: string;
+  handleEdit: (item: UserProps) => void;
+  type: "agreements" | "users";
 }
 
 export default function TableAgreementsUsers({
@@ -15,128 +14,114 @@ export default function TableAgreementsUsers({
   handleEdit,
   type,
 }: CustomModalProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 5
-
-  // const handleOpenModal = () => {
-  //   setIsModalOpen(true)
-  // }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   const usersData = [
     {
-      codigo: '0001',
-      nome: 'Ryan',
-      cpf: '999.999.999-99',
-      email: 'ryan@gmail.com',
-      celular: '859999-9999',
-      dataNascimento: '10/10/2000',
-      cadastro: '01/01/2023',
+      code: "0001",
+      name: "Ryan",
+      register: "01/01/2023",
     },
     {
-      codigo: '0002',
-      nome: 'Themis',
-      cpf: '999.999.999-99',
-      email: 'ryan@gmail.com',
-      celular: '859999-9999',
-      dataNascimento: '10/10/2000',
-      cadastro: '02/01/2023',
+      code: "0002",
+      name: "Themis",
+      cpf: "999.999.999-99",
+      mail: "ryan@gmail.com",
+      cellPhone: "859999-9999",
+      dateBirth: "10/10/2000",
+      register: "02/01/2023",
     },
     {
-      codigo: '0003',
-      nome: 'Jamile',
-      cpf: '999.999.999-99',
-      email: 'ryan@gmail.com',
-      celular: '859999-9999',
-      dataNascimento: '10/10/2000',
-      cadastro: '02/01/2023',
+      code: "0003",
+      name: "Jamile",
+      cpf: "999.999.999-99",
+      mail: "ryan@gmail.com",
+      cellPhone: "859999-9999",
+      dateBirth: "10/10/2000",
+      register: "02/01/2023",
     },
     {
-      codigo: '0004',
-      nome: 'Ivana',
-      cpf: '999.999.999-99',
-      email: 'ryan@gmail.com',
-      celular: '859999-9999',
-      dataNascimento: '10/10/2000',
-      cadastro: '02/01/2023',
+      code: "0004",
+      name: "Ivana",
+      cpf: "999.999.999-99",
+      mail: "ryan@gmail.com",
+      cellPhone: "859999-9999",
+      dateBirth: "10/10/2000",
+      register: "02/01/2023",
     },
     {
-      codigo: '0005',
-      nome: 'Karine',
-      cpf: '999.999.999-99',
-      email: 'ryan@gmail.com',
-      celular: '859999-9999',
-      dataNascimento: '10/10/2000',
-      cadastro: '02/01/2023',
+      code: "0005",
+      name: "Karine",
+      cpf: "999.999.999-99",
+      mail: "ryan@gmail.com",
+      cellPhone: "859999-9999",
+      dateBirth: "10/10/2000",
+      register: "02/01/2023",
     },
     {
-      codigo: '0006',
-      nome: 'Adriel',
-      cpf: '999.999.999-99',
-      email: 'ryan@gmail.com',
-      celular: '859999-9999',
-      dataNascimento: '10/10/2000',
-      cadastro: '02/01/2023',
+      code: "0006",
+      name: "Adriel",
+      cpf: "999.999.999-99",
+      mail: "ryan@gmail.com",
+      cellPhone: "859999-9999",
+      dateBirth: "10/10/2000",
+      register: "02/01/2023",
     },
     {
-      codigo: '0007',
-      nome: 'Mateus',
-      cpf: '999.999.999-99',
-      email: 'ryan@gmail.com',
-      celular: '859999-9999',
-      dataNascimento: '10/10/2000',
-      cadastro: '02/01/2023',
+      code: "0007",
+      name: "Mateus",
+      cpf: "999.999.999-99",
+      mail: "ryan@gmail.com",
+      cellPhone: "859999-9999",
+      dateBirth: "10/10/2000",
+      register: "02/01/2023",
     },
     {
-      codigo: '0008',
-      nome: 'Sergio',
-      cpf: '999.999.999-99',
-      email: 'ryan@gmail.com',
-      celular: '859999-9999',
-      dataNascimento: '10/10/2000',
-      cadastro: '02/01/2023',
+      code: "0008",
+      name: "Sergio",
+      cpf: "999.999.999-99",
+      mail: "ryan@gmail.com",
+      cellPhone: "859999-9999",
+      dateBirth: "10/10/2000",
+      register: "02/01/2023",
     },
     {
-      codigo: '0009',
-      nome: 'Yasmin',
-      cpf: '999.999.999-99',
-      email: 'ryan@gmail.com',
-      celular: '859999-9999',
-      dataNascimento: '10/10/2000',
-      cadastro: '02/01/2023',
+      code: "0009",
+      name: "Yasmin",
+      cpf: "999.999.999-99",
+      mail: "ryan@gmail.com",
+      cellPhone: "859999-9999",
+      dateBirth: "10/10/2000",
+      register: "02/01/2023",
     },
     {
-      codigo: '0010',
-      nome: 'Heberth',
-      cpf: '999.999.999-99',
-      email: 'ryan@gmail.com',
-      celular: '859999-9999',
-      dataNascimento: '10/10/2000',
-      cadastro: '02/01/2023',
+      code: "0010",
+      name: "Heberth",
+      cpf: "999.999.999-99",
+      mail: "ryan@gmail.com",
+      cellPhone: "859999-9999",
+      dateBirth: "10/10/2000",
+      register: "02/01/2023",
     },
-  ]
+  ];
 
   const filteredData = usersData!.filter((item) =>
-    item.nome.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const indexOfLastItem = currentPage * itemsPerPage
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber)
-  }
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div>
-      {type === 'agreements' ? (
+      {type === "agreements" ? (
         <table className="mt-8 w-full text-left">
           <thead>
             <tr>
@@ -149,9 +134,9 @@ export default function TableAgreementsUsers({
           <tbody>
             {currentItems.map((item, index) => (
               <tr key={index} className="border-y">
-                <td className="p-4 text-left">{item.codigo}</td>
-                <td className="p-4 text-left">{item.nome}</td>
-                <td className="p-4 text-left">{item.cadastro}</td>
+                <td className="p-4 text-left">{item.code}</td>
+                <td className="p-4 text-left">{item.name}</td>
+                <td className="p-4 text-left">{item.register}</td>
                 <td className="p-4 text-left">
                   <a
                     onClick={() => handleEdit(item)}
@@ -164,7 +149,7 @@ export default function TableAgreementsUsers({
             ))}
           </tbody>
         </table>
-      ) : type === 'users' ? (
+      ) : type === "users" ? (
         <table className="mt-8 w-full text-left">
           <thead>
             <tr>
@@ -177,9 +162,9 @@ export default function TableAgreementsUsers({
           <tbody>
             {currentItems.map((item, index) => (
               <tr key={index} className="border-y">
-                <td className="p-4 text-left">{item.codigo}</td>
-                <td className="p-4 text-left">{item.nome}</td>
-                <td className="p-4 text-left">{item.cadastro}</td>
+                <td className="p-4 text-left">{item.code}</td>
+                <td className="p-4 text-left">{item.name}</td>
+                <td className="p-4 text-left">{item.register}</td>
                 <td className="p-4 text-left">
                   <a
                     onClick={() => handleEdit(item)}
@@ -209,7 +194,7 @@ export default function TableAgreementsUsers({
             <div
               key={index}
               className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${
-                index + 1 === currentPage ? 'bg-deg1 text-white' : ''
+                index + 1 === currentPage ? "bg-deg1 text-white" : ""
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
@@ -226,7 +211,6 @@ export default function TableAgreementsUsers({
           {IconArrow}
         </button>
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </div>
-  )
+  );
 }

@@ -1,18 +1,17 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { IconArrow, IconEdit } from '../../../public/icons'
-import Modal from '../modal/ModalBanner'
+import { useState } from "react";
+import { IconArrow, IconEdit } from "../../../public/icons";
 interface ItemProps {
-  codigo: string
-  razaoSocial: string
-  cnpj: string
-  cadastro: string
+  codigo: string;
+  razaoSocial: string;
+  cnpj: string;
+  cadastro: string;
 }
 interface CustomModalProps {
-  searchTerm: string
-  handleEdit: (item: ItemProps) => void
-  type: 'providers'
+  searchTerm: string;
+  handleEdit: (item: ItemProps) => void;
+  type: "providers";
 }
 
 export default function TableProviders({
@@ -20,94 +19,84 @@ export default function TableProviders({
   handleEdit,
   type,
 }: CustomModalProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 5
-
-  // const handleOpenModal = () => {
-  //   setIsModalOpen(true)
-  // }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   const tableData = [
     {
-      codigo: '0001',
-      razaoSocial: 'Marcos',
-      cnpj: '11.000.000/0001-00',
-      cadastro: '01/01/2023',
+      codigo: "0001",
+      razaoSocial: "Marcos",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "01/01/2023",
     },
     {
-      codigo: '0002',
-      razaoSocial: 'João',
-      cnpj: '11.000.000/0001-00',
-      cadastro: '02/01/2023',
+      codigo: "0002",
+      razaoSocial: "João",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0003',
-      razaoSocial: 'Marcelo',
-      cnpj: '11.000.000/0001-00',
-      cadastro: '02/01/2023',
+      codigo: "0003",
+      razaoSocial: "Marcelo",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0004',
-      razaoSocial: 'Rodrigo',
-      cnpj: '11.000.000/0001-00',
-      cadastro: '02/01/2023',
+      codigo: "0004",
+      razaoSocial: "Rodrigo",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0005',
-      razaoSocial: 'Antonio',
-      cnpj: '11.000.000/0001-00',
-      cadastro: '02/01/2023',
+      codigo: "0005",
+      razaoSocial: "Antonio",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0006',
-      razaoSocial: 'Alice',
-      cnpj: '11.000.000/0001-00',
-      cadastro: '02/01/2023',
+      codigo: "0006",
+      razaoSocial: "Alice",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0007',
-      razaoSocial: 'Fernanda',
-      cnpj: '11.000.000/0001-00',
-      cadastro: '02/01/2023',
+      codigo: "0007",
+      razaoSocial: "Fernanda",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0008',
-      razaoSocial: 'Angelo',
-      cnpj: '11.000.000/0001-00',
-      cadastro: '02/01/2023',
+      codigo: "0008",
+      razaoSocial: "Angelo",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0009',
-      razaoSocial: 'Maria',
-      cnpj: '11.000.000/0001-00',
-      cadastro: '02/01/2023',
+      codigo: "0009",
+      razaoSocial: "Maria",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
     },
     {
-      codigo: '0010',
-      razaoSocial: 'José',
-      cnpj: '11.000.000/0001-00',
-      cadastro: '02/01/2023',
+      codigo: "0010",
+      razaoSocial: "José",
+      cnpj: "11.000.000/0001-00",
+      cadastro: "02/01/2023",
     },
-  ]
+  ];
 
   const filteredData = tableData!.filter((item) =>
-    item.razaoSocial.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+    item.razaoSocial.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const indexOfLastItem = currentPage * itemsPerPage
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber)
-  }
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div>
@@ -151,7 +140,7 @@ export default function TableProviders({
             <div
               key={index}
               className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${
-                index + 1 === currentPage ? 'bg-deg1 text-white' : ''
+                index + 1 === currentPage ? "bg-deg1 text-white" : ""
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
@@ -168,7 +157,6 @@ export default function TableProviders({
           {IconArrow}
         </button>
       </div>
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </div>
-  )
+  );
 }
