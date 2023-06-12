@@ -1,56 +1,56 @@
-import React, { useState, ChangeEvent } from 'react'
-import { IconArrowBack, IconPartners } from '../../../public/icons'
-import { ILoans } from '@/interfaces/IProps'
+import React, { useState, ChangeEvent } from "react";
+import { IconArrowBack, IconPartners } from "../../../public/icons";
+import { ILoans } from "@/interfaces/IProps";
 
-import { Dropdown } from '../Dropdown'
+import { Dropdown } from "../Dropdown";
 // import { useForm } from "react-hook-form";
 
-import { Inter, Roboto } from 'next/font/google'
+import { Inter, Roboto } from "next/font/google";
 
-import DocumentDownload from '../DocumentDownload'
-import { ButtonSave } from '../common/ButtonSave'
-import { Input } from '../common/Input'
+import DocumentDownload from "../DocumentDownload";
+import { ButtonSave } from "../common/ButtonSave";
+import { Input } from "../common/Input";
 const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 interface EditLoansProps {
-  item: ILoans
-  onClose: () => void
+  item: ILoans;
+  onClose: () => void;
 }
 
 export default function EditLoans({ item, onClose }: EditLoansProps) {
-  const [editedItem, setEditedItem] = useState<ILoans>(item)
+  const [editedItem, setEditedItem] = useState<ILoans>(item);
   // const { control, handleSubmit } = useForm({
   //   defaultValues: {},
   // });
 
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setEditedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSave = () => {
-    onClose()
-    console.log('Item editado:', editedItem)
-  }
+    onClose();
+    console.log("Item editado:", editedItem);
+  };
 
   const handleGoBack = () => {
     // window.location.reload();
-    onClose()
-    console.log('voltei')
-  }
+    onClose();
+    console.log("voltei");
+  };
 
   return (
     <div className={inter.className}>
@@ -120,7 +120,7 @@ export default function EditLoans({ item, onClose }: EditLoansProps) {
           <Dropdown
             defaultValue="Suporte"
             type="form"
-            options={['Cliente', 'Suporte', 'Administrador']}
+            options={["Cliente", "Suporte", "Administrador"]}
           />
         </div>
       </div>
@@ -132,7 +132,7 @@ export default function EditLoans({ item, onClose }: EditLoansProps) {
           <Dropdown
             defaultValue="Login liberado"
             type="form"
-            options={['Login bloqueado', 'Login liberado']}
+            options={["Login bloqueado", "Login liberado"]}
           />
         </div>
         <Input
@@ -287,7 +287,7 @@ export default function EditLoans({ item, onClose }: EditLoansProps) {
           <textarea
             name="observacaoPendencias"
             placeholder="David Bessa Pontes"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
+            className="w-full rounded-lg border border-gray-400 px-6 py-2"
             // value={editedItem.dateBirth}
             onChange={handleInputChange}
           />
@@ -314,5 +314,5 @@ export default function EditLoans({ item, onClose }: EditLoansProps) {
       </div>
       <ButtonSave handleSave={handleSave} />
     </div>
-  )
+  );
 }
