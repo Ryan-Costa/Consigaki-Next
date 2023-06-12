@@ -1,6 +1,6 @@
-import { IconClose } from "../../../public/icons";
-import { ButtonAdd } from "../common/ButtonAdd";
-import { Input } from "../common/Input";
+import { IconClose } from '../../../public/icons'
+import { ButtonAdd } from '../common/ButtonAdd'
+import { Input } from '../common/Input'
 
 export default function BankData() {
   return (
@@ -92,5 +92,5 @@ export default function BankData() {
         </tbody>
       </table>
     </>
-  );
+  )
 }

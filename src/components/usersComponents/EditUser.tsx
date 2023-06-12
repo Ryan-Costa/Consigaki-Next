@@ -1,95 +1,95 @@
-import React, { useState, ChangeEvent } from "react";
-import { IconArrowBack, IconPartners } from "../../../public/icons";
-import { Inter } from "next/font/google";
-import { Dropdown } from "../Dropdown";
-import { UserProps } from "@/interfaces/IProps";
-import { TableEditUsers } from "../table/TableEditUsers";
-import { ButtonSave } from "../common/ButtonSave";
-import { TableUserRequests } from "./TableUserRequests";
-import Calls from "./Calls";
-import BankData from "./BankData";
+import React, { useState, ChangeEvent } from 'react'
+import { IconArrowBack, IconPartners } from '../../../public/icons'
+import { Inter } from 'next/font/google'
+import { Dropdown } from '../Dropdown'
+import { UserProps } from '@/interfaces/IProps'
+import { TableEditUsers } from '../table/TableEditUsers'
+import { ButtonSave } from '../common/ButtonSave'
+import { TableUserRequests } from './TableUserRequests'
+import Calls from './Calls'
+import BankData from './BankData'
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface EditProps {
-  item: UserProps;
-  onClose: () => void;
+  item: UserProps
+  onClose: () => void
 }
 
 export default function EditUser({ item, onClose }: EditProps) {
-  const [editedItem, setEditedItem] = useState<UserProps>(item);
-  const [activeSection, setActiveSection] = useState<string>("agreements");
-  const [activeButton, setActiveButton] = useState("agreements");
+  const [editedItem, setEditedItem] = useState<UserProps>(item)
+  const [activeSection, setActiveSection] = useState<string>('agreements')
+  const [activeButton, setActiveButton] = useState('agreements')
   // const { control, handleSubmit } = useForm({
   //   defaultValues: {},
   // });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setEditedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSave = () => {
-    onClose();
-    console.log("Item editado:", editedItem);
-  };
+    onClose()
+    console.log('Item editado:', editedItem)
+  }
 
   const handleGoBack = () => {
     // window.location.reload();
-    onClose();
-  };
+    onClose()
+  }
 
   const handleAgreementsSection = () => {
-    setActiveSection("agreements");
-  };
+    setActiveSection('agreements')
+  }
 
   const handleRequestsSection = () => {
-    setActiveSection("requests");
-  };
+    setActiveSection('requests')
+  }
 
   const handleCallsSection = () => {
-    setActiveSection("calls");
-  };
+    setActiveSection('calls')
+  }
 
   const handleBankDataSection = () => {
-    setActiveSection("bankData");
-  };
+    setActiveSection('bankData')
+  }
 
   const handleButtonClick = (section: any) => {
-    setActiveButton(section);
-  };
+    setActiveButton(section)
+  }
 
   const sectionContent =
-    activeSection === "agreements" ? (
+    activeSection === 'agreements' ? (
       <>
         <div className="mt-4">
           <TableEditUsers />
         </div>
       </>
-    ) : activeSection === "requests" ? (
+    ) : activeSection === 'requests' ? (
       <>
         <div className="custom-scrollbar mt-4 h-[255px] w-full overflow-auto">
           <TableUserRequests />
         </div>
       </>
-    ) : activeSection === "calls" ? (
+    ) : activeSection === 'calls' ? (
       <>
         <div className="custom-scrollbar mt-4 h-[255px] w-full overflow-auto pr-[6px]">
           <Calls />
         </div>
       </>
-    ) : activeSection === "bankData" ? (
+    ) : activeSection === 'bankData' ? (
       <>
         <div className="custom-scrollbar mt-4 h-[255px] w-full overflow-auto">
           <BankData />
         </div>
       </>
-    ) : null;
+    ) : null
 
   return (
     <div>
@@ -181,7 +181,7 @@ export default function EditUser({ item, onClose }: EditProps) {
           <Dropdown
             defaultValue="Suporte"
             type="form"
-            options={["Cliente", "Suporte", "Administrador"]}
+            options={['Cliente', 'Suporte', 'Administrador']}
           />
         </div>
       </div>
@@ -193,7 +193,7 @@ export default function EditUser({ item, onClose }: EditProps) {
           <Dropdown
             defaultValue="Login liberado"
             type="form"
-            options={["Login bloqueado", "Login liberado"]}
+            options={['Login bloqueado', 'Login liberado']}
           />
         </div>
         <div className="flex w-full flex-col gap-2">
@@ -227,63 +227,63 @@ export default function EditUser({ item, onClose }: EditProps) {
       <div className="flex w-full justify-center gap-11">
         <button
           className={`btn text-xl font-bold ${
-            activeButton === "agreements" ? "active" : ""
+            activeButton === 'agreements' ? 'active' : ''
           }`}
           onClick={() => {
-            handleButtonClick("agreements");
-            handleAgreementsSection();
+            handleButtonClick('agreements')
+            handleAgreementsSection()
           }}
           style={{
-            position: "relative",
+            position: 'relative',
             borderBottom:
-              activeButton === "agreements" ? "3px solid black" : "none",
+              activeButton === 'agreements' ? '3px solid black' : 'none',
           }}
         >
           CONVÊNIOS
         </button>
         <button
           className={`btn z-0 text-xl font-bold ${
-            activeButton === "requests" ? "active" : ""
+            activeButton === 'requests' ? 'active' : ''
           }`}
           onClick={() => {
-            handleButtonClick("requests");
-            handleRequestsSection();
+            handleButtonClick('requests')
+            handleRequestsSection()
           }}
           style={{
-            position: "relative",
+            position: 'relative',
             borderBottom:
-              activeButton === "requests" ? "3px solid black" : "none",
+              activeButton === 'requests' ? '3px solid black' : 'none',
           }}
         >
           SOLICITAÇÕES
         </button>
         <button
           className={`btn text-xl font-bold ${
-            activeButton === "calls" ? "active" : ""
+            activeButton === 'calls' ? 'active' : ''
           }`}
           onClick={() => {
-            handleButtonClick("calls");
-            handleCallsSection();
+            handleButtonClick('calls')
+            handleCallsSection()
           }}
           style={{
-            position: "relative",
-            borderBottom: activeButton === "calls" ? "3px solid black" : "none",
+            position: 'relative',
+            borderBottom: activeButton === 'calls' ? '3px solid black' : 'none',
           }}
         >
           ATENDIMENTOS
         </button>
         <button
           className={`btn text-xl font-bold ${
-            activeButton === "bankData" ? "active" : ""
+            activeButton === 'bankData' ? 'active' : ''
           }`}
           onClick={() => {
-            handleButtonClick("bankData");
-            handleBankDataSection();
+            handleButtonClick('bankData')
+            handleBankDataSection()
           }}
           style={{
-            position: "relative",
+            position: 'relative',
             borderBottom:
-              activeButton === "bankData" ? "3px solid black" : "none",
+              activeButton === 'bankData' ? '3px solid black' : 'none',
           }}
         >
           DADOS BANCÁRIOS
@@ -292,5 +292,5 @@ export default function EditUser({ item, onClose }: EditProps) {
       {sectionContent}
       <ButtonSave handleSave={handleSave} />
     </div>
-  );
+  )
 }

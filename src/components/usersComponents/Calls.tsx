@@ -35,5 +35,5 @@ export default function Calls() {
         </tbody>
       </table>
     </>
-  );
+  )
 }

@@ -2,12 +2,12 @@
 import { useState } from 'react'
 import { IconClose } from '../../../public/icons'
 import { ButtonAdd } from '../common/ButtonAdd'
-import ModalBanner from '../modal/ModalBanner'
-import ModalProduct from '../modal/ModalProduct'
+// import ModalBanner from "../modal/ModalBanner";
+// import ModalProduct from "../modal/ModalProduct";
 
 export function TableEditAgreement() {
-  const [isOpenModalBanner, setIsOpenModalBanner] = useState(false)
-  const [isOpenModalProduct, setIsOpenModalProduct] = useState(false)
+  // const [isOpenModalBanner, setIsOpenModalBanner] = useState(false);
+  // const [isOpenModalProduct, setIsOpenModalProduct] = useState(false);
   const [agreementsData, setAgreementsData] = useState([
     {
       nome: 'Empréstimo',
@@ -27,21 +27,21 @@ export function TableEditAgreement() {
     setAgreementsData(updateData)
   }
 
-  const handleOpenModalBanner = () => {
-    setIsOpenModalBanner(true)
-  }
+  // const handleOpenModalBanner = () => {
+  //   setIsOpenModalBanner(true);
+  // };
 
-  const handleCloseModalBanner = () => {
-    setIsOpenModalBanner(false)
-  }
+  // const handleCloseModalBanner = () => {
+  //   setIsOpenModalBanner(false);
+  // };
 
-  const handleOpenModalProduct = () => {
-    setIsOpenModalProduct(true)
-  }
+  // const handleOpenModalProduct = () => {
+  //   setIsOpenModalProduct(true);
+  // };
 
-  const handleCloseModalProduct = () => {
-    setIsOpenModalProduct(false)
-  }
+  // const handleCloseModalProduct = () => {
+  //   setIsOpenModalProduct(false);
+  // };
 
   return (
     <>
@@ -60,7 +60,7 @@ export function TableEditAgreement() {
               <td className="w-1/6 p-4 text-left">{item.nome}</td>
               <td className="w-3/6 p-4 text-left">
                 <button
-                  onClick={handleOpenModalBanner}
+                  // onClick={handleOpenModalBanner}
                   className="font-semibold underline"
                 >
                   {item.banner}
@@ -74,10 +74,10 @@ export function TableEditAgreement() {
                 >
                   {IconClose}
                 </a>
-                <ModalBanner
+                {/* <ModalBanner
                   isOpen={isOpenModalBanner}
                   onRequestClose={handleCloseModalBanner}
-                />
+                /> */}
               </td>
             </tr>
           ))}
@@ -86,12 +86,12 @@ export function TableEditAgreement() {
       <ButtonAdd
         name="Produto"
         type="tableAgreement"
-        handleOpenModalProduct={handleOpenModalProduct}
+        // handleOpenModalProduct={handleOpenModalProduct}
       />
-      <ModalProduct
+      {/* <ModalProduct
         isOpen={isOpenModalProduct}
         onRequestClose={handleCloseModalProduct}
-      />
+      /> */}
     </>
   )
 }
