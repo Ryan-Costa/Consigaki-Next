@@ -1,61 +1,70 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { IconePass, IconeUser } from '../../../../public/icons'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { useState } from 'react'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import ClickHere from '@/components/ClickHere'
+import Link from "next/link";
+import { IconePass, IconeUser } from "../../../../public/icons";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useContext, useState } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import ClickHere from "@/components/ClickHere";
+import { AuthContext } from "@/contexts/AuthContext";
 
-const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/
+// const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
 
-const createUserFormSchema = z.object({
-  cpf: z
-    .string()
-    .nonempty('O CPF é obrigatório')
-    .regex(cpfRegex, 'CPF inválido'),
-  email: z
-    .string()
-    .nonempty('O e-mail é obrigatório')
-    .email('Formato de e-mail inválido')
-    .toLowerCase()
-    .refine((email) => {
-      return email.endsWith('@consigaki.com')
-    }, 'O e-mail precisa ser do Banco Pan'),
-  password: z.string().min(6, 'A senha precisa de no mínimo 6 caracteres'),
-})
+// const createUserFormSchema = z.object({
+//   cpf: z
+//     .string()
+//     .nonempty("O CPF é obrigatório")
+//     .regex(cpfRegex, "CPF inválido"),
+//   email: z
+//     .string()
+//     .nonempty("O e-mail é obrigatório")
+//     .email("Formato de e-mail inválido")
+//     .toLowerCase()
+//     .refine((email) => {
+//       return email.endsWith("@consigaki.com");
+//     }, "O e-mail precisa ser do Banco Pan"),
+//   password: z.string().min(6, "A senha precisa de no mínimo 6 caracteres"),
+// });
 
-type CreateUserFormData = z.infer<typeof createUserFormSchema>
+// type CreateUserFormData = z.infer<typeof createUserFormSchema>;
 
 const defaultValues = {
-  cpf: '',
-  password: '',
-}
+  cpf: "",
+  password: "",
+};
 
 export default function SignIn() {
-  const [output, setOutput] = useState('')
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CreateUserFormData>({
-    resolver: zodResolver(createUserFormSchema),
-    defaultValues,
-  })
+  // const [output, setOutput] = useState("");
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm<CreateUserFormData>({
+  //   resolver: zodResolver(createUserFormSchema),
+  //   defaultValues,
+  // });
 
-  const createUser: SubmitHandler<typeof defaultValues> = (data) => {
-    setOutput(JSON.stringify(data, null, 2))
+  // const createUser: SubmitHandler<typeof defaultValues> = (data) => {
+  //   setOutput(JSON.stringify(data, null, 2));
+  // };
+
+  const { register, handleSubmit } = useForm();
+  const { signIn } = useContext(AuthContext);
+
+  async function handleSignIn(data: any) {
+    await signIn(data);
   }
 
   return (
     <div className="mr-64 flex w-492 flex-col gap-6">
       <form
-        onSubmit={handleSubmit(createUser)}
+        onSubmit={handleSubmit(handleSignIn)}
         className="flex w-full flex-col"
       >
         <div className="relative z-0 mb-28 flex flex-col gap-1">
           <input
+            {...register("cpf")}
             type="text"
             maxLength={14}
             className={`
@@ -65,19 +74,28 @@ export default function SignIn() {
                 focus:outline-none focus:ring-0
               `}
             placeholder=" "
-            {...register('cpf')}
           />
-          {errors.cpf && (
+          {/* {errors.cpf && (
             <span className="text-sm text-red-500">{errors.cpf.message}</span>
-          )}
+          )} */}
           <label
             htmlFor="pass"
             className={`
-              align-center absolute top-2 -z-10 flex origin-[0]
-              -translate-y-6 scale-75 transform gap-2 text-lg text-white 
-              duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
-              peer-focus:left-0 
-              peer-focus:-translate-y-6 peer-focus:scale-100
+              align-center absolute 
+              top-2 
+              -z-10 flex
+              origin-[0] 
+              -translate-y-6 
+              scale-100 
+              transform 
+              gap-2 
+              text-lg 
+              text-white 
+              duration-300 
+              peer-placeholder-shown:translate-y-0 
+              peer-placeholder-shown:scale-100
+              peer-focus:left-0 peer-focus:-translate-y-6
+              peer-focus:scale-100 
               peer-focus:text-white
             `}
           >
@@ -87,6 +105,7 @@ export default function SignIn() {
 
         <div className="relative z-0 mb-8 flex flex-col gap-1">
           <input
+            {...register("password")}
             type="password"
             className={`
               peer block w-full appearance-none border-0 border-b-2 
@@ -95,13 +114,12 @@ export default function SignIn() {
               focus:outline-none focus:ring-0
             `}
             placeholder=" "
-            {...register('password')}
           />
-          {errors.password && (
+          {/* {errors.password && (
             <span className="text-sm text-red-500">
               {errors.password.message}
             </span>
-          )}
+          )} */}
           <label
             htmlFor="pass"
             className={`
@@ -116,6 +134,7 @@ export default function SignIn() {
             {IconePass} Senha
           </label>
         </div>
+
         <ClickHere />
         <div className="mb-20">
           <Link
@@ -133,7 +152,7 @@ export default function SignIn() {
           Entrar
         </button>
       </form>
-      <pre>{output}</pre>
+      {/* <pre>{output}</pre> */}
     </div>
-  )
+  );
 }
