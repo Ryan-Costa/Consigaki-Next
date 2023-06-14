@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { NEXT_PUBLIC_BASE_URL, uri } from "@/constants/environment-variables";
 
-const axiosiInstance = axios.create({
+const axiosInstance = axios.create({
   baseURL: uri[NEXT_PUBLIC_BASE_URL!],
 });
 
@@ -30,4 +30,4 @@ const api = (axios: AxiosInstance) => {
   };
 };
 
-export default api(axiosiInstance);
+export default api(axiosInstance);

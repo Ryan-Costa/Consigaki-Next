@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={karla.className}>
       <head />
       <body className="h-screen w-full bg-gradient-to-r from-deg2 to-deg1">
-        {isPublicPage && children}
+        {isPublicPage && <AuthProvider>{children}</AuthProvider>}
         {!isPublicPage && (
           <PrivateRoute>
             <AuthProvider>{children}</AuthProvider>
