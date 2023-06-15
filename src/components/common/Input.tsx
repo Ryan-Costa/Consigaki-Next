@@ -1,15 +1,15 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent } from "react";
 
 interface InputProps {
-  label: string
-  name: string
-  type: string
-  placeholder?: string
-  readOnly?: boolean
-  disabled?: boolean
-  value?: string
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
-  className?: string
+  label: string;
+  name: string;
+  type: string;
+  placeholder?: string;
+  readOnly?: boolean;
+  disabled?: boolean;
+  value?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 }
 
 export function Input(props: InputProps) {
@@ -20,12 +20,12 @@ export function Input(props: InputProps) {
         name={props.name}
         type={props.type}
         placeholder={props.placeholder}
-        className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
+        className="h-[48px] w-full rounded-lg border border-gray-400 px-6 outline-none"
         readOnly={props.readOnly}
         disabled={props.disabled}
         value={props.value}
         onChange={props.onChange}
       />
     </div>
-  )
+  );
 }

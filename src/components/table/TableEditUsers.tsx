@@ -1,46 +1,46 @@
-import { useState } from 'react'
-import { IconClose, IconEdit } from '../../../public/icons'
-// import ModalEditUserAgreement from "../modal/ModalEditUserAgreement";
-// import ModalDeleteUserAgreement from "../modal/ModalDeleteUserAgreement";
+import { useState } from "react";
+import { IconClose, IconEdit } from "../../../public/icons";
+import { ModalDelete } from "../modal/ModalDelete";
+import { ModalEdit } from "../modal/ModalEdit";
 
 export function TableEditUsers() {
-  // const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false);
-  // const [isOpenModalDeleteUser, setIsOpenModalDeleteUser] = useState(false);
+  const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false);
+  const [isOpenModalDeleteUser, setIsOpenModalDeleteUser] = useState(false);
 
-  const [agreementsData] = useState([
+  const [agreementsData, setAgreementsData] = useState([
     {
-      nome: 'Empréstimo',
-      banner: 'http://aws.s3.imagem.com/teste',
-      ativo: 'Sim',
+      nome: "Empréstimo",
+      banner: "http://aws.s3.imagem.com/teste",
+      ativo: "Sim",
     },
     {
-      nome: 'Empréstimo',
-      banner: 'http://aws.s3.imagem.com/teste',
-      ativo: 'Não',
+      nome: "Empréstimo",
+      banner: "http://aws.s3.imagem.com/teste",
+      ativo: "Não",
     },
-  ])
+  ]);
 
-  // const handleDelete = (index: any) => {
-  //   const updateData = [...agreementsData]
-  //   updateData.splice(index, 1)
-  //   setAgreementsData(updateData)
-  // }
+  const handleDelete = (index: any) => {
+    const updateData = [...agreementsData];
+    updateData.splice(index, 1);
+    setAgreementsData(updateData);
+  };
 
-  // const handleOpenModalEditUser = () => {
-  //   setIsOpenModalEditUser(true);
-  // };
+  const handleOpenModalEditUser = () => {
+    setIsOpenModalEditUser(true);
+  };
 
-  // const handleCloseModalEditUser = () => {
-  //   setIsOpenModalEditUser(false);
-  // };
+  const handleCloseModalEditUser = () => {
+    setIsOpenModalEditUser(false);
+  };
 
-  // const handleOpenModalDeleteUser = () => {
-  //   setIsOpenModalDeleteUser(true);
-  // };
+  const handleOpenModalDeleteUser = () => {
+    setIsOpenModalDeleteUser(true);
+  };
 
-  // const handleCloseModalDeleteUser = () => {
-  //   setIsOpenModalDeleteUser(false);
-  // };
+  const handleCloseModalDeleteUser = () => {
+    setIsOpenModalDeleteUser(false);
+  };
 
   return (
     <>
@@ -61,30 +61,26 @@ export function TableEditUsers() {
               <td className="w-3/6 p-4 text-left">{item.banner}</td>
               <td className="w-1/6 p-4 text-left">{item.ativo}</td>
               <td className="w-6/6 p-4 text-left">
-                <a
-                  // onClick={handleOpenModalEditUser}
-                  className="cursor-pointer"
-                >
+                <a onClick={handleOpenModalEditUser} className="cursor-pointer">
                   {IconEdit}
                 </a>
-                {/* <ModalEditUserAgreement
+                <ModalEdit
                   isOpen={isOpenModalEditUser}
                   onRequestClose={handleCloseModalEditUser}
-                /> */}
+                />
               </td>
-
               <td className="w-6/6 flex justify-center p-4 text-left">
                 <a
-                  // onClick={handleOpenModalDeleteUser}
+                  onClick={handleOpenModalDeleteUser}
                   className="cursor-pointer"
                 >
                   {IconClose}
                 </a>
-                {/* <ModalDeleteUserAgreement
+                <ModalDelete
                   isOpen={isOpenModalDeleteUser}
                   onRequestClose={handleCloseModalDeleteUser}
                   handleDelete={() => handleDelete(index)}
-                /> */}
+                />
               </td>
             </tr>
           ))}
@@ -99,5 +95,5 @@ export function TableEditUsers() {
         </button>
       </div>
     </>
-  )
+  );
 }
