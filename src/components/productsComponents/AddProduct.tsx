@@ -1,40 +1,41 @@
-import React, { useState, ChangeEvent } from 'react'
-import { IconArrowBack, IconPartners } from '../../../public/icons'
-import { Inter } from 'next/font/google'
-import ToggleSwitch from '../ToggleSwitch'
-import { IProducts } from '@/interfaces/IProps'
-import { ButtonSave } from '../common/ButtonSave'
+import React, { useState, ChangeEvent } from "react";
+import { IconArrowBack, IconPartners } from "../../../public/icons";
+import { Inter } from "next/font/google";
+import ToggleSwitch from "../ToggleSwitch";
+import { IProducts } from "@/interfaces/IProps";
+import { ButtonSave } from "../common/ButtonSave";
+import { Input } from "../common/Input";
 
 const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 interface AddProductsProps {
-  item: IProducts
-  onClose: () => void
+  item: IProducts;
+  onClose: () => void;
 }
 
 export default function AddProduct({ item, onClose }: AddProductsProps) {
-  const [savedItem, setSavedItem] = useState<IProducts>(item)
+  const [savedItem, setSavedItem] = useState<IProducts>(item);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setSavedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSave = () => {
-    onClose()
-    console.log('Item editado:', savedItem)
-  }
+    onClose();
+    console.log("Item editado:", savedItem);
+  };
 
   const handleGoBack = () => {
-    onClose()
-    console.log('voltei')
-  }
+    onClose();
+    console.log("voltei");
+  };
 
   return (
     <div>
@@ -52,48 +53,33 @@ export default function AddProduct({ item, onClose }: AddProductsProps) {
         Prencha todos os campos
       </p>
       <div className="mt-6 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Razão Social
-          </label>
-          <input
-            name="razaoSocial"
-            type="text"
-            placeholder="---------- -------- -------"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={setSavedItem.razaoSocial}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Razão Social"
+          type="text"
+          name="razaoSocial"
+          placeholder="---------- -------- -------"
+          className="w-full"
+          onChange={handleInputChange}
+        />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Cadastro
-          </label>
-          <input
-            name="cadastro"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={setSavedItem.cadastro}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Alterado
-          </label>
-          <input
-            name="alterado"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-          />
-        </div>
+        <Input
+          label="Cadastro"
+          type="text"
+          name="cadastro"
+          placeholder="00/00/0000"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Alterado"
+          type="text"
+          name="alterado"
+          placeholder="00/00/0000"
+          onChange={handleInputChange}
+        />
       </div>
       <ToggleSwitch />
       <ButtonSave handleSave={handleSave} />
     </div>
-  )
+  );
 }

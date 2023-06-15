@@ -8,6 +8,7 @@ import { ButtonSave } from "../common/ButtonSave";
 import { TableUserRequests } from "./TableUserRequests";
 import Calls from "./Calls";
 import BankData from "./BankData";
+import { Input } from "../common/Input";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -107,74 +108,55 @@ export default function EditUser({ item, onClose }: EditProps) {
         Prencha todos os campos
       </p>
       <div className="mt-6 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Nome
-          </label>
-          <input
-            name="nome"
-            type="text"
-            placeholder="David Bessa Pontes"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.name}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            E-mail
-          </label>
-          <input
-            name="nome"
-            type="text"
-            placeholder="OrpelNet@Gmail.acom"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.mail}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Nome"
+          name="name"
+          type="text"
+          value={editedItem.name}
+          onChange={handleInputChange}
+          className="w-full"
+        />
+        <Input
+          label="E-mail"
+          name="email"
+          type="text"
+          className="w-full"
+          placeholder="OrpelNet@Gmail.acom"
+          value={editedItem.mail}
+          onChange={handleInputChange}
+        />
       </div>
 
       <div className="mb-6 mt-6 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            CPF
-          </label>
-          <input
-            name="CPF"
-            type="text"
-            placeholder="000.000.000-00"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.cpf}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Celular
-          </label>
-          <input
-            name="celular"
-            type="text"
-            placeholder="(00) 0 0000-0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.cellPhoner}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Data de nascimento
-          </label>
-          <input
-            name="dataNascimento"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.dateBirth}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="CPF"
+          name="cpf"
+          type="text"
+          className="w-full"
+          placeholder="000.000.000-00"
+          value={editedItem.cpf}
+          onChange={handleInputChange}
+        />
+
+        <Input
+          label="CPF"
+          name="celular"
+          type="text"
+          placeholder="(00) 0 0000-0000"
+          className="w-full"
+          value={editedItem.cellPhoner}
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Data de nascimento"
+          name="dataNascimento"
+          type="text"
+          className="w-full"
+          placeholder="00/00/0000"
+          value={editedItem.dateBirth}
+          onChange={handleInputChange}
+        />
+
         <div className="flex w-full flex-col gap-2">
           <label htmlFor="" className="font-semibold">
             Perfil
@@ -197,33 +179,24 @@ export default function EditUser({ item, onClose }: EditProps) {
             options={["Login bloqueado", "Login liberado"]}
           />
         </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Cadastro
-          </label>
-          <input
-            name="cadastro"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.register}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Alterado
-          </label>
-          <input
-            name="alterado"
-            type="text"
-            placeholder="00/00/0000"
-            readOnly
-            disabled
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            value={editedItem.register}
-          />
-        </div>
+
+        <Input
+          label="Cadastro"
+          name="cadastro"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          value={editedItem.register}
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Alterado"
+          name="alterado"
+          type="text"
+          placeholder="00/00/0000"
+          className="w-full"
+          value={editedItem.register}
+        />
       </div>
       <ButtonSave handleSave={handleSave} />
       <div className="mt-8 flex w-full justify-center gap-11">

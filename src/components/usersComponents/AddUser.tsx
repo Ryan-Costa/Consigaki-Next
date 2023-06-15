@@ -1,40 +1,41 @@
-import React, { useState, ChangeEvent } from 'react'
-import { IconArrowBack, IconPartners } from '../../../public/icons'
-import { Inter } from 'next/font/google'
-import ToggleSwitch from '../ToggleSwitch'
-import { Dropdown } from '../Dropdown'
-import { UserProps } from '@/interfaces/IProps'
-import { ButtonSave } from '../common/ButtonSave'
+import React, { useState, ChangeEvent } from "react";
+import { IconArrowBack, IconPartners } from "../../../public/icons";
+import { Inter } from "next/font/google";
+import ToggleSwitch from "../ToggleSwitch";
+import { Dropdown } from "../Dropdown";
+import { UserProps } from "@/interfaces/IProps";
+import { ButtonSave } from "../common/ButtonSave";
+import { Input } from "../common/Input";
 const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 interface AddProps {
-  item: UserProps
-  onClose: () => void
+  item: UserProps;
+  onClose: () => void;
 }
 
 export default function AddUser({ item, onClose }: AddProps) {
-  const [savedItem, setSavedItem] = useState<UserProps>(item)
+  const [savedItem, setSavedItem] = useState<UserProps>(item);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setSavedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSave = () => {
-    onClose()
-    console.log('Item editado:', savedItem)
-  }
+    onClose();
+    console.log("Item editado:", savedItem);
+  };
 
   const handleGoBack = () => {
-    onClose()
-    console.log('voltei')
-  }
+    onClose();
+    console.log("voltei");
+  };
 
   return (
     <div>
@@ -52,69 +53,48 @@ export default function AddUser({ item, onClose }: AddProps) {
         Prencha todos os campos
       </p>
       <div className="mt-6 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Nome
-          </label>
-          <input
-            name="nome"
-            type="text"
-            placeholder="David Bessa Pontes"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={setSavedItem.razaoSocial}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            E-mail
-          </label>
-          <input
-            name="nome"
-            type="text"
-            placeholder="OrpelNet@Gmail.acom"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={setSavedItem.razaoSocial}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Nome"
+          type="text"
+          name="nome"
+          placeholder="David Bessa Pontes"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="E-mail"
+          type="text"
+          name="email"
+          placeholder="OrpelNet@Gmail.acom"
+          className="w-full"
+          onChange={handleInputChange}
+        />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            CPF
-          </label>
-          <input
-            name="cadastro"
-            type="text"
-            placeholder="000.000.000-00"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={setSavedItem.cadastro}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Celular
-          </label>
-          <input
-            name="alterado"
-            type="text"
-            placeholder="(00) 0 0000-0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Data de nascimento
-          </label>
-          <input
-            name="alterado"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-          />
-        </div>
+        <Input
+          label="CPF"
+          type="text"
+          name="cadastro"
+          placeholder="000.000.000-00"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Celular"
+          type="text"
+          name="alterado"
+          placeholder="(00) 0 0000-0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Data de nascimento"
+          type="text"
+          name="dataNascimento"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
         <div className="flex w-full flex-col gap-2">
           <label htmlFor="" className="font-semibold">
             Perfil
@@ -122,7 +102,7 @@ export default function AddUser({ item, onClose }: AddProps) {
           <Dropdown
             defaultValue="Selecione"
             type="form"
-            options={['Cliente', 'Suporte', 'Administrador']}
+            options={["Cliente", "Suporte", "Administrador"]}
           />
         </div>
       </div>
@@ -134,38 +114,28 @@ export default function AddUser({ item, onClose }: AddProps) {
           <Dropdown
             defaultValue="Login liberado"
             type="form"
-            options={['Login bloqueado', 'Login liberado']}
+            options={["Login bloqueado", "Login liberado"]}
           />
         </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Cadastro
-          </label>
-          <input
-            name="cadastro"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={setSavedItem.cadastro}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <label htmlFor="" className="font-semibold">
-            Alterado
-          </label>
-          <input
-            name="cadastro"
-            type="text"
-            placeholder="00/00/0000"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2 outline-none"
-            // value={setSavedItem.cadastro}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Cadastro"
+          type="text"
+          name="cadastro"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Alterado"
+          type="text"
+          name="alterado"
+          placeholder="00/00/0000"
+          className="w-full"
+          onChange={handleInputChange}
+        />
       </div>
       <ToggleSwitch />
       <ButtonSave handleSave={handleSave} />
     </div>
-  )
+  );
 }
