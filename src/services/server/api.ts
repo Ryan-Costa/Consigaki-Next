@@ -11,6 +11,8 @@ axiosInstance.interceptors.request.use(
 
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
+    } else {
+      // redireciona pra tela de login
     }
 
     return config;

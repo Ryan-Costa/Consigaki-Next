@@ -4,26 +4,20 @@ import { Inter } from "next/font/google";
 import ToggleSwitch from "../ToggleSwitch";
 import { ButtonSave } from "../common/ButtonSave";
 import { Input } from "../common/Input";
+import { IProviders } from "@/interfaces/IProps";
 // import { useForm } from "react-hook-form";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
 
-interface Item {
-  codigo: string;
-  razaoSocial: string;
-  cnpj: string;
-  cadastro: string;
-}
-
-interface EditProps {
-  item: Item;
+interface EditProvidersProps {
+  item: IProviders;
   onClose: () => void;
 }
 
-export default function EditProvider({ item, onClose }: EditProps) {
-  const [editedItem, setEditedItem] = useState<Item>(item);
+export default function EditProvider({ item, onClose }: EditProvidersProps) {
+  const [editedItem, setEditedItem] = useState<IProviders>(item);
   // const { control, handleSubmit } = useForm({
   //   defaultValues: {},
   // });
@@ -67,7 +61,7 @@ export default function EditProvider({ item, onClose }: EditProps) {
           name="razaoSicial"
           type="text"
           className="w-full"
-          value={editedItem.razaoSocial}
+          value={editedItem.name}
           onChange={handleInputChange}
         />
         <Input
@@ -75,7 +69,7 @@ export default function EditProvider({ item, onClose }: EditProps) {
           name="cnpj"
           type="text"
           className="w-full"
-          value={editedItem.cnpj}
+          // value={editedItem.}
           onChange={handleInputChange}
         />
       </div>
@@ -84,14 +78,18 @@ export default function EditProvider({ item, onClose }: EditProps) {
           label="Cadastro"
           name="cadastro"
           type="text"
-          value={editedItem.cadastro}
+          value={new Date(editedItem.createdAt).toLocaleDateString()}
           onChange={handleInputChange}
         />
         <Input
           label="Alterado"
           name="alterado"
           type="text"
-          value={editedItem.cadastro}
+          value={
+            editedItem.updatedAt !== null
+              ? new Date(editedItem.updatedAt).toLocaleDateString()
+              : ""
+          }
           onChange={handleInputChange}
         />
       </div>

@@ -12,12 +12,12 @@ const inter = Inter({
   weight: ["400", "700"],
 });
 
-interface EditProps {
+interface EditProductsProps {
   item: IProducts;
   onClose: () => void;
 }
 
-export default function EditProduct({ item, onClose }: EditProps) {
+export default function EditProduct({ item, onClose }: EditProductsProps) {
   const [editedItem, setEditedItem] = useState<IProducts>(item);
   // const { control, handleSubmit } = useForm({
   //   defaultValues: {},

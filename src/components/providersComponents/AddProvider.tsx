@@ -4,23 +4,19 @@ import { Inter } from "next/font/google";
 import ToggleSwitch from "../ToggleSwitch";
 import { ButtonSave } from "../common/ButtonSave";
 import { Input } from "../common/Input";
+import { IProviders } from "@/interfaces/IProps";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
 
-interface Item {
-  razaoSocial: string;
-  cnpj: string;
-}
-
-interface AddProps {
-  item: Item;
+interface AddProvidersProps {
+  item: IProviders;
   onClose: () => void;
 }
 
-export default function AddProvider({ item, onClose }: AddProps) {
-  const [savedItem, setSavedItem] = useState<Item>(item);
+export default function AddProvider({ item, onClose }: AddProvidersProps) {
+  const [savedItem, setSavedItem] = useState<IProviders>(item);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

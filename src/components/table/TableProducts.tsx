@@ -17,7 +17,7 @@ export default function TableProducts({
   data,
 }: CustomModalProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9;
+  const itemsPerPage = 10;
 
   const filteredData = data!.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())

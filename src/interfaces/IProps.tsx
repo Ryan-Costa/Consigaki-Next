@@ -32,6 +32,32 @@ export interface IAllProducts {
   };
 }
 
+export interface IProviders {
+  id: number;
+  name: string;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface IAllProviders {
+  data: {
+    totalItems: number;
+    providers: IProviders[];
+    totalPages: number;
+    currentPage: number;
+  };
+}
+
+export interface IProducts {
+  id: number;
+  name: string;
+  type: number;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface ILoans {
   agreementId: string;
   userId: string;
