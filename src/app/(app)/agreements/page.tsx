@@ -1,56 +1,69 @@
-'use client'
+"use client";
 
-import TableAgreements from '@/components/table/TableAgreements'
-import EditAgreement from '@/components/agreementsComponents/EditAgreement'
-import AddAgreement from '@/components/agreementsComponents/AddAgreement'
+import TableAgreements from "@/components/table/TableAgreements";
+import EditAgreement from "@/components/agreementsComponents/EditAgreement";
+import AddAgreement from "@/components/agreementsComponents/AddAgreement";
 
-import { SearchInput } from '@/components/SearchInput'
-import { useState } from 'react'
-import { IconPartners } from '../../../../public/icons'
+import { SearchInput } from "@/components/SearchInput";
+import { useEffect, useState } from "react";
+import { IconPartners } from "../../../../public/icons";
 
-import { AgreementsProps } from '@/interfaces/IProps'
+import { IAgreements, IDataAgreements } from "@/interfaces/IProps";
 
-import { Roboto } from 'next/font/google'
-import { Dropdown } from '@/components/Dropdown'
+import { Roboto } from "next/font/google";
+import { Dropdown } from "@/components/Dropdown";
+import api from "@/services/server/api";
 const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default function Agreements() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [isEditing, setIsEditing] = useState(false)
-  const [selectedItem, setSelectedItem] = useState<AgreementsProps | null>(null)
-  const [heAddAgreement, setHeAddAgreement] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<IAgreements | null>(null);
+  const [heAddAgreement, setHeAddAgreement] = useState(false);
+  const [agreements, setAgreements] = useState<IAgreements[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await api.get<IDataAgreements>("/agreements");
+        setAgreements(response.data.data.agreements);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
   const handleSearch = (value: string) => {
-    setSearchTerm(value)
-  }
+    setSearchTerm(value);
+  };
 
-  const handleEdit = (item: AgreementsProps) => {
-    setSelectedItem(item)
-    setIsEditing(true)
-  }
+  const handleEdit = (item: IAgreements) => {
+    setSelectedItem(item);
+    setIsEditing(true);
+  };
 
   const handleCloseEditScreen = () => {
-    setIsEditing(false)
-  }
+    setIsEditing(false);
+  };
 
   const handleAddition = () => {
-    setHeAddAgreement(true)
-  }
+    setHeAddAgreement(true);
+  };
 
   const handleCloseAdditionScreen = () => {
-    setHeAddAgreement(false)
-  }
+    setHeAddAgreement(false);
+  };
 
-  console.log(heAddAgreement)
+  console.log(heAddAgreement);
 
   return (
     <>
       <div
         className={`${roboto.className} h-full w-full rounded-md bg-white px-6 
-        ${heAddAgreement || isEditing ? 'py-9' : 'py-14'}`}
+        ${heAddAgreement || isEditing ? "py-9" : "py-14"}`}
       >
         {heAddAgreement ? (
           <AddAgreement
@@ -74,7 +87,7 @@ export default function Agreements() {
                     <Dropdown
                       defaultValue="Ativo"
                       type="table"
-                      options={['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4']}
+                      options={["Opção 1", "Opção 2", "Opção 3", "Opção 4"]}
                     />
                     <div className="flex items-center justify-center">
                       <SearchInput onSearch={handleSearch} />
@@ -92,7 +105,7 @@ export default function Agreements() {
                 <TableAgreements
                   searchTerm={searchTerm}
                   handleEdit={handleEdit}
-                  type={'agreements'}
+                  data={agreements}
                 />
               </>
             )}
@@ -100,5 +113,5 @@ export default function Agreements() {
         )}
       </div>
     </>
-  )
+  );
 }

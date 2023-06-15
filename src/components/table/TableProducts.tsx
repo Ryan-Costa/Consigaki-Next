@@ -5,7 +5,7 @@ import { IconArrow, IconEdit } from "../../../public/icons";
 import { IProducts } from "@/interfaces/IProps";
 import React from "react";
 
-interface CustomModalProps {
+interface ProductsProps {
   searchTerm: string;
   handleEdit: (item: IProducts) => void;
   data: IProducts[];
@@ -15,7 +15,7 @@ export default function TableProducts({
   searchTerm,
   handleEdit,
   data,
-}: CustomModalProps) {
+}: ProductsProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 

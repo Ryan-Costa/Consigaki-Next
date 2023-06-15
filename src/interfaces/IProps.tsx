@@ -8,12 +8,23 @@ export interface UserProps {
   dateBirth?: string;
 }
 
-export interface AgreementsProps {
-  code: string;
+export interface IAgreements {
+  id: number;
   name: string;
-  register: string;
+  active: boolean;
+  createdAt: string | null;
+  updatedAt: string | null;
 }
 
+export interface IDataAgreements {
+  data: {
+    totalItems: number;
+    agreements: IAgreements[];
+    active: boolean;
+    createdAt: string;
+    updatedAt: string | null;
+  };
+}
 export interface IProducts {
   id: number;
   name: string;
@@ -23,7 +34,7 @@ export interface IProducts {
   updatedAt: string;
 }
 
-export interface IAllProducts {
+export interface IDataProducts {
   data: {
     totalItems: number;
     products: IProducts[];
@@ -40,7 +51,7 @@ export interface IProviders {
   updatedAt: string | null;
 }
 
-export interface IAllProviders {
+export interface IDataProviders {
   data: {
     totalItems: number;
     providers: IProviders[];

@@ -37,7 +37,6 @@ export default function EditProduct({ item, onClose }: EditProductsProps) {
   };
 
   const handleGoBack = () => {
-    // window.location.reload();
     onClose();
     console.log("voltei");
   };

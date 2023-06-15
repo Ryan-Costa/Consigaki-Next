@@ -9,7 +9,7 @@ import { SearchInput } from "@/components/SearchInput";
 import { useEffect, useState } from "react";
 import { IconPartners } from "../../../../public/icons";
 
-import { IAllProducts, IProducts } from "@/interfaces/IProps";
+import { IDataProducts, IProducts } from "@/interfaces/IProps";
 import api from "../../../services/server/api";
 import { Roboto } from "next/font/google";
 import { ButtonAdd } from "@/components/common/ButtonAdd";
@@ -29,7 +29,7 @@ export default function Products() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await api.get<IAllProducts>("/products");
+        const response = await api.get<IDataProducts>("/products");
         setProducts(response.data.data.products);
       } catch (error) {
         console.log(error);

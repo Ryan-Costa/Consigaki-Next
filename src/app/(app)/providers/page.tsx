@@ -11,7 +11,7 @@ import { Dropdown } from "@/components/Dropdown";
 
 import { Roboto } from "next/font/google";
 import { ButtonAdd } from "@/components/common/ButtonAdd";
-import { IAllProviders, IProviders } from "@/interfaces/IProps";
+import { IDataProviders, IProviders } from "@/interfaces/IProps";
 import api from "@/services/server/api";
 const roboto = Roboto({
   subsets: ["latin"],
@@ -28,7 +28,7 @@ export default function Providers() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await api.get<IAllProviders>("/providers");
+        const response = await api.get<IDataProviders>("/providers");
         console.log("Fetch", response);
         setProvider(response.data.data.providers);
       } catch (error) {

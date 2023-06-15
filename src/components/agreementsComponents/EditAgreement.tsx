@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import ToggleSwitch from "../ToggleSwitch";
 
 import { ButtonSave } from "../common/ButtonSave";
-import { AgreementsProps } from "@/interfaces/IProps";
+import { IAgreements, IDataAgreements } from "@/interfaces/IProps";
 import { Input } from "../common/Input";
 import { TableEditParamAgreement } from "../table/agreements/TableEditParamAgreement";
 import { TableEditProductAgreement } from "../table/agreements/TableEditProductAgreement";
@@ -16,12 +16,12 @@ const inter = Inter({
 });
 
 interface EditProps {
-  item: AgreementsProps;
+  item: IAgreements;
   onClose: () => void;
 }
 
 export default function EditAgreement({ item, onClose }: EditProps) {
-  const [editedItem, setEditedItem] = useState<AgreementsProps>(item);
+  const [editedItem, setEditedItem] = useState<IAgreements>(item);
   const [activeSection, setActiveSection] = useState<string>("product");
   const [activeButton, setActiveButton] = useState("product");
 
@@ -103,10 +103,24 @@ export default function EditAgreement({ item, onClose }: EditProps) {
           label="Cadastro"
           name="cadastro"
           type="text"
-          value={editedItem.register}
+          value={
+            editedItem.createdAt !== null
+              ? new Date(editedItem.createdAt).toLocaleDateString()
+              : ""
+          }
           onChange={handleInputChange}
         />
-        <Input label="Alterado" name="alterado" type="text" />
+        <Input
+          label="Alterado"
+          name="alterado"
+          type="text"
+          value={
+            editedItem.updatedAt !== null
+              ? new Date(editedItem.updatedAt).toLocaleDateString()
+              : ""
+          }
+          onChange={handleInputChange}
+        />
       </div>
       <ToggleSwitch />
       <ButtonSave handleSave={handleSave} />
