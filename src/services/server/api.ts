@@ -1,9 +1,24 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { NEXT_PUBLIC_BASE_URL, uri } from "@/constants/environment-variables";
+import { parseCookies } from "nookies";
 
 const axiosInstance = axios.create({
-  baseURL: uri[NEXT_PUBLIC_BASE_URL!],
+  baseURL: process.env.NEXT_PUBLIC_CONSIGAKI_API,
 });
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const { "consigaki.token": token } = parseCookies();
+
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 const api = (axios: AxiosInstance) => {
   return {

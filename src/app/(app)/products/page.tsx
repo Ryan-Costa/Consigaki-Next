@@ -26,21 +26,15 @@ export default function Products() {
   const [heAddProduct, setHeAddProduct] = useState(false);
   const [products, setProducts] = useState<IProducts[]>([]);
 
-  const getProducts = async () => {
-    try {
-      const response = await api.get<IAllProducts>(
-        "http://localhost:3000/products/api"
-      );
-      console.log(response.data.jsonData.products);
-      setProducts(response.data.jsonData.products);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    getProducts();
+    (async () => {
+      try {
+        const response = await api.get<IAllProducts>("/products");
+        setProducts(response.data.data.products);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }, []);
 
   const handleSearch = (value: string) => {
