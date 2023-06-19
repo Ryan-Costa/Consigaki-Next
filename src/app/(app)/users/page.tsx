@@ -1,8 +1,8 @@
 'use client'
 
-import TableUsers from '@/components/table/TableUsers'
-import EditUser from '@/components/usersComponents/EditUser'
-import AddUser from '@/components/usersComponents/AddUser'
+import TableUsers from '@/components/Table/TableUsers'
+import EditUser from '@/components/UsersComponents/EditUser'
+import AddUser from '@/components/UsersComponents/AddUser'
 
 import { SearchInput } from '@/components/SearchInput'
 import { useState } from 'react'
@@ -11,7 +11,7 @@ import { Dropdown } from '@/components/Dropdown'
 import { UserProps } from '@/interfaces/IProps'
 
 import { Roboto } from 'next/font/google'
-import { ButtonAdd } from '@/components/common/ButtonAdd'
+import { ButtonAdd } from '@/components/Common/ButtonAdd'
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],

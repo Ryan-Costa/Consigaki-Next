@@ -1,50 +1,55 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { parseCookies } from "nookies";
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import { destroyCookie, parseCookies } from 'nookies'
+// import { logout } from "@/functions/logout";
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_CONSIGAKI_API,
-});
+})
+
+export const logout = () => {
+  destroyCookie(null, 'consigaki.token')
+}
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const { "consigaki.token": token } = parseCookies();
+    const { 'consigaki.token': token } = parseCookies()
 
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`
     } else {
-      // redireciona pra tela de login
+      logout()
     }
 
-    return config;
+    return config
   },
   (error) => {
-    return Promise.reject(error);
-  }
-);
+    return Promise.reject(error)
+  },
+)
 
 const api = (axios: AxiosInstance) => {
   return {
     get: function <T>(url: string, config: AxiosRequestConfig = {}) {
-      return axios.get<T>(url, config);
+      return axios.get<T>(url, config)
     },
     put: function <T>(
       url: string,
       body: unknown,
-      config: AxiosRequestConfig = {}
+      config: AxiosRequestConfig = {},
     ) {
-      return axios.put<T>(url, body, config);
+      return axios.put<T>(url, body, config)
     },
     post: function <T>(
       url: string,
       body: unknown,
-      config: AxiosRequestConfig = {}
+      config: AxiosRequestConfig = {},
     ) {
-      return axios.post<T>(url, body, config);
+      return axios.post<T>(url, body, config)
     },
     delete: function <T>(url: string, config: AxiosRequestConfig = {}) {
-      return axios.delete<T>(url, config);
+      return axios.delete<T>(url, config)
     },
-  };
-};
+  }
+}
 
-export default api(axiosInstance);
+export default api(axiosInstance)

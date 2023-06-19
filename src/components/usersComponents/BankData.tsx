@@ -1,6 +1,6 @@
 import { IconClose } from '../../../public/icons'
-import { ButtonAdd } from '../common/ButtonAdd'
-import { Input } from '../common/Input'
+import { ButtonAdd } from '../Common/ButtonAdd'
+import { Input } from '../Common/Input'
 
 export default function BankData() {
   return (

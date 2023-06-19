@@ -1,46 +1,46 @@
-"use client";
-import { Input } from "@/components/common/Input";
-import { Dropdown } from "@/components/Dropdown";
-import { useState } from "react";
-import { IconClose } from "../../../../public/icons";
-import { ButtonAdd } from "../../common/ButtonAdd";
-import { ModalProduct } from "../../modal/ModalProduct";
+'use client'
+import { Input } from '@/components/Common/Input'
+import { Dropdown } from '@/components/Dropdown'
+import { useState } from 'react'
+import { IconClose } from '../../../../public/icons'
+import { ButtonAdd } from '../../Common/ButtonAdd'
+import { ModalProduct } from '../../Modal/ModalProduct'
 
 export function TableEditParamAgreement() {
-  const [isOpenModalProduct, setIsOpenModalProduct] = useState(false);
+  const [isOpenModalProduct, setIsOpenModalProduct] = useState(false)
 
   const [agreementsData, setAgreementsData] = useState([
     {
-      id: "Senha Averbação",
-      type: "Texto",
-      subtitle: "Senha Averbação",
-      altType: "String",
-      minSize: "00",
-      maxSize: "06",
+      id: 'Senha Averbação',
+      type: 'Texto',
+      subtitle: 'Senha Averbação',
+      altType: 'String',
+      minSize: '00',
+      maxSize: '06',
     },
     {
-      id: "Número Benefício",
-      type: "Texto",
-      subtitle: "Número Benefício",
-      altType: "Number",
-      minSize: "00",
-      maxSize: "06",
+      id: 'Número Benefício',
+      type: 'Texto',
+      subtitle: 'Número Benefício',
+      altType: 'Number',
+      minSize: '00',
+      maxSize: '06',
     },
-  ]);
+  ])
 
   const handleDelete = (index: any) => {
-    const updateData = [...agreementsData];
-    updateData.splice(index, 1);
-    setAgreementsData(updateData);
-  };
+    const updateData = [...agreementsData]
+    updateData.splice(index, 1)
+    setAgreementsData(updateData)
+  }
 
   const handleOpenModalProduct = () => {
-    setIsOpenModalProduct(true);
-  };
+    setIsOpenModalProduct(true)
+  }
 
   const handleCloseModalProduct = () => {
-    setIsOpenModalProduct(false);
-  };
+    setIsOpenModalProduct(false)
+  }
 
   return (
     <>
@@ -81,9 +81,9 @@ export function TableEditParamAgreement() {
       <div className="mt-3 flex justify-end gap-6">
         <div className="flex w-full flex-col justify-end">
           <Dropdown
-            type={"form"}
-            defaultValue={"Tipo"}
-            options={["String", "Number", "DateTime"]}
+            type={'form'}
+            defaultValue={'Tipo'}
+            options={['String', 'Number', 'DateTime']}
           />
         </div>
         <Input
@@ -146,5 +146,5 @@ export function TableEditParamAgreement() {
         onRequestClose={handleCloseModalProduct}
       />
     </>
-  );
+  )
 }

@@ -1,9 +1,9 @@
 interface ButtonAddProps {
-  name: string;
-  type?: "tableAgreement";
-  handleAddition?: () => void;
-  handleOpenModal?: () => void;
-  className?: string;
+  name: string
+  type?: 'tableAgreement'
+  handleAddition?: () => void
+  handleOpenModal?: () => void
+  className?: string
 }
 
 export function ButtonAdd({
@@ -19,10 +19,10 @@ export function ButtonAdd({
         <button
           className={`${className} rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none`}
           onClick={() => {
-            if (type === "tableAgreement") {
-              handleOpenModal && handleOpenModal();
+            if (type === 'tableAgreement') {
+              handleOpenModal && handleOpenModal()
             } else {
-              handleAddition && handleAddition();
+              handleAddition && handleAddition()
             }
           }}
         >
@@ -30,5 +30,5 @@ export function ButtonAdd({
         </button>
       </div>
     </>
-  );
+  )
 }

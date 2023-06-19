@@ -1,6 +1,6 @@
 'use client'
 
-import { ButtonSave } from '@/components/common/ButtonSave'
+import { ButtonSave } from '@/components/Common/ButtonSave'
 import { Inter, Roboto } from 'next/font/google'
 
 import Link from 'next/link'

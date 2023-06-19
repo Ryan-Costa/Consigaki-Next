@@ -1,10 +1,10 @@
-import { TableEditProductAgreement } from "./TableEditProductAgreement";
-import { TableEditParamAgreement } from "./TableEditParamAgreement";
+import { TableEditProductAgreement } from './TableEditProductAgreement'
+import { TableEditParamAgreement } from './TableEditParamAgreement'
 
 export function Params() {
-  return <TableEditParamAgreement />;
+  return <TableEditParamAgreement />
 }
 
 export function Products() {
-  return <TableEditProductAgreement />;
+  return <TableEditProductAgreement />
 }

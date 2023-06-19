@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import { IconArrowRight } from "../../../public/icons";
-import { Karla } from "next/font/google";
+import { IconArrowRight } from '../../../public/icons'
+import { Karla } from 'next/font/google'
 
 const karla = Karla({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface ModalProps {
-  isOpen: boolean;
-  onRequestClose: () => void;
-  handleDelete: () => void;
+  isOpen: boolean
+  onRequestClose: () => void
+  handleDelete: () => void
 }
 
 export function ModalDelete({
@@ -22,7 +22,7 @@ export function ModalDelete({
   return (
     <div
       className={`${
-        !isOpen && "hidden"
+        !isOpen && 'hidden'
       } fixed left-0 top-0 flex min-h-screen w-full items-center justify-center bg-black bg-opacity-50`}
     >
       <div className="h-[250px] w-[560px] rounded-3xl bg-white px-[105px] py-[40px] pt-[20px] shadow-lg">
@@ -47,8 +47,8 @@ export function ModalDelete({
             <button
               className="text-sm font-bold text-dark-blue"
               onClick={() => {
-                handleDelete();
-                onRequestClose();
+                handleDelete()
+                onRequestClose()
               }}
             >
               Sim, excluir
@@ -57,5 +57,5 @@ export function ModalDelete({
         </div>
       </div>
     </div>
-  );
+  )
 }

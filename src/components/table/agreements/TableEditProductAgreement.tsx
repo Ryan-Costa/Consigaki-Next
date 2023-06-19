@@ -1,36 +1,36 @@
-"use client";
-import { useState } from "react";
-import { IconClose } from "../../../../public/icons";
-import { ButtonAdd } from "../../common/ButtonAdd";
-import { ModalProduct } from "../../modal/ModalProduct";
+'use client'
+import { useState } from 'react'
+import { IconClose } from '../../../../public/icons'
+import { ButtonAdd } from '../../Common/ButtonAdd'
+import { ModalProduct } from '../../Modal/ModalProduct'
 
 export function TableEditProductAgreement() {
-  const [isOpenModalProduct, setIsOpenModalProduct] = useState(false);
+  const [isOpenModalProduct, setIsOpenModalProduct] = useState(false)
 
   const [agreementsData, setAgreementsData] = useState([
     {
-      nome: "Cartão Consignado",
-      banner: "http://aws.s3.imagem.com/teste",
+      nome: 'Cartão Consignado',
+      banner: 'http://aws.s3.imagem.com/teste',
     },
     {
-      nome: "Cartão Consignado",
-      banner: "http://aws.s3.imagem.com/teste",
+      nome: 'Cartão Consignado',
+      banner: 'http://aws.s3.imagem.com/teste',
     },
-  ]);
+  ])
 
   const handleDelete = (index: any) => {
-    const updateData = [...agreementsData];
-    updateData.splice(index, 1);
-    setAgreementsData(updateData);
-  };
+    const updateData = [...agreementsData]
+    updateData.splice(index, 1)
+    setAgreementsData(updateData)
+  }
 
   const handleOpenModalProduct = () => {
-    setIsOpenModalProduct(true);
-  };
+    setIsOpenModalProduct(true)
+  }
 
   const handleCloseModalProduct = () => {
-    setIsOpenModalProduct(false);
-  };
+    setIsOpenModalProduct(false)
+  }
 
   return (
     <>
@@ -77,5 +77,5 @@ export function TableEditProductAgreement() {
         onRequestClose={handleCloseModalProduct}
       />
     </>
-  );
+  )
 }

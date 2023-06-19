@@ -3,8 +3,8 @@ import { IconArrowBack, IconPartners } from '../../../public/icons'
 import { Inter } from 'next/font/google'
 import ToggleSwitch from '../ToggleSwitch'
 import { ILoans } from '@/interfaces/IProps'
-import { ButtonSave } from '../common/ButtonSave'
-import { Input } from '../common/Input'
+import { ButtonSave } from '../Common/ButtonSave'
+import { Input } from '../Common/Input'
 
 const inter = Inter({
   subsets: ['latin'],

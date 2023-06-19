@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { IProviders } from "@/interfaces/IProps";
-import { useState } from "react";
-import { IconArrow, IconEdit } from "../../../public/icons";
+import { IProviders } from '@/interfaces/IProps'
+import { useState } from 'react'
+import { IconArrow, IconEdit } from '../../../public/icons'
 interface ProviderProps {
-  searchTerm: string;
-  handleEdit: (item: IProviders) => void;
-  data: IProviders[];
+  searchTerm: string
+  handleEdit: (item: IProviders) => void
+  data: IProviders[]
 }
 
 export default function TableProviders({
@@ -14,21 +14,21 @@ export default function TableProviders({
   handleEdit,
   data,
 }: ProviderProps) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10
 
   const filteredData = data!.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
 
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+    setCurrentPage(pageNumber)
+  }
 
   return (
     <div>
@@ -72,7 +72,7 @@ export default function TableProviders({
             <div
               key={index}
               className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${
-                index + 1 === currentPage ? "bg-deg1 text-white" : ""
+                index + 1 === currentPage ? 'bg-deg1 text-white' : ''
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
@@ -90,5 +90,5 @@ export default function TableProviders({
         </button>
       </div>
     </div>
-  );
+  )
 }

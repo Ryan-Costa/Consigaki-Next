@@ -1,40 +1,40 @@
-import React, { useState, ChangeEvent } from "react";
-import { IconArrowBack, IconPartners } from "../../../public/icons";
-import { Inter } from "next/font/google";
-import ToggleSwitch from "../ToggleSwitch";
-import { ButtonSave } from "../common/ButtonSave";
-import { Input } from "../common/Input";
-import { IProviders } from "@/interfaces/IProps";
+import React, { useState, ChangeEvent } from 'react'
+import { IconArrowBack, IconPartners } from '../../../public/icons'
+import { Inter } from 'next/font/google'
+import ToggleSwitch from '../ToggleSwitch'
+import { ButtonSave } from '../Common/ButtonSave'
+import { Input } from '../Common/Input'
+import { IProviders } from '@/interfaces/IProps'
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface AddProvidersProps {
-  item: IProviders;
-  onClose: () => void;
+  item: IProviders
+  onClose: () => void
 }
 
 export default function AddProvider({ item, onClose }: AddProvidersProps) {
-  const [savedItem, setSavedItem] = useState<IProviders>(item);
+  const [savedItem, setSavedItem] = useState<IProviders>(item)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setSavedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSave = () => {
-    onClose();
-    console.log("Item editado:", savedItem);
-  };
+    onClose()
+    console.log('Item editado:', savedItem)
+  }
 
   const handleGoBack = () => {
-    onClose();
-    console.log("voltei");
-  };
+    onClose()
+    console.log('voltei')
+  }
 
   return (
     <div>
@@ -92,5 +92,5 @@ export default function AddProvider({ item, onClose }: AddProvidersProps) {
       <ToggleSwitch />
       <ButtonSave handleSave={handleSave} />
     </div>
-  );
+  )
 }

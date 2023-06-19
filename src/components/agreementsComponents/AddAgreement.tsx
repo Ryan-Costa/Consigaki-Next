@@ -1,41 +1,41 @@
-import React, { useState, ChangeEvent } from "react";
-import { IconArrowBack, IconPartners } from "../../../public/icons";
-import { Inter } from "next/font/google";
-import ToggleSwitch from "../ToggleSwitch";
-import { IAgreements } from "@/interfaces/IProps";
-import { Input } from "../common/Input";
-import { ButtonSave } from "../common/ButtonSave";
+import React, { useState, ChangeEvent } from 'react'
+import { IconArrowBack, IconPartners } from '../../../public/icons'
+import { Inter } from 'next/font/google'
+import ToggleSwitch from '../ToggleSwitch'
+import { IAgreements } from '@/interfaces/IProps'
+import { Input } from '../Common/Input'
+import { ButtonSave } from '../Common/ButtonSave'
 
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface AddAgreementsProps {
-  item: IAgreements;
-  onClose: () => void;
+  item: IAgreements
+  onClose: () => void
 }
 
 export default function AddAgreement({ item, onClose }: AddAgreementsProps) {
-  const [savedItem, setSavedItem] = useState<IAgreements>(item);
+  const [savedItem, setSavedItem] = useState<IAgreements>(item)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setSavedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSave = () => {
-    onClose();
-    console.log("Item editado:", savedItem);
-  };
+    onClose()
+    console.log('Item editado:', savedItem)
+  }
 
   const handleGoBack = () => {
-    onClose();
-    console.log("voltei");
-  };
+    onClose()
+    console.log('voltei')
+  }
 
   return (
     <div>
@@ -81,5 +81,5 @@ export default function AddAgreement({ item, onClose }: AddAgreementsProps) {
       <ToggleSwitch />
       <ButtonSave handleSave={handleSave} />
     </div>
-  );
+  )
 }

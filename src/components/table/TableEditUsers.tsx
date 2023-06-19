@@ -1,46 +1,46 @@
-import { useState } from "react";
-import { IconClose, IconEdit } from "../../../public/icons";
-import { ModalDelete } from "../modal/ModalDelete";
-import { ModalEdit } from "../modal/ModalEdit";
+import { useState } from 'react'
+import { IconClose, IconEdit } from '../../../public/icons'
+import { ModalDelete } from '../Modal/ModalDelete'
+import { ModalEdit } from '../Modal/ModalEdit'
 
 export function TableEditUsers() {
-  const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false);
-  const [isOpenModalDeleteUser, setIsOpenModalDeleteUser] = useState(false);
+  const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false)
+  const [isOpenModalDeleteUser, setIsOpenModalDeleteUser] = useState(false)
 
   const [agreementsData, setAgreementsData] = useState([
     {
-      nome: "Empréstimo",
-      banner: "http://aws.s3.imagem.com/teste",
-      ativo: "Sim",
+      nome: 'Empréstimo',
+      banner: 'http://aws.s3.imagem.com/teste',
+      ativo: 'Sim',
     },
     {
-      nome: "Empréstimo",
-      banner: "http://aws.s3.imagem.com/teste",
-      ativo: "Não",
+      nome: 'Empréstimo',
+      banner: 'http://aws.s3.imagem.com/teste',
+      ativo: 'Não',
     },
-  ]);
+  ])
 
   const handleDelete = (index: any) => {
-    const updateData = [...agreementsData];
-    updateData.splice(index, 1);
-    setAgreementsData(updateData);
-  };
+    const updateData = [...agreementsData]
+    updateData.splice(index, 1)
+    setAgreementsData(updateData)
+  }
 
   const handleOpenModalEditUser = () => {
-    setIsOpenModalEditUser(true);
-  };
+    setIsOpenModalEditUser(true)
+  }
 
   const handleCloseModalEditUser = () => {
-    setIsOpenModalEditUser(false);
-  };
+    setIsOpenModalEditUser(false)
+  }
 
   const handleOpenModalDeleteUser = () => {
-    setIsOpenModalDeleteUser(true);
-  };
+    setIsOpenModalDeleteUser(true)
+  }
 
   const handleCloseModalDeleteUser = () => {
-    setIsOpenModalDeleteUser(false);
-  };
+    setIsOpenModalDeleteUser(false)
+  }
 
   return (
     <>
@@ -95,5 +95,5 @@ export function TableEditUsers() {
         </button>
       </div>
     </>
-  );
+  )
 }

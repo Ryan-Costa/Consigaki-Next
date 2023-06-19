@@ -1,8 +1,7 @@
-// import { getStorageItem } from "utils";
+import { parseCookies } from 'nookies'
 
 export const checkUserAuthenticated = () => {
-  // const userToken = getStorageItem(process.env.NEXT_PUBLIC_USER_TOKEN);
-  const userToken = true;
-  // console.log(userToken)
-  return !!userToken;
-};
+  const { 'consigaki.token': token } = parseCookies()
+  // const token = true;
+  return !!token
+}

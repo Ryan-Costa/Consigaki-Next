@@ -1,15 +1,15 @@
 'use client'
 
-import { TableLoans } from '@/components/table/TableLoans'
+import { TableLoans } from '@/components/Table/TableLoans'
 import { Dropdown } from '@/components/Dropdown'
-import AddLoans from '@/components/loansComponents/AddLoans'
-import EditLoans from '@/components/loansComponents/EditLoans'
+import AddLoans from '@/components/LoansComponents/AddLoans'
+import EditLoans from '@/components/LoansComponents/EditLoans'
 import { SearchInput } from '@/components/SearchInput'
 import { ILoans } from '@/interfaces/IProps'
 import { useState } from 'react'
 import { IconPartners } from '../../../../public/icons'
 import { Roboto } from 'next/font/google'
-import { ButtonAdd } from '@/components/common/ButtonAdd'
+import { ButtonAdd } from '@/components/Common/ButtonAdd'
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],

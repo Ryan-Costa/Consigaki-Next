@@ -8,8 +8,8 @@ import { Dropdown } from '../Dropdown'
 import { Inter, Roboto } from 'next/font/google'
 
 import DocumentDownload from '../DocumentDownload'
-import { ButtonSave } from '../common/ButtonSave'
-import { Input } from '../common/Input'
+import { ButtonSave } from '../Common/ButtonSave'
+import { Input } from '../Common/Input'
 const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '700'],

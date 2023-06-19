@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { IAgreements } from "@/interfaces/IProps";
-import { useState } from "react";
-import { IconArrow, IconEdit } from "../../../public/icons";
+import { IAgreements } from '@/interfaces/IProps'
+import { useState } from 'react'
+import { IconArrow, IconEdit } from '../../../public/icons'
 interface AgreementsProps {
-  searchTerm: string;
-  handleEdit: (item: IAgreements) => void;
-  data: IAgreements[];
+  searchTerm: string
+  handleEdit: (item: IAgreements) => void
+  data: IAgreements[]
 }
 
 export default function TableAgreementsUsers({
@@ -14,21 +14,21 @@ export default function TableAgreementsUsers({
   handleEdit,
   data,
 }: AgreementsProps) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10
 
   const filteredData = data!.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
 
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+    setCurrentPage(pageNumber)
+  }
 
   return (
     <div>
@@ -49,7 +49,7 @@ export default function TableAgreementsUsers({
               <td className="p-4 text-left">
                 {item.createdAt !== null
                   ? new Date(item.createdAt).toLocaleDateString()
-                  : ""}
+                  : ''}
               </td>
               <td className="p-4 text-left">
                 <a onClick={() => handleEdit(item)} className="cursor-pointer">
@@ -74,7 +74,7 @@ export default function TableAgreementsUsers({
             <div
               key={index}
               className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${
-                index + 1 === currentPage ? "bg-deg1 text-white" : ""
+                index + 1 === currentPage ? 'bg-deg1 text-white' : ''
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
@@ -92,5 +92,5 @@ export default function TableAgreementsUsers({
         </button>
       </div>
     </div>
-  );
+  )
 }

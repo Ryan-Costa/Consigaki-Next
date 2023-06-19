@@ -1,78 +1,78 @@
-import React, { useState, ChangeEvent } from "react";
-import { IconArrowBack, IconPartners } from "../../../public/icons";
-import { Inter } from "next/font/google";
-import ToggleSwitch from "../ToggleSwitch";
+import React, { useState, ChangeEvent } from 'react'
+import { IconArrowBack, IconPartners } from '../../../public/icons'
+import { Inter } from 'next/font/google'
+import ToggleSwitch from '../ToggleSwitch'
 
-import { ButtonSave } from "../common/ButtonSave";
-import { IAgreements, IDataAgreements } from "@/interfaces/IProps";
-import { Input } from "../common/Input";
-import { TableEditParamAgreement } from "../table/agreements/TableEditParamAgreement";
-import { TableEditProductAgreement } from "../table/agreements/TableEditProductAgreement";
+import { ButtonSave } from '../Common/ButtonSave'
+import { IAgreements } from '@/interfaces/IProps'
+import { Input } from '../Common/Input'
+import { TableEditParamAgreement } from '../Table/Agreements/TableEditParamAgreement'
+import { TableEditProductAgreement } from '../Table/Agreements/TableEditProductAgreement'
 
 // import { useForm } from "react-hook-form";
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 interface EditProps {
-  item: IAgreements;
-  onClose: () => void;
+  item: IAgreements
+  onClose: () => void
 }
 
 export default function EditAgreement({ item, onClose }: EditProps) {
-  const [editedItem, setEditedItem] = useState<IAgreements>(item);
-  const [activeSection, setActiveSection] = useState<string>("product");
-  const [activeButton, setActiveButton] = useState("product");
+  const [editedItem, setEditedItem] = useState<IAgreements>(item)
+  const [activeSection, setActiveSection] = useState<string>('product')
+  const [activeButton, setActiveButton] = useState('product')
 
   // const { control, handleSubmit } = useForm({
   //   defaultValues: {},
   // });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setEditedItem((prevItem) => ({
       ...prevItem,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSave = () => {
-    onClose();
-    console.log("Item editado:", editedItem);
-  };
+    onClose()
+    console.log('Item editado:', editedItem)
+  }
 
   const handleGoBack = () => {
-    onClose();
-    console.log("voltei");
-  };
+    onClose()
+    console.log('voltei')
+  }
 
   const handleAgreementsSection = () => {
-    setActiveSection("product");
-  };
+    setActiveSection('product')
+  }
 
   const handleRequestsSection = () => {
-    setActiveSection("param");
-  };
+    setActiveSection('param')
+  }
 
   const handleButtonClick = (section: any) => {
-    setActiveButton(section);
-  };
+    setActiveButton(section)
+  }
 
   const sectionContent =
-    activeSection === "product" ? (
+    activeSection === 'product' ? (
       <>
         <div className="mt-4">
           <TableEditProductAgreement />
         </div>
       </>
-    ) : activeSection === "param" ? (
+    ) : activeSection === 'param' ? (
       <>
         <div className="mt-4">
           <TableEditParamAgreement />
         </div>
       </>
-    ) : null;
+    ) : null
 
   return (
     <div>
@@ -106,7 +106,7 @@ export default function EditAgreement({ item, onClose }: EditProps) {
           value={
             editedItem.createdAt !== null
               ? new Date(editedItem.createdAt).toLocaleDateString()
-              : ""
+              : ''
           }
           onChange={handleInputChange}
         />
@@ -117,7 +117,7 @@ export default function EditAgreement({ item, onClose }: EditProps) {
           value={
             editedItem.updatedAt !== null
               ? new Date(editedItem.updatedAt).toLocaleDateString()
-              : ""
+              : ''
           }
           onChange={handleInputChange}
         />
@@ -128,31 +128,31 @@ export default function EditAgreement({ item, onClose }: EditProps) {
       <div className="mt-8 flex w-full justify-center gap-11">
         <button
           className={`btn text-xl font-bold ${
-            activeButton === "product" ? "active" : ""
+            activeButton === 'product' ? 'active' : ''
           }`}
           onClick={() => {
-            handleButtonClick("product");
-            handleAgreementsSection();
+            handleButtonClick('product')
+            handleAgreementsSection()
           }}
           style={{
-            position: "relative",
+            position: 'relative',
             borderBottom:
-              activeButton === "product" ? "3px solid black" : "none",
+              activeButton === 'product' ? '3px solid black' : 'none',
           }}
         >
           PRODUTOS
         </button>
         <button
           className={`btn z-0 text-xl font-bold ${
-            activeButton === "param" ? "active" : ""
+            activeButton === 'param' ? 'active' : ''
           }`}
           onClick={() => {
-            handleButtonClick("param");
-            handleRequestsSection();
+            handleButtonClick('param')
+            handleRequestsSection()
           }}
           style={{
-            position: "relative",
-            borderBottom: activeButton === "param" ? "3px solid black" : "none",
+            position: 'relative',
+            borderBottom: activeButton === 'param' ? '3px solid black' : 'none',
           }}
         >
           PARÂMETROS
@@ -160,5 +160,5 @@ export default function EditAgreement({ item, onClose }: EditProps) {
       </div>
       {sectionContent}
     </div>
-  );
+  )
 }

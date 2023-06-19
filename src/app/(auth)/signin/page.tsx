@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { IconePass, IconeUser } from "../../../../public/icons";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useContext, useState } from "react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import ClickHere from "@/components/ClickHere";
-import { AuthContext } from "@/contexts/AuthContext";
+import Link from 'next/link'
+import { IconePass, IconeUser } from '../../../../public/icons'
+import { useForm } from 'react-hook-form'
+import { useContext } from 'react'
+// import { z } from 'zod'
+// import { zodResolver } from '@hookform/resolvers/zod'
+import ClickHere from '@/components/ClickHere'
+import { AuthContext } from '@/contexts/AuthContext'
 
 // const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
 
@@ -29,10 +29,10 @@ import { AuthContext } from "@/contexts/AuthContext";
 
 // type CreateUserFormData = z.infer<typeof createUserFormSchema>;
 
-const defaultValues = {
-  cpf: "",
-  password: "",
-};
+// const defaultValues = {
+//   cpf: "",
+//   password: "",
+// };
 
 export default function SignIn() {
   // const [output, setOutput] = useState("");
@@ -49,11 +49,11 @@ export default function SignIn() {
   //   setOutput(JSON.stringify(data, null, 2));
   // };
 
-  const { register, handleSubmit } = useForm();
-  const { signIn } = useContext(AuthContext);
+  const { register, handleSubmit } = useForm()
+  const { signIn } = useContext(AuthContext)
 
   async function handleSignIn(data: any) {
-    await signIn(data);
+    await signIn(data)
   }
 
   return (
@@ -64,7 +64,7 @@ export default function SignIn() {
       >
         <div className="relative z-0 mb-28 flex flex-col gap-1">
           <input
-            {...register("cpf")}
+            {...register('cpf')}
             type="text"
             maxLength={14}
             className={`
@@ -105,7 +105,7 @@ export default function SignIn() {
 
         <div className="relative z-0 mb-8 flex flex-col gap-1">
           <input
-            {...register("password")}
+            {...register('password')}
             type="password"
             className={`
               peer block w-full appearance-none border-0 border-b-2 
@@ -154,5 +154,5 @@ export default function SignIn() {
       </form>
       {/* <pre>{output}</pre> */}
     </div>
-  );
+  )
 }

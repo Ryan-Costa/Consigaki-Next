@@ -1,62 +1,62 @@
-"use client";
+'use client'
 
-import TableProviders from "@/components/table/TableProviders";
-import AddProvider from "@/components/providersComponents/AddProvider";
-import EditProvider from "@/components/providersComponents/EditProvider";
+import TableProviders from '@/components/Table/TableProviders'
+import AddProvider from '@/components/ProvidersComponents/AddProvider'
+import EditProvider from '@/components/ProvidersComponents/EditProvider'
 
-import { SearchInput } from "@/components/SearchInput";
-import { useEffect, useState } from "react";
-import { IconPartners } from "../../../../public/icons";
-import { Dropdown } from "@/components/Dropdown";
+import { SearchInput } from '@/components/SearchInput'
+import { useEffect, useState } from 'react'
+import { IconPartners } from '../../../../public/icons'
+import { Dropdown } from '@/components/Dropdown'
 
-import { Roboto } from "next/font/google";
-import { ButtonAdd } from "@/components/common/ButtonAdd";
-import { IDataProviders, IProviders } from "@/interfaces/IProps";
-import api from "@/services/server/api";
+import { Roboto } from 'next/font/google'
+import { ButtonAdd } from '@/components/Common/ButtonAdd'
+import { IDataProviders, IProviders } from '@/interfaces/IProps'
+import api from '@/services/server/api'
 const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 export default function Providers() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<IProviders | null>(null);
-  const [heAddProvider, setHeAddProvider] = useState(false);
-  const [providers, setProvider] = useState<IProviders[]>([]);
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isEditing, setIsEditing] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<IProviders | null>(null)
+  const [heAddProvider, setHeAddProvider] = useState(false)
+  const [providers, setProvider] = useState<IProviders[]>([])
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       try {
-        const response = await api.get<IDataProviders>("/providers");
-        console.log("Fetch", response);
-        setProvider(response.data.data.providers);
+        const response = await api.get<IDataProviders>('/providers')
+        console.log('Fetch', response)
+        setProvider(response.data.data.providers)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    })();
-  }, []);
+    })()
+  }, [])
 
   const handleSearch = (value: string) => {
-    setSearchTerm(value);
-  };
+    setSearchTerm(value)
+  }
 
   const handleEdit = (item: IProviders) => {
-    setSelectedItem(item);
-    setIsEditing(true);
-  };
+    setSelectedItem(item)
+    setIsEditing(true)
+  }
 
   const handleCloseEditScreen = () => {
-    setIsEditing(false);
-  };
+    setIsEditing(false)
+  }
 
   const handleAddition = () => {
-    setHeAddProvider(true);
-  };
+    setHeAddProvider(true)
+  }
 
   const handleCloseAdditionScreen = () => {
-    setHeAddProvider(false);
-  };
+    setHeAddProvider(false)
+  }
 
   return (
     <>
@@ -64,7 +64,7 @@ export default function Providers() {
         className={`${
           roboto.className
         } h-full w-full rounded-md bg-white px-6 ${
-          heAddProvider ? "py-9" : "py-14"
+          heAddProvider ? 'py-9' : 'py-14'
         }`}
       >
         {heAddProvider ? (
@@ -89,7 +89,7 @@ export default function Providers() {
                     <Dropdown
                       defaultValue="Ativo"
                       type="table"
-                      options={["Opção 1", "Opção 2", "Opção 3", "Opção 4"]}
+                      options={['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4']}
                     />
                     <div className="flex items-center justify-center">
                       <SearchInput onSearch={handleSearch} />
@@ -111,5 +111,5 @@ export default function Providers() {
         )}
       </div>
     </>
-  );
+  )
 }

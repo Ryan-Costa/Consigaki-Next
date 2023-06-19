@@ -1,6 +1,6 @@
 type ButtonSaveProps = {
-  handleSave: () => void;
-};
+  handleSave: () => void
+}
 
 export function ButtonSave({ handleSave }: ButtonSaveProps) {
   return (
@@ -12,5 +12,5 @@ export function ButtonSave({ handleSave }: ButtonSaveProps) {
         Salvar
       </button>
     </div>
-  );
+  )
 }
