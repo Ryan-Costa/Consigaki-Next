@@ -115,7 +115,7 @@ const Sidebar = () => {
                 <li>
                   <Link
                     href="/reports"
-                    className="flex items-center gap-2  from-greyish-blue to-white px-2 py-1 text-xl font-normal text-word-app hover:bg-gradient-to-r hover:text-white"
+                    className="flex items-center gap-2  px-2 py-1 text-xl font-normal text-word-app hover:bg-slate-200"
                   >
                     {IconInsumo} Relatório-01
                   </Link>
