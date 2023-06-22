@@ -12,24 +12,21 @@ const inter = Inter({
 })
 
 interface AddProductsProps {
-  item: IProducts
   onClose: () => void
 }
 
-export default function AddProduct({ item, onClose }: AddProductsProps) {
-  const [savedItem, setSavedItem] = useState<IProducts>(item)
+export default function AddProduct({ onClose }: AddProductsProps) {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setSavedItem((prevItem) => ({
-      ...prevItem,
-      [name]: value,
-    }))
+    // setSavedItem((prevItem) => ({
+    //   ...prevItem,
+    //   [name]: value,
+    // }))
   }
 
   const handleSave = () => {
     onClose()
-    console.log('Item editado:', savedItem)
   }
 
   const handleGoBack = () => {

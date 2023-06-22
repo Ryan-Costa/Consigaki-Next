@@ -1,5 +1,3 @@
-'use client'
-
 import TableProducts from '@/components/Table/TableProducts'
 import AddProduct from '@/components/ProductsComponents/AddProduct'
 import EditProduct from '@/components/ProductsComponents/EditProduct'
@@ -19,93 +17,36 @@ const roboto = Roboto({
   weight: ['400', '700'],
 })
 
-export default function Products() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [isEditing, setIsEditing] = useState(false)
-  const [selectedItem, setSelectedItem] = useState<IProducts | null>(null)
-  const [heAddProduct, setHeAddProduct] = useState(false)
-  const [products, setProducts] = useState<IProducts[]>([])
+export default async function Products() {
+  const response = await fetch('http://consigaki-stg.eba-wfmmb8xh.sa-east-1.elasticbeanstalk.com/products')
+    .then(response => response.json())
+    .then(json => console.log(json))
+  // const products = await response.json()
+  // console.log(products)
+  // const [products, setProducts] = useState<IProducts[]>([])
 
-  useEffect(() => {
-    ;(async () => {
-      try {
-        const response = await api.get<IDataProducts>('/products')
-        setProducts(response.data.data.products)
-      } catch (error) {
-        console.log(error)
-      }
-    })()
-  }, [])
-
-  const handleSearch = (value: string) => {
-    setSearchTerm(value)
-  }
-
-  const handleEdit = (item: IProducts) => {
-    setSelectedItem(item)
-    setIsEditing(true)
-  }
-
-  const handleCloseEditScreen = () => {
-    setIsEditing(false)
-  }
-
-  const handleAddition = () => {
-    setHeAddProduct(true)
-  }
-
-  const handleCloseAdditionScreen = () => {
-    setHeAddProduct(false)
-  }
+  // useEffect(() => {
+  //   ; (async () => {
+  //     try {
+  //       const response = await api.get<IDataProducts>('/products')
+  //       setProducts(response.data.data.products)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   })()
+  // }, [])
 
   return (
     <>
       <div
-        className={`${
-          roboto.className
-        } h-full w-full rounded-md bg-white px-6 ${
-          heAddProduct ? 'py-9' : 'py-14'
-        }`}
+        className={`${roboto.className} h-full w-full rounded-md bg-white px-6 py-14`}
       >
-        {heAddProduct ? (
-          <AddProduct
-            item={selectedItem!}
-            onClose={handleCloseAdditionScreen}
-          />
-        ) : (
-          <>
-            {isEditing ? (
-              <EditProduct
-                item={selectedItem!}
-                onClose={handleCloseEditScreen}
-              />
-            ) : (
-              <>
-                <div className="flex w-full justify-between">
-                  <h2 className="flex items-center gap-2 text-2xl font-bold">
-                    Produtos {IconPartners}
-                  </h2>
-                  <div className="flex gap-5 ">
-                    <Dropdown
-                      defaultValue="Ativo"
-                      type="table"
-                      options={['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4']}
-                    />
-                    <div className="flex items-center justify-center">
-                      <SearchInput onSearch={handleSearch} />
-                    </div>
-                  </div>
-                </div>
-                <ButtonAdd name="Produto" handleAddition={handleAddition} />
-                <TableProducts
-                  searchTerm={searchTerm}
-                  handleEdit={handleEdit}
-                  data={products}
-                />
-              </>
-            )}
-          </>
-        )}
+        <>
+          <div>Teste</div>
+          {/* <TableProducts
+            data={products}
+          /> */}
+        </>
       </div>
     </>
   )
