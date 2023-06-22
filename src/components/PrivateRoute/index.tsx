@@ -1,34 +1,26 @@
-"use client";
+import { ReactNode } from "react";
 
-import { useRouter } from "next/navigation";
-import { ReactNode, useEffect } from "react";
-
-import { APP_ROUTES } from "@/constants/app-routes";
 import { checkUserAuthenticated } from "@/functions/check-user-authenticated";
+import { AuthCheck } from "../AuthCheck";
 
 type PrivateRouteProps = {
   children: ReactNode;
 };
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
-  const { push } = useRouter();
-
   let isUserAuthenticated = false;
 
   if (typeof window !== "undefined") {
     isUserAuthenticated = checkUserAuthenticated();
   }
 
-  useEffect(() => {
-    if (!isUserAuthenticated) {
-      push(APP_ROUTES.public.login);
-    }
-  }, [isUserAuthenticated, push]);
-
+  
   return (
     <>
+    <AuthCheck isUserAuthenticated={isUserAuthenticated}>
       {!isUserAuthenticated && null}
       {isUserAuthenticated && children}
+    </AuthCheck>
     </>
   );
 };

@@ -1,4 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import { redirect } from 'next/navigation'
+import {cookies} from 'next/headers'
 import { destroyCookie, parseCookies } from 'nookies'
 // import { logout } from "@/functions/logout";
 
@@ -8,19 +10,36 @@ const axiosInstance = axios.create({
 
 export const logout = () => {
   destroyCookie(null, 'consigaki.token')
+  // redirect('/signin')
 }
 
 axiosInstance.interceptors.request.use(
-  (config) => {
-    const { 'consigaki.token': token } = parseCookies()
+  async (config) => {
+    const isServer = typeof window === 'undefined';
+    if (isServer) {
 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    } else {
-      logout()
-    }
+      const { cookies } = (await import('next/headers'))
+          , token = cookies().get('consigaki.token')?.value
 
-    return config
+      if (token) {
+          config.headers['Authorization'] = `Bearer ${token}`
+      } else {
+        console.log('deletando cookie')
+        destroyCookie(null, 'consigaki.token')
+      }
+  }
+  else {
+
+      const token = document.cookie.replace(/(?:(?:^|.*;\s*)consigaki.token\s*=\s*([^;]*).*$)|^.*$/, '$1')
+      
+      if (token) {
+          config.headers['Authorization'] = `Bearer ${token}`
+      } else {
+        logout()
+      }
+  }
+
+  return config
   },
   (error) => {
     return Promise.reject(error)

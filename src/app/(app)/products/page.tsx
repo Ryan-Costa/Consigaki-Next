@@ -17,12 +17,9 @@ const roboto = Roboto({
   weight: ['400', '700'],
 })
 
-export default async function Products() {
-  const response = await fetch('http://consigaki-stg.eba-wfmmb8xh.sa-east-1.elasticbeanstalk.com/products')
-    .then(response => response.json())
-    .then(json => console.log(json))
-  // const products = await response.json()
-  // console.log(products)
+export default async function Products(req: any) {
+  const products = await api.get<IDataProducts>('/products')
+
   // const [products, setProducts] = useState<IProducts[]>([])
 
   // useEffect(() => {
@@ -42,10 +39,9 @@ export default async function Products() {
         className={`${roboto.className} h-full w-full rounded-md bg-white px-6 py-14`}
       >
         <>
-          <div>Teste</div>
-          {/* <TableProducts
-            data={products}
-          /> */}
+          <TableProducts
+            data={products.data.data.products}
+          />
         </>
       </div>
     </>

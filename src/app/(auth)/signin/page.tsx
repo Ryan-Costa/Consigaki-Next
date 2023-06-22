@@ -52,8 +52,9 @@ export default function SignIn() {
   const { register, handleSubmit } = useForm()
   const { signIn } = useContext(AuthContext)
 
-  async function handleSignIn(data: any) {
-    await signIn(data)
+   function handleSignIn(data: any) {
+   
+     signIn(data)
   }
 
   return (

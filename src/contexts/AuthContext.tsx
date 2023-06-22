@@ -47,7 +47,7 @@ export function AuthProvider({ children }: any) {
         cpf,
         password,
       })
-
+      
       const { data, token } = response.data
 
       setCookie(undefined, 'consigaki.token', token, {
