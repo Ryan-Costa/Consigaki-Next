@@ -3,67 +3,66 @@
 import Link from 'next/link'
 import { IconePass, IconeUser } from '../../../../public/icons'
 import { useForm } from 'react-hook-form'
-import { useContext } from 'react'
-// import { z } from 'zod'
-// import { zodResolver } from '@hookform/resolvers/zod'
+import { useContext, useState } from 'react'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import ClickHere from '@/components/ClickHere'
 import { AuthContext } from '@/contexts/AuthContext'
+import { CpfMask } from '@/components/Common/CpfMask'
 
-// const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+const loginUserFormSchema = z.object({
+  cpf: z.string().nonempty('O CPF é obrigatório').min(14, 'O CPF é inválido'),
+  password: z.string().min(6, 'A senha precisa de no mínimo 6 caracteres'),
+})
 
-// const createUserFormSchema = z.object({
-//   cpf: z
-//     .string()
-//     .nonempty("O CPF é obrigatório")
-//     .regex(cpfRegex, "CPF inválido"),
-//   email: z
-//     .string()
-//     .nonempty("O e-mail é obrigatório")
-//     .email("Formato de e-mail inválido")
-//     .toLowerCase()
-//     .refine((email) => {
-//       return email.endsWith("@consigaki.com");
-//     }, "O e-mail precisa ser do Banco Pan"),
-//   password: z.string().min(6, "A senha precisa de no mínimo 6 caracteres"),
-// });
+type LoginUserFormData = z.infer<typeof loginUserFormSchema>
 
-// type CreateUserFormData = z.infer<typeof createUserFormSchema>;
-
-// const defaultValues = {
-//   cpf: "",
-//   password: "",
-// };
+const defaultValues = {
+  cpf: '',
+  password: '',
+}
 
 export default function SignIn() {
-  // const [output, setOutput] = useState("");
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm<CreateUserFormData>({
-  //   resolver: zodResolver(createUserFormSchema),
-  //   defaultValues,
-  // });
-
-  // const createUser: SubmitHandler<typeof defaultValues> = (data) => {
-  //   setOutput(JSON.stringify(data, null, 2));
-  // };
-
-  const { register, handleSubmit } = useForm()
   const { signIn } = useContext(AuthContext)
+  const [cpfMask, setCpfMask] = useState()
 
-   function handleSignIn(data: any) {
-   
-     signIn(data)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginUserFormData>({
+    resolver: zodResolver(loginUserFormSchema),
+    defaultValues,
+  })
+
+  const newUnmaskedCpfData = (data: any) => {
+    const removedCpfMask = data.cpf.replace(/\D/g, '')
+    const newData = {
+      cpf: removedCpfMask,
+      password: data.password,
+    }
+
+    return newData
+  }
+
+  const handleSignIn = (data: any) => {
+    const newData = newUnmaskedCpfData(data)
+    signIn(newData)
+    console.log(newData)
+  }
+
+  const handleChange = (e: any) => {
+    setCpfMask(CpfMask(e.target.value))
+    console.log(cpfMask)
   }
 
   return (
-    <div className="mr-64 flex w-492 flex-col gap-6">
+    <div className="mr-64 flex w-492 flex-col">
       <form
         onSubmit={handleSubmit(handleSignIn)}
         className="flex w-full flex-col"
       >
-        <div className="relative z-0 mb-28 flex flex-col gap-1">
+        <div className="relative z-0 mb-20 flex flex-col gap-1">
           <input
             {...register('cpf')}
             type="text"
@@ -75,10 +74,12 @@ export default function SignIn() {
                 focus:outline-none focus:ring-0
               `}
             placeholder=" "
+            value={cpfMask}
+            onChange={handleChange}
           />
-          {/* {errors.cpf && (
+          {errors.cpf && (
             <span className="text-sm text-red-500">{errors.cpf.message}</span>
-          )} */}
+          )}
           <label
             htmlFor="pass"
             className={`
@@ -116,11 +117,11 @@ export default function SignIn() {
             `}
             placeholder=" "
           />
-          {/* {errors.password && (
+          {errors.password && (
             <span className="text-sm text-red-500">
               {errors.password.message}
             </span>
-          )} */}
+          )}
           <label
             htmlFor="pass"
             className={`
@@ -137,7 +138,7 @@ export default function SignIn() {
         </div>
 
         <ClickHere />
-        <div className="mb-20">
+        <div>
           <Link
             href="/forget-password"
             className="font-karla font-bold text-click-here underline"
@@ -148,12 +149,11 @@ export default function SignIn() {
 
         <button
           type="submit"
-          className="flex justify-center rounded-xl bg-dark-blue px-40 py-5 opacity-80 hover:opacity-100"
+          className="mt-10 flex justify-center rounded-xl bg-dark-blue px-40 py-5 opacity-80 hover:opacity-100"
         >
           Entrar
         </button>
       </form>
-      {/* <pre>{output}</pre> */}
     </div>
   )
 }

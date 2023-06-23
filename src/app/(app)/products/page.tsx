@@ -1,16 +1,8 @@
 import TableProducts from '@/components/Table/TableProducts'
-import AddProduct from '@/components/ProductsComponents/AddProduct'
-import EditProduct from '@/components/ProductsComponents/EditProduct'
 
-import { Dropdown } from '@/components/Dropdown'
-import { SearchInput } from '@/components/SearchInput'
-import { useEffect, useState } from 'react'
-import { IconPartners } from '../../../../public/icons'
-
-import { IDataProducts, IProducts } from '@/interfaces/IProps'
+import { IDataProducts } from '@/interfaces/IProps'
 import api from '../../../services/server/api'
 import { Roboto } from 'next/font/google'
-import { ButtonAdd } from '@/components/Common/ButtonAdd'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -39,9 +31,7 @@ export default async function Products(req: any) {
         className={`${roboto.className} h-full w-full rounded-md bg-white px-6 py-14`}
       >
         <>
-          <TableProducts
-            data={products.data.data.products}
-          />
+          <TableProducts data={products.data.data.products} />
         </>
       </div>
     </>

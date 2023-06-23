@@ -22,13 +22,20 @@ type SignInData = {
   password: string
 }
 
+type SignUpData = {
+  cpf: string
+  email: string
+  password: string
+}
+
 type AuthContextType = {
   isAuthenticated: boolean
   signIn: (data: SignInData) => Promise<void>
+  signUp: (data: SignUpData) => Promise<void>
   data?: Data
 }
 
-type LoginResponseType = {
+type ResponseType = {
   data: Data
   token: string
 }
@@ -43,12 +50,14 @@ export function AuthProvider({ children }: any) {
 
   async function signIn({ cpf, password }: SignInData) {
     try {
-      const response = await api.post<LoginResponseType>('/login', {
+      const response = await api.post<ResponseType>('/login', {
         cpf,
         password,
       })
-      
+
       const { data, token } = response.data
+
+      console.log(data)
 
       setCookie(undefined, 'consigaki.token', token, {
         maxAge: 60 * 60 * 1, // 1 hour
@@ -57,13 +66,25 @@ export function AuthProvider({ children }: any) {
       setData(data)
 
       router.push('/dashboard')
-    } catch (error) {
-      console.log(error)
+    } catch (err) {
+      console.log(err)
     }
   }
 
+  async function signUp({ cpf, email, password }: SignUpData) {
+    // try {
+    //   const response = await api.post<ResponseType>('/createUser', {
+    //     cpf,
+    //     email,
+    //     password,
+    //   })
+
+    // }
+    console.log('SignUp')
+  }
+
   return (
-    <AuthContext.Provider value={{ data, isAuthenticated, signIn }}>
+    <AuthContext.Provider value={{ data, isAuthenticated, signIn, signUp }}>
       {children}
     </AuthContext.Provider>
   )

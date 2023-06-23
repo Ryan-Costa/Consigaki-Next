@@ -13,9 +13,7 @@ interface ProductsProps {
   data: IProducts[]
 }
 
-export default function TableProducts({
-  data,
-}: ProductsProps) {
+export default function TableProducts({ data }: ProductsProps) {
   const [currentPage, setCurrentPage] = useState(1)
   const [heAddProduct, setHeAddProduct] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
@@ -88,7 +86,10 @@ export default function TableProducts({
                     {new Date(item.createdAt).toLocaleDateString()}
                   </td>
                   <td className="p-4 text-left">
-                    <Link href={`/products/${item.id}`} className="cursor-pointer">
+                    <Link
+                      href={`/products/${item.id}`}
+                      className="cursor-pointer"
+                    >
                       {IconEdit}
                     </Link>
                   </td>
@@ -109,8 +110,9 @@ export default function TableProducts({
               .map((_, index) => (
                 <div
                   key={index}
-                  className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${index + 1 === currentPage ? "bg-deg1 text-white" : ""
-                    }`}
+                  className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${
+                    index + 1 === currentPage ? 'bg-deg1 text-white' : ''
+                  }`}
                   onClick={() => handlePageChange(index + 1)}
                 >
                   {index + 1}
