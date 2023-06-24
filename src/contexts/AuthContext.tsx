@@ -17,6 +17,10 @@ type Data = {
   email: string
 }
 
+type ErrorType = {
+  message: string
+}
+
 type SignInData = {
   cpf: string
   password: string
@@ -33,6 +37,7 @@ type AuthContextType = {
   signIn: (data: SignInData) => Promise<void>
   signUp: (data: SignUpData) => Promise<void>
   data?: Data
+  messageError: ErrorType | undefined
 }
 
 type ResponseType = {
@@ -44,6 +49,7 @@ export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthProvider({ children }: any) {
   const [data, setData] = useState<Data>()
+  const [messageError, setMessageError] = useState<ErrorType>()
   const router = useRouter()
 
   const isAuthenticated = !!data
@@ -57,8 +63,6 @@ export function AuthProvider({ children }: any) {
 
       const { data, token } = response.data
 
-      console.log(data)
-
       setCookie(undefined, 'consigaki.token', token, {
         maxAge: 60 * 60 * 1, // 1 hour
       })
@@ -67,7 +71,15 @@ export function AuthProvider({ children }: any) {
 
       router.push('/dashboard')
     } catch (err) {
-      console.log(err)
+      if (err instanceof Error) {
+        const formattedErrorMessage =
+          err.message === 'Request failed with status code 409'
+            ? 'CPF ou senha inválidos'
+            : err.message
+        setMessageError({ message: formattedErrorMessage })
+      } else {
+        console.log('Unexpected error', err)
+      }
     }
   }
 
@@ -84,7 +96,9 @@ export function AuthProvider({ children }: any) {
   }
 
   return (
-    <AuthContext.Provider value={{ data, isAuthenticated, signIn, signUp }}>
+    <AuthContext.Provider
+      value={{ data, isAuthenticated, signIn, signUp, messageError }}
+    >
       {children}
     </AuthContext.Provider>
   )

@@ -23,9 +23,8 @@ const defaultValues = {
 }
 
 export default function SignIn() {
-  const { signIn } = useContext(AuthContext)
+  const { signIn, messageError } = useContext(AuthContext)
   const [cpfMask, setCpfMask] = useState()
-
   const {
     register,
     handleSubmit,
@@ -48,12 +47,10 @@ export default function SignIn() {
   const handleSignIn = (data: any) => {
     const newData = newUnmaskedCpfData(data)
     signIn(newData)
-    console.log(newData)
   }
 
   const handleChange = (e: any) => {
     setCpfMask(CpfMask(e.target.value))
-    console.log(cpfMask)
   }
 
   return (
@@ -121,6 +118,10 @@ export default function SignIn() {
             <span className="text-sm text-red-500">
               {errors.password.message}
             </span>
+          )}
+
+          {messageError && (
+            <span className="text-sm text-red-500">{messageError.message}</span>
           )}
           <label
             htmlFor="pass"
