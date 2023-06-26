@@ -19,6 +19,8 @@ export default function TableProducts({ data }: ProductsProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const itemsPerPage = 10
 
+  console.log(data)
+
   const filteredData = data!.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase()),
   )

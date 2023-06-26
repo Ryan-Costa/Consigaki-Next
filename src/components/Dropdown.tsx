@@ -5,12 +5,16 @@ type DropdownProps = {
   type: 'modal' | 'table' | 'form'
   options: string[]
   defaultValue: string
+  className?: string
+  onSelect?: (value: string) => void
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
   type,
   options,
   defaultValue,
+  className,
+  onSelect,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedValue, setSelectedValue] = useState<string | null>(null)
@@ -21,7 +25,11 @@ export const Dropdown: React.FC<DropdownProps> = ({
 
   const handleSelectItem = (value: string) => {
     setSelectedValue(value)
+    onSelect?.(value)
   }
+
+  console.log(selectedValue)
+
   return (
     <div
       className={`flex ${
@@ -30,7 +38,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
           : type === 'table'
           ? 'h-42 w-60 rounded-20 border-black px-7'
           : type === 'form'
-          ? 'h-[48px] w-full rounded-lg border border-gray-400 px-6 outline-none'
+          ? `h-[48px] rounded-lg border border-gray-400 px-6 outline-none ${className}`
           : null
       } items-center justify-center border`}
     >

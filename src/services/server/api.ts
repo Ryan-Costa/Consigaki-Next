@@ -49,6 +49,7 @@ const api = (axios: AxiosInstance) => {
     get: function <T>(url: string, config: AxiosRequestConfig = {}) {
       return axios.get<T>(url, config)
     },
+
     put: function <T>(
       url: string,
       body: unknown,

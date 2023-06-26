@@ -1,9 +1,13 @@
-"use client"
+'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 
-export default function ToggleSwitch() {
-  const [isOn, setIsOn] = useState(false)
+interface ToggleSwitchProps {
+  isChecked: boolean | undefined
+}
+
+export default function ToggleSwitch({ isChecked }: ToggleSwitchProps) {
+  const [isOn, setIsOn] = useState(isChecked)
 
   const handleToggle = () => {
     setIsOn(!isOn)

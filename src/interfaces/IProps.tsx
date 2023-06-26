@@ -42,7 +42,7 @@ export interface IProductID {
     active?: boolean
     createdAt: string
     updatedAt: string
-  },
+  }
   message?: string
 }
 
@@ -52,7 +52,7 @@ export interface IDataProducts {
     products: IProducts[]
     totalPages: number
     currentPage: number
-  },
+  }
   message: string
 }
 

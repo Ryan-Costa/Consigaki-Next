@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react'
+import { UseFormRegister } from 'react-hook-form'
 
 interface InputProps {
   label: string
@@ -10,21 +11,34 @@ interface InputProps {
   value?: string
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   className?: string
+  register?: UseFormRegister<any>
 }
 
-export function Input(props: InputProps) {
+export function Input({
+  label,
+  name,
+  type,
+  placeholder,
+  disabled,
+  readOnly,
+  onChange,
+  value,
+  register,
+  className,
+}: InputProps) {
   return (
-    <div className={`${props.className} flex flex-col gap-2`}>
-      <label className="font-semibold">{props.label}</label>
+    <div className={`${className} flex flex-col gap-2`}>
+      <label className="font-semibold">{label}</label>
       <input
-        name={props.name}
-        type={props.type}
-        placeholder={props.placeholder}
+        {...(register && register(name))}
+        name={name}
+        type={type}
+        placeholder={placeholder}
         className="h-[48px] w-full rounded-lg border border-gray-400 px-6 outline-none"
-        readOnly={props.readOnly}
-        disabled={props.disabled}
-        value={props.value}
-        onChange={props.onChange}
+        readOnly={readOnly}
+        disabled={disabled}
+        value={value}
+        onChange={onChange}
       />
     </div>
   )

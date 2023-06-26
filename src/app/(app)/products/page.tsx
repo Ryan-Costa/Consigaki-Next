@@ -10,7 +10,19 @@ const roboto = Roboto({
 })
 
 export default async function Products(req: any) {
-  const products = await api.get<IDataProducts>('/products')
+  const params = {
+    name: '',
+    page: 1,
+    size: 10,
+  }
+
+  // const objectToQueryString = (obj: any) => {
+  //   return new URLSearchParams(obj).toString()
+  // }
+  // const paramQueryString = objectToQueryString(params)
+
+  const products = await api.post<any>('/products/get-all', params)
+  console.log(products)
 
   // const [products, setProducts] = useState<IProducts[]>([])
 
