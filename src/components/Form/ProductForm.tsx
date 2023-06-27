@@ -3,7 +3,7 @@
 import { IProductID } from '@/interfaces/IProps'
 import api from '@/services/server/api'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { ButtonSave } from '../Common/ButtonSave'
@@ -13,55 +13,59 @@ import ToggleSwitch from '../ToggleSwitch'
 
 const schemaProductForm = z.object({
   name: z.string(),
-  type: z.number(),
+  type: z.string(),
 })
 
 type ProductsFormProps = z.infer<typeof schemaProductForm>
 
 export default function ProductForm({ data }: { data: IProductID }) {
-  const [dropdownValue, setDropdownValue] = useState<string>()
-  // const { back } = useRouter()
+  const { back } = useRouter()
   const products = data.data
-
-  console.log(products)
-  console.log(dropdownValue)
-  const getTypeLabel = (type: number | undefined): string => {
-    const typeMap: { [key: number]: string } = {
-      0: 'Cartão',
-      1: 'Empréstimo',
-      2: 'Previdência',
-      3: 'Seguro',
-      99: 'Diversos',
-    }
-    return typeMap[type!] || 'Selecione um tipo'
-  }
 
   const { handleSubmit, register } = useForm<ProductsFormProps>({
     resolver: zodResolver(schemaProductForm),
     defaultValues: {
       name: products.name,
-      type: getTypeLabel(products.type),
+      type: String(products.type),
     },
   })
 
+  // const handleFormSubmit = (dataForm: ProductsFormProps) => {
+  //   console.log(dataForm)
+  //   const payload = { ...dataForm, dropdownValue }
+  //   console.log(payload)
+  //   // api
+  //   //   .put<ProductsFormProps>(`/products/${products.id}`, dataForm)
+  //   //   .then((response) => {
+  //   //     console.log(response)
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.log(error)
+  //   //   })
+  // }
+
   const handleFormSubmit = (dataForm: ProductsFormProps) => {
-    const payload = { ...dataForm, dropdownValue }
-    console.log(dropdownValue)
-    console.log(payload)
-    console.log(dataForm)
+    const { name, type } = dataForm
+    const dataFormFormatted = {
+      name,
+      type: Number(type),
+    }
+    console.log(dataFormFormatted)
     api
-      .put<ProductsFormProps>(`/products/${products.id}`, payload)
+      .put<ProductsFormProps>(`/products/${products.id}`, dataFormFormatted)
       .then((response) => {
         console.log(response)
       })
       .catch((error) => {
         console.log(error)
       })
+
+    location.reload()
+    back()
   }
 
-  const handleDropdownSelect = (value: string) => {
+  const handleOnChange = (value: number) => {
     console.log(value)
-    setDropdownValue(value)
   }
 
   return (
@@ -79,16 +83,17 @@ export default function ProductForm({ data }: { data: IProductID }) {
             Tipo
           </label>
           <Dropdown
-            defaultValue={getTypeLabel(products.type)}
+            name="type"
+            register={register}
+            defaultValue={products.type}
+            onSelect={handleOnChange}
             type="form"
-            className="w-full"
-            onSelect={handleDropdownSelect}
             options={[
-              'Cartão',
-              'Empréstimo',
-              'Previdência',
-              'Seguro',
-              'Diversos',
+              { name: 'cartao', displayName: 'Cartão', value: 0 },
+              { name: 'emprestimo', displayName: 'Empréstimo', value: 1 },
+              { name: 'previdencia', displayName: 'Previdência', value: 2 },
+              { name: 'seguro', displayName: 'Seguro', value: 3 },
+              { name: 'diversos', displayName: 'Diversos', value: 99 },
             ]}
           />
         </div>
