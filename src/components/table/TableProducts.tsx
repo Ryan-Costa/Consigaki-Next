@@ -8,7 +8,6 @@ import { SearchInput } from '../SearchInput'
 import { Dropdown } from '../Dropdown'
 import Link from 'next/link'
 import { getProducts } from '@/app/(app)/products/page'
-// import api from '@/services/server/api'
 
 interface ProductsProps {
   productData: IDataProducts
@@ -16,53 +15,40 @@ interface ProductsProps {
 
 export default function TableProducts({ productData }: ProductsProps) {
   const totalPages = productData.data.totalPages
-
-  const itemsPerPage = 10
+  const [currentItems, setCurrentItems] = useState<IProducts[]>([])
   const [products, setProducts] = useState<IProducts[]>(
     productData.data.products,
   )
   const [currentPage, setCurrentPage] = useState(productData.data.currentPage)
   const [searchTerm, setSearchTerm] = useState('')
-
-  const filteredData = products!.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
-  console.log('filtered', filteredData)
-
-  const indexOfLastItem = currentPage * itemsPerPage
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage
-
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
-  // console.log('currentItems', currentItems)
-
-  const handlePageChange = async (pageNumber: number) => {
-    setCurrentPage(pageNumber)
-  }
-
-  console.log('products', products)
+  const itemsPerPage = 10
 
   useEffect(() => {
-    ;(async () => {
+    const fetchData = async () => {
       const productsNextPage = await getProducts(currentPage)
       setProducts(productsNextPage.data.products)
-    })()
+    }
+    fetchData()
   }, [currentPage])
 
-  // console.log('data', data)
-  // console.log('página corrente', data.data.currentPage)
-  // console.log('total items', data.data.totalItems)
-  // console.log('total pages', data.data.totalPages)
-  // console.log('products', data.data.products)
+  useEffect(() => {
+    const filteredData = products.filter((item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    )
+    const indexOfLastItem = Math.min(
+      currentPage * itemsPerPage,
+      filteredData.length,
+    )
+    const indexOfFirstItem = Math.min(
+      indexOfLastItem - itemsPerPage,
+      filteredData.length,
+    )
+    setCurrentItems(filteredData.slice(indexOfFirstItem, indexOfLastItem))
+  }, [searchTerm, products, currentPage])
 
-  // const totalItems = productData.data.totalItems
-
-  // console.log('pageNumber', pageNumber)
-  // const response = await api.post<IDataProducts>('/products/get-all', {
-  //   name: '',
-  //   page: pageNumber,
-  //   size: itemsPerPage,
-  // })
-  console.log('currentPage', currentPage)
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+  }
 
   const handleSearch = (value: string) => {
     setSearchTerm(value)
