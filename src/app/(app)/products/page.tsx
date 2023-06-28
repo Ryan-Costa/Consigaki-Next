@@ -8,15 +8,26 @@ const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
+// const callbackDataFetching = (params: any) => {
+//   console.log('Dados recebidos: ', params)
+// }
 
-export default async function Products(req: any) {
-  const products = await api.post<IDataProducts>('/products/get-all', {
+export const getProducts = async (pageNumber: number) => {
+  const response = await api.post<IDataProducts>('/products/get-all', {
     name: '',
-    page: 1,
+    page: pageNumber,
     size: 10,
   })
 
+  console.log(pageNumber)
+
+  return response.data
+}
+
+export default async function Products() {
+  const products = await getProducts(1)
   console.log(products)
+  console.log(products.data.products)
 
   return (
     <>
@@ -24,7 +35,10 @@ export default async function Products(req: any) {
         className={`${roboto.className} h-full w-full rounded-md bg-white px-6 py-14`}
       >
         <>
-          <TableProducts data={products.data.data.products} />
+          <TableProducts
+            productData={products}
+            // callback={callbackDataFetching}
+          />
         </>
       </div>
     </>

@@ -1,34 +1,68 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IconArrow, IconEdit, IconPartners } from '../../../public/icons'
-import { IProducts } from '@/interfaces/IProps'
+import { IDataProducts, IProducts } from '@/interfaces/IProps'
 import { ButtonAdd } from '../Common/ButtonAdd'
 import { SearchInput } from '../SearchInput'
 import { Dropdown } from '../Dropdown'
 import Link from 'next/link'
+import { getProducts } from '@/app/(app)/products/page'
+// import api from '@/services/server/api'
 
 interface ProductsProps {
-  data: IProducts[]
+  productData: IDataProducts
 }
 
-export default function TableProducts({ data }: ProductsProps) {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [searchTerm, setSearchTerm] = useState('')
-  const itemsPerPage = 10
+export default function TableProducts({ productData }: ProductsProps) {
+  const totalPages = productData.data.totalPages
 
-  const filteredData = data!.filter((item) =>
+  const itemsPerPage = 10
+  const [products, setProducts] = useState<IProducts[]>(
+    productData.data.products,
+  )
+  const [currentPage, setCurrentPage] = useState(productData.data.currentPage)
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const filteredData = products!.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase()),
   )
+  console.log('filtered', filteredData)
 
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
 
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
+  // console.log('currentItems', currentItems)
 
-  const handlePageChange = (pageNumber: number) => {
+  const handlePageChange = async (pageNumber: number) => {
     setCurrentPage(pageNumber)
   }
+
+  console.log('products', products)
+
+  useEffect(() => {
+    ;(async () => {
+      const productsNextPage = await getProducts(currentPage)
+      setProducts(productsNextPage.data.products)
+    })()
+  }, [currentPage])
+
+  // console.log('data', data)
+  // console.log('página corrente', data.data.currentPage)
+  // console.log('total items', data.data.totalItems)
+  // console.log('total pages', data.data.totalPages)
+  // console.log('products', data.data.products)
+
+  // const totalItems = productData.data.totalItems
+
+  // console.log('pageNumber', pageNumber)
+  // const response = await api.post<IDataProducts>('/products/get-all', {
+  //   name: '',
+  //   page: pageNumber,
+  //   size: itemsPerPage,
+  // })
+  console.log('currentPage', currentPage)
 
   const handleSearch = (value: string) => {
     setSearchTerm(value)
@@ -65,8 +99,8 @@ export default function TableProducts({ data }: ProductsProps) {
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((item, index) => (
-            <tr key={index} className="border-y">
+          {currentItems.map((item) => (
+            <tr key={item.id} className="border-y">
               <td className="p-4 text-left">{item.id}</td>
               <td className="p-4 text-left">{item.name}</td>
               <td className="p-4 text-left">{item.type}</td>
@@ -90,7 +124,7 @@ export default function TableProducts({ data }: ProductsProps) {
         >
           {IconArrow}
         </button>
-        {Array(Math.ceil(filteredData.length / itemsPerPage))
+        {Array(totalPages)
           .fill(0)
           .map((_, index) => (
             <div
@@ -106,9 +140,7 @@ export default function TableProducts({ data }: ProductsProps) {
         <button
           className="flex h-8 w-8 rotate-90 items-center justify-center rounded-sm bg-goldenrod"
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={
-            currentPage === Math.ceil(filteredData.length / itemsPerPage)
-          }
+          disabled={currentPage === totalPages}
         >
           {IconArrow}
         </button>
