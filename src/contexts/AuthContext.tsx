@@ -72,6 +72,7 @@ export function AuthProvider({ children }: any) {
       router.push('/dashboard')
     } catch (err) {
       if (err instanceof Error) {
+        console.log('erro', err)
         const formattedErrorMessage =
           err.message === 'Request failed with status code 409'
             ? 'CPF ou senha inválidos'

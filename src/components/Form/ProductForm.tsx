@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { ButtonSave } from '../Common/ButtonSave'
 import { Input } from '../Common/Input'
-import { Dropdown } from '../Dropdown'
+import { DropdownForm } from '../DropdownForm'
 import ToggleSwitch from '../ToggleSwitch'
 
 const schemaProductForm = z.object({
@@ -30,20 +30,6 @@ export default function ProductForm({ data }: { data: IProductID }) {
     },
   })
 
-  // const handleFormSubmit = (dataForm: ProductsFormProps) => {
-  //   console.log(dataForm)
-  //   const payload = { ...dataForm, dropdownValue }
-  //   console.log(payload)
-  //   // api
-  //   //   .put<ProductsFormProps>(`/products/${products.id}`, dataForm)
-  //   //   .then((response) => {
-  //   //     console.log(response)
-  //   //   })
-  //   //   .catch((error) => {
-  //   //     console.log(error)
-  //   //   })
-  // }
-
   const handleFormSubmit = (dataForm: ProductsFormProps) => {
     const { name, type } = dataForm
     const dataFormFormatted = {
@@ -52,7 +38,7 @@ export default function ProductForm({ data }: { data: IProductID }) {
     }
     console.log(dataFormFormatted)
     api
-      .put<ProductsFormProps>(`/products/${products.id}`, dataFormFormatted)
+      .patch<ProductsFormProps>(`/products/${products.id}`, dataFormFormatted)
       .then((response) => {
         console.log(response)
       })
@@ -60,7 +46,6 @@ export default function ProductForm({ data }: { data: IProductID }) {
         console.log(error)
       })
 
-    location.reload()
     back()
   }
 
@@ -82,7 +67,7 @@ export default function ProductForm({ data }: { data: IProductID }) {
           <label htmlFor="" className="font-semibold">
             Tipo
           </label>
-          <Dropdown
+          <DropdownForm
             name="type"
             register={register}
             defaultValue={products.type}

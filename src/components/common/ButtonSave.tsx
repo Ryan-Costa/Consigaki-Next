@@ -1,6 +1,6 @@
 type ButtonSaveProps = {
   handleSave?: () => void
-  type?: "submit"
+  type?: 'submit'
 }
 
 export function ButtonSave({ handleSave, type }: ButtonSaveProps) {

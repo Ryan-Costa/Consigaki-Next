@@ -16,7 +16,7 @@ interface AddProductsProps {
   onClose: () => void
 }
 
-export default function AddProduct({ item, onClose }: AddProductsProps) {
+export default function AddLoans({ item, onClose }: AddProductsProps) {
   const [savedItem, setSavedItem] = useState<ILoans>(item)
 
   const handleInputChange = (

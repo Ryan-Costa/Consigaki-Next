@@ -1,36 +1,29 @@
-import React, { useState, ChangeEvent } from 'react'
+'use client'
+
+import React from 'react'
 import { IconArrowBack, IconPartners } from '../../../public/icons'
 import { Inter } from 'next/font/google'
-import ToggleSwitch from '../ToggleSwitch'
-import { IProducts } from '@/interfaces/IProps'
-import { ButtonSave } from '../Common/ButtonSave'
-import { Input } from '../Common/Input'
+// import { IProducts } from '@/interfaces/IProps'
+import { useRouter } from 'next/navigation'
+import NewProductForm from '../Form/NewProductForm'
 
 const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
 
-interface AddProductsProps {
-  onClose: () => void
-}
-
-export default function AddProduct({ onClose }: AddProductsProps) {
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    // setSavedItem((prevItem) => ({
-    //   ...prevItem,
-    //   [name]: value,
-    // }))
-  }
-
-  const handleSave = () => {
-    onClose()
-  }
+export default function AddProduct() {
+  const { back } = useRouter()
+  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target
+  //   setSavedItem((prevItem) => ({
+  //     ...prevItem,
+  //     [name]: value,
+  //   }))
+  // }
 
   const handleGoBack = () => {
-    onClose()
+    back()
     console.log('voltei')
   }
 
@@ -49,34 +42,7 @@ export default function AddProduct({ onClose }: AddProductsProps) {
       >
         Prencha todos os campos
       </p>
-      <div className="mt-6 flex gap-6">
-        <Input
-          label="Razão Social"
-          type="text"
-          name="razaoSocial"
-          placeholder="---------- -------- -------"
-          className="w-full"
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className="mb-6 mt-6 flex gap-6">
-        <Input
-          label="Cadastro"
-          type="text"
-          name="cadastro"
-          placeholder="00/00/0000"
-          onChange={handleInputChange}
-        />
-        <Input
-          label="Alterado"
-          type="text"
-          name="alterado"
-          placeholder="00/00/0000"
-          onChange={handleInputChange}
-        />
-      </div>
-      <ToggleSwitch />
-      <ButtonSave handleSave={handleSave} />
+      <NewProductForm />
     </div>
   )
 }

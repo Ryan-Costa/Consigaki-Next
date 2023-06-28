@@ -1,6 +1,6 @@
-import { logout } from "@/services/server/api";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { logout } from '@/services/server/api'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function DropdownTopbar() {
   const { push } = useRouter()
@@ -23,5 +23,5 @@ export default function DropdownTopbar() {
       </li>
       <li className="h-4"></li>
     </div>
-  );
+  )
 }

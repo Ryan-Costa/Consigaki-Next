@@ -16,18 +16,7 @@ export default async function Products(req: any) {
     size: 10,
   })
 
-  // const [products, setProducts] = useState<IProducts[]>([])
-
-  // useEffect(() => {
-  //   ; (async () => {
-  //     try {
-  //       const response = await api.get<IDataProducts>('/products')
-  //       setProducts(response.data.data.products)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   })()
-  // }, [])
+  console.log(products)
 
   return (
     <>
