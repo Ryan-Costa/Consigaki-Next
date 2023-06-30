@@ -17,10 +17,15 @@ export default function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === '/signin') {
     return NextResponse.redirect(dashboardURL)
   }
+
+  if (request.nextUrl.pathname === '/') {
+    return NextResponse.redirect('/signin')
+  }
 }
 
 export const config = {
   matcher: [
+    '/',
     '/signin',
     '/agreements/:path*',
     '/dashboard/:path*',

@@ -7,7 +7,7 @@ import { ButtonAdd } from '../Common/ButtonAdd'
 import { SearchInput } from '../SearchInput'
 import { Dropdown } from '../Dropdown'
 import Link from 'next/link'
-import { getProducts } from '@/app/(app)/products/page'
+import { getProducts } from '@/functions/get-products'
 
 interface ProductsProps {
   productData: IDataProducts
@@ -35,14 +35,18 @@ export default function TableProducts({ productData }: ProductsProps) {
     const filteredData = products.filter((item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase()),
     )
+
     const indexOfLastItem = Math.min(
       currentPage * itemsPerPage,
       filteredData.length,
     )
-    const indexOfFirstItem = Math.min(
-      indexOfLastItem - itemsPerPage,
-      filteredData.length,
-    )
+
+    const indexOfFirstItem = Math.max(indexOfLastItem - itemsPerPage, 0)
+
+    console.log('filteredData ==>', filteredData)
+    console.log('indexOfLastItem ==>', indexOfLastItem)
+    console.log('indexOfFirstItem ==>', indexOfFirstItem)
+
     setCurrentItems(filteredData.slice(indexOfFirstItem, indexOfLastItem))
   }, [searchTerm, products, currentPage])
 
@@ -52,6 +56,22 @@ export default function TableProducts({ productData }: ProductsProps) {
 
   const handleSearch = (value: string) => {
     setSearchTerm(value)
+  }
+
+  const productTypeToString = (type: number) => {
+    const productTypeTransformed: Record<number, string> = {
+      0: 'Cartão',
+      1: 'Empréstimo',
+      2: 'Previdência',
+      3: 'Seguro',
+      99: 'Diversos',
+    }
+
+    if (Object.prototype.hasOwnProperty.call(productTypeTransformed, type)) {
+      return productTypeTransformed[type]
+    }
+
+    return productTypeTransformed[type]
   }
 
   return (
@@ -79,7 +99,7 @@ export default function TableProducts({ productData }: ProductsProps) {
           <tr>
             <th className="p-4 text-left">Código</th>
             <th className="p-4 text-left">Razão Social</th>
-            <th className="p-4 text-left">CNPJ</th>
+            <th className="p-4 text-left">Tipo</th>
             <th className="p-4 text-left">Cadastro</th>
             <th className="p-4 text-left">Editar</th>
           </tr>
@@ -87,9 +107,11 @@ export default function TableProducts({ productData }: ProductsProps) {
         <tbody>
           {currentItems.map((item) => (
             <tr key={item.id} className="border-y">
-              <td className="p-4 text-left">{item.id}</td>
+              <td className="p-4 pl-8 text-left">{item.id}</td>
               <td className="p-4 text-left">{item.name}</td>
-              <td className="p-4 text-left">{item.type}</td>
+              <td className="p-4 text-left">
+                {item.type !== undefined && productTypeToString(item.type)}
+              </td>
               <td className="p-4 text-left">
                 {new Date(item.createdAt).toLocaleDateString()}
               </td>
