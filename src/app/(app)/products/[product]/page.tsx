@@ -2,7 +2,6 @@ import React from 'react'
 import api from '@/services/server/api'
 import { IProductID } from '@/interfaces/IProps'
 import ProductForm from '@/components/Form/ProductForm'
-// import { useForm } from "react-hook-form";
 
 export default async function EditProduct({
   params,

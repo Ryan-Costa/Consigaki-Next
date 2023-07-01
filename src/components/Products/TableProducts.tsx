@@ -1,13 +1,14 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { IconArrow, IconEdit, IconPartners } from '../../../public/icons'
+import { IconArrow, IconPartners } from '../../../public/icons'
 import { IDataProducts, IProducts } from '@/interfaces/IProps'
 import { ButtonAdd } from '../Common/ButtonAdd'
 import { SearchInput } from '../SearchInput'
 import { Dropdown } from '../Dropdown'
 import Link from 'next/link'
-import { getProducts } from '@/functions/get-products'
+import { getProducts } from '@/services/getProducts'
+import TBodyProducts from './TBodyProducts'
 
 interface ProductsProps {
   productData: IDataProducts
@@ -58,22 +59,6 @@ export default function TableProducts({ productData }: ProductsProps) {
     setSearchTerm(value)
   }
 
-  const productTypeToString = (type: number) => {
-    const productTypeTransformed: Record<number, string> = {
-      0: 'Cartão',
-      1: 'Empréstimo',
-      2: 'Previdência',
-      3: 'Seguro',
-      99: 'Diversos',
-    }
-
-    if (Object.prototype.hasOwnProperty.call(productTypeTransformed, type)) {
-      return productTypeTransformed[type]
-    }
-
-    return productTypeTransformed[type]
-  }
-
   return (
     <>
       <div className="flex w-full justify-between">
@@ -104,25 +89,7 @@ export default function TableProducts({ productData }: ProductsProps) {
             <th className="p-4 text-left">Editar</th>
           </tr>
         </thead>
-        <tbody>
-          {currentItems.map((item) => (
-            <tr key={item.id} className="border-y">
-              <td className="p-4 pl-8 text-left">{item.id}</td>
-              <td className="p-4 text-left">{item.name}</td>
-              <td className="p-4 text-left">
-                {item.type !== undefined && productTypeToString(item.type)}
-              </td>
-              <td className="p-4 text-left">
-                {new Date(item.createdAt).toLocaleDateString()}
-              </td>
-              <td className="p-4 text-left">
-                <Link href={`/products/${item.id}`} className="cursor-pointer">
-                  {IconEdit}
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        <TBodyProducts data={currentItems} />
       </table>
       <div className="mt-8 flex gap-2">
         <button

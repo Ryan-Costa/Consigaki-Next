@@ -25,11 +25,23 @@ export default function Agreements() {
   const [heAddAgreement, setHeAddAgreement] = useState(false)
   const [agreements, setAgreements] = useState<IAgreements[]>([])
 
+  // type BodyProps = {
+  //   name: string
+  //   page: number
+  //   size: number
+  // }
+  // const body: BodyProps = {
+  //   name: '',
+  //   page: 1,
+  //   size: 10,
+  // }
+
   useEffect(() => {
     ;(async () => {
       try {
         const response = await api.get<IDataAgreements>('/agreements')
         setAgreements(response.data.data.agreements)
+        console.log(response.data.data.agreements)
       } catch (error) {
         console.log(error)
       }
@@ -56,8 +68,6 @@ export default function Agreements() {
   const handleCloseAdditionScreen = () => {
     setHeAddAgreement(false)
   }
-
-  console.log(heAddAgreement)
 
   return (
     <>

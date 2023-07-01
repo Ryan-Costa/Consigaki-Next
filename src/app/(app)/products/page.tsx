@@ -1,5 +1,5 @@
-import TableProducts from '@/components/Table/TableProducts'
-import { getProducts } from '@/functions/get-products'
+import TableProducts from '@/components/Products/TableProducts'
+import { getProducts } from '@/services/getProducts'
 import { Roboto } from 'next/font/google'
 
 const roboto = Roboto({

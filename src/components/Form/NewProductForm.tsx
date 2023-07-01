@@ -1,3 +1,5 @@
+'use client'
+
 import { useRouter } from 'next/navigation'
 import { ButtonSave } from '../Common/ButtonSave'
 import { Input } from '../Common/Input'
@@ -59,7 +61,6 @@ export default function NewProductForm() {
             name="name"
             placeholder="---------- -------- -------"
             className="w-full"
-            // onChange={handleInputChange}
           />
 
           <div className="flex w-1/3 flex-col gap-2">
@@ -93,14 +94,12 @@ export default function NewProductForm() {
             type="text"
             name="cadastro"
             placeholder="00/00/0000"
-            // onChange={handleInputChange}
           />
           <Input
             label="Alterado"
             type="text"
             name="alterado"
             placeholder="00/00/0000"
-            // onChange={handleInputChange}
           />
         </div>
         <ToggleSwitch />

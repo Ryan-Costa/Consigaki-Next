@@ -15,7 +15,7 @@ export function ButtonAdd({
 }: ButtonAddProps) {
   return (
     <>
-      <div className={`${className} mt-8`}>
+      <div className={`${className} mt-8 inline-block rounded-md`}>
         <button
           className={`${className} rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none`}
           onClick={() => {

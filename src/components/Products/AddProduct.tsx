@@ -1,19 +1,21 @@
+import React from 'react'
 import { IconPartners } from '../../../public/icons'
 import { Inter } from 'next/font/google'
-import NewProviderForm from './NewProviderForm'
+import NewProductForm from '../Form/NewProductForm'
 import ButtonGoBack from '../Common/ButtonBack'
+
 const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
 
-export default function AddProvider() {
+export default function AddProduct() {
   return (
     <div>
       <ButtonGoBack />
 
       <div className="mt-12 flex gap-2">
-        <h1 className="text-2xl font-bold">Adicionar Consignatária</h1>
+        <h1 className="text-2xl font-bold">Adicionar Produto</h1>
         {IconPartners}
       </div>
       <p
@@ -21,7 +23,7 @@ export default function AddProvider() {
       >
         Prencha todos os campos
       </p>
-      <NewProviderForm />
+      <NewProductForm />
     </div>
   )
 }

@@ -5,9 +5,6 @@ import { useRouter } from 'next/navigation'
 
 export default function ButtonGoBack() {
   const router = useRouter()
-  // const handleGoBack = () => {
-  //   router.back()
-  // }
 
   return (
     <>

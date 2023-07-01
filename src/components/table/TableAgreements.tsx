@@ -26,6 +26,8 @@ export default function TableAgreementsUsers({
 
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
 
+  console.log(currentItems)
+
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber)
   }

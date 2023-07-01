@@ -57,11 +57,21 @@ export interface IDataProducts {
 }
 
 export interface IProviders {
-  id: number
+  id?: number
   name: string
-  active: boolean
+  active?: boolean
   createdAt: string
   updatedAt: string | null
+}
+export interface IProviderID {
+  data: {
+    id?: number
+    name: string
+    active?: boolean
+    createdAt: string
+    updatedAt: string
+  }
+  message?: string
 }
 
 export interface IDataProviders {
@@ -71,6 +81,7 @@ export interface IDataProviders {
     totalPages: number
     currentPage: number
   }
+  message: string
 }
 export interface ILoans {
   agreementId: string
