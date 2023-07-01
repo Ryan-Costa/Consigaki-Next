@@ -10,5 +10,7 @@ export const getProviders = async (pageNumber: number) => {
 
   const response = await api.post<IDataProviders>('/providers/get-all', body)
 
+  console.log('response')
+
   return response.data
 }

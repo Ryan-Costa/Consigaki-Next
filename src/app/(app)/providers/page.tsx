@@ -1,5 +1,3 @@
-'use client'
-
 import TableProviders from '@/components/Table/TableProviders'
 import { getProviders } from '@/services/getProviders'
 import { Roboto } from 'next/font/google'
