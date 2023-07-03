@@ -8,7 +8,7 @@ import { IconArrow, IconPartners } from '../../../public/icons'
 import { ButtonAdd } from '../Common/ButtonAdd'
 import { Dropdown } from '../Dropdown'
 import { SearchInput } from '../SearchInput'
-import TBodyProviders from './Agreements/TBodyProviders'
+import TBodyProviders from './TBodyProviders'
 interface ProviderProps {
   providerData: IDataProviders
 }

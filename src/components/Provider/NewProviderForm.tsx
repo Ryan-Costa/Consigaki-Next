@@ -29,7 +29,6 @@ export default function NewProviderForm() {
   })
 
   const handleFormSubmit = (dataForm: NewProviderFormProps) => {
-    console.log(dataForm)
     api
       .post<NewProviderFormProps>('/providers/', dataForm)
       .then((response) => {
@@ -41,6 +40,7 @@ export default function NewProviderForm() {
 
     back()
   }
+
   return (
     <>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -49,8 +49,8 @@ export default function NewProviderForm() {
             register={register}
             label="Razão Social"
             type="text"
-            name="razaoSocial"
-            placeholder="---------- -------- -------"
+            name="name"
+            placeholder="Digite o nome"
             className="w-full"
           />
           {errors.name && (
@@ -58,29 +58,23 @@ export default function NewProviderForm() {
               {errors.name.message}
             </span>
           )}
-          <Input
-            register={register}
-            label="CNPJ"
-            name="cnpj"
-            type="text"
-            placeholder="00000000000-000-000"
-            className="w-full"
-          />
         </div>
         <div className="mb-6 mt-6 flex gap-6">
           <Input
-            register={register}
             label="Cadastro"
             name="cadastro"
             type="text"
             placeholder="00/00/0000"
+            disabled
+            classNameInput="cursor-no-drop"
           />
           <Input
-            register={register}
             label="Alterado"
             name="alterado"
             type="text"
             placeholder="00/00/0000"
+            disabled
+            classNameInput="cursor-no-drop"
           />
         </div>
         <ToggleSwitch />

@@ -1,10 +1,15 @@
-import AddProvider from '@/components/ProvidersComponents/AddProvider'
+import AddProvider from '@/components/Provider/AddProvider'
+import { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
+
+export const metadata: Metadata = {
+  title: 'Nova Consignatária',
+}
 
 export default function NewProvider() {
   return (

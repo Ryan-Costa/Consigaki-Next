@@ -1,9 +1,9 @@
 'use client'
 
-import { TableLoans } from '@/components/Table/TableLoans'
+import { TableLoans } from '@/components/Loan/TableLoans'
 import { Dropdown } from '@/components/Dropdown'
-import AddLoans from '@/components/LoansComponents/AddLoans'
-import EditLoans from '@/components/LoansComponents/EditLoans'
+import AddLoans from '@/components/Loan/AddLoans'
+import EditLoans from '@/components/Loan/EditLoans'
 import { SearchInput } from '@/components/SearchInput'
 import { ILoans } from '@/interfaces/IProps'
 import { useState } from 'react'

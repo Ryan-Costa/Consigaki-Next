@@ -1,10 +1,11 @@
 'use client'
+
 import { Input } from '@/components/Common/Input'
 import { Dropdown } from '@/components/Dropdown'
 import { useState } from 'react'
-import { IconClose } from '../../../../public/icons'
-import { ButtonAdd } from '../../Common/ButtonAdd'
-import { ModalProduct } from '../../Modal/ModalProduct'
+import { ButtonAdd } from '../Common/ButtonAdd'
+import { IconClose } from '../../../public/icons'
+import { ModalProduct } from '../Modal/ModalProduct'
 
 export function TableEditParamAgreement() {
   const [isOpenModalProduct, setIsOpenModalProduct] = useState(false)

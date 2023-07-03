@@ -37,6 +37,7 @@ export default function NewProductForm() {
       name,
       type: Number(type),
     }
+
     console.log(dataFormFormatted)
     api
       .post<NewProductFormProps>('/products/', dataFormFormatted)

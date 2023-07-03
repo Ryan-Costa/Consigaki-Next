@@ -1,17 +1,11 @@
-'use client'
-
 import Chart from '@/components/Chart'
-// import { fetchUser } from '@/services/client'
-import { useEffect } from 'react'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+}
 
 export default function Dashboard() {
-  useEffect(() => {
-    ;(async () => {
-      // const response = await fetchUser("45642");
-      // console.log(response);
-    })()
-  }, [])
-
   return (
     <>
       <div className="h-full w-full ">

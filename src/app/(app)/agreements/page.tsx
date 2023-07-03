@@ -1,8 +1,8 @@
 'use client'
 
-import TableAgreements from '@/components/Table/TableAgreements'
-import EditAgreement from '@/components/AgreementsComponents/EditAgreement'
-import AddAgreement from '@/components/AgreementsComponents/AddAgreement'
+import TableAgreements from '@/components/Agreement/TableAgreements'
+import EditAgreement from '@/components/Agreement/EditAgreement'
+import AddAgreement from '@/components/Agreement/AddAgreement'
 
 import { SearchInput } from '@/components/SearchInput'
 import { useEffect, useState } from 'react'
@@ -13,10 +13,15 @@ import { IAgreements, IDataAgreements } from '@/interfaces/IProps'
 import { Roboto } from 'next/font/google'
 import { Dropdown } from '@/components/Dropdown'
 import api from '@/services/server/api'
+import { Metadata } from 'next'
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
+
+export const metadata: Metadata = {
+  title: 'Convênios',
+}
 
 export default function Agreements() {
   const [searchTerm, setSearchTerm] = useState('')

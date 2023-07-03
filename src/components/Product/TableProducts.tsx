@@ -9,6 +9,7 @@ import { Dropdown } from '../Dropdown'
 import Link from 'next/link'
 import { getProducts } from '@/services/getProducts'
 import TBodyProducts from './TBodyProducts'
+// import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 interface ProductsProps {
   productData: IDataProducts

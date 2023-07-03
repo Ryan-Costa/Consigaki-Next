@@ -1,10 +1,15 @@
-import TableProviders from '@/components/Table/TableProviders'
+import TableProviders from '@/components/Provider/TableProviders'
 import { getProviders } from '@/services/getProviders'
+import { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
+
+export const metadata: Metadata = {
+  title: 'Consignatárias',
+}
 
 export default async function Providers() {
   const providers = await getProviders(1)

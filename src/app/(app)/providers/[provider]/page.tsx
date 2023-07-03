@@ -1,6 +1,11 @@
-import ProviderForm from '@/components/Form/ProviderForm'
+import ProviderForm from '@/components/Provider/ProviderForm'
 import { IProviderID } from '@/interfaces/IProps'
 import api from '@/services/server/api'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Consignatárias',
+}
 
 export default async function EditProvider({
   params,

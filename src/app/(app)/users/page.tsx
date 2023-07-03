@@ -1,8 +1,8 @@
 'use client'
 
-import TableUsers from '@/components/Table/TableUsers'
-import EditUser from '@/components/UsersComponents/EditUser'
-import AddUser from '@/components/UsersComponents/AddUser'
+import TableUsers from '@/components/User/TableUsers'
+import EditUser from '@/components/User/EditUser'
+import AddUser from '@/components/User/AddUser'
 
 import { SearchInput } from '@/components/SearchInput'
 import { useState } from 'react'

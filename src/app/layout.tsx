@@ -3,7 +3,15 @@ import '../styles/global/globals.css'
 
 import { Karla } from 'next/font/google'
 import { AuthProvider } from '@/contexts/AuthContext'
+import { Metadata } from 'next'
 const karla = Karla({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Consigaki RL',
+    default: 'Consigaki RL',
+  },
+}
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

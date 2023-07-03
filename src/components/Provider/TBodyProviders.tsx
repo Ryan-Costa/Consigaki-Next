@@ -1,6 +1,6 @@
 import { IProviders } from '@/interfaces/IProps'
 import Link from 'next/link'
-import { IconEdit } from '../../../../public/icons'
+import { IconEdit } from '../../../public/icons'
 
 interface TBodyProps {
   data: IProviders[]

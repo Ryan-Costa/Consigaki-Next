@@ -1,11 +1,16 @@
-import TableProducts from '@/components/Products/TableProducts'
+import TableProducts from '@/components/Product/TableProducts'
 import { getProducts } from '@/services/getProducts'
+import { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
+
+export const metadata: Metadata = {
+  title: 'Produtos',
+}
 
 export default async function Products() {
   const products = await getProducts(1)

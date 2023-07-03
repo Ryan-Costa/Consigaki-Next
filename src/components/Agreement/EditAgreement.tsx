@@ -6,8 +6,8 @@ import ToggleSwitch from '../ToggleSwitch'
 import { ButtonSave } from '../Common/ButtonSave'
 import { IAgreements } from '@/interfaces/IProps'
 import { Input } from '../Common/Input'
-import { TableEditParamAgreement } from '../Table/Agreements/TableEditParamAgreement'
-import { TableEditProductAgreement } from '../Table/Agreements/TableEditProductAgreement'
+import { TableEditParamAgreement } from './TableEditParamAgreement'
+import { TableEditProductAgreement } from './TableEditProductAgreement'
 
 // import { useForm } from "react-hook-form";
 const inter = Inter({

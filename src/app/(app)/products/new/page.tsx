@@ -1,10 +1,15 @@
-import AddProduct from '@/components/Products/AddProduct'
+import AddProduct from '@/components/Product/AddProduct'
+import { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
+
+export const metadata: Metadata = {
+  title: 'Novo Produto',
+}
 
 export default function NewProduct() {
   return (

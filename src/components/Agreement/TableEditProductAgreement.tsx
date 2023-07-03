@@ -1,8 +1,8 @@
 'use client'
 import { useState } from 'react'
-import { IconClose } from '../../../../public/icons'
-import { ButtonAdd } from '../../Common/ButtonAdd'
-import { ModalProduct } from '../../Modal/ModalProduct'
+import { IconClose } from '../../../public/icons'
+import { ButtonAdd } from '../Common/ButtonAdd'
+import { ModalProduct } from '../Modal/ModalProduct'
 
 export function TableEditProductAgreement() {
   const [isOpenModalProduct, setIsOpenModalProduct] = useState(false)

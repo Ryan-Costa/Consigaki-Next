@@ -11,6 +11,7 @@ interface InputProps {
   value?: string
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   className?: string
+  classNameInput?: string
   register?: UseFormRegister<any>
 }
 
@@ -25,6 +26,7 @@ export function Input({
   value,
   register,
   className,
+  classNameInput,
 }: InputProps) {
   return (
     <div className={`${className} flex flex-col gap-2`}>
@@ -34,7 +36,7 @@ export function Input({
         name={name}
         type={type}
         placeholder={placeholder}
-        className="h-[48px] w-full rounded-lg border border-gray-400 px-6 outline-none"
+        className={`${classNameInput} h-[48px] w-full rounded-lg border border-gray-400 px-6 outline-none`}
         readOnly={readOnly}
         disabled={disabled}
         value={value}

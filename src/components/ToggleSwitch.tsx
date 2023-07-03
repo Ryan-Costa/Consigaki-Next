@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 
 interface ToggleSwitchProps {
-  isChecked?: boolean | undefined
+  isChecked?: boolean
 }
 
 export default function ToggleSwitch({ isChecked }: ToggleSwitchProps) {

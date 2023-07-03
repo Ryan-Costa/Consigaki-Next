@@ -1,11 +1,9 @@
 import Image from 'next/image'
-import styles from './styles.module.css'
-
-export default function Validate() {
+export default function Loading() {
   return (
     <>
       <div
-        className={`${styles.container} flex h-screen w-screen flex-col items-center justify-center`}
+        className={`flex h-screen w-screen list-image-[url(/images/fundo.png)] flex-col items-center justify-center bg-cover bg-center`}
       >
         <h1 className="mb-24 text-4xl font-bold text-dark-blue">
           Estamos validando algumas informações suas, um instante

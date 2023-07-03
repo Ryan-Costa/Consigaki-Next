@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconPartners } from '../../../public/icons'
 import { Inter } from 'next/font/google'
-import NewProductForm from '../Form/NewProductForm'
+import NewProductForm from './NewProductForm'
 import ButtonGoBack from '../Common/ButtonBack'
 
 const inter = Inter({

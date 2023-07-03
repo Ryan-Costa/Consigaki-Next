@@ -3,10 +3,18 @@ import { ReactNode } from 'react'
 import Sidebar from '@/components/Sidebar'
 import Topbar from '@/components/TopBar'
 import { Karla } from 'next/font/google'
+import { Metadata } from 'next'
 const karla = Karla({ subsets: ['latin'] })
 
 interface AppLayoutProps {
   children: ReactNode
+}
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Consigaki App',
+    default: 'Consigaki App',
+  },
 }
 
 export default function AppLayout({ children }: AppLayoutProps) {

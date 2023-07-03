@@ -55,18 +55,22 @@ export default function ProviderForm({ data }: { data: IProviderID }) {
       <div className="mb-6 mt-6 flex gap-6">
         <Input
           label="Cadastro"
-          name="cadastro"
+          name="createdAt"
           type="text"
+          disabled
+          classNameInput="cursor-no-drop"
           value={new Date(providers.createdAt).toLocaleDateString()}
         />
         <Input
           label="Alterado"
-          name="alterado"
+          name="updatedAt"
           type="text"
+          disabled
+          classNameInput="cursor-no-drop"
           value={new Date(providers.updatedAt).toLocaleDateString()}
         />
       </div>
-      <ToggleSwitch isChecked={true} />
+      <ToggleSwitch isChecked={providers.active} />
       <ButtonSave type="submit" />
     </form>
   )
