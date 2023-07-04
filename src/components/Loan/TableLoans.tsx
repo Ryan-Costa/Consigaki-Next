@@ -4,7 +4,6 @@ import { IDataLoans, ILoans } from '@/interfaces/IProps'
 import { getLoans } from '@/services/getLoans'
 import { useEffect, useState } from 'react'
 import { IconArrow, IconPartners } from '../../../public/icons'
-import { ButtonAdd } from '../Common/ButtonAdd'
 import { Dropdown } from '../Dropdown'
 import { SearchInput } from '../SearchInput'
 import TBodyLoans from './TBodyLoans'
@@ -67,8 +66,7 @@ export function TableLoans({ loanData }: LoansProps) {
           </div>
         </div>
       </div>
-      <ButtonAdd name="Esteira" />
-      <table className="mt-8 w-full text-left">
+      <table className="mt-28 w-full text-left">
         <thead>
           <tr>
             <th className="p-3 text-left">Código</th>

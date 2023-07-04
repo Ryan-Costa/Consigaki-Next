@@ -8,7 +8,7 @@ interface InputProps {
   placeholder?: string
   readOnly?: boolean
   disabled?: boolean
-  value?: string
+  value?: string | number
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   className?: string
   classNameInput?: string
