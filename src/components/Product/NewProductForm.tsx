@@ -1,14 +1,15 @@
 'use client'
 
+import ToggleSwitch from '../ToggleSwitch'
+import { z } from 'zod'
+import { Input } from '../Common/Input'
+import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { ButtonSave } from '../Common/ButtonSave'
-import { Input } from '../Common/Input'
-import { DropdownForm } from '../DropdownForm'
-import ToggleSwitch from '../ToggleSwitch'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import { zodResolver } from '@hookform/resolvers/zod'
-import api from '@/services/server/api'
+import { DropdownForm } from '../DropdownForm'
+import { useTransition } from 'react'
 
 const schemaNewProductForm = z.object({
   name: z.string().nonempty('Digite o nome do produto').toUpperCase(),
@@ -18,7 +19,9 @@ const schemaNewProductForm = z.object({
 type NewProductFormProps = z.infer<typeof schemaNewProductForm>
 
 export default function NewProductForm() {
+  const [isPending, startTransition] = useTransition()
   const { back } = useRouter()
+  console.log(isPending)
   const {
     handleSubmit,
     register,
@@ -39,14 +42,12 @@ export default function NewProductForm() {
     }
 
     console.log(dataFormFormatted)
-    api
-      .post<NewProductFormProps>('/products/', dataFormFormatted)
-      .then((response) => {
-        console.log(response)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+
+    const productsUrl = '/products'
+
+    startTransition(() =>
+      postRevalidateItems<NewProductFormProps>(productsUrl, dataFormFormatted),
+    )
 
     back()
   }
@@ -60,7 +61,7 @@ export default function NewProductForm() {
             label="Razão Social"
             type="text"
             name="name"
-            placeholder="---------- -------- -------"
+            placeholder="Digite o nome"
             className="w-full"
           />
 

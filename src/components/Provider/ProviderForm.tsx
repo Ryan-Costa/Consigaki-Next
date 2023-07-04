@@ -1,14 +1,16 @@
 'use client'
 
-import { IProviderID } from '@/interfaces/IProps'
-import api from '@/services/server/api'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { ButtonSave } from '../Common/ButtonSave'
 import { Input } from '../Common/Input'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { ButtonSave } from '../Common/ButtonSave'
+import { IProviderID } from '@/interfaces/IProps'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
 import ToggleSwitch from '../ToggleSwitch'
+import api from '@/services/server/api'
+import { useTransition } from 'react'
 
 const schemaProvidersForm = z.object({
   name: z.string(),
@@ -17,7 +19,10 @@ const schemaProvidersForm = z.object({
 type ProvidersFormProps = z.infer<typeof schemaProvidersForm>
 
 export default function ProviderForm({ data }: { data: IProviderID }) {
+  const [isPending, startTransition] = useTransition()
   const { back } = useRouter()
+  console.log(isPending)
+
   const providers = data.data
 
   const { handleSubmit, register } = useForm<ProvidersFormProps>({
@@ -37,6 +42,12 @@ export default function ProviderForm({ data }: { data: IProviderID }) {
       .catch((error) => {
         console.log(error)
       })
+
+    const providersUrl = `/providers/${providers.id}`
+
+    startTransition(() =>
+      patchRevalidateItems<ProvidersFormProps>(providersUrl, dataForm),
+    )
 
     back()
   }

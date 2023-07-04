@@ -1,14 +1,15 @@
 'use client'
 
-import { IProductID } from '@/interfaces/IProps'
-import api from '@/services/server/api'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { ButtonSave } from '../Common/ButtonSave'
 import { Input } from '../Common/Input'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { IProductID } from '@/interfaces/IProps'
+import { ButtonSave } from '../Common/ButtonSave'
+import { patchRevalidateItems } from '../../functions/patchRevalidateItems'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { DropdownForm } from '../DropdownForm'
+import { useTransition } from 'react'
 import ToggleSwitch from '../ToggleSwitch'
 
 const schemaProductForm = z.object({
@@ -19,7 +20,10 @@ const schemaProductForm = z.object({
 type ProductsFormProps = z.infer<typeof schemaProductForm>
 
 export default function ProductForm({ data }: { data: IProductID }) {
+  const [isPending, startTransition] = useTransition()
   const { back } = useRouter()
+  console.log(isPending)
+
   const products = data.data
 
   const { handleSubmit, register } = useForm<ProductsFormProps>({
@@ -36,21 +40,13 @@ export default function ProductForm({ data }: { data: IProductID }) {
       name,
       type: Number(type),
     }
-    console.log(dataFormFormatted)
-    api
-      .patch<ProductsFormProps>(`/products/${products.id}`, dataFormFormatted)
-      .then((response) => {
-        console.log(response)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
 
+    const productsUrl = `/products/${products.id}`
+
+    startTransition(() =>
+      patchRevalidateItems<ProductsFormProps>(productsUrl, dataFormFormatted),
+    )
     back()
-  }
-
-  const handleOnChange = (value: number) => {
-    console.log(value)
   }
 
   return (
@@ -71,8 +67,6 @@ export default function ProductForm({ data }: { data: IProductID }) {
             name="type"
             register={register}
             defaultValue={products.type}
-            onSelect={handleOnChange}
-            type="form"
             options={[
               { name: 'cartao', displayName: 'Cartão', value: 0 },
               { name: 'emprestimo', displayName: 'Empréstimo', value: 1 },

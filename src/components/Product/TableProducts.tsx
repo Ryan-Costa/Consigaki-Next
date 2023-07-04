@@ -9,7 +9,6 @@ import { Dropdown } from '../Dropdown'
 import Link from 'next/link'
 import { getProducts } from '@/services/getProducts'
 import TBodyProducts from './TBodyProducts'
-// import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 interface ProductsProps {
   productData: IDataProducts
@@ -34,7 +33,7 @@ export default function TableProducts({ productData }: ProductsProps) {
   }, [currentPage])
 
   useEffect(() => {
-    const filteredData = products.filter((item) =>
+    const filteredData = products?.filter((item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase()),
     )
 
@@ -44,10 +43,6 @@ export default function TableProducts({ productData }: ProductsProps) {
     )
 
     const indexOfFirstItem = Math.max(indexOfLastItem - itemsPerPage, 0)
-
-    console.log('filteredData ==>', filteredData)
-    console.log('indexOfLastItem ==>', indexOfLastItem)
-    console.log('indexOfFirstItem ==>', indexOfFirstItem)
 
     setCurrentItems(filteredData.slice(indexOfFirstItem, indexOfLastItem))
   }, [searchTerm, products, currentPage])

@@ -1,190 +1,73 @@
 'use client'
 
-import { useState } from 'react'
-import { IconArrow, IconEdit } from '../../../public/icons'
-import { ILoans } from '@/interfaces/IProps'
+import { IDataLoans, ILoans } from '@/interfaces/IProps'
+import { getLoans } from '@/services/getLoans'
+import { useEffect, useState } from 'react'
+import { IconArrow, IconPartners } from '../../../public/icons'
+import { ButtonAdd } from '../Common/ButtonAdd'
+import { Dropdown } from '../Dropdown'
+import { SearchInput } from '../SearchInput'
+import TBodyLoans from './TBodyLoans'
 
-interface TableLoansProps {
-  searchTerm: string
-  handleEdit: (item: ILoans) => void
+interface LoansProps {
+  loanData: IDataLoans
 }
 
-export function TableLoans({ searchTerm, handleEdit }: TableLoansProps) {
-  const [currentPage, setCurrentPage] = useState(1)
+export function TableLoans({ loanData }: LoansProps) {
+  const totalPages = loanData.data.totalPages
+  const [currentItems, setCurrentItems] = useState<ILoans[]>([])
+  const [loans, setLoans] = useState<ILoans[]>(loanData.data.loans)
+  const [currentPage, setCurrentPage] = useState(loanData.data.currentPage)
+  const [searchTerm, setSearchTerm] = useState('')
   const itemsPerPage = 10
 
-  const tableData = [
-    {
-      agreementId: '0001',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0002',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0003',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0004',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0005',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0006',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0007',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0008',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0009',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0010',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0011',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0012',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0013',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-    {
-      agreementId: '0014',
-      userId: 'David Pontes',
-      cpf: '61828311383',
-      registration: '25489-6',
-      productId: 'Gov SP',
-      providerId: 'CapitalConsig',
-      amouunt: 'R$ 5.000,00',
-      installment: 'R$ 450,00',
-      fee: 68,
-    },
-  ]
+  useEffect(() => {
+    const fetchData = async () => {
+      const loansNextPage = await getLoans(currentPage)
+      setLoans(loansNextPage.data.loans)
+    }
+    fetchData()
+  }, [currentPage])
 
-  const filteredData = tableData!.filter((item) =>
-    item.userId.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+  useEffect(() => {
+    const filteredData = loans?.filter((item) =>
+      item.user.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    )
 
-  const indexOfLastItem = currentPage * itemsPerPage
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+    const indexOfLastItem = Math.min(
+      currentPage * itemsPerPage,
+      filteredData.length,
+    )
 
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem)
+    const indexOfFirstItem = Math.max(indexOfLastItem - itemsPerPage, 0)
+
+    setCurrentItems(filteredData.slice(indexOfFirstItem, indexOfLastItem))
+  }, [searchTerm, loans, currentPage])
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber)
   }
 
+  const handleSearch = (value: string) => setSearchTerm(value)
+
   return (
     <div>
+      <div className="flex w-full justify-between">
+        <h2 className="flex items-center gap-2 text-2xl font-bold">
+          Esteira {IconPartners}
+        </h2>
+        <div className="flex gap-5 ">
+          <Dropdown
+            defaultValue="Ativo"
+            type="table"
+            options={['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4']}
+          />
+          <div className="flex items-center justify-center">
+            <SearchInput onSearch={handleSearch} />
+          </div>
+        </div>
+      </div>
+      <ButtonAdd name="Esteira" />
       <table className="mt-8 w-full text-left">
         <thead>
           <tr>
@@ -200,26 +83,7 @@ export function TableLoans({ searchTerm, handleEdit }: TableLoansProps) {
             <th className="p-3 text-left">Editar</th>
           </tr>
         </thead>
-        <tbody>
-          {currentItems.map((item, index) => (
-            <tr key={index} className="border-y">
-              <td className="p-3 text-left">{item.agreementId}</td>
-              <td className="p-3 text-left">{item.userId}</td>
-              <td className="p-3 text-left">{item.cpf}</td>
-              <td className="p-3 text-left">{item.registration}</td>
-              <td className="p-3 text-left">{item.productId}</td>
-              <td className="p-3 text-left">{item.providerId}</td>
-              <td className="p-3 text-left">{item.amouunt}</td>
-              <td className="p-3 text-left">{item.installment}</td>
-              <td className="p-3 text-left">{item.fee}X</td>
-              <td className="p-3 text-left">
-                <a onClick={() => handleEdit(item)} className="cursor-pointer">
-                  {IconEdit}
-                </a>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        <TBodyLoans data={currentItems} />
       </table>
       <div className="mt-8 flex gap-2">
         <button
@@ -229,7 +93,7 @@ export function TableLoans({ searchTerm, handleEdit }: TableLoansProps) {
         >
           {IconArrow}
         </button>
-        {Array(Math.ceil(filteredData.length / itemsPerPage))
+        {Array(totalPages)
           .fill(0)
           .map((_, index) => (
             <div
@@ -245,9 +109,7 @@ export function TableLoans({ searchTerm, handleEdit }: TableLoansProps) {
         <button
           className="flex h-8 w-8 rotate-90 items-center justify-center rounded-sm bg-goldenrod"
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={
-            currentPage === Math.ceil(filteredData.length / itemsPerPage)
-          }
+          disabled={currentPage === totalPages}
         >
           {IconArrow}
         </button>

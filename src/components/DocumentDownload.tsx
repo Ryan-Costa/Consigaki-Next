@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react'
 import { IconUpload } from '../../public/icons'
 import { Inter } from 'next/font/google'
@@ -8,14 +10,13 @@ const inter = Inter({
   weight: ['400', '700'],
 })
 
-const DocumentDownload: React.FC = () => {
+const DocumentDownload = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null
     setSelectedImage(file)
-
     if (file) {
       const reader = new FileReader()
       reader.onloadend = () => {
