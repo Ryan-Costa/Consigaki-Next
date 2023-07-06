@@ -14,3 +14,13 @@ export default async function EditProduct({
 
   return <ProductForm data={productsById} />
 }
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { product: string }
+}) {
+  return {
+    title: `Editar Produto ${params.product}`,
+  }
+}

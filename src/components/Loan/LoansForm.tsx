@@ -4,7 +4,7 @@ import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
 import { ILoanID } from '@/interfaces/IProps'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { useTransition } from 'react'
+import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { ButtonSave } from '../Common/ButtonSave'
@@ -21,6 +21,7 @@ const schamaLoansForm = z.object({
 type LoansFormProps = z.infer<typeof schamaLoansForm>
 
 export default function LoansForm({ data }: { data: ILoanID }) {
+  const [obsPendencies, setObsPendencies] = useState(true)
   const [isPending, startTransition] = useTransition()
   console.log(isPending)
   const { back } = useRouter()
@@ -33,6 +34,11 @@ export default function LoansForm({ data }: { data: ILoanID }) {
       status: loans.status,
     },
   })
+
+  const statusChange = (value: string) => {
+    console.log('valor do status:', +value)
+    value === '2' ? setObsPendencies(false) : setObsPendencies(true)
+  }
 
   const handleFormSubmit = (dataForm: LoansFormProps) => {
     const loansUrl = `/loans/${loans.id}`
@@ -251,12 +257,13 @@ export default function LoansForm({ data }: { data: ILoanID }) {
         />
         <div className="flex w-full flex-col gap-2">
           <label htmlFor="" className="font-semibold">
-            Tipo
+            Status
           </label>
           <DropdownForm
             name="Status"
             register={register}
             defaultValue={loans.status}
+            valueSelected={statusChange}
             options={[
               { name: 'solicitado', displayName: 'Solicitado', value: 0 },
               { name: 'crivo', displayName: 'Crivo', value: 1 },
@@ -277,6 +284,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           <textarea
             name="observacaoPendencias"
             className="w-full rounded-lg border border-gray-400 px-6 py-2"
+            disabled={obsPendencies}
           />
         </div>
       </div>

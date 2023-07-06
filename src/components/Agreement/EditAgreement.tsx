@@ -103,22 +103,12 @@ export default function EditAgreement({ item, onClose }: EditProps) {
           label="Cadastro"
           name="cadastro"
           type="text"
-          value={
-            editedItem.createdAt !== null
-              ? new Date(editedItem.createdAt).toLocaleDateString()
-              : ''
-          }
           onChange={handleInputChange}
         />
         <Input
           label="Alterado"
           name="alterado"
           type="text"
-          value={
-            editedItem.updatedAt !== null
-              ? new Date(editedItem.updatedAt).toLocaleDateString()
-              : ''
-          }
           onChange={handleInputChange}
         />
       </div>

@@ -16,3 +16,13 @@ export default async function EditProvider({
   const providerById = response.data
   return <ProviderForm data={providerById} />
 }
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { provider: string }
+}) {
+  return {
+    title: `Editar Consignatária ${params.provider}`,
+  }
+}

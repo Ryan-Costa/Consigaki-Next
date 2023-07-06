@@ -2,6 +2,7 @@ import ButtonGoBack from '@/components/Common/ButtonBack'
 import { Roboto, Inter } from 'next/font/google'
 import { IconPartners } from '../../../../../public/icons'
 import { ReactNode } from 'react'
+import { Metadata } from 'next'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -12,6 +13,10 @@ const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
+
+export const metadata: Metadata = {
+  title: 'Nova Consignatária',
+}
 
 export default function NewProviderLayout({
   children,

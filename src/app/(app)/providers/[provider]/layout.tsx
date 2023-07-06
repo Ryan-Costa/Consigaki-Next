@@ -10,8 +10,10 @@ const roboto = Roboto({
 
 export default function EditProviderLayout({
   children,
+  params,
 }: {
   children: ReactNode
+  params: { provider: string }
 }) {
   return (
     <div
@@ -19,7 +21,9 @@ export default function EditProviderLayout({
     >
       <ButtonGoBack />
       <div className="mt-12 flex gap-2">
-        <h1 className="text-2xl font-bold">Editar Consignatária</h1>
+        <h1 className="text-2xl font-bold">
+          Editar Consignatária {params.provider}
+        </h1>
         {IconPartners}
       </div>
       {children}

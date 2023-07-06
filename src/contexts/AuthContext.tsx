@@ -4,46 +4,14 @@ import { createContext, useState } from 'react'
 import { setCookie } from 'nookies'
 import api from '@/services/server/api'
 import { useRouter } from 'next/navigation'
-
-type Data = {
-  id: number
-  name: string
-  codeToken: string
-  temp: boolean
-  active: boolean
-  role: number
-  blocked: boolean
-  userToken: string
-  email: string
-}
-
-type ErrorType = {
-  message: string
-}
-
-type SignInData = {
-  cpf: string
-  password: string
-}
-
-type SignUpData = {
-  cpf: string
-  email: string
-  password: string
-}
-
-type AuthContextType = {
-  isAuthenticated: boolean
-  signIn: (data: SignInData) => Promise<void>
-  signUp: (data: SignUpData) => Promise<void>
-  data?: Data
-  messageError: ErrorType | undefined
-}
-
-type ResponseType = {
-  data: Data
-  token: string
-}
+import {
+  AuthContextType,
+  Data,
+  ErrorType,
+  SignInData,
+  SignUpData,
+  TokenType,
+} from '@/interfaces/TokensProps'
 
 export const AuthContext = createContext({} as AuthContextType)
 
@@ -56,7 +24,7 @@ export function AuthProvider({ children }: any) {
 
   async function signIn({ cpf, password }: SignInData) {
     try {
-      const response = await api.post<ResponseType>('/login', {
+      const response = await api.post<TokenType>('/login', {
         cpf,
         password,
       })

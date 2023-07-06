@@ -73,8 +73,6 @@ export default function NewProductForm() {
               name="type"
               register={register}
               defaultValue="Selecione o tipo do produto"
-              // onSelect={handleOnChange}
-              type="form"
               options={[
                 { name: 'cartao', displayName: 'Cartão', value: 0 },
                 { name: 'emprestimo', displayName: 'Empréstimo', value: 1 },

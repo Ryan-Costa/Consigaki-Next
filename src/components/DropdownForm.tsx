@@ -2,28 +2,31 @@ import React, { useState } from 'react'
 import { UseFormRegister } from 'react-hook-form'
 // import { IconArrow } from '../../public/icons'
 
-type DropdownProps = {
+interface DropdownProps {
   name: string
   options: { name: string; displayName: string; value: number }[]
   defaultValue?: number | string | boolean | undefined
   className?: string
   register?: UseFormRegister<any>
+  valueSelected?: (value: string) => void
 }
 
-export const DropdownForm: React.FC<DropdownProps> = ({
+export function DropdownForm({
   name,
   options,
   defaultValue,
   className,
   register,
-}) => {
+  valueSelected,
+}: DropdownProps) {
   const [selectedValue, setSelectedValue] = useState<
     number | string | boolean | undefined
   >(defaultValue)
 
   const handleSelectItem = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log('selectedValue | ', selectedValue)
-    console.log('event | ', +event.target.value)
+    if (valueSelected) {
+      valueSelected(event.target.value)
+    }
     setSelectedValue(+event.target.value)
   }
 
