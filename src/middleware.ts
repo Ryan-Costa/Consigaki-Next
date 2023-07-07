@@ -10,7 +10,6 @@ export default function middleware(request: NextRequest) {
     if (request.nextUrl.pathname === '/signin') {
       return NextResponse.next()
     }
-
     return NextResponse.redirect(signInURL)
   }
 

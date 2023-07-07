@@ -1,7 +1,9 @@
 import TableProducts from '@/components/Product/TableProducts'
+import Loading from '@/components/UI/loading'
 import { getProducts } from '@/services/getProducts'
 import { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
+import { Suspense } from 'react'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -25,7 +27,10 @@ export default async function Products() {
         className={`${roboto.className} h-full w-full rounded-md bg-white px-6 py-14`}
       >
         <>
-          <TableProducts productData={products} />
+          <Suspense fallback={<Loading />}>
+            <TableProducts productData={products} />
+          </Suspense>
+          {/* <Loading /> */}
         </>
       </div>
     </>

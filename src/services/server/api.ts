@@ -1,15 +1,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { destroyCookie } from 'nookies'
-// import { logout } from "@/functions/logout";
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_CONSIGAKI_API,
 })
-
-export const logout = () => {
-  destroyCookie(null, 'consigaki.token')
-  // redirect('/signin')
-}
 
 axiosInstance.interceptors.request.use(
   async (config) => {
@@ -32,8 +26,6 @@ axiosInstance.interceptors.request.use(
 
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
-      } else {
-        logout()
       }
     }
 

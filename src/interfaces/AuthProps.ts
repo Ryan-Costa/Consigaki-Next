@@ -31,6 +31,7 @@ export type AuthContextType = {
   signUp: (data: SignUpData) => Promise<void>
   data?: Data
   messageError: ErrorType | undefined
+  isPending: boolean
 }
 
 export type TokenType = {

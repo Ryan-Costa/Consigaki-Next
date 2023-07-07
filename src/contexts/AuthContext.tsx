@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useState } from 'react'
+import { createContext, useState, useTransition } from 'react'
 import { setCookie } from 'nookies'
 import api from '@/services/server/api'
 import { useRouter } from 'next/navigation'
@@ -11,11 +11,12 @@ import {
   SignInData,
   SignUpData,
   TokenType,
-} from '@/interfaces/TokensProps'
+} from '@/interfaces/AuthProps'
 
 export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthProvider({ children }: any) {
+  const [isPending, startTransition] = useTransition()
   const [data, setData] = useState<Data>()
   const [messageError, setMessageError] = useState<ErrorType>()
   const router = useRouter()
@@ -24,20 +25,22 @@ export function AuthProvider({ children }: any) {
 
   async function signIn({ cpf, password }: SignInData) {
     try {
-      const response = await api.post<TokenType>('/login', {
-        cpf,
-        password,
+      startTransition(async () => {
+        const response = await api.post<TokenType>('/login', {
+          cpf,
+          password,
+          expoPushToken: 'teste',
+        })
+
+        const { data, token } = response.data
+
+        setCookie(undefined, 'consigaki.token', token, {
+          maxAge: 60 * 60 * 1, // 1 hour
+        })
+        setData(data)
+
+        router.push('/dashboard')
       })
-
-      const { data, token } = response.data
-
-      setCookie(undefined, 'consigaki.token', token, {
-        maxAge: 60 * 60 * 1, // 1 hour
-      })
-
-      setData(data)
-
-      router.push('/dashboard')
     } catch (err) {
       if (err instanceof Error) {
         console.log('erro', err)
@@ -66,7 +69,7 @@ export function AuthProvider({ children }: any) {
 
   return (
     <AuthContext.Provider
-      value={{ data, isAuthenticated, signIn, signUp, messageError }}
+      value={{ data, isAuthenticated, signIn, signUp, messageError, isPending }}
     >
       {children}
     </AuthContext.Provider>

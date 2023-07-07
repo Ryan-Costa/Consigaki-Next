@@ -20,9 +20,8 @@ const schemaProductForm = z.object({
 type ProductsFormProps = z.infer<typeof schemaProductForm>
 
 export default function ProductForm({ data }: { data: IProductID }) {
-  const [isPending, startTransition] = useTransition()
+  const [, startTransition] = useTransition()
   const { back } = useRouter()
-  console.log(isPending)
 
   const products = data.data
 

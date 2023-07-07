@@ -34,7 +34,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
         type === 'modal'
           ? 'h-12 w-60 rounded-xl border-black px-7'
           : type === 'table'
-          ? 'h-42 w-60 rounded-20 border-black px-7'
+          ? 'h-42 w-60 rounded-20 border-gray-500 px-7'
           : type === 'form'
           ? `h-[48px] rounded-lg border border-gray-400 px-6 outline-none ${className}`
           : null
@@ -42,7 +42,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
     >
       <button
         className={`relative flex w-full items-center justify-between font-bold ${
-          type === 'form' ? 'text-text-select' : 'text-black'
+          type === 'form' ? 'text-text-select' : 'text-gray-500'
         }`}
         onClick={handleOpen}
       >

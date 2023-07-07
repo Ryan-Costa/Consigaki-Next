@@ -29,7 +29,7 @@ const defaultValues = {
 }
 
 export default function SignIn() {
-  const { signIn, messageError } = useContext(AuthContext)
+  const { signIn, messageError, isPending } = useContext(AuthContext)
   const [cpfMask, setCpfMask] = useState()
   const {
     register,
@@ -156,9 +156,12 @@ export default function SignIn() {
 
         <button
           type="submit"
-          className="mt-10 flex justify-center rounded-xl bg-dark-blue px-40 py-5 opacity-80 hover:opacity-100"
+          disabled={isPending}
+          className={`${
+            isPending && 'opacity-50'
+          } mt-10 flex justify-center rounded-xl bg-dark-blue px-40 py-5 opacity-80 hover:opacity-100`}
         >
-          Entrar
+          {isPending ? 'Carregando...' : 'Entrar'}
         </button>
       </form>
     </div>

@@ -22,9 +22,8 @@ const schemaNewProviderForm = z.object({
 type NewProviderFormProps = z.infer<typeof schemaNewProviderForm>
 
 export default function NewProviderForm() {
-  const [isPending, startTransition] = useTransition()
+  const [, startTransition] = useTransition()
   const { back } = useRouter()
-  console.log(isPending)
   const {
     handleSubmit,
     register,

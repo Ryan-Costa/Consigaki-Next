@@ -11,7 +11,7 @@ export const IconePass = (
       fill="white"
     />
   </svg>
-);
+)
 
 export const IconeUser = (
   <svg
@@ -26,7 +26,7 @@ export const IconeUser = (
       fill="white"
     />
   </svg>
-);
+)
 
 export const IconCalender = (
   <svg
@@ -41,7 +41,7 @@ export const IconCalender = (
       fill="#2D2D2D"
     />
   </svg>
-);
+)
 
 export const IconHome = (
   <svg
@@ -56,7 +56,7 @@ export const IconHome = (
       fill="#2D2D2D"
     />
   </svg>
-);
+)
 
 export const IconStore = (
   <svg
@@ -71,7 +71,7 @@ export const IconStore = (
       fill="#2D2D2D"
     />
   </svg>
-);
+)
 
 export const IconStoreAlt = (
   <svg
@@ -86,7 +86,7 @@ export const IconStoreAlt = (
       fill="#2D2D2D"
     />
   </svg>
-);
+)
 
 export const IconWallet = (
   <svg
@@ -101,7 +101,7 @@ export const IconWallet = (
       fill="#2D2D2D"
     />
   </svg>
-);
+)
 
 export const IconInsumo = (
   <svg
@@ -116,7 +116,7 @@ export const IconInsumo = (
       fill="#2D2D2D"
     />
   </svg>
-);
+)
 
 export const IconArrow = (
   <svg
@@ -131,7 +131,7 @@ export const IconArrow = (
       fill="#2B3155"
     />
   </svg>
-);
+)
 
 export const IconArrowDown = (
   <svg
@@ -146,7 +146,7 @@ export const IconArrowDown = (
       fill="#ffffff"
     />
   </svg>
-);
+)
 
 export const IconArrowRight = (
   <svg
@@ -161,7 +161,7 @@ export const IconArrowRight = (
       fill="#ffffff"
     />
   </svg>
-);
+)
 
 export const IconArrowBack = (
   <svg
@@ -183,7 +183,7 @@ export const IconArrowBack = (
       </clipPath>
     </defs>
   </svg>
-);
+)
 
 export const IconPartners = (
   <svg
@@ -198,7 +198,7 @@ export const IconPartners = (
       fill="#2D2D2D"
     />
   </svg>
-);
+)
 
 export const IconSearch = (
   <svg
@@ -215,7 +215,7 @@ export const IconSearch = (
       fill="#9FA2AB"
     />
   </svg>
-);
+)
 
 export const IconEdit = (
   <svg
@@ -230,7 +230,7 @@ export const IconEdit = (
       fill="#6C6FF5"
     />
   </svg>
-);
+)
 
 export const IconClose = (
   <svg
@@ -245,7 +245,7 @@ export const IconClose = (
       fill="#FF0000"
     />
   </svg>
-);
+)
 
 export const IconUpload = (
   <svg
@@ -260,4 +260,4 @@ export const IconUpload = (
       fill="white"
     />
   </svg>
-);
+)

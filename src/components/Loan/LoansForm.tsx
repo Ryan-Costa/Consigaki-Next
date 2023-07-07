@@ -22,8 +22,7 @@ type LoansFormProps = z.infer<typeof schamaLoansForm>
 
 export default function LoansForm({ data }: { data: ILoanID }) {
   const [obsPendencies, setObsPendencies] = useState(true)
-  const [isPending, startTransition] = useTransition()
-  console.log(isPending)
+  const [, startTransition] = useTransition()
   const { back } = useRouter()
 
   const loans = data.data

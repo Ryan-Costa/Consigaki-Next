@@ -19,9 +19,8 @@ const schemaProvidersForm = z.object({
 type ProvidersFormProps = z.infer<typeof schemaProvidersForm>
 
 export default function ProviderForm({ data }: { data: IProviderID }) {
-  const [isPending, startTransition] = useTransition()
+  const [, startTransition] = useTransition()
   const { back } = useRouter()
-  console.log(isPending)
 
   const providers = data.data
 
