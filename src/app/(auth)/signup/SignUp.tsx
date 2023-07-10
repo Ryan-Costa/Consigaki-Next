@@ -15,11 +15,12 @@ export const metadata: Metadata = {
 
 const createUserFormSchema = z
   .object({
+    cpf: z.string().nonempty('O CPF é obrigatório').min(14, 'O CPF é inválido'),
     name: z
       .string()
       .nonempty('O Nome é obrigatório')
-      .min(3, 'O Nome é inválido'),
-    cpf: z.string().nonempty('O CPF é obrigatório').min(14, 'O CPF é inválido'),
+      .min(3, 'O Nome é inválido')
+      .toLowerCase(),
     email: z
       .string()
       .nonempty('O e-mail é obrigatório')
@@ -63,6 +64,7 @@ export default function SignUp() {
     const removedCpfMask = data.cpf.replace(/\D/g, '')
     const newData = {
       cpf: removedCpfMask,
+      name: data.name,
       email: data.email,
       password: data.password,
     }
@@ -91,7 +93,6 @@ export default function SignUp() {
           <input
             {...register('name')}
             type="text"
-            maxLength={14}
             className={`
                 peer mb-2 block w-full appearance-none border-0 
                 border-b-2 border-white bg-transparent px-0 

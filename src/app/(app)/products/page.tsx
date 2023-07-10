@@ -30,7 +30,6 @@ export default async function Products() {
           <Suspense fallback={<Loading />}>
             <TableProducts productData={products} />
           </Suspense>
-          {/* <Loading /> */}
         </>
       </div>
     </>

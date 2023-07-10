@@ -19,6 +19,43 @@ export interface User {
   blocked: boolean
 }
 
+export interface CurrentUserProps {
+  id: number
+  name: string
+  email: string
+  birthDate: string
+  cpf: string
+  phoneNumber: string
+  temp: boolean
+  active: boolean
+  role: number
+  codeTokenType: number
+  blocked: boolean
+  avatar: null
+  createdAt: string
+  updatedAt: string
+}
+
+export interface IDataCurrentUser {
+  data: {
+    id: number
+    name: string
+    email: string
+    birthDate: string
+    cpf: string
+    phoneNumber: string
+    temp: boolean
+    active: boolean
+    role: number
+    codeTokenType: number
+    blocked: boolean
+    avatar: null
+    createdAt: string
+    updatedAt: string
+  }
+  message: string
+}
+
 interface Agreement {
   id: number
   name: string
