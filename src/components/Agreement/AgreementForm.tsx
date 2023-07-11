@@ -5,38 +5,41 @@ import { Input } from '../Common/Input'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { ButtonSave } from '../Common/ButtonSave'
-import { IProviderID } from '@/interfaces/IProps'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { IAgreementID } from '@/interfaces/IProps'
 import { useTransition } from 'react'
 import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
 import ToggleSwitch from '../ToggleSwitch'
+// import SectionProductsAndParams from './SectionProductsAndParams'
 
-const schemaProvidersForm = z.object({
-  name: z.string(),
+const schemaAgreementForm = z.object({
+  name: z.string().toUpperCase(),
 })
 
-type ProvidersFormProps = z.infer<typeof schemaProvidersForm>
+type AgreementsFormProps = z.infer<typeof schemaAgreementForm>
 
-export default function ProviderForm({ data }: { data: IProviderID }) {
+export default function AgreementForm({ data }: { data: IAgreementID }) {
   const [, startTransition] = useTransition()
   const { back } = useRouter()
 
-  const providers = data.data
+  const agreements = data.data
 
-  const { handleSubmit, register } = useForm<ProvidersFormProps>({
-    resolver: zodResolver(schemaProvidersForm),
+  console.log(agreements)
+
+  const { handleSubmit, register } = useForm<AgreementsFormProps>({
+    resolver: zodResolver(schemaAgreementForm),
     defaultValues: {
-      name: providers.name,
+      name: agreements.name,
     },
   })
 
-  const handleFormSubmit = (dataForm: ProvidersFormProps) => {
+  const handleFormSubmit = (dataForm: AgreementsFormProps) => {
     console.log(dataForm)
 
-    const providersUrl = `/providers/${providers.id}`
+    const agreementsUrl = `/agreements/${agreements.id}`
 
     startTransition(() =>
-      patchRevalidateItems<ProvidersFormProps>(providersUrl, dataForm),
+      patchRevalidateItems<AgreementsFormProps>(agreementsUrl, dataForm),
     )
 
     back()
@@ -47,7 +50,7 @@ export default function ProviderForm({ data }: { data: IProviderID }) {
       <div className="mt-6 flex gap-6">
         <Input
           register={register}
-          label="Razão Social"
+          label="Nome"
           name="name"
           type="text"
           className="w-full"
@@ -56,23 +59,24 @@ export default function ProviderForm({ data }: { data: IProviderID }) {
       <div className="mb-6 mt-6 flex gap-6">
         <Input
           label="Cadastro"
-          name="createdAt"
+          name="cadastro"
           type="text"
+          value={new Date(agreements.createdAt).toLocaleDateString()}
+          readOnly
           disabled
-          classNameInput="cursor-no-drop"
-          value={new Date(providers.createdAt).toLocaleDateString()}
         />
         <Input
           label="Alterado"
-          name="updatedAt"
+          name="alterado"
           type="text"
+          value={new Date(agreements.updatedAt).toLocaleDateString()}
+          readOnly
           disabled
-          classNameInput="cursor-no-drop"
-          value={new Date(providers.updatedAt).toLocaleDateString()}
         />
       </div>
-      <ToggleSwitch isChecked={providers.active} />
-      <ButtonSave type="submit" />
+      <ToggleSwitch isChecked={agreements.active} />
+      <ButtonSave />
+      {/* <SectionProductsAndParams /> */}
     </form>
   )
 }

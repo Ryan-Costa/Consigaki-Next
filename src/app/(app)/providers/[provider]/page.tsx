@@ -13,8 +13,8 @@ export default async function EditProvider({
   params: { provider: string }
 }) {
   const response = await api.get<IProviderID>(`/providers/${params.provider}`)
-  const providerById = response.data
-  return <ProviderForm data={providerById} />
+  const providersById = response.data
+  return <ProviderForm data={providersById} />
 }
 
 export async function generateMetadata({

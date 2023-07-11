@@ -1,12 +1,12 @@
-import { IProviders } from '@/interfaces/IProps'
+import { IAgreements } from '@/interfaces/IProps'
 import Link from 'next/link'
 import { IconEdit } from '../../../public/icons'
 
 interface TBodyProps {
-  data: IProviders[]
+  data: IAgreements[]
 }
 
-export default function TBodyProviders({ data }: TBodyProps) {
+export default function TBodyAgreements({ data }: TBodyProps) {
   return (
     <>
       <tbody>
@@ -18,7 +18,7 @@ export default function TBodyProviders({ data }: TBodyProps) {
               {new Date(item.createdAt).toLocaleDateString()}
             </td>
             <td className="p-4 text-left">
-              <Link href={`/providers/${item.id}`} className="cursor-pointer">
+              <Link href={`/agreements/${item.id}`} className="cursor-pointer">
                 {IconEdit}
               </Link>
             </td>

@@ -20,11 +20,6 @@ function formattAmountValue(valor: string): string {
   return valorString
 }
 
-// Exemplo de uso
-const valor = '15000.00'
-const valorMonetario = formattAmountValue(valor)
-console.log(valorMonetario)
-
 export default function TBodyLoans({ data }: TBodyProps) {
   return (
     <tbody>

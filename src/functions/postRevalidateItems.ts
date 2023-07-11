@@ -7,7 +7,7 @@ export async function postRevalidateItems<T = unknown>(url: string, data: any) {
   return api
     .post<T>(url, data)
     .then((response) => {
-      console.log(response)
+      console.log(response.data)
       revalidatePath(url)
     })
     .catch((error) => {

@@ -82,21 +82,32 @@ export interface UserAgreements {
 }
 
 export interface IAgreements {
-  id: number
+  id?: number
   name: string
-  active: boolean
-  createdAt: string | null
-  updatedAt: string | null
+  active?: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface IAgreementID {
+  data: {
+    id?: number
+    name: string
+    active?: boolean
+    createdAt: string
+    updatedAt: string
+  }
+  message?: string
 }
 
 export interface IDataAgreements {
   data: {
     totalItems: number
     agreements: IAgreements[]
-    active: boolean
-    createdAt: string
-    updatedAt: string | null
+    totalPages: number
+    currentPage: number
   }
+  message: string
 }
 export interface IProducts {
   id?: number

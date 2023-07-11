@@ -1,19 +1,20 @@
 'use client'
 
 import { IDataProviders, IProviders } from '@/interfaces/IProps'
-import { getProviders } from '@/services/getProviders'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { IconArrow, IconPartners } from '../../../public/icons'
 import { ButtonAdd } from '../Common/ButtonAdd'
 import { Dropdown } from '../Dropdown'
 import { SearchInput } from '../SearchInput'
 import TBodyProviders from './TBodyProviders'
+import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
 interface ProviderProps {
   providerData: IDataProviders
 }
 
 export default function TableProviders({ providerData }: ProviderProps) {
+  const [, startTransition] = useTransition()
   const totalPages = providerData.data.totalPages
   const [currentItems, setCurrentItems] = useState<IProviders[]>([])
   const [providers, setProviders] = useState<IProviders[]>(
@@ -24,11 +25,17 @@ export default function TableProviders({ providerData }: ProviderProps) {
   const itemsPerPage = 10
 
   useEffect(() => {
-    const fetchData = async () => {
-      const providersNextPage = await getProviders(currentPage)
-      setProviders(providersNextPage.data.providers)
+    const body = {
+      name: '',
+      page: currentPage,
+      size: 10,
     }
-    fetchData()
+    const urlProductsGetAll = '/providers/get-all'
+    startTransition(() =>
+      postRevalidatePageItems<IDataProviders>(urlProductsGetAll, body).then(
+        (response) => setProviders(response!.data.providers),
+      ),
+    )
   }, [currentPage])
 
   useEffect(() => {
@@ -42,10 +49,6 @@ export default function TableProviders({ providerData }: ProviderProps) {
     )
 
     const indexOfFirstItem = Math.max(indexOfLastItem - itemsPerPage, 0)
-
-    console.log('filteredData ==>', filteredData)
-    console.log('indexOfLastItem ==>', indexOfLastItem)
-    console.log('indexOfFirstItem ==>', indexOfFirstItem)
 
     setCurrentItems(filteredData.slice(indexOfFirstItem, indexOfLastItem))
   }, [searchTerm, providers, currentPage])

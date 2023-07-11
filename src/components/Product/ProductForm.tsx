@@ -13,7 +13,7 @@ import { useTransition } from 'react'
 import ToggleSwitch from '../ToggleSwitch'
 
 const schemaProductForm = z.object({
-  name: z.string(),
+  name: z.string().toUpperCase(),
   type: z.string(),
 })
 

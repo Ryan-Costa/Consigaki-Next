@@ -15,8 +15,6 @@ export default function TBodyProducts({ data }: TBodyProps) {
       3: 'Seguro',
       99: 'Diversos',
     }
-    console.log('dadooos >>>>>>>>>>>>>>>>>')
-    console.log('dados', data)
 
     if (Object.prototype.hasOwnProperty.call(productTypeTransformed, type)) {
       return productTypeTransformed[type]

@@ -8,8 +8,8 @@ const karla = Karla({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Consigaki RL',
-    default: 'Consigaki RL',
+    template: '%s | Consigaki',
+    default: 'Consigaki',
   },
 }
 

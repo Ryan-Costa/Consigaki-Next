@@ -7,10 +7,6 @@ export const getProducts = async (pageNumber: number) => {
     page: pageNumber,
     size: 10,
   }
-
   const response = await api.post<IDataProducts>('/products/get-all', body)
-
-  console.log('response')
-
   return response.data
 }

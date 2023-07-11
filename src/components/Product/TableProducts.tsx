@@ -1,20 +1,21 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useTransition } from 'react'
 import { IconArrow, IconPartners } from '../../../public/icons'
 import { IDataProducts, IProducts } from '@/interfaces/IProps'
 import { ButtonAdd } from '../Common/ButtonAdd'
 import { SearchInput } from '../SearchInput'
 import { Dropdown } from '../Dropdown'
 import Link from 'next/link'
-import { getProducts } from '@/services/getProducts'
 import TBodyProducts from './TBodyProducts'
+import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
 
 interface ProductsProps {
   productData: IDataProducts
 }
 
 export default function TableProducts({ productData }: ProductsProps) {
+  const [, startTransition] = useTransition()
   const totalPages = productData.data.totalPages
   const [currentItems, setCurrentItems] = useState<IProducts[]>([])
   const [products, setProducts] = useState<IProducts[]>(
@@ -25,11 +26,17 @@ export default function TableProducts({ productData }: ProductsProps) {
   const itemsPerPage = 10
 
   useEffect(() => {
-    const fetchData = async () => {
-      const productsNextPage = await getProducts(currentPage)
-      setProducts(productsNextPage.data.products)
+    const body = {
+      name: '',
+      page: currentPage,
+      size: 10,
     }
-    fetchData()
+    const urlProductsGetAll = '/products/get-all'
+    startTransition(() =>
+      postRevalidatePageItems<IDataProducts>(urlProductsGetAll, body).then(
+        (response) => setProducts(response!.data.products),
+      ),
+    )
   }, [currentPage])
 
   useEffect(() => {
@@ -48,6 +55,7 @@ export default function TableProducts({ productData }: ProductsProps) {
   }, [searchTerm, products, currentPage])
 
   const handlePageChange = (pageNumber: number) => {
+    console.log('currentpage')
     setCurrentPage(pageNumber)
   }
 
