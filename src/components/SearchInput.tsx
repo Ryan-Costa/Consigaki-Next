@@ -20,7 +20,7 @@ export function SearchInput({ onSearch }: SearchInputProps) {
     <div className="relative">
       <input
         type="text"
-        className="rounded-full border border-black px-4 py-2 pr-12 focus:outline-none"
+        className="rounded-full border border-gray-500 px-4 py-2 pr-12 focus:outline-none"
         value={searchValue}
         onChange={handleChange}
       />
