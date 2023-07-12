@@ -30,10 +30,14 @@ export default function TableProviders({ providerData }: ProviderProps) {
       page: currentPage,
       size: 10,
     }
-    const urlProductsGetAll = '/providers/get-all'
+    const urlProvidersGetAll = '/providers/get-all'
     startTransition(() =>
-      postRevalidatePageItems<IDataProviders>(urlProductsGetAll, body).then(
-        (response) => setProviders(response!.data.providers),
+      postRevalidatePageItems<IDataProviders>(urlProvidersGetAll, body).then(
+        (response) => {
+          if (response) {
+            setProviders(response.data.providers)
+          }
+        },
       ),
     )
   }, [currentPage])

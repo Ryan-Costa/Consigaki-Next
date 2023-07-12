@@ -33,7 +33,11 @@ export default function TableAgreements({ agreementData }: AgreementsProps) {
     const urlAgreementsGetAll = '/agreements/get-all'
     startTransition(() =>
       postRevalidatePageItems<IDataAgreements>(urlAgreementsGetAll, body).then(
-        (response) => setAgreements(response!.data.agreements),
+        (response) => {
+          if (response) {
+            setAgreements(response.data.agreements)
+          }
+        },
       ),
     )
   }, [currentPage])

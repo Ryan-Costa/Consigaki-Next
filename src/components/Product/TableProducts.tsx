@@ -34,7 +34,11 @@ export default function TableProducts({ productData }: ProductsProps) {
     const urlProductsGetAll = '/products/get-all'
     startTransition(() =>
       postRevalidatePageItems<IDataProducts>(urlProductsGetAll, body).then(
-        (response) => setProducts(response!.data.products),
+        (response) => {
+          if (response) {
+            setProducts(response.data.products)
+          }
+        },
       ),
     )
   }, [currentPage])

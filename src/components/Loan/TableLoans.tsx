@@ -1,18 +1,18 @@
 'use client'
 
 import { IDataLoans, ILoans } from '@/interfaces/IProps'
-import { getLoans } from '@/services/getLoans'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { IconArrow, IconPartners } from '../../../public/icons'
 import { Dropdown } from '../Dropdown'
 import { SearchInput } from '../SearchInput'
 import TBodyLoans from './TBodyLoans'
-
+import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
 interface LoansProps {
   loanData: IDataLoans
 }
 
 export function TableLoans({ loanData }: LoansProps) {
+  const [, startTransition] = useTransition()
   const totalPages = loanData.data.totalPages
   const [currentItems, setCurrentItems] = useState<ILoans[]>([])
   const [loans, setLoans] = useState<ILoans[]>(loanData.data.loans)
@@ -21,11 +21,21 @@ export function TableLoans({ loanData }: LoansProps) {
   const itemsPerPage = 10
 
   useEffect(() => {
-    const fetchData = async () => {
-      const loansNextPage = await getLoans(currentPage)
-      setLoans(loansNextPage.data.loans)
+    const body = {
+      name: '',
+      page: currentPage,
+      size: 10,
     }
-    fetchData()
+    const urlLoansGetAll = '/loans/get-all'
+    startTransition(() =>
+      postRevalidatePageItems<IDataLoans>(urlLoansGetAll, body).then(
+        (response) => {
+          if (response) {
+            setLoans(response.data.loans)
+          }
+        },
+      ),
+    )
   }, [currentPage])
 
   useEffect(() => {
