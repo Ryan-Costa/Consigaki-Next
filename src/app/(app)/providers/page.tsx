@@ -1,4 +1,4 @@
-import TableProviders from '@/components/Provider/TableProviders'
+import TableProviders from '@/components/Services/Provider/TableProviders'
 import { getProviders } from '@/services/getProviders'
 import { Metadata } from 'next'
 import { Roboto } from 'next/font/google'

@@ -1,4 +1,4 @@
-import { IDataLoans } from '@/interfaces/IProps'
+import { IDataLoans } from '@/interfaces/Loan'
 import api from './server/api'
 
 export const getLoans = async (pageNumber: number) => {

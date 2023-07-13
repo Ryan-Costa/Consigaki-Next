@@ -1,4 +1,4 @@
-import TableAgreements from '@/components/Agreement/TableAgreements'
+import TableAgreements from '@/components/Services/Agreement/TableAgreements'
 import { Roboto } from 'next/font/google'
 import { Metadata } from 'next'
 import { getAgreements } from '@/services/getAgreements'

@@ -1,17 +1,18 @@
 'use client'
 
+import ToggleSwitch from '../../ToggleSwitch'
 import { z } from 'zod'
+import { Input } from '../../Common/Input'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
+import { ButtonSave } from '../../Common/ButtonSave'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { DropdownForm } from '../../DropdownForm'
 import { useTransition } from 'react'
-import { ButtonSave } from '@/components/Common/ButtonSave'
-import { Input } from '@/components/Common/Input'
-import { DropdownForm } from '@/components/DropdownForm'
 
 const schemaNewProductForm = z.object({
-  name: z.string().nonempty('Nome do Produto não pode ser vazio').toUpperCase(),
+  name: z.string().nonempty('Digite o nome do produto').toUpperCase(),
   type: z.string(),
 })
 
@@ -56,12 +57,13 @@ export default function NewProductForm() {
         <div className="mt-6 flex gap-6">
           <Input
             register={register}
-            label="Nome do Produto"
+            label="Razão Social"
             type="text"
             name="name"
-            placeholder="---------- -------- -------"
+            placeholder="Digite o nome"
             className="w-full"
           />
+
           <div className="flex w-1/3 flex-col gap-2">
             <label htmlFor="" className="font-semibold">
               Tipo
@@ -91,18 +93,15 @@ export default function NewProductForm() {
             type="text"
             name="cadastro"
             placeholder="00/00/0000"
-            disabled
-            readOnly
           />
           <Input
             label="Alterado"
             type="text"
             name="alterado"
             placeholder="00/00/0000"
-            disabled
-            readOnly
           />
         </div>
+        <ToggleSwitch />
         <ButtonSave />
       </form>
     </>

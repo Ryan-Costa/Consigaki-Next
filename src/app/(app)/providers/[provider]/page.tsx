@@ -1,5 +1,5 @@
-import ProviderForm from '@/components/Provider/ProviderForm'
-import { IProviderID } from '@/interfaces/IProps'
+import ProviderForm from '@/components/Services/Provider/ProviderForm'
+import { IProviderID } from '@/interfaces/Provider'
 import api from '@/services/server/api'
 import { Metadata } from 'next'
 

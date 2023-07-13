@@ -1,5 +1,5 @@
-import LoansForm from '@/components/Loan/LoansForm'
-import { ILoanID } from '@/interfaces/IProps'
+import LoansForm from '@/components/Services/Loan/LoansForm'
+import { ILoanID } from '@/interfaces/Loan'
 import api from '@/services/server/api'
 
 export default async function EditLoans({

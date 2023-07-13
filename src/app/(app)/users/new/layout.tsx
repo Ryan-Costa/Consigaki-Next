@@ -15,14 +15,10 @@ const roboto = Roboto({
 })
 
 export const metadata: Metadata = {
-  title: 'Novo Produto',
+  title: 'Novo Usuário',
 }
 
-export default function EditProductLayout({
-  children,
-}: {
-  children: ReactNode
-}) {
+export default function EditUserLayout({ children }: { children: ReactNode }) {
   return (
     <div
       className={`${roboto.className} h-full w-full rounded-md bg-white px-6 py-14`}
@@ -30,7 +26,7 @@ export default function EditProductLayout({
       <div>
         <ButtonGoBack />
         <div className="mt-12 flex gap-2">
-          <h1 className="text-2xl font-bold">Adicionar Produto</h1>
+          <h1 className="text-2xl font-bold">Adicionar Usuário</h1>
           {IconPartners}
         </div>
         <p

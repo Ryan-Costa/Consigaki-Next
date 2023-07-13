@@ -1,4 +1,4 @@
-import { IDataProducts } from '@/interfaces/IProps'
+import { IDataProducts } from '@/interfaces/Product'
 import api from '@/services/server/api'
 
 export const getProducts = async (pageNumber: number) => {

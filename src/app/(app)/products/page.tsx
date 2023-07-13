@@ -1,4 +1,4 @@
-import TableProducts from '@/components/Product/TableProducts'
+import TableProducts from '@/components/Services/Product/TableProducts'
 import Loading from '@/components/UI/loading'
 import { getProducts } from '@/services/getProducts'
 import { Metadata } from 'next'
@@ -18,7 +18,7 @@ export default async function Products() {
   const products = await getProducts(1)
 
   if (!products) {
-    return <p>Carregando...</p>
+    return <Loading />
   }
 
   return (

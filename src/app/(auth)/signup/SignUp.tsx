@@ -27,8 +27,8 @@ const createUserFormSchema = z
       .email('Formato de e-mail inválido')
       .toLowerCase()
       .refine((email) => {
-        return email.endsWith('@consigaki.com')
-      }, 'O e-mail precisa terminar com @consigaki.com'),
+        return email.endsWith('@consigaki.com.br')
+      }, 'O e-mail precisa terminar com @consigaki.com.br'),
     confirmEmail: z
       .string()
       .nonempty('A confirmação de e-mail é obrigatória')

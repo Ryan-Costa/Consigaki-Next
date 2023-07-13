@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import { Input } from '@/components/Common/Input'
-import ToggleSwitch from '@/components/ToggleSwitch'
 import { ButtonSave } from '@/components/Common/ButtonSave'
 
 export const metadata: Metadata = {
@@ -16,7 +15,10 @@ export const metadata: Metadata = {
 }
 
 const schemaNewAgreementForm = z.object({
-  name: z.string().nonempty('Digite o nome do produto').toUpperCase(),
+  name: z
+    .string()
+    .nonempty('Nome do Convênio não pode ser vazio')
+    .toUpperCase(),
 })
 
 type NewAgreementFormProps = z.infer<typeof schemaNewAgreementForm>
@@ -37,6 +39,7 @@ export default function NewAgreementForm() {
 
   const handleFormSubmit = (dataForm: NewAgreementFormProps) => {
     const agreementUrl = '/agreements'
+    console.log(dataForm)
 
     startTransition(() =>
       postRevalidateItems<NewAgreementFormProps>(agreementUrl, dataForm),
@@ -50,18 +53,18 @@ export default function NewAgreementForm() {
       <div className="mt-6 flex gap-6">
         <Input
           register={register}
-          label="Nome"
-          name="nome"
+          label="Nome do Convênio"
+          name="name"
           type="text"
           placeholder="---------- -------- -------"
           className="w-full"
         />
-        {errors.name && (
-          <span className="text-md font-bold tracking-wide text-red-600">
-            {errors.name.message}
-          </span>
-        )}
       </div>
+      {errors.name && (
+        <span className="text-md font-bold tracking-wide text-red-600">
+          {errors.name.message}
+        </span>
+      )}
       <div className="mb-6 mt-6 flex gap-6">
         <Input
           label="Cadastro"
@@ -76,8 +79,7 @@ export default function NewAgreementForm() {
           placeholder="00/00/0000"
         />
       </div>
-      <ToggleSwitch />
-      <ButtonSave type="submit" />
+      <ButtonSave />
     </form>
   )
 }

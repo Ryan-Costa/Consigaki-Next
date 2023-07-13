@@ -1,21 +1,17 @@
 'use client'
 
 import { z } from 'zod'
-import { Input } from '@/components/Common/Input'
+import { Input } from '../../Common/Input'
 import { useForm } from 'react-hook-form'
-import { Metadata } from 'next'
 import { useRouter } from 'next/navigation'
-import { ButtonSave } from '@/components/Common/ButtonSave'
+import { ButtonSave } from '../../Common/ButtonSave'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTransition } from 'react'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
-
-export const metadata: Metadata = {
-  title: 'Nova Consignatária',
-}
+import ToggleSwitch from '../../ToggleSwitch'
 
 const schemaNewProviderForm = z.object({
-  name: z.string().nonempty('Razão Social não pode ser vazio').toUpperCase(),
+  name: z.string().nonempty('Digite o nome do produto').toUpperCase(),
 })
 
 type NewProviderFormProps = z.infer<typeof schemaNewProviderForm>
@@ -56,12 +52,12 @@ export default function NewProviderForm() {
             placeholder="Digite o nome"
             className="w-full"
           />
+          {errors.name && (
+            <span className="text-md font-bold tracking-wide text-red-600">
+              {errors.name.message}
+            </span>
+          )}
         </div>
-        {errors.name && (
-          <span className="text-md font-bold tracking-wide text-red-600">
-            {errors.name.message}
-          </span>
-        )}
         <div className="mb-6 mt-6 flex gap-6">
           <Input
             label="Cadastro"
@@ -80,7 +76,8 @@ export default function NewProviderForm() {
             classNameInput="cursor-no-drop"
           />
         </div>
-        <ButtonSave type="submit" />
+        <ToggleSwitch />
+        <ButtonSave />
       </form>
     </>
   )

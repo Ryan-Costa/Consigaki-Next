@@ -1,4 +1,4 @@
-import { TableLoans } from '@/components/Loan/TableLoans'
+import { TableLoans } from '@/components/Services/Loan/TableLoans'
 import { getLoans } from '@/services/getLoans'
 import { Metadata } from 'next'
 import { Roboto } from 'next/font/google'

@@ -8,12 +8,12 @@ const roboto = Roboto({
   weight: ['400', '700'],
 })
 
-export default function EditProductLayout({
+export default function EditUserLayout({
   children,
   params,
 }: {
   children: ReactNode
-  params: { product: string }
+  params: { user: string }
 }) {
   return (
     <div
@@ -21,7 +21,7 @@ export default function EditProductLayout({
     >
       <ButtonGoBack />
       <div className="mt-12 flex gap-2">
-        <h1 className="text-2xl font-bold">Editar Produto {params.product}</h1>
+        <h1 className="text-2xl font-bold">Editar Usuário {params.user}</h1>
         {IconPartners}
       </div>
       {children}

@@ -1,4 +1,4 @@
-import { IDataAgreements } from '@/interfaces/IProps'
+import { IDataAgreements } from '@/interfaces/Agreement'
 import api from '@/services/server/api'
 
 export const getAgreements = async (pageNumber: number) => {

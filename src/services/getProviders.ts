@@ -1,4 +1,4 @@
-import { IDataProviders } from '@/interfaces/IProps'
+import { IDataProviders } from '@/interfaces/Provider'
 import api from '@/services/server/api'
 
 export const getProviders = async (pageNumber: number) => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import api from '@/services/server/api'
-import { IProductID } from '@/interfaces/IProps'
-import ProductForm from '@/components/Product/ProductForm'
+import ProductForm from '@/components/Services/Product/ProductForm'
+import { IProductID } from '@/interfaces/Product'
 
 export default async function EditProduct({
   params,

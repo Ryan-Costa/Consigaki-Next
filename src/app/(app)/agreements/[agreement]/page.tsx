@@ -1,5 +1,5 @@
-import AgreementForm from '@/components/Agreement/AgreementForm'
-import { IAgreementID } from '@/interfaces/IProps'
+import AgreementForm from '@/components/Services/Agreement/AgreementForm'
+import { IAgreementID } from '@/interfaces/Agreement'
 import api from '@/services/server/api'
 import { Metadata } from 'next'
 
