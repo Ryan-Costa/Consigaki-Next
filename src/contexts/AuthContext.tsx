@@ -60,18 +60,18 @@ export function AuthProvider({ children }: any) {
 
   async function signUp({ cpf, name, email, password }: SignUpData) {
     try {
-      startTransition(async () => {
-        const response = await api.post<SignUpResponse>('/users/backoffice', {
-          cpf,
-          name,
-          email,
-          password,
-          expoPushToken: 'teste',
-        })
-        const { message } = response.data
-
-        console.log(message)
+      // startTransition(async () => {
+      const response = await api.post<SignUpResponse>('/users/backoffice', {
+        cpf,
+        name,
+        email,
+        password,
+        expoPushToken: 'teste',
       })
+      const { message } = response.data
+
+      console.log(message)
+      // })
 
       // }
       console.log('SignUp')

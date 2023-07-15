@@ -5,10 +5,13 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useTransition } from 'react'
+import { useState, useTransition } from 'react'
 import { ButtonSave } from '@/components/Common/ButtonSave'
 import { Input } from '@/components/Common/Input'
 import { DropdownForm } from '@/components/DropdownForm'
+import { CpfMask } from '@/components/Mask/CpfMask'
+import { DateMask } from '@/components/Mask/DateMask'
+import { TelMask } from '@/components/Mask/telMask'
 
 const schemaNewUserForm = z.object({
   name: z.string().nonempty('Digite o nome do usuário').toUpperCase(),
@@ -23,7 +26,6 @@ const schemaNewUserForm = z.object({
   cpf: z.string().nonempty('O CPF é obrigatório').min(14, 'O CPF é inválido'),
   phoneNumber: z.string().min(13, 'O Número de telefone é inválido'),
   birthDate: z.string().min(10, 'A data de nascimento é inválida'),
-  profile: z.string(),
   blocked: z.string(),
 })
 
@@ -31,6 +33,9 @@ type NewUserFormProps = z.infer<typeof schemaNewUserForm>
 
 export default function NewUserForm() {
   const [, startTransition] = useTransition()
+  const [cpfMask, setCpfMask] = useState()
+  const [telMask, setTelMask] = useState()
+  const [dateMask, setDateMask] = useState()
   const { back } = useRouter()
   const {
     handleSubmit,
@@ -43,27 +48,58 @@ export default function NewUserForm() {
       email: '',
       phoneNumber: '',
       birthDate: '',
-      profile: '',
       blocked: '',
     },
   })
 
+  const newUnmaskedCpfData = (data: any) => {
+    const removedCpfMask = data.cpf.replace(/\D/g, '')
+    const removedTelMask = data.phoneNumber.replace(/\D/g, '')
+    const removedDateMask = data.birthDate.replace(/\D/g, '')
+    const newData = {
+      ...data,
+      cpf: removedCpfMask,
+      phoneNumber: removedTelMask,
+      birthDate: removedDateMask,
+    }
+
+    return newData
+  }
+
   const handleFormSubmit = (dataForm: NewUserFormProps) => {
+    const newData = newUnmaskedCpfData(dataForm)
     const usersUrl = '/users'
-
-    // const { name, type } = dataForm
-    // const dataFormFormatted = {
-    //   name,
-    //   type: Number(type),
-    // }
-
-    console.log(dataForm)
+    console.log(newData)
 
     startTransition(() =>
-      postRevalidateItems<NewUserFormProps>(usersUrl, dataForm),
+      postRevalidateItems<NewUserFormProps>(usersUrl, newData),
     )
 
     back()
+  }
+
+  // const handleChange = (e: any) => {
+  //   setCpfMask(CpfMask(e.target.value))
+  //   console.log(cpfMask)
+  // }
+
+  const handleChange = (event: any) => {
+    const { name, value } = event.target
+
+    let maskedValue
+
+    if (name === 'cpf') {
+      maskedValue = CpfMask(value)
+      setCpfMask(maskedValue)
+    } else if (name === 'phoneNumber') {
+      maskedValue = TelMask(value)
+      setTelMask(maskedValue)
+    } else if (name === 'birthDate') {
+      maskedValue = DateMask(value)
+      setDateMask(maskedValue)
+    }
+
+    console.log(maskedValue)
   }
 
   return (
@@ -104,10 +140,13 @@ export default function NewUserForm() {
           <div className="w-full">
             <Input
               register={register}
+              maxLength={14}
               label="CPF"
               type="text"
               name="cpf"
               placeholder="000.000.000-00"
+              value={cpfMask}
+              onChange={handleChange}
             />
             {errors.cpf && (
               <span className="text-md font-bold tracking-wide text-red-600">
@@ -118,10 +157,13 @@ export default function NewUserForm() {
           <div className="w-full">
             <Input
               register={register}
+              maxLength={15}
               label="Celular"
               type="text"
               name="phoneNumber"
-              placeholder="(00) 0 0000-0000"
+              placeholder="(00) 00000-0000"
+              value={telMask}
+              onChange={handleChange}
             />
             {errors.phoneNumber && (
               <span className="text-md font-bold tracking-wide text-red-600">
@@ -132,36 +174,20 @@ export default function NewUserForm() {
           <div className="w-full">
             <Input
               register={register}
+              maxLength={10}
               label="Data de nascimento"
               type="text"
               name="birthDate"
               placeholder="00/00/0000"
               className="w-full"
+              value={dateMask}
+              onChange={handleChange}
             />
             {errors.birthDate && (
               <span className="text-md font-bold tracking-wide text-red-600">
                 {errors.birthDate.message}
               </span>
             )}
-          </div>
-          <div className="flex w-full flex-col gap-2">
-            <label htmlFor="" className="font-semibold">
-              Perfil
-            </label>
-            <DropdownForm
-              name="profile"
-              register={register}
-              defaultValue="Selecione"
-              options={[
-                { name: 'cliente', displayName: 'Cliente', value: 0 },
-                { name: 'suporte', displayName: 'Suporte', value: 1 },
-                {
-                  name: 'adminstrador',
-                  displayName: 'Administrador',
-                  value: 2,
-                },
-              ]}
-            />
           </div>
         </div>
         <div className="mb-6 mt-6 flex gap-6">

@@ -1,5 +1,5 @@
-import LoansForm from '@/components/Services/Loan/LoansForm'
 import { ILoanID } from '@/interfaces/Loan'
+import LoansForm from '@/components/Services/Loan/LoansForm'
 import api from '@/services/server/api'
 
 export default async function EditLoans({
@@ -12,4 +12,14 @@ export default async function EditLoans({
   console.log(loansById)
 
   return <LoansForm data={loansById} />
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { loan: string }
+}) {
+  return {
+    title: `Editar Esteira ${params.loan}`,
+  }
 }

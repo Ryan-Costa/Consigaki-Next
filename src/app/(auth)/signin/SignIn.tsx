@@ -8,7 +8,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ClickHere from '@/components/ClickHere'
 import { AuthContext } from '@/contexts/AuthContext'
-import { CpfMask } from '@/components/Common/CpfMask'
+import { CpfMask } from '@/components/Mask/CpfMask'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

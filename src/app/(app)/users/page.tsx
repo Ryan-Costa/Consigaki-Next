@@ -1,6 +1,7 @@
 import TableUsers from '@/components/Services/User/TableUsers'
 import Loading from '@/components/UI/loading'
 import { getUsers } from '@/services/getUsers'
+import { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import { Suspense } from 'react'
 
@@ -8,6 +9,10 @@ const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
+
+export const metadata: Metadata = {
+  title: 'Usuários',
+}
 
 export default async function Users() {
   const users = await getUsers(1)

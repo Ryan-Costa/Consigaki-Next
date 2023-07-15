@@ -13,6 +13,7 @@ interface InputProps {
   className?: string
   classNameInput?: string
   register?: UseFormRegister<any>
+  maxLength?: number
 }
 
 export function Input({
@@ -27,6 +28,7 @@ export function Input({
   register,
   className,
   classNameInput,
+  maxLength,
 }: InputProps) {
   return (
     <div className={`${className} flex flex-col gap-2`}>
@@ -40,6 +42,7 @@ export function Input({
         readOnly={readOnly}
         disabled={disabled}
         value={value}
+        maxLength={maxLength}
         onChange={onChange}
       />
     </div>

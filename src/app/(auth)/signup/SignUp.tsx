@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useContext, useState } from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { CpfMask } from '@/components/Common/CpfMask'
+import { CpfMask } from '@/components/Mask/CpfMask'
 import { AuthContext } from '@/contexts/AuthContext'
 import { Metadata } from 'next'
 
@@ -62,17 +62,12 @@ export default function SignUp() {
 
   const newUnmaskedCpfData = (data: any) => {
     const removedCpfMask = data.cpf.replace(/\D/g, '')
-    const newData = {
-      cpf: removedCpfMask,
-      name: data.name,
-      email: data.email,
-      password: data.password,
-    }
+    const newData = { ...data, cpf: removedCpfMask }
 
     return newData
   }
 
-  const handleSignUp = (data: any) => {
+  const handleSignUp = (data: CreateUserFormData) => {
     const newData = newUnmaskedCpfData(data)
     signUp(newData)
     console.log(newData)

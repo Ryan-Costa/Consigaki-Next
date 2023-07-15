@@ -1,4 +1,4 @@
-import { ILoans } from '@/interfaces/IProps'
+import { ILoans } from '@/interfaces/Loan'
 import Link from 'next/link'
 import { IconEdit } from '../../../../public/icons'
 

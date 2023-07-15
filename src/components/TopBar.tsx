@@ -27,7 +27,7 @@ export default function Topbar() {
             className="flex items-center gap-4 text-white"
             onClick={handleOpen}
           >
-            Olá, Davi Bessa Pontes{' '}
+            Olá, Ryan da Costa Souza{' '}
             <span
               className={`transition-transform duration-300 ${
                 isOpen ? 'rotate-180 transform ' : ''

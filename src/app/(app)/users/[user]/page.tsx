@@ -1,18 +1,21 @@
-import React from 'react'
-import api from '@/services/server/api'
 import { IUserID } from '@/interfaces/User'
 import UserForm from '@/components/Services/User/UserForm'
+import api from '@/services/server/api'
+import { IProviderID } from '@/interfaces/Provider'
 
-export default async function EditUser({
+export default async function EditUsers({
   params,
 }: {
   params: { user: string }
 }) {
-  const response = await api.get<IUserID>(`/users/${params.user}`)
-  const usersById = response.data
-  console.log(usersById)
-
-  return <UserForm data={usersById} />
+  try {
+    const response = await api.get<IProviderID>(`/providers/${params.user}`)
+    const usersById = response.data
+    console.log(usersById)
+    return <UserForm data={usersById} />
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export async function generateMetadata({

@@ -57,7 +57,6 @@ export default function TableUsers({ userData }: UsersProps) {
   }, [searchTerm, users, currentPage])
 
   const handlePageChange = (pageNumber: number) => {
-    console.log('currentpage')
     setCurrentPage(pageNumber)
   }
 
@@ -69,7 +68,7 @@ export default function TableUsers({ userData }: UsersProps) {
     <>
       <div className="flex w-full justify-between">
         <h2 className="flex items-center gap-2 text-2xl font-bold">
-          Produtos {IconPartners}
+          Usuários {IconPartners}
         </h2>
         <div className="flex gap-5 ">
           <Dropdown
