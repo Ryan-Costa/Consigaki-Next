@@ -1,7 +1,6 @@
 import { IUserID } from '@/interfaces/User'
 import UserForm from '@/components/Services/User/UserForm'
 import api from '@/services/server/api'
-import { IProviderID } from '@/interfaces/Provider'
 
 export default async function EditUsers({
   params,
@@ -9,7 +8,7 @@ export default async function EditUsers({
   params: { user: string }
 }) {
   try {
-    const response = await api.get<IProviderID>(`/providers/${params.user}`)
+    const response = await api.get<IUserID>(`/users/${params.user}/user`)
     const usersById = response.data
     console.log(usersById)
     return <UserForm data={usersById} />

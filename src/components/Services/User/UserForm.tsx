@@ -11,7 +11,6 @@ import { DropdownForm } from '../../DropdownForm'
 import { useState, useTransition } from 'react'
 import ToggleSwitch from '../../ToggleSwitch'
 import { IUserID } from '@/interfaces/User'
-import { IProviderID } from '@/interfaces/Provider'
 import { CpfMask } from '@/components/Mask/CpfMask'
 
 const schemaUserForm = z.object({
@@ -32,7 +31,7 @@ const schemaUserForm = z.object({
 
 type UsersFormProps = z.infer<typeof schemaUserForm>
 
-export default function UserForm({ data }: { data: IProviderID }) {
+export default function UserForm({ data }: { data: IUserID }) {
   const [, startTransition] = useTransition()
   const [cpfMask, setCpfMask] = useState()
   const { back } = useRouter()
@@ -46,7 +45,7 @@ export default function UserForm({ data }: { data: IProviderID }) {
   } = useForm<UsersFormProps>({
     resolver: zodResolver(schemaUserForm),
     defaultValues: {
-      name: '',
+      name: users.name,
       email: '',
       phoneNumber: '',
       birthDate: '',

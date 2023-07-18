@@ -10,6 +10,7 @@ import ClickHere from '@/components/ClickHere'
 import { AuthContext } from '@/contexts/AuthContext'
 import { CpfMask } from '@/components/Mask/CpfMask'
 import { Metadata } from 'next'
+import { translatePtBrToEnUs } from '@/functions/translatePtBrToEnUs'
 
 export const metadata: Metadata = {
   title: 'Login',
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 
 const loginUserFormSchema = z.object({
   cpf: z.string().nonempty('O CPF é obrigatório').min(14, 'O CPF é inválido'),
-  password: z.string().min(6, 'A senha precisa de no mínimo 6 caracteres'),
+  password: z.string().min(6, 'A senha precisa de no mínimo 9 caracteres'),
 })
 
 type LoginUserFormData = z.infer<typeof loginUserFormSchema>
@@ -29,8 +30,9 @@ const defaultValues = {
 }
 
 export default function SignIn() {
-  const { signIn, messageError, isPending } = useContext(AuthContext)
-  const [cpfMask, setCpfMask] = useState()
+  const { signIn, messageError } = useContext(AuthContext)
+  console.log('teste')
+  const [cpfMask, setCpfMask] = useState('')
   const {
     register,
     handleSubmit,
@@ -156,12 +158,10 @@ export default function SignIn() {
 
         <button
           type="submit"
-          disabled={isPending}
-          className={`${
-            isPending && 'opacity-50'
-          } mt-10 flex justify-center rounded-xl bg-dark-blue px-40 py-5 opacity-80 hover:opacity-100`}
+          // disabled={isPending}
+          className={`mt-10 flex justify-center rounded-xl bg-dark-blue px-40 py-5 opacity-80 hover:opacity-100`}
         >
-          {isPending ? 'Carregando...' : 'Entrar'}
+          Entrar
         </button>
       </form>
     </div>

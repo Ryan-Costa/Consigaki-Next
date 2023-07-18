@@ -62,8 +62,7 @@ export type AuthContextType = {
   signIn: (data: SignInData) => Promise<void>
   signUp: (data: SignUpData) => Promise<void>
   signInData?: DataSignIn
-  messageError: ErrorType | undefined
-  isPending: boolean
+  messageError?: ErrorType
 }
 
 export type SignInResponse = {

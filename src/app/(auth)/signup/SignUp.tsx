@@ -51,7 +51,7 @@ type CreateUserFormData = z.infer<typeof createUserFormSchema>
 
 export default function SignUp() {
   const { signUp } = useContext(AuthContext)
-  const [cpfMask, setCpfMask] = useState()
+  const [cpfMask, setCpfMask] = useState('')
   const {
     register,
     handleSubmit,
@@ -59,6 +59,8 @@ export default function SignUp() {
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   })
+
+  console.log('teste')
 
   const newUnmaskedCpfData = (data: any) => {
     const removedCpfMask = data.cpf.replace(/\D/g, '')
@@ -70,12 +72,10 @@ export default function SignUp() {
   const handleSignUp = (data: CreateUserFormData) => {
     const newData = newUnmaskedCpfData(data)
     signUp(newData)
-    console.log(newData)
   }
 
   const handleChange = (e: any) => {
     setCpfMask(CpfMask(e.target.value))
-    console.log(cpfMask)
   }
 
   return (

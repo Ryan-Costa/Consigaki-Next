@@ -4,11 +4,24 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { IconArrowDown } from '../../public/icons'
 import DropdownTopbar from './DropdownTopbar'
+import { toUpperCase } from '@/functions/toUpperCase'
+import { parseCookies } from 'nookies'
 
 export default function Topbar() {
   const [isOpen, setIsOpen] = useState(false)
 
+  const cookies = parseCookies()
+
+  const usernameFromStorage = cookies.username
+
+  // useEffect(() => {
+  //   if (signInData) {
+  //     setUsername(toUpperCase(signInData.name))
+  //   }
+  // }, [username])
+
   const handleOpen = () => setIsOpen((prev) => !prev)
+
   return (
     <>
       <header className="flex h-20 w-full items-center justify-between bg-dark-blue shadow-2xl">
@@ -27,7 +40,7 @@ export default function Topbar() {
             className="flex items-center gap-4 text-white"
             onClick={handleOpen}
           >
-            Olá, Ryan da Costa Souza{' '}
+            Olá, {toUpperCase(usernameFromStorage)}{' '}
             <span
               className={`transition-transform duration-300 ${
                 isOpen ? 'rotate-180 transform ' : ''

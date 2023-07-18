@@ -11,7 +11,7 @@ import { Input } from '@/components/Common/Input'
 import { DropdownForm } from '@/components/DropdownForm'
 import { CpfMask } from '@/components/Mask/CpfMask'
 import { DateMask } from '@/components/Mask/DateMask'
-import { TelMask } from '@/components/Mask/telMask'
+import { TelMask } from '@/components/Mask/TelMask'
 
 const schemaNewUserForm = z.object({
   name: z.string().nonempty('Digite o nome do usuário').toUpperCase(),
@@ -77,11 +77,6 @@ export default function NewUserForm() {
 
     back()
   }
-
-  // const handleChange = (e: any) => {
-  //   setCpfMask(CpfMask(e.target.value))
-  //   console.log(cpfMask)
-  // }
 
   const handleChange = (event: any) => {
     const { name, value } = event.target
