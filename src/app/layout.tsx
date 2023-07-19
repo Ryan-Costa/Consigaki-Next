@@ -4,6 +4,7 @@ import '../styles/global/globals.css'
 import { Karla } from 'next/font/google'
 import { AuthProvider } from '@/contexts/AuthContext'
 import { Metadata } from 'next'
+import ToastComponent from '@/components/Common/ToastComponent'
 const karla = Karla({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -18,7 +19,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={karla.className}>
       <head />
       <body className="h-screen w-full bg-gradient-to-r from-deg2 to-deg1">
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <ToastComponent />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )
