@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useTransition } from 'react'
 import { IconUpload } from '../../public/icons'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
+import { IAvatar } from '@/interfaces/IProps'
+import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
+import { toast } from 'react-toastify'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -10,9 +13,11 @@ const inter = Inter({
 
 type ImageUploadProps = {
   type: 'modal' | 'profile'
+  avatarUrl?: string
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ type }) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({ type, avatarUrl }) => {
+  const [, startTransition] = useTransition()
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
 
@@ -38,16 +43,21 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ type }) => {
       const formData = new FormData()
       formData.append('image', selectedImage)
 
-      try {
-        fetch('/api/upload', {
-          method: 'POST',
-          body: formData,
-        })
-          .then(() => {})
-          .catch(() => {})
-      } catch (error) {
-        console.error('Erro ao fazer o upload da imagem')
-      }
+      const urlAvatar = '/users/create-avatar'
+
+      startTransition(() =>
+        patchRevalidateItems<IAvatar>(urlAvatar, formData).then((response) => {
+          console.log(response)
+          if (response) {
+            if (Object.values(response).length === 3) {
+              toast.success(response.message)
+            } else {
+              console.log(response)
+              toast.error(response.message)
+            }
+          }
+        }),
+      )
     }
   }
 
@@ -79,7 +89,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ type }) => {
           />
         ) : type === 'profile' ? (
           <Image
-            src="/images/bg-download-image.png"
+            src={avatarUrl || '/images/bg-download-image.png'}
+            // src="/images/bg-download-image.png"
             alt="bg-image-upload"
             width={150}
             height={138}

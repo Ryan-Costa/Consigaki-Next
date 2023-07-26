@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
-const withImages = require("next-images");
+const withImages = require('next-images')
 
 const nextConfig = withImages({
   experimental: {
     appDir: true,
   },
-});
+  // images: {
+  //   domains: ['consigaki.s3.sa-east-1.amazonaws.com'],
+  // },
+})
 
-module.exports = nextConfig;
+module.exports = nextConfig
