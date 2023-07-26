@@ -1,8 +1,15 @@
-import { IconClose } from '../../../../public/icons'
-import { ButtonAdd } from '../../Common/ButtonAdd'
+import { UserBankAccount } from '@/interfaces/UserBankAccount'
 import { Input } from '../../Common/Input'
 
-export default function BankData() {
+interface BankDataProps {
+  data: UserBankAccount
+}
+
+export default function BankData({ data }: BankDataProps) {
+  const bankData = data.data
+
+  console.log(data)
+
   return (
     <>
       <div className="mt-6 flex gap-6">
@@ -12,6 +19,9 @@ export default function BankData() {
           type="text"
           placeholder="000"
           className="w-full"
+          value={bankData.bank}
+          readOnly
+          disabled
         />
         <Input
           label="Agência"
@@ -19,6 +29,9 @@ export default function BankData() {
           type="text"
           placeholder="0000"
           className="w-full"
+          value={bankData.agency}
+          readOnly
+          disabled
         />
         <Input
           label="Conta"
@@ -26,6 +39,9 @@ export default function BankData() {
           type="text"
           placeholder="0000000"
           className="w-full"
+          value={bankData.account}
+          readOnly
+          disabled
         />
         <Input
           label="DV"
@@ -33,6 +49,9 @@ export default function BankData() {
           type="text"
           placeholder="0"
           className="w-full"
+          value={bankData.account}
+          readOnly
+          disabled
         />
       </div>
       <div className="mt-4 flex items-center gap-6">
@@ -42,55 +61,11 @@ export default function BankData() {
           type="text"
           placeholder="CPF, E-mail, Telefone, Chave Aleatória"
           className="w-3/6"
+          value={bankData.pixKey}
+          readOnly
+          disabled
         />
-        <ButtonAdd name="Convênio" />
       </div>
-      <table className="mb-2 mt-5 w-full border-collapse">
-        <thead>
-          <tr>
-            <th className="border border-gray-400 px-4 py-3 text-left text-base">
-              BANCO
-            </th>
-            <th className="border border-gray-400 px-4 py-3 text-left text-base">
-              AGÊNCIA
-            </th>
-            <th className="border border-gray-400 px-4 py-3 text-left text-base">
-              CONTA
-            </th>
-            <th className="border border-gray-400 px-4 py-3 text-left text-base">
-              DV
-            </th>
-            <th className="border border-gray-400 px-4 py-3 text-left text-base">
-              CHAVE PIX
-            </th>
-            <th className="border border-gray-400 px-4 py-3 text-left text-base">
-              EXCLUIR
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="border border-gray-400 px-4 py-6 text-left text-base"></td>
-            <td className="border border-gray-400 px-4 py-6 text-left text-base"></td>
-            <td className="border border-gray-400 px-4 py-6 text-left text-base"></td>
-            <td className="border border-gray-400 px-4 py-6 text-left text-base"></td>
-            <td className="border border-gray-400 px-4 py-6 text-left text-base"></td>
-            <td className="cursor-pointer border border-gray-400 px-4 py-3 text-left text-base">
-              {IconClose}
-            </td>
-          </tr>
-          <tr>
-            <td className="border border-gray-400 px-4 py-6 text-left text-base"></td>
-            <td className="border border-gray-400 px-4 py-6 text-left text-base"></td>
-            <td className="border border-gray-400 px-4 py-6 text-left text-base"></td>
-            <td className="border border-gray-400 px-4 py-6 text-left text-base"></td>
-            <td className="border border-gray-400 px-4 py-6 text-left text-base"></td>
-            <td className="cursor-pointer border border-gray-400 px-4 py-3 text-left text-base">
-              {IconClose}
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </>
   )
 }

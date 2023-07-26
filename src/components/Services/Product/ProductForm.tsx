@@ -75,7 +75,6 @@ export default function ProductForm({ data }: { data: IProductID }) {
           <DropdownForm
             name="type"
             register={register}
-            defaultValue={products.type}
             options={[
               { name: 'cartao', displayName: 'Cartão', value: 0 },
               { name: 'emprestimo', displayName: 'Empréstimo', value: 1 },

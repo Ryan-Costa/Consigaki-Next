@@ -2,7 +2,6 @@
 
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState, useTransition } from 'react'
@@ -12,6 +11,9 @@ import { DropdownForm } from '@/components/DropdownForm'
 import { CpfMask } from '@/components/Mask/CpfMask'
 import { DateMask } from '@/components/Mask/DateMask'
 import { TelMask } from '@/components/Mask/TelMask'
+import { convertToBoolean } from '@/functions/convertToBoolean'
+import { formatDateISO } from '@/functions/formatDateISO'
+import { toast } from 'react-toastify'
 
 const schemaNewUserForm = z.object({
   name: z.string().nonempty('Digite o nome do usuário').toUpperCase(),
@@ -30,13 +32,13 @@ const schemaNewUserForm = z.object({
 })
 
 type NewUserFormProps = z.infer<typeof schemaNewUserForm>
+type MaskFunctions = { [key: string]: (value: string) => string }
 
 export default function NewUserForm() {
   const [, startTransition] = useTransition()
-  const [cpfMask, setCpfMask] = useState()
-  const [telMask, setTelMask] = useState()
-  const [dateMask, setDateMask] = useState()
-  const { back } = useRouter()
+  const [cpfMask, setCpfMask] = useState<string | undefined>(undefined)
+  const [telMask, setTelMask] = useState<string | undefined>(undefined)
+  const [dateMask, setDateMask] = useState<string | undefined>(undefined)
   const {
     handleSubmit,
     register,
@@ -55,12 +57,10 @@ export default function NewUserForm() {
   const newUnmaskedCpfData = (data: any) => {
     const removedCpfMask = data.cpf.replace(/\D/g, '')
     const removedTelMask = data.phoneNumber.replace(/\D/g, '')
-    const removedDateMask = data.birthDate.replace(/\D/g, '')
     const newData = {
       ...data,
       cpf: removedCpfMask,
       phoneNumber: removedTelMask,
-      birthDate: removedDateMask,
     }
 
     return newData
@@ -68,33 +68,62 @@ export default function NewUserForm() {
 
   const handleFormSubmit = (dataForm: NewUserFormProps) => {
     const newData = newUnmaskedCpfData(dataForm)
+    const dataFormatted = {
+      ...newData,
+      birthDate: formatDateISO(newData.birthDate),
+      blocked: convertToBoolean(newData.blocked),
+      codeTokenType: 0,
+      expoPushToken: 'teste',
+    }
+
+    console.log(dataFormatted)
+    console.log(newData.birthDate)
+
     const usersUrl = '/users'
-    console.log(newData)
 
     startTransition(() =>
-      postRevalidateItems<NewUserFormProps>(usersUrl, newData),
+      postRevalidateItems<NewUserFormProps>(usersUrl, dataFormatted).then(
+        (response) => {
+          console.log(response)
+          if (response) {
+            if (Object.values(response).length === 3) {
+              toast.success(response.message)
+            } else {
+              console.log(response)
+              toast.error(response.message)
+            }
+          }
+        },
+      ),
     )
-
-    back()
   }
 
   const handleChange = (event: any) => {
     const { name, value } = event.target
 
-    let maskedValue
-
-    if (name === 'cpf') {
-      maskedValue = CpfMask(value)
-      setCpfMask(maskedValue)
-    } else if (name === 'phoneNumber') {
-      maskedValue = TelMask(value)
-      setTelMask(maskedValue)
-    } else if (name === 'birthDate') {
-      maskedValue = DateMask(value)
-      setDateMask(maskedValue)
+    const maskFunctions: MaskFunctions = {
+      cpf: CpfMask,
+      phoneNumber: TelMask,
+      birthDate: DateMask,
     }
 
-    console.log(maskedValue)
+    if (name in maskFunctions) {
+      const maskedValue = maskFunctions[name](value)
+
+      switch (name) {
+        case 'cpf':
+          setCpfMask(maskedValue)
+          break
+        case 'phoneNumber':
+          setTelMask(maskedValue)
+          break
+        case 'birthDate':
+          setDateMask(maskedValue)
+          break
+        default:
+          break
+      }
+    }
   }
 
   return (
@@ -198,12 +227,12 @@ export default function NewUserForm() {
                 {
                   name: 'bloqueado',
                   displayName: 'Login Bloqueado',
-                  value: 0,
+                  value: 1,
                 },
                 {
                   name: 'liberado',
                   displayName: 'Login Liberado',
-                  value: 1,
+                  value: 0,
                 },
               ]}
             />
@@ -215,6 +244,8 @@ export default function NewUserForm() {
             name="cadastro"
             placeholder="00/00/0000"
             className="w-full"
+            disabled
+            readOnly
           />
           <Input
             register={register}
@@ -223,6 +254,8 @@ export default function NewUserForm() {
             name="alterado"
             placeholder="00/00/0000"
             className="w-full"
+            disabled
+            readOnly
           />
         </div>
         <ButtonSave type="submit" />

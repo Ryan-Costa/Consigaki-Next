@@ -3,29 +3,21 @@
 import { z } from 'zod'
 import { Input } from '../../Common/Input'
 import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
-import { ButtonSave } from '../../Common/ButtonSave'
-import { patchRevalidateItems } from '../../../functions/patchRevalidateItems'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { DropdownForm } from '../../DropdownForm'
-import { useState, useTransition } from 'react'
-import ToggleSwitch from '../../ToggleSwitch'
 import { IUserID } from '@/interfaces/User'
 import { CpfMask } from '@/components/Mask/CpfMask'
+import { DateMask } from '@/components/Mask/DateMask'
+import { TelMask } from '@/components/Mask/TelMask'
+import { ButtonSave } from '../../Common/ButtonSave'
+import { DropdownForm } from '../../DropdownForm'
+import { useTransition, useEffect } from 'react'
+import ToggleSwitch from '../../ToggleSwitch'
+import { toast } from 'react-toastify'
+import { toUpperCase } from '@/functions/toUpperCase'
+
+import { convertToBoolean } from '@/functions/convertToBoolean'
+import { putRevalidateItems } from '@/functions/putRevalidateItems'
 
 const schemaUserForm = z.object({
-  name: z.string().nonempty('O Nome é obrigatório').toUpperCase(),
-  email: z
-    .string()
-    .nonempty('O E-mail é obrigatório')
-    .email('Formato de e-mail inválido')
-    .toLowerCase()
-    .refine((email) => {
-      return email.endsWith('@consigaki.com.br')
-    }, 'O e-mail precisa terminar com @consigaki.com.br'),
-  cpf: z.string().nonempty('O CPF é obrigatório').min(14, 'O CPF é inválido'),
-  phoneNumber: z.string().min(13, 'O Número de telefone é inválido'),
-  birthDate: z.string().min(10, 'A data de nascimento é inválida'),
   blocked: z.string(),
 })
 
@@ -33,47 +25,36 @@ type UsersFormProps = z.infer<typeof schemaUserForm>
 
 export default function UserForm({ data }: { data: IUserID }) {
   const [, startTransition] = useTransition()
-  const [cpfMask, setCpfMask] = useState()
-  const { back } = useRouter()
 
   const users = data.data
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm<UsersFormProps>({
-    resolver: zodResolver(schemaUserForm),
-    defaultValues: {
-      name: users.name,
-      email: '',
-      phoneNumber: '',
-      birthDate: '',
-      blocked: '',
-    },
-  })
+  const { handleSubmit, register, setValue } = useForm<UsersFormProps>()
 
-  const newUnmaskedCpfData = (data: any) => {
-    const removedCpfMask = data.cpf.replace(/\D/g, '')
-    const newData = { ...data, cpf: removedCpfMask }
+  const initialValue = Number(users.blocked)
 
-    return newData
-  }
+  useEffect(() => {
+    setValue('blocked', String(initialValue))
+  }, [setValue, initialValue])
 
   const handleFormSubmit = (dataForm: UsersFormProps) => {
-    const newData = newUnmaskedCpfData(dataForm)
-    console.log(newData)
-    const usersUrl = `/users/${users.id}`
+    const dataFormatted = {
+      blocked: convertToBoolean(dataForm.blocked),
+    }
+    console.log(dataFormatted.blocked)
+
+    let usersUrl: any
+
+    if (dataFormatted.blocked) {
+      usersUrl = `/users/${users.id}/block`
+    } else {
+      usersUrl = `/users/${users.id}/unblock`
+    }
 
     startTransition(() =>
-      patchRevalidateItems<UsersFormProps>(usersUrl, newData),
+      putRevalidateItems<UsersFormProps>(usersUrl).then((response) => {
+        toast.success(response.message)
+      }),
     )
-    back()
-  }
-
-  const handleChange = (e: any) => {
-    setCpfMask(CpfMask(e.target.value))
-    console.log(cpfMask)
   }
 
   return (
@@ -81,80 +62,63 @@ export default function UserForm({ data }: { data: IUserID }) {
       <div className="mt-6 flex gap-6">
         <div className="w-full">
           <Input
-            register={register}
             label="Nome"
             type="text"
             name="name"
+            value={toUpperCase(users.name)}
+            disabled
+            readOnly
             placeholder="Digite seu nome completo"
           />
-          {errors.name && (
-            <span className="text-md font-bold tracking-wide text-red-600">
-              {errors.name.message}
-            </span>
-          )}
         </div>
         <div className="w-full">
           <Input
-            register={register}
             label="E-mail"
             type="text"
             name="email"
+            value={users.email}
+            disabled
+            readOnly
             placeholder="seunome@consigaki.com.br"
             className="w-full"
           />
-          {errors.email && (
-            <span className="text-md font-bold tracking-wide text-red-600">
-              {errors.email.message}
-            </span>
-          )}
         </div>
       </div>
       <div className="mb-6 mt-6 flex gap-6">
         <div className="w-full">
           <Input
-            register={register}
             maxLength={14}
             label="CPF"
             type="text"
             name="cpf"
             placeholder="000.000.000-00"
-            value={cpfMask}
-            onChange={handleChange}
+            value={CpfMask(users.cpf)}
+            disabled
+            readOnly
           />
-          {errors.cpf && (
-            <span className="text-md font-bold tracking-wide text-red-600">
-              {errors.cpf.message}
-            </span>
-          )}
         </div>
         <div className="w-full">
           <Input
-            register={register}
             label="Celular"
             type="text"
             name="phoneNumber"
             placeholder="(00) 0 0000-0000"
+            value={TelMask(users.phoneNumber)}
+            disabled
+            readOnly
           />
-          {errors.phoneNumber && (
-            <span className="text-md font-bold tracking-wide text-red-600">
-              {errors.phoneNumber.message}
-            </span>
-          )}
         </div>
         <div className="w-full">
           <Input
-            register={register}
             label="Data de nascimento"
             type="text"
             name="birthDate"
             placeholder="00/00/0000"
             className="w-full"
+            value={DateMask(users.birthDate)}
+            disabled
+            readOnly
           />
-          {errors.birthDate && (
-            <span className="text-md font-bold tracking-wide text-red-600">
-              {errors.birthDate.message}
-            </span>
-          )}
         </div>
       </div>
       <div className="mb-6 mt-6 flex gap-6">
@@ -165,17 +129,17 @@ export default function UserForm({ data }: { data: IUserID }) {
           <DropdownForm
             name="blocked"
             register={register}
-            defaultValue="Selecione"
+            defaultValue={Number(users.blocked)}
             options={[
-              {
-                name: 'bloqueado',
-                displayName: 'Login Bloqueado',
-                value: 0,
-              },
               {
                 name: 'liberado',
                 displayName: 'Login Liberado',
-                value: 1,
+                value: '0',
+              },
+              {
+                name: 'bloqueado',
+                displayName: 'Login Bloqueado',
+                value: '1',
               },
             ]}
           />

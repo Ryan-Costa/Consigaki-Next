@@ -4,8 +4,8 @@ import { UseFormRegister } from 'react-hook-form'
 
 interface DropdownProps {
   name: string
-  options: { name: string; displayName: string; value: number }[]
-  defaultValue?: number | string | boolean | undefined
+  options: { name: string; displayName: string; value: number | string }[]
+  defaultValue?: number | string | undefined
   className?: string
   register?: UseFormRegister<any>
   valueSelected?: (value: string) => void
@@ -20,7 +20,7 @@ export function DropdownForm({
   valueSelected,
 }: DropdownProps) {
   const [selectedValue, setSelectedValue] = useState<
-    number | string | boolean | undefined
+    number | string | undefined
   >(defaultValue)
 
   const handleSelectItem = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -35,12 +35,13 @@ export function DropdownForm({
       className="h-[48px] rounded-lg border border-gray-400 px-2 outline-none"
       {...(register && register(name))}
       onChange={handleSelectItem}
+      value={selectedValue}
     >
-      {defaultValue ? (
+      {selectedValue && (
         <option value="" disabled hidden>
-          {defaultValue}
+          {selectedValue}
         </option>
-      ) : null}
+      )}
 
       {options.map((option) => (
         <option

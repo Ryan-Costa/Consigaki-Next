@@ -3,7 +3,6 @@
 import { IDataLoans, ILoans } from '@/interfaces/Loan'
 import { useEffect, useState, useTransition } from 'react'
 import { IconArrow, IconPartners } from '../../../../public/icons'
-import { Dropdown } from '../../Dropdown'
 import { SearchInput } from '../../SearchInput'
 import TBodyLoans from './TBodyLoans'
 import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
@@ -65,15 +64,8 @@ export function TableLoans({ loanData }: LoansProps) {
         <h2 className="flex items-center gap-2 text-2xl font-bold">
           Esteira {IconPartners}
         </h2>
-        <div className="flex gap-5 ">
-          <Dropdown
-            defaultValue="Ativo"
-            type="table"
-            options={['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4']}
-          />
-          <div className="flex items-center justify-center">
-            <SearchInput onSearch={handleSearch} />
-          </div>
+        <div className="flex items-center justify-center">
+          <SearchInput onSearch={handleSearch} />
         </div>
       </div>
       <table className="mt-28 w-full text-left">

@@ -42,6 +42,10 @@ const api = (axios: AxiosInstance) => {
       return axios.get<T>(url, config)
     },
 
+    getSection: function (url: string) {
+      return axios.get(url)
+    },
+
     put: function <T>(
       url: string,
       body: unknown,

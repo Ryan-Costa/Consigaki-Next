@@ -13,12 +13,12 @@ import { DropdownForm } from '../../DropdownForm'
 import LoansDocuments from './LoansDocuments'
 import { putRevalidateItems } from '@/functions/putRevalidateItems'
 
-const schamaLoansForm = z.object({
+const schemaLoansForm = z.object({
   status: z.number(),
   observation: z.string(),
 })
 
-type LoansFormProps = z.infer<typeof schamaLoansForm>
+type LoansFormProps = z.infer<typeof schemaLoansForm>
 
 export default function LoansForm({ data }: { data: ILoanID }) {
   const [obsPendencies, setObsPendencies] = useState(true)
@@ -28,7 +28,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
   const loans = data.data
 
   const { handleSubmit, register } = useForm<LoansFormProps>({
-    resolver: zodResolver(schamaLoansForm),
+    resolver: zodResolver(schemaLoansForm),
     defaultValues: {
       status: loans.status,
     },
@@ -38,6 +38,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
     console.log('valor do status:', +value)
     value === '2' ? setObsPendencies(false) : setObsPendencies(true)
   }
+  console.log(loans.status)
 
   const handleFormSubmit = (dataForm: LoansFormProps) => {
     const loansUrl = `/loans/${loans.id}`

@@ -2,10 +2,9 @@
 
 import { useEffect, useState, useTransition } from 'react'
 import { IconArrow, IconPartners } from '../../../../public/icons'
-import { IDataUsers, IUsers } from '@/interfaces/User'
+import { IDataUsers, IUsersID } from '@/interfaces/User'
 import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
 import { ButtonAdd } from '@/components/Common/ButtonAdd'
-import { Dropdown } from '@/components/Dropdown'
 import { SearchInput } from '@/components/SearchInput'
 import Link from 'next/link'
 import TBodyUsers from './TBodyUsers'
@@ -17,8 +16,8 @@ interface UsersProps {
 export default function TableUsers({ userData }: UsersProps) {
   const [, startTransition] = useTransition()
   const totalPages = userData.data.totalPages
-  const [currentItems, setCurrentItems] = useState<IUsers[]>([])
-  const [users, setUsers] = useState<IUsers[]>(userData.data.users)
+  const [currentItems, setCurrentItems] = useState<IUsersID[]>([])
+  const [users, setUsers] = useState<IUsersID[]>(userData.data.users)
   const [currentPage, setCurrentPage] = useState(userData.data.currentPage)
   const [searchTerm, setSearchTerm] = useState('')
   const itemsPerPage = 10
@@ -70,15 +69,8 @@ export default function TableUsers({ userData }: UsersProps) {
         <h2 className="flex items-center gap-2 text-2xl font-bold">
           Usuários {IconPartners}
         </h2>
-        <div className="flex gap-5 ">
-          <Dropdown
-            defaultValue="Ativo"
-            type="table"
-            options={['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4']}
-          />
-          <div className="flex items-center justify-center">
-            <SearchInput onSearch={handleSearch} />
-          </div>
+        <div className="flex items-center justify-center">
+          <SearchInput onSearch={handleSearch} />
         </div>
       </div>
       <Link href={`/users/new`}>

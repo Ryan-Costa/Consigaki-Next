@@ -1,4 +1,4 @@
-export interface IUsers {
+export type IUsersID = {
   id?: number
   name: string
   email: string
@@ -14,29 +14,16 @@ export interface IUsers {
   createdAt: string
   updatedAt: string
 }
-export interface IUserID {
-  data: {
-    id?: number
-    name: string
-    email: string
-    birthDate: string
-    cpf: string
-    phoneNumber: string
-    temp: boolean
-    active?: boolean
-    role: number
-    codeTokenType: number
-    blocked: boolean
-    avatar: string
-    createdAt: string
-    updatedAt: string
-  }
+
+export type IUser = {
+  data: IUsersID
   message?: string
 }
-export interface IDataUsers {
+
+export type IDataUsers = {
   data: {
     totalItems: number
-    users: IUsers[]
+    users: IUsersID[]
     totalPages: number
     currentPage: number
   }

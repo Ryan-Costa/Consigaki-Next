@@ -1,14 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { IconePass, IconeUser } from '../../../../public/icons'
+import { IconePass } from '../../../../public/icons'
 import { useForm } from 'react-hook-form'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ClickHere from '@/components/ClickHere'
 import { AuthContext } from '@/contexts/AuthContext'
-import { CpfMask } from '@/components/Mask/CpfMask'
 import { Metadata } from 'next'
 import { toast } from 'react-toastify'
 import InputMask from '@/components/Common/InputMask'
@@ -25,11 +24,6 @@ const loginUserFormSchema = z.object({
 
 type LoginUserFormData = z.infer<typeof loginUserFormSchema>
 
-const defaultValues = {
-  cpf: '',
-  password: '',
-}
-
 export default function SignIn() {
   const { signIn, messageError } = useContext(AuthContext)
   const {
@@ -38,8 +32,13 @@ export default function SignIn() {
     formState: { errors },
   } = useForm<LoginUserFormData>({
     resolver: zodResolver(loginUserFormSchema),
-    defaultValues,
+    defaultValues: {
+      cpf: '',
+      password: '',
+    },
   })
+
+  console.log(errors)
 
   const newUnmaskedCpfData = (data: any) => {
     const removedCpfMask = data.cpf.replace(/\D/g, '')
@@ -53,7 +52,6 @@ export default function SignIn() {
 
   const handleSignIn = (data: any) => {
     const newData = newUnmaskedCpfData(data)
-    console.log(newData)
     signIn(newData)
   }
 
@@ -90,6 +88,7 @@ export default function SignIn() {
               </div>
             </>
           )}
+
           <label
             htmlFor="pass"
             className={`
@@ -117,7 +116,6 @@ export default function SignIn() {
 
         <button
           type="submit"
-          // disabled={isPending}
           className={`mt-10 flex justify-center rounded-xl bg-dark-blue px-40 py-5 opacity-80 hover:opacity-100`}
         >
           Entrar

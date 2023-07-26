@@ -7,18 +7,13 @@ interface ToggleSwitchProps {
 }
 
 export default function ToggleSwitch({ isChecked }: ToggleSwitchProps) {
-  const [isOn, setIsOn] = useState(isChecked)
-
-  const handleToggle = () => {
-    setIsOn(!isOn)
-  }
+  const [isOn] = useState(isChecked)
 
   return (
     <div
       className={`toggle-switch flex h-7 w-14 items-center rounded-full ${
         isOn ? 'bg-goldenrod' : 'bg-gray-300'
       }`}
-      onClick={handleToggle}
     >
       <div
         className={`toggle-ball h-6 w-6 rounded-full bg-black ${

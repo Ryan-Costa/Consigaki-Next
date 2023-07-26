@@ -4,7 +4,6 @@ import React, { useEffect, useState, useTransition } from 'react'
 import { IconArrow, IconPartners } from '../../../../public/icons'
 import { ButtonAdd } from '../../Common/ButtonAdd'
 import { SearchInput } from '../../SearchInput'
-import { Dropdown } from '../../Dropdown'
 import Link from 'next/link'
 import TBodyProducts from './TBodyProducts'
 import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
@@ -73,15 +72,8 @@ export default function TableProducts({ productData }: ProductsProps) {
         <h2 className="flex items-center gap-2 text-2xl font-bold">
           Produtos {IconPartners}
         </h2>
-        <div className="flex gap-5 ">
-          <Dropdown
-            defaultValue="Ativo"
-            type="table"
-            options={['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4']}
-          />
-          <div className="flex items-center justify-center">
-            <SearchInput onSearch={handleSearch} />
-          </div>
+        <div className="flex items-center justify-center">
+          <SearchInput onSearch={handleSearch} />
         </div>
       </div>
       <Link href={`/products/new`}>

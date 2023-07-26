@@ -16,8 +16,6 @@ export default function InputMask({ register, name, errors }: InputMaskProps) {
     setCpfMask(CpfMask(e.target.value))
   }
 
-  console.log('teste')
-
   return (
     <div className="relative z-0 mb-20 flex flex-col gap-1">
       <input

@@ -63,6 +63,7 @@ export type AuthContextType = {
   signUp: (data: SignUpData) => Promise<void>
   signInData?: DataSignIn
   messageError?: ErrorType
+  username: string
 }
 
 export type SignInResponse = {

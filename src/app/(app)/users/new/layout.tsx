@@ -32,7 +32,7 @@ export default function EditUserLayout({ children }: { children: ReactNode }) {
         <p
           className={`${inter.className} text-base tracking-tight text-text-regular`}
         >
-          Prencha todos os campos
+          Prencha todos os camposs
         </p>
         {children}
       </div>

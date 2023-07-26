@@ -4,7 +4,6 @@ import { IAgreements, IDataAgreements } from '@/interfaces/Agreement'
 import { useEffect, useState, useTransition } from 'react'
 import { IconArrow, IconPartners } from '../../../../public/icons'
 import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
-import { Dropdown } from '../../Dropdown'
 import { SearchInput } from '../../SearchInput'
 import Link from 'next/link'
 import { ButtonAdd } from '../../Common/ButtonAdd'
@@ -71,15 +70,8 @@ export default function TableAgreements({ agreementData }: AgreementsProps) {
         <h2 className="flex items-center gap-2 text-2xl font-bold">
           Convênios {IconPartners}
         </h2>
-        <div className="flex gap-5 ">
-          <Dropdown
-            defaultValue="Ativo"
-            type="table"
-            options={['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4']}
-          />
-          <div className="flex items-center justify-center">
-            <SearchInput onSearch={handleSearch} />
-          </div>
+        <div className="flex items-center justify-center">
+          <SearchInput onSearch={handleSearch} />
         </div>
       </div>
       <Link href={'/agreements/new'}>

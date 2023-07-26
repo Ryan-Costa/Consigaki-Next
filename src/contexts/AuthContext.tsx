@@ -1,7 +1,7 @@
 'use client'
 
-import { createContext, useState } from 'react'
-import { setCookie } from 'nookies'
+import { createContext, useEffect, useState } from 'react'
+import { parseCookies, setCookie } from 'nookies'
 import api from '@/services/server/api'
 import { useRouter } from 'next/navigation'
 import {
@@ -13,19 +13,26 @@ import {
   SignInResponse,
   SignUpResponse,
 } from '@/interfaces/AuthProps'
+import { toUpperCase } from '@/functions/toUpperCase'
 
 export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthProvider({ children }: any) {
-  // const [isPending, startTransition] = useTransition()
   const [signInData, setSignInData] = useState<DataSignIn>()
   const [messageError, setMessageError] = useState<ErrorType>()
+  const cookies = parseCookies()
+  const [username, setUsername] = useState<string>('')
   const router = useRouter()
 
   const isAuthenticated = !!signInData
 
+  useEffect(() => {
+    if (cookies.username) {
+      setUsername(toUpperCase(cookies.username))
+    }
+  }, [cookies.username])
+
   async function signIn({ cpf, password }: SignInData) {
-    // startTransition(async () => {
     api
       .post<SignInResponse>('/login', {
         cpf,
@@ -38,7 +45,7 @@ export function AuthProvider({ children }: any) {
         console.log('mensagem', message)
 
         setCookie(undefined, 'consigaki.token', token, {
-          maxAge: 60 * 60 * 1, // 1 hour
+          maxAge: 60 * 60 * 1, // 14 dias
         })
         setSignInData(data)
         console.log(data)
@@ -51,26 +58,16 @@ export function AuthProvider({ children }: any) {
         router.push('/dashboard')
       })
       .catch((error) => {
-        console.log(error.response)
         if (error.response) {
-          console.log(error.response.data)
-          // console.log('erro', error)
-          // const formattedErrorMessage =
-          //   error.message === 'Request failed with status code 409'
-          //     ? 'CPF ou senha inválidos'
-          //     : error.message
           setMessageError(error.response.data)
         } else {
           console.log('Unexpected error', error)
         }
       })
-
-    // })
   }
 
   async function signUp({ cpf, name, email, password }: SignUpData) {
     try {
-      // startTransition(async () => {
       const response = await api.post<SignUpResponse>('/users/backoffice', {
         cpf,
         name,
@@ -81,22 +78,7 @@ export function AuthProvider({ children }: any) {
       const { message } = response.data
 
       console.log(message)
-      // })
-
-      // }
-      console.log('SignUp')
-    } catch (err) {
-      if (err instanceof Error) {
-        console.log('erro', err)
-        // const formattedErrorMessage =
-        //   err.message === 'Request failed with status code 409'
-        //     ? 'CPF ou senha inválidos'
-        //     : err.message
-        // setMessageError({ message: formattedErrorMessage })
-      } else {
-        console.log('Unexpected error', err)
-      }
-    }
+    } catch (err) {}
   }
 
   return (
@@ -107,6 +89,7 @@ export function AuthProvider({ children }: any) {
         signIn,
         signUp,
         messageError,
+        username,
         // isPending,
       }}
     >
