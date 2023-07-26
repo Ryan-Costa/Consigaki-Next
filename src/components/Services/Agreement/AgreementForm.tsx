@@ -3,14 +3,13 @@
 import { z } from 'zod'
 import { Input } from '../../Common/Input'
 import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
 import { ButtonSave } from '../../Common/ButtonSave'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IAgreementID } from '@/interfaces/Agreement'
 import { useTransition } from 'react'
 import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
 import ToggleSwitch from '../../ToggleSwitch'
-// import SectionProductsAndParams from './SectionProductsAndParams'
+import AgreementDetails from './AgreementDetails'
 
 const schemaAgreementForm = z.object({
   name: z
@@ -23,7 +22,6 @@ type AgreementsFormProps = z.infer<typeof schemaAgreementForm>
 
 export default function AgreementForm({ data }: { data: IAgreementID }) {
   const [, startTransition] = useTransition()
-  const { back } = useRouter()
 
   const agreements = data.data
 
@@ -46,10 +44,10 @@ export default function AgreementForm({ data }: { data: IAgreementID }) {
     const agreementsUrl = `/agreements/${agreements.id}`
 
     startTransition(() =>
-      patchRevalidateItems<AgreementsFormProps>(agreementsUrl, dataForm),
+      patchRevalidateItems<AgreementsFormProps>(agreementsUrl, dataForm).then(
+        (response) => console.log(response),
+      ),
     )
-
-    back()
   }
 
   return (
@@ -88,7 +86,7 @@ export default function AgreementForm({ data }: { data: IAgreementID }) {
       </div>
       <ToggleSwitch isChecked={agreements.active} />
       <ButtonSave />
-      {/* <SectionProductsAndParams /> */}
+      <AgreementDetails />
     </form>
   )
 }
