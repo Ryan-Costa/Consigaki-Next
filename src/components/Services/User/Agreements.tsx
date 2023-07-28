@@ -6,7 +6,7 @@ interface AgreementUserProps {
   userId: string
 }
 
-export function AgreementsUserPage({ userId }: AgreementUserProps) {
+export function Agreements({ userId }: AgreementUserProps) {
   const URL = `/user-agreements/${userId}`
 
   const { data, error } = useSWR(URL, (url) =>

@@ -6,14 +6,15 @@ import { AuthContext } from '@/contexts/AuthContext'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import { PostUserCall, UserCall } from '@/interfaces/UserCalls'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useContext, useTransition } from 'react'
+import { useContext, useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import api from '@/services/server/api'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
+import { toast } from 'react-toastify'
 
 const schemaCallsForm = z.object({
-  observation: z.string(),
+  call: z.string(),
 })
 
 type CallsFormProps = z.infer<typeof schemaCallsForm>
@@ -23,19 +24,29 @@ interface CallUserProps {
 }
 
 export default function Calls({ userId }: CallUserProps) {
-  const { signInData } = useContext(AuthContext)
-  const { handleSubmit, register } = useForm<CallsFormProps>({
+  const { userID } = useContext(AuthContext)
+  const [expandedCallId, setExpandedCallId] = useState(null)
+  const [valueTextarea, setValueTextarea] = useState('')
+  const { handleSubmit, register, reset } = useForm<CallsFormProps>({
     resolver: zodResolver(schemaCallsForm),
     defaultValues: {
-      observation: '',
+      call: '',
     },
   })
+
+  const toggleExpand = (callId: any) => {
+    if (expandedCallId === callId) {
+      setExpandedCallId(null)
+    } else {
+      setExpandedCallId(callId)
+    }
+  }
 
   const [, startTransition] = useTransition()
   // const callData = data.data
   // console.log(callData)
 
-  console.log(signInData)
+  console.log(userID)
 
   const URL = `/users-calls/${userId}`
 
@@ -56,27 +67,39 @@ export default function Calls({ userId }: CallUserProps) {
     console.log(dataForm)
 
     const newData = {
-      userId: signInData?.id,
+      userId: userID,
       ...dataForm,
     }
 
-    console.log(newData)
+    console.log(typeof newData.userId)
 
-    // startTransition(() =>
-    //   postRevalidateItems<PostUserCall>(userCallsUrl, dataForm),
-    // )
+    startTransition(() =>
+      postRevalidateItems<PostUserCall>(userCallsUrl, newData).then(
+        (response) => {
+          api.get<UserCall>(`/users-calls/${userId}`).then((res) => mutate(URL))
+          toast.success(response.message)
+        },
+      ),
+    )
   }
 
   return (
     <>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <TextareaWithCounter
-          name="observation"
+          name="call"
           maxLength={2000}
+          value={valueTextarea}
           register={register}
         />
 
-        <ButtonAdd name="Observação" type="button" />
+        <ButtonAdd
+          name="Observação"
+          type="button"
+          onClick={() => {
+            setValueTextarea('')
+          }}
+        />
       </form>
       <table className="mt-4 w-full text-left">
         <thead>
@@ -93,7 +116,41 @@ export default function Calls({ userId }: CallUserProps) {
                 {new Date(call.created_at).toLocaleDateString()}
               </td>
               <td className="w-3/6 p-4 text-left">{call.user.name}</td>
-              <td className="w-1/6 p-4 text-left">{call.call}</td>
+              <td className="w-1/6 p-4 text-left">
+                <div className="relative">
+                  <button
+                    onClick={() => toggleExpand(call.id)}
+                    className="flex items-center"
+                  >
+                    <svg
+                      className="mr-2 h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path fillRule="evenodd" d="M6 8l4 4 4-4H6z" />
+                    </svg>
+                    Exibir Histórico
+                  </button>
+                  {expandedCallId === call.id && (
+                    <div
+                      className={`${
+                        expandedCallId === call.id
+                          ? 'max-h-40 overflow-hidden'
+                          : 'max-h-0'
+                      }`}
+                    >
+                      <textarea
+                        value={call.call}
+                        className={`mt-2 resize-none rounded border border-gray-400 p-2 ${
+                          !expandedCallId && 'hidden'
+                        }`}
+                        rows={3}
+                        readOnly
+                      />
+                    </div>
+                  )}
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

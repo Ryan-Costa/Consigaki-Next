@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { AgreementsUserPage } from './AgreementsUserPage'
-import { UserRequests } from './UserRequests'
+import { Agreements } from './Agreements'
+import { Requests } from './Requests'
 import Calls from './Calls'
 import BankData from './BankData'
 interface UserDetailsProps {
@@ -14,12 +14,12 @@ export default function UserDetails({ userId }: UserDetailsProps) {
     {
       id: 'agreements',
       label: 'CONVÊNIOS',
-      component: <AgreementsUserPage userId={userId} />,
+      component: <Agreements userId={userId} />,
     },
     {
       id: 'requests',
       label: 'SOLICITAÇÕES',
-      component: <UserRequests userId={userId} />,
+      component: <Requests userId={userId} />,
     },
     {
       id: 'calls',

@@ -22,15 +22,19 @@ export function AuthProvider({ children }: any) {
   const [messageError, setMessageError] = useState<ErrorType>()
   const cookies = parseCookies()
   const [username, setUsername] = useState<string>('')
+  const [userID, setUserID] = useState<number>(0)
   const router = useRouter()
 
   const isAuthenticated = !!signInData
 
   useEffect(() => {
-    if (cookies.username) {
+    if (cookies.username && cookies.userId) {
       setUsername(toUpperCase(cookies.username))
+      setUserID(Number(cookies.userId))
     }
-  }, [cookies.username])
+  }, [cookies.username, cookies.userId])
+
+  console.log(typeof userID)
 
   async function signIn({ cpf, password }: SignInData) {
     api
@@ -48,6 +52,8 @@ export function AuthProvider({ children }: any) {
         setSignInData(data)
 
         if (data) {
+          setCookie(undefined, 'userId', String(data.id))
+          console.log(data.id)
           setCookie(undefined, 'username', data.name)
         }
 
@@ -86,6 +92,7 @@ export function AuthProvider({ children }: any) {
         signUp,
         messageError,
         username,
+        userID,
       }}
     >
       {children}

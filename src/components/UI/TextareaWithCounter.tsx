@@ -29,7 +29,17 @@ const TextareaWithCounter: React.FC<TextareaWithCounterProps> = ({
           onChange={handleChange}
           maxLength={maxLength}
         />
-        <span>{maxLength - text.length}/2000 caracteres restantes</span>
+        <div className="flex w-full justify-between ">
+          <span
+            onClick={() => setText('')}
+            className="cursor-pointer text-gray-600 hover:text-gray-900"
+          >
+            Limpar
+          </span>
+          <span className="text-gray-600">
+            {maxLength - text.length}/2000 caracteres restantes
+          </span>
+        </div>
       </div>
     </>
   )

@@ -5,7 +5,7 @@ interface RequestsUserProps {
   userId: string
 }
 
-export function UserRequests({ userId }: RequestsUserProps) {
+export function Requests({ userId }: RequestsUserProps) {
   const URL = `/loans/${userId}/get-all`
 
   const { data, error } = useSWR(URL, (url) =>

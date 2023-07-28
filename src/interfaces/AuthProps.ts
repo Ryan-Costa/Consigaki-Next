@@ -64,6 +64,7 @@ export type AuthContextType = {
   signInData?: DataSignIn
   messageError?: ErrorType
   username: string
+  userID: number
 }
 
 export type SignInResponse = {
