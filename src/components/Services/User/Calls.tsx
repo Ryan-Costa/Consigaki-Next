@@ -27,7 +27,7 @@ export default function Calls({ userId }: CallUserProps) {
   const { userID } = useContext(AuthContext)
   const [expandedCallId, setExpandedCallId] = useState(null)
   const [valueTextarea, setValueTextarea] = useState('')
-  const { handleSubmit, register, reset } = useForm<CallsFormProps>({
+  const { handleSubmit, register } = useForm<CallsFormProps>({
     resolver: zodResolver(schemaCallsForm),
     defaultValues: {
       call: '',
