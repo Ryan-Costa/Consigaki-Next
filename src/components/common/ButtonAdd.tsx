@@ -1,6 +1,8 @@
-interface ButtonAddProps {
+import { ComponentProps } from 'react'
+
+type ButtonAddProps = ComponentProps<'button'> & {
   name: string
-  type?: 'tableAgreement'
+  styled?: 'tableAgreement'
   handleAddition?: () => void
   handleOpenModal?: () => void
   className?: string
@@ -8,6 +10,7 @@ interface ButtonAddProps {
 
 export function ButtonAdd({
   name,
+  styled,
   type,
   handleAddition,
   handleOpenModal,
@@ -19,7 +22,7 @@ export function ButtonAdd({
         <button
           className={`${className} rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none`}
           onClick={() => {
-            if (type === 'tableAgreement') {
+            if (styled === 'tableAgreement') {
               handleOpenModal && handleOpenModal()
             } else {
               handleAddition && handleAddition()

@@ -1,12 +1,27 @@
 import { UserRequest } from '@/interfaces/UserRequest'
-
-interface UserRequestsProps {
-  data: UserRequest
+import api from '@/services/server/api'
+import useSWR from 'swr'
+interface RequestsUserProps {
+  userId: string
 }
 
-export function UserRequests({ data }: UserRequestsProps) {
+export function UserRequests({ userId }: RequestsUserProps) {
+  const URL = `/loans/${userId}/get-all`
+
+  const { data, error } = useSWR(URL, (url) =>
+    api.get<UserRequest>(url).then((res) => res.data.data),
+  )
+
   console.log(data)
-  const requestsData = data.data
+
+  if (error) {
+    return <div>Error ao carregar os dados</div>
+  }
+
+  if (!data) {
+    return <div>Carregando...</div>
+  }
+
   return (
     <div>
       <table className="w-full text-left">
@@ -22,7 +37,7 @@ export function UserRequests({ data }: UserRequestsProps) {
           </tr>
         </thead>
         <tbody>
-          {requestsData.map((request) => (
+          {data.map((request) => (
             <tr key={request.id} className="border-y">
               <td className="p-3 text-left">{request.id}</td>
               <td className="p-3 text-left">{request.status}</td>

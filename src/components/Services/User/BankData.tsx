@@ -1,14 +1,26 @@
 import { UserBankAccount } from '@/interfaces/UserBankAccount'
 import { Input } from '../../Common/Input'
+import api from '@/services/server/api'
+import useSWR from 'swr'
 
-interface BankDataProps {
-  data: UserBankAccount
+interface BankDataUserProps {
+  userId: string
 }
 
-export default function BankData({ data }: BankDataProps) {
-  const bankData = data.data
+export default function BankData({ userId }: BankDataUserProps) {
+  const URL = `/users-bank-account/${userId}`
 
-  console.log(data)
+  const { data, error } = useSWR(URL, (url) =>
+    api.get<UserBankAccount>(url).then((res) => res.data.data),
+  )
+
+  if (error) {
+    return <div>Error ao carregar os dados</div>
+  }
+
+  if (!data) {
+    return <div>Carregando...</div>
+  }
 
   return (
     <>
@@ -19,7 +31,7 @@ export default function BankData({ data }: BankDataProps) {
           type="text"
           placeholder="000"
           className="w-full"
-          value={bankData.bank}
+          value={data.bank}
           readOnly
           disabled
         />
@@ -29,7 +41,7 @@ export default function BankData({ data }: BankDataProps) {
           type="text"
           placeholder="0000"
           className="w-full"
-          value={bankData.agency}
+          value={data.agency}
           readOnly
           disabled
         />
@@ -39,7 +51,7 @@ export default function BankData({ data }: BankDataProps) {
           type="text"
           placeholder="0000000"
           className="w-full"
-          value={bankData.account}
+          value={data.account}
           readOnly
           disabled
         />
@@ -49,7 +61,7 @@ export default function BankData({ data }: BankDataProps) {
           type="text"
           placeholder="0"
           className="w-full"
-          value={bankData.account}
+          value={data.account}
           readOnly
           disabled
         />
@@ -61,7 +73,7 @@ export default function BankData({ data }: BankDataProps) {
           type="text"
           placeholder="CPF, E-mail, Telefone, Chave Aleatória"
           className="w-3/6"
-          value={bankData.pixKey}
+          value={data.pixKey}
           readOnly
           disabled
         />

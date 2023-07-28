@@ -1,9 +1,7 @@
+import UserDetails from '@/components/Services/User/UserDetails'
 import UserEditPage from '@/components/Services/User/UserEditPage'
-import { getAgreementsUser } from '@/services/getAgreementsUser'
-import { getBankData } from '@/services/getBankData'
-import { getCallsUser } from '@/services/getCallsUser'
+import UserForm from '@/components/Services/User/UserForm'
 import { getCurrentUser } from '@/services/getCurrentUser'
-import { getRequestsUser } from '@/services/getRequestsUser'
 
 export default async function EditUsers({
   params,
@@ -13,22 +11,11 @@ export default async function EditUsers({
   try {
     const userData = getCurrentUser(params.user)
     const usersById = await userData
-    const agreementsData = getAgreementsUser(params.user)
-    const agreementsById = await agreementsData
-    const requestsData = getRequestsUser(params.user)
-    const requestsById = await requestsData
-    const callsData = getCallsUser(params.user)
-    const callsById = await callsData
-    const bankData = getBankData(params.user)
-    const bankDataById = await bankData
 
     return (
       <UserEditPage
-        data={usersById}
-        dataAgreements={agreementsById}
-        dataRequests={requestsById}
-        dataBankDatas={bankDataById}
-        dataCalls={callsById}
+        userForm={<UserForm dataUserId={usersById} />}
+        userDetails={<UserDetails userId={params.user} />}
       />
     )
   } catch (error) {

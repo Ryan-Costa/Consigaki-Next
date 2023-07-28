@@ -3,7 +3,7 @@
 import { z } from 'zod'
 import { Input } from '../../Common/Input'
 import { useForm } from 'react-hook-form'
-import { IUserID } from '@/interfaces/User'
+import { IUser } from '@/interfaces/User'
 import { CpfMask } from '@/components/Mask/CpfMask'
 import { DateMask } from '@/components/Mask/DateMask'
 import { TelMask } from '@/components/Mask/TelMask'
@@ -21,12 +21,16 @@ const schemaUserForm = z.object({
   blocked: z.string(),
 })
 
+interface UserIdProps {
+  dataUserId: IUser
+}
+
 type UsersFormProps = z.infer<typeof schemaUserForm>
 
-export default function UserForm({ data }: { data: IUserID }) {
+export default function UserForm({ dataUserId }: UserIdProps) {
   const [, startTransition] = useTransition()
 
-  const users = data.data
+  const users = dataUserId.data
 
   const { handleSubmit, register, setValue } = useForm<UsersFormProps>()
 

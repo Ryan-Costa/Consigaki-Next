@@ -103,7 +103,7 @@ export function TableEditParamAgreement() {
         />
         <ButtonAdd
           name=""
-          type="tableAgreement"
+          styled="tableAgreement"
           className="w-full"
           handleOpenModal={handleOpenModalProduct}
         />

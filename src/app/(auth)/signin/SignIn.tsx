@@ -38,8 +38,6 @@ export default function SignIn() {
     },
   })
 
-  console.log(errors)
-
   const newUnmaskedCpfData = (data: any) => {
     const removedCpfMask = data.cpf.replace(/\D/g, '')
     const newData = {

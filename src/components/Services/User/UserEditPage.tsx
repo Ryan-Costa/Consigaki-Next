@@ -1,35 +1,18 @@
-import { IUser } from '@/interfaces/User'
-import UserForm from './UserForm'
-import UserDetails from './UserDetails'
-import { UserAgreement } from '@/interfaces/UserAgreement'
-import { UserRequest } from '@/interfaces/UserRequest'
-import { UserBankAccount } from '@/interfaces/UserBankAccount'
-import { UserCall } from '@/interfaces/UserCall'
+import { ReactNode } from 'react'
 
 interface UserEditPageProps {
-  data: IUser
-  dataAgreements: UserAgreement
-  dataRequests: UserRequest
-  dataCalls: UserCall
-  dataBankDatas: UserBankAccount
+  userForm: ReactNode
+  userDetails: ReactNode
 }
 
 export default function UserEditPage({
-  data,
-  dataAgreements,
-  dataRequests,
-  dataCalls,
-  dataBankDatas,
+  userForm,
+  userDetails,
 }: UserEditPageProps) {
   return (
     <>
-      <UserForm data={data} />
-      <UserDetails
-        dataAgreements={dataAgreements}
-        dataRequests={dataRequests}
-        dataCalls={dataCalls}
-        dataBankDatas={dataBankDatas}
-      />
+      {userForm}
+      {userDetails}
     </>
   )
 }

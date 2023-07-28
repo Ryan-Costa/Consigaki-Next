@@ -69,7 +69,7 @@ export default function NewProductForm() {
             <DropdownForm
               name="type"
               register={register}
-              defaultValue="Selecione o tipo do produto"
+              defaultValue="Selecione"
               options={[
                 { name: 'cartao', displayName: 'Cartão', value: 0 },
                 { name: 'emprestimo', displayName: 'Empréstimo', value: 1 },

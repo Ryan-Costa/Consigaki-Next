@@ -14,3 +14,8 @@ export type UserCall = {
   data: ICallsUserID[]
   message: string
 }
+
+export type PostUserCall = {
+  userId: number
+  call: string
+}

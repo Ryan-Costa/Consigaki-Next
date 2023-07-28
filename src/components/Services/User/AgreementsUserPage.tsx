@@ -1,11 +1,25 @@
 import { UserAgreement } from '@/interfaces/UserAgreement'
+import api from '@/services/server/api'
+import useSWR from 'swr'
 
 interface AgreementUserProps {
-  data: UserAgreement
+  userId: string
 }
 
-export function AgreementsUserPage({ data }: AgreementUserProps) {
-  const agreementData = data.data
+export function AgreementsUserPage({ userId }: AgreementUserProps) {
+  const URL = `/user-agreements/${userId}`
+
+  const { data, error } = useSWR(URL, (url) =>
+    api.get<UserAgreement>(url).then((res) => res.data.data),
+  )
+
+  if (error) {
+    return <div>Error ao carregar os dados</div>
+  }
+
+  if (!data) {
+    return <div>Carregando...</div>
+  }
 
   return (
     <>
@@ -19,12 +33,14 @@ export function AgreementsUserPage({ data }: AgreementUserProps) {
           </tr>
         </thead>
         <tbody>
-          {agreementData.map((data) => (
-            <tr className="border-y" key={data.id}>
-              <td className="w-1/6 p-4 text-left">{data.agreement.name}</td>
-              <td className="w-3/6 p-4 text-left">{data.registration}</td>
-              <td className="w-1/6 p-4 text-left">{data.jobTitle}</td>
-              <td className="w-6/6 p-4 text-left">{data.position}</td>
+          {data.map((agreement) => (
+            <tr className="border-y" key={agreement.id}>
+              <td className="w-1/6 p-4 text-left">
+                {agreement.agreement.name}
+              </td>
+              <td className="w-3/6 p-4 text-left">{agreement.registration}</td>
+              <td className="w-1/6 p-4 text-left">{agreement.jobTitle}</td>
+              <td className="w-6/6 p-4 text-left">{agreement.position}</td>
             </tr>
           ))}
         </tbody>

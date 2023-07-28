@@ -1,4 +1,4 @@
-import { UserCall } from '@/interfaces/UserCall'
+import { UserCall } from '@/interfaces/UserCalls'
 import api from '@/services/server/api'
 
 export const getCallsUser = async (userId: string) => {

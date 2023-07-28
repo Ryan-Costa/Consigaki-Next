@@ -40,18 +40,14 @@ export function AuthProvider({ children }: any) {
         expoPushToken: 'teste',
       })
       .then((response) => {
-        const { data, token, message } = response.data
-
-        console.log('mensagem', message)
+        const { data, token } = response.data
 
         setCookie(undefined, 'consigaki.token', token, {
-          maxAge: 60 * 60 * 1, // 14 dias
+          maxAge: 60 * 60 * 1, // 1 dia
         })
         setSignInData(data)
-        console.log(data)
 
         if (data) {
-          console.log(data.name)
           setCookie(undefined, 'username', data.name)
         }
 
@@ -90,7 +86,6 @@ export function AuthProvider({ children }: any) {
         signUp,
         messageError,
         username,
-        // isPending,
       }}
     >
       {children}
