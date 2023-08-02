@@ -9,7 +9,8 @@ import { IAgreementID } from '@/interfaces/Agreement'
 import { useTransition } from 'react'
 import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
 import ToggleSwitch from '../../ToggleSwitch'
-import AgreementDetails from './AgreementDetails'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 const schemaAgreementForm = z.object({
   name: z
@@ -22,10 +23,9 @@ type AgreementsFormProps = z.infer<typeof schemaAgreementForm>
 
 export default function AgreementForm({ data }: { data: IAgreementID }) {
   const [, startTransition] = useTransition()
+  const { back } = useRouter()
 
   const agreements = data.data
-
-  console.log(agreements)
 
   const {
     handleSubmit,
@@ -45,7 +45,10 @@ export default function AgreementForm({ data }: { data: IAgreementID }) {
 
     startTransition(() =>
       patchRevalidateItems<AgreementsFormProps>(agreementsUrl, dataForm).then(
-        (response) => console.log(response),
+        (response) => {
+          toast.success(response.message)
+          back()
+        },
       ),
     )
   }
@@ -86,7 +89,6 @@ export default function AgreementForm({ data }: { data: IAgreementID }) {
       </div>
       <ToggleSwitch isChecked={agreements.active} />
       <ButtonSave />
-      <AgreementDetails />
     </form>
   )
 }

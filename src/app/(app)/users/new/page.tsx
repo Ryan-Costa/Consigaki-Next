@@ -14,6 +14,9 @@ import { TelMask } from '@/components/Mask/TelMask'
 import { convertToBoolean } from '@/functions/convertToBoolean'
 import { formatDateISO } from '@/functions/formatDateISO'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
+
+const validationOptions = ['0', '1'] as const
 
 const schemaNewUserForm = z.object({
   name: z.string().nonempty('Digite o nome do usuário').toUpperCase(),
@@ -28,7 +31,9 @@ const schemaNewUserForm = z.object({
   cpf: z.string().nonempty('O CPF é obrigatório').min(14, 'O CPF é inválido'),
   phoneNumber: z.string().min(13, 'O Número de telefone é inválido'),
   birthDate: z.string().min(10, 'A data de nascimento é inválida'),
-  blocked: z.string(),
+  blocked: z.enum(validationOptions, {
+    errorMap: () => ({ message: 'O Acesso é obrigatório' }),
+  }),
 })
 
 type NewUserFormProps = z.infer<typeof schemaNewUserForm>
@@ -39,6 +44,7 @@ export default function NewUserForm() {
   const [cpfMask, setCpfMask] = useState<string | undefined>(undefined)
   const [telMask, setTelMask] = useState<string | undefined>(undefined)
   const [dateMask, setDateMask] = useState<string | undefined>(undefined)
+  const { back } = useRouter()
   const {
     handleSubmit,
     register,
@@ -50,7 +56,6 @@ export default function NewUserForm() {
       email: '',
       phoneNumber: '',
       birthDate: '',
-      blocked: '',
     },
   })
 
@@ -88,6 +93,7 @@ export default function NewUserForm() {
           if (response) {
             if (Object.values(response).length === 3) {
               toast.success(response.message)
+              back()
             } else {
               console.log(response)
               toast.error(response.message)
@@ -215,15 +221,19 @@ export default function NewUserForm() {
           </div>
         </div>
         <div className="mb-6 mt-6 flex gap-6">
-          <div className="flex w-full flex-col gap-2">
-            <label htmlFor="" className="font-semibold">
+          <div className="flex w-full flex-col">
+            <label htmlFor="" className="mb-2 font-semibold">
               Acesso
             </label>
             <DropdownForm
               name="blocked"
               register={register}
-              defaultValue="Selecione"
               options={[
+                {
+                  name: 'selecione',
+                  displayName: 'Selecione',
+                  value: 999,
+                },
                 {
                   name: 'bloqueado',
                   displayName: 'Login Bloqueado',
@@ -236,6 +246,11 @@ export default function NewUserForm() {
                 },
               ]}
             />
+            {errors.blocked && (
+              <span className="text-md font-bold tracking-wide text-red-600">
+                {errors.blocked.message}
+              </span>
+            )}
           </div>
           <Input
             register={register}

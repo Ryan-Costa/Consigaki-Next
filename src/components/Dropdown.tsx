@@ -1,20 +1,25 @@
 import React, { useState } from 'react'
 import { IconArrow } from '../../public/icons'
+import { UseFormRegister } from 'react-hook-form'
 
 type DropdownProps = {
   type: 'modal' | 'table' | 'form'
   options: string[]
   defaultValue: string
   className?: string
+  name: string
   onSelect?: (value: string) => void
+  register?: UseFormRegister<any>
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
   type,
   options,
+  name,
   defaultValue,
   className,
   onSelect,
+  register,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedValue, setSelectedValue] = useState<string | null>(null)
@@ -27,6 +32,8 @@ export const Dropdown: React.FC<DropdownProps> = ({
     setSelectedValue(value)
     onSelect?.(value)
   }
+
+  console.log('selectedValue', selectedValue)
 
   return (
     <div
@@ -45,6 +52,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
           type === 'form' ? 'text-text-select' : 'text-gray-500'
         }`}
         onClick={handleOpen}
+        {...(register && register(name))}
       >
         {!selectedValue ? defaultValue : selectedValue}
         <span

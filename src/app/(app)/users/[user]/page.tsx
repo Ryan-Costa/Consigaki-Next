@@ -1,5 +1,4 @@
 import UserDetails from '@/components/Services/User/UserDetails'
-import UserEditPage from '@/components/Services/User/UserEditPage'
 import UserForm from '@/components/Services/User/UserForm'
 import { getCurrentUser } from '@/services/getCurrentUser'
 
@@ -13,10 +12,10 @@ export default async function EditUsers({
     const usersById = await userData
 
     return (
-      <UserEditPage
-        userForm={<UserForm dataUserId={usersById} />}
-        userDetails={<UserDetails userId={params.user} />}
-      />
+      <>
+        <UserForm dataUserId={usersById} />
+        <UserDetails userId={params.user} />
+      </>
     )
   } catch (error) {
     console.log(error)

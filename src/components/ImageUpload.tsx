@@ -64,36 +64,34 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ type, avatarUrl }) => {
   return (
     <form onSubmit={handleFormSubmit}>
       <div
-        className={`mb-5 mt-4 flex ${
-          type === 'modal' ? 'h-[128px] w-[320px]' : 'h-[138px] w-[150px]'
-        } border-spacing-1 items-center justify-center border border-gray-200`}
+        className={`mb-5 mt-4 flex h-[138px] w-[150px] items-center justify-center border `}
       >
         {previewImage ? (
-          type === 'modal' ? (
-            <Image
-              src={previewImage}
-              alt="Preview"
-              width={320}
-              height={128}
-              style={{ maxWidth: '320px', maxHeight: '128px' }}
-            />
-          ) : (
-            <Image src={previewImage} alt="Preview" width={150} height={138} />
-          )
+          <Image
+            src={previewImage}
+            alt="Preview"
+            width={150}
+            height={138}
+            className="object-cover"
+            style={{ maxWidth: '100%', maxHeight: '100%' }}
+          />
         ) : type === 'modal' ? (
           <Image
-            src="/images/bg-upload-image.png"
+            src="/images/bg-download-image.png"
             alt="bg-image-upload"
-            width={320}
+            width={150}
             height={128}
+            className="object-cover"
+            style={{ maxWidth: '100%', maxHeight: '100%' }}
           />
         ) : type === 'profile' ? (
           <Image
             src={avatarUrl || '/images/bg-download-image.png'}
-            // src="/images/bg-download-image.png"
             alt="bg-image-upload"
             width={150}
             height={138}
+            className="object-cover"
+            style={{ maxWidth: '100%', maxHeight: '100%' }}
           />
         ) : null}
       </div>

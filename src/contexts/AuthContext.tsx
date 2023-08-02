@@ -34,8 +34,6 @@ export function AuthProvider({ children }: any) {
     }
   }, [cookies.username, cookies.userId])
 
-  console.log(typeof userID)
-
   async function signIn({ cpf, password }: SignInData) {
     api
       .post<SignInResponse>('/login', {
@@ -53,7 +51,6 @@ export function AuthProvider({ children }: any) {
 
         if (data) {
           setCookie(undefined, 'userId', String(data.id))
-          console.log(data.id)
           setCookie(undefined, 'username', data.name)
         }
 

@@ -24,9 +24,9 @@ export const metadata: Metadata = {
 export default function ChangePassword() {
   const router = useRouter()
 
-  const handleSave = () => {
-    router.push('/dashboard')
-  }
+  // const handleSave = () => {
+  //   router.push('/dashboard')
+  // }
 
   const handleGoBack = () => {
     router.back()
@@ -111,7 +111,7 @@ export default function ChangePassword() {
           </div>
         </div>
 
-        <ButtonSave handleSave={handleSave} />
+        <ButtonSave />
       </div>
     </>
   )

@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import { Input } from '@/components/Common/Input'
 import { ButtonSave } from '@/components/Common/ButtonSave'
+import { toast } from 'react-toastify'
 
 export const metadata: Metadata = {
   title: 'Novo Convênio',
@@ -42,10 +43,21 @@ export default function NewAgreementForm() {
     console.log(dataForm)
 
     startTransition(() =>
-      postRevalidateItems<NewAgreementFormProps>(agreementUrl, dataForm),
+      postRevalidateItems<NewAgreementFormProps>(agreementUrl, dataForm).then(
+        (response) => {
+          console.log(response)
+          if (response) {
+            if (Object.values(response).length === 2) {
+              toast.success(response.message)
+              back()
+            } else {
+              console.log(response)
+              toast.error(response.message)
+            }
+          }
+        },
+      ),
     )
-
-    back()
   }
 
   return (
@@ -66,18 +78,8 @@ export default function NewAgreementForm() {
         </span>
       )}
       <div className="mb-6 mt-6 flex gap-6">
-        <Input
-          label="Cadastro"
-          name="cadastro"
-          type="text"
-          placeholder="00/00/0000"
-        />
-        <Input
-          label="Alterado"
-          name="alterado"
-          type="text"
-          placeholder="00/00/0000"
-        />
+        <Input label="Cadastro" name="" type="text" placeholder="00/00/0000" />
+        <Input label="Alterado" name="" type="text" placeholder="00/00/0000" />
       </div>
       <ButtonSave />
     </form>

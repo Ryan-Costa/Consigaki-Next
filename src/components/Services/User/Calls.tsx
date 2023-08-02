@@ -76,7 +76,7 @@ export default function Calls({ userId }: CallUserProps) {
     startTransition(() =>
       postRevalidateItems<PostUserCall>(userCallsUrl, newData).then(
         (response) => {
-          api.get<UserCall>(`/users-calls/${userId}`).then((res) => mutate(URL))
+          api.get<UserCall>(`/users-calls/${userId}`).then(() => mutate(URL))
           toast.success(response.message)
         },
       ),

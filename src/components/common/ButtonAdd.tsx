@@ -20,7 +20,7 @@ export function ButtonAdd({
     <>
       <div className={`${className} mt-8 inline-block rounded-md`}>
         <button
-          className={`${className} rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-none`}
+          className={`${className} rounded-md bg-bs-teal-2 px-6 py-3 text-white outline-2 outline-neutral-950`}
           onClick={() => {
             if (styled === 'tableAgreement') {
               handleOpenModal && handleOpenModal()

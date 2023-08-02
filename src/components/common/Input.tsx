@@ -12,6 +12,7 @@ interface InputProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   className?: string
   classNameInput?: string
+  classNameLabel?: string
   register?: UseFormRegister<any>
   maxLength?: number
 }
@@ -28,23 +29,26 @@ export function Input({
   register,
   className,
   classNameInput,
+  classNameLabel,
   maxLength,
 }: InputProps) {
   return (
     <div className={`${className} flex flex-col gap-2`}>
-      <label className="font-semibold">{label}</label>
-      <input
-        {...(register && register(name))}
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        className={`${classNameInput} h-[48px] w-full rounded-lg border border-gray-400 px-6 outline-none`}
-        readOnly={readOnly}
-        disabled={disabled}
-        value={value}
-        maxLength={maxLength}
-        onChange={onChange}
-      />
+      <label className={`font-${!classNameLabel && 'semibold'}`}>{label}</label>
+      <div className="rounded-lg border border-gray-400">
+        <input
+          {...(register && register(name))}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          className={`${classNameInput} h-[48px] w-full rounded-lg  px-6`}
+          readOnly={readOnly}
+          disabled={disabled}
+          value={value}
+          maxLength={maxLength}
+          onChange={onChange}
+        />
+      </div>
     </div>
   )
 }

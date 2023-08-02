@@ -9,6 +9,7 @@ import { ButtonSave } from '@/components/Common/ButtonSave'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTransition } from 'react'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
+import { toast } from 'react-toastify'
 
 export const metadata: Metadata = {
   title: 'Nova Consignatária',
@@ -38,10 +39,21 @@ export default function NewProviderForm() {
     const providerUrl = '/providers'
 
     startTransition(() =>
-      postRevalidateItems<NewProviderFormProps>(providerUrl, dataForm),
+      postRevalidateItems<NewProviderFormProps>(providerUrl, dataForm).then(
+        (response) => {
+          console.log(response)
+          if (response) {
+            if (Object.values(response).length === 2) {
+              toast.success(response.message)
+              back()
+            } else {
+              console.log(response)
+              toast.error(response.message)
+            }
+          }
+        },
+      ),
     )
-
-    back()
   }
 
   return (

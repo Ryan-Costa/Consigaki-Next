@@ -24,23 +24,6 @@ export type DataSignUp = {
   userToken: string
 }
 
-// "id": 13,
-// "name": "ryan costa",
-// "email": "ryancosta@consigaki.com.br",
-// "cpf": "00000000002",
-// "password": "",
-// "expoPushToken": "teste",
-// "temp": false,
-// "active": true,
-// "role": 1,
-// "userToken": "",
-// "blocked": false,
-// "birthDate": "0001-01-01T00:00:00.000Z",
-// "phoneNumber": "",
-// "codeTokenType": 0,
-// "updatedAt": "2023-07-07T21:01:49.953Z",
-// "createdAt": "2023-07-07T21:01:49.953Z"
-
 export type ErrorType = {
   message: string
 }

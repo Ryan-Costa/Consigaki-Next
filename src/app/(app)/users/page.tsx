@@ -21,6 +21,8 @@ export default async function Users() {
     return <Loading />
   }
 
+  console.log(users)
+
   return (
     <>
       <div

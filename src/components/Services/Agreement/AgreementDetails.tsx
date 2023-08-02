@@ -1,21 +1,33 @@
+'use client'
+
 import { useState } from 'react'
-import { TableEditParamAgreement } from './TableEditParamAgreement'
-import { TableEditProductAgreement } from './TableEditProductAgreement'
+import { Parameters } from './Parameters'
+import { Products } from './Products'
+import { ProductGetAll } from '@/interfaces/AgreementProduct'
 
-const sections = [
-  {
-    id: 'products',
-    label: 'PRODUTOS',
-    component: <TableEditProductAgreement />,
-  },
-  {
-    id: 'parameters',
-    label: 'PARÂMETROS',
-    component: <TableEditParamAgreement />,
-  },
-]
+interface AgreementDetailsProps {
+  agreementId: string
+  allProducts: ProductGetAll
+}
 
-export default function AgreementDetails() {
+export default function AgreementDetails({
+  agreementId,
+  allProducts,
+}: AgreementDetailsProps) {
+  const sections = [
+    {
+      id: 'products',
+      label: 'PRODUTOS',
+      component: (
+        <Products agreementId={agreementId} allProducts={allProducts} />
+      ),
+    },
+    {
+      id: 'parameters',
+      label: 'PARÂMETROS',
+      component: <Parameters agreementId={agreementId} />,
+    },
+  ]
   const [activeSection, setActiveSection] = useState<string>('products')
 
   const handleSectionChange = (sectionId: string) => {
