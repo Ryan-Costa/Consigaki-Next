@@ -27,7 +27,7 @@ export default function DropdownTopbar({
   console.log(isOpen)
   console.log(dropdownRef)
 
-  const handleClickOutside = (event: MouseEvent) => {
+  const handleClickOutside = () => {
     if (dropdownRef.current) {
       setIsOpen(false)
     }

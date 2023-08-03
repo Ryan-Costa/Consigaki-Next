@@ -22,17 +22,3 @@ export async function patchRevalidateItems<T = unknown>(
       }
     })
 }
-
-// return api
-//   .patch<T>(url, data)
-//   .then((response) => {
-//     console.log(response)
-//     revalidatePath(url)
-//     return response.data
-//   })
-//   .catch((error) => {
-//     console.log(error)
-//     if (error.response) {
-//       return error.response.data
-//     }
-//   })

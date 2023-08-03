@@ -15,14 +15,16 @@ interface ImageUploadProps {
   // onImageChange: (url: string) => void
   name: string
   register?: UseFormRegister<any>
+  imageUrl?: string
 }
 
 const ImageUploadProductAgreement: React.FC<ImageUploadProps> = ({
   // onImageChange,
   name,
   register,
+  imageUrl,
 }) => {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const [previewUrl, setPreviewUrl] = useState<string | null>(imageUrl ?? null)
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -42,21 +44,27 @@ const ImageUploadProductAgreement: React.FC<ImageUploadProps> = ({
   return (
     <div>
       <div
-        className={`mb-5 mt-4 flex h-[138px] w-[150px] items-center justify-center border`}
+        className={`mb-5 mt-4 flex h-[148.856px] w-[161.1px] items-center justify-center border`}
       >
         {previewUrl ? (
-          <Image src={previewUrl} alt="Preview" width={150} height={138} />
+          <Image
+            src={previewUrl}
+            alt="Preview"
+            width={161.1}
+            height={148.856}
+            className="max-h-[148.856px] max-w-[161.1px] object-cover"
+          />
         ) : (
           <Image
             src="/images/image-preview.png"
             alt="Preview"
-            width={150}
-            height={138}
-            className="object-cover"
+            width={161.1}
+            height={148.856}
+            className="max-h-[148.856px] max-w-[161.1px] object-cover"
           />
         )}
       </div>
-      <div className="flex h-8 w-150 cursor-pointer items-center rounded bg-bs-teal-2">
+      <div className="flex h-8 w-[161.1px] cursor-pointer items-center rounded bg-bs-teal-2">
         <div className="border-r p-2">{IconUpload}</div>
         <label
           htmlFor="file-upload"
@@ -71,7 +79,7 @@ const ImageUploadProductAgreement: React.FC<ImageUploadProps> = ({
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          className="absolute opacity-0"
+          className="cursor-pointer opacity-0"
         />
       </div>
     </div>

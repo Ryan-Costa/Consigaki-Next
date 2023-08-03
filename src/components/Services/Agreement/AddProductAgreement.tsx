@@ -44,7 +44,7 @@ export default function AddProductAgreement({
     productId: z.enum(validationOptions, {
       errorMap: () => ({ message: 'Selecione um produto' }),
     }),
-    docs: z
+    productImage: z
       .instanceof(FileList)
       .transform((list) => (list.length > 0 ? list.item(0) : null))
       .refine((value) => value !== null, { message: 'Selecione uma imagem' })
@@ -65,10 +65,10 @@ export default function AddProductAgreement({
   })
 
   const handleFormSubmit = (dataForm: NewProductAgreementProps) => {
-    const { docs, productId } = dataForm
+    const { productImage, productId } = dataForm
 
     const formData = new FormData()
-    formData.append('docs', docs as File)
+    formData.append('docs', productImage as File)
     formData.append('productId', productId)
     formData.append('agreementId', agreementId)
 
@@ -124,10 +124,13 @@ export default function AddProductAgreement({
             </div>
             <div>
               <div>
-                <ImageUploadProductAgreement name="docs" register={register} />
-                {errors.docs && (
+                <ImageUploadProductAgreement
+                  name="productImage"
+                  register={register}
+                />
+                {errors.productImage && (
                   <span className="text-md font-bold tracking-wide text-red-600">
-                    {errors.docs.message}
+                    {errors.productImage.message}
                   </span>
                 )}
               </div>

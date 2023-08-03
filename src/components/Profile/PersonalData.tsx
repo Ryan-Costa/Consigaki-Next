@@ -2,14 +2,17 @@
 
 import { ButtonSave } from '../Common/ButtonSave'
 import { Roboto } from 'next/font/google'
-import { IProfileID } from '@/interfaces/Profile'
+import { IProfileID, PostAvatar } from '@/interfaces/Profile'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { TelMask } from '../Mask/TelMask'
 import { CpfMask } from '../Mask/CpfMask'
 import { toUpperCase } from '@/functions/toUpperCase'
-import Upload from '../UploadImage'
+import ImageUploadProductAgreement from '../UI/ImageUploadProductAgreement'
+import { useTransition } from 'react'
+import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
+import { toast } from 'react-toastify'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -17,40 +20,43 @@ const roboto = Roboto({
 })
 
 const schemaProfileForm = z.object({
-  avatar: z.string(),
+  avatar: z
+    .instanceof(FileList)
+    .transform((list) => (list.length > 0 ? list.item(0) : null)),
 })
 
 type ProfileFormProps = z.infer<typeof schemaProfileForm>
 
 export default function PersonalData({ data }: { data: IProfileID }) {
+  const [, startTransition] = useTransition()
   const profile = data.data
 
-  const { handleSubmit } = useForm<ProfileFormProps>({
+  console.log(profile.avatar)
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<ProfileFormProps>({
     resolver: zodResolver(schemaProfileForm),
-    defaultValues: {
-      avatar: profile.avatar,
-    },
   })
 
   const handleFormSubmit = (dataForm: ProfileFormProps) => {
-    // const loansUrl = ``
-    console.log(dataForm)
-  }
+    const { avatar } = dataForm
+    console.log(avatar?.size)
+    console.log('docs', avatar)
+    const formData = new FormData()
+    formData.append('docs', avatar as File)
 
-  const handleImageUpload = (formData: any) => {
-    fetch('sua-url-da-api', {
-      method: 'PATCH',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        // Lide com a resposta da API aqui, se necessário
-      })
-      .catch((error) => {
-        console.log(error)
-        // Lide com erros de requisição aqui, se necessário
-      })
+    startTransition(() =>
+      patchRevalidateItems<PostAvatar>('/users/create-avatar', formData)
+        .then((response) => {
+          console.log(response)
+          toast.success(response.message)
+        })
+        .catch((error) => {
+          toast.error(error.message)
+        }),
+    )
   }
 
   return (
@@ -156,7 +162,16 @@ export default function PersonalData({ data }: { data: IProfileID }) {
         </div>
         <p className="text-base">Imagens menos que 16MB</p>
 
-        <Upload avatar={profile.avatar} onImageUpload={handleImageUpload} />
+        <ImageUploadProductAgreement
+          name="avatar"
+          register={register}
+          imageUrl={profile.avatar}
+        />
+        {errors.avatar && (
+          <span className="text-md font-bold tracking-wide text-red-600">
+            {errors.avatar.message}
+          </span>
+        )}
         <ButtonSave />
       </form>
     </>

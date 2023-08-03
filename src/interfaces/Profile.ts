@@ -1,4 +1,4 @@
-export interface IProfileID {
+export type IProfileID = {
   data: {
     id?: number
     name: string
@@ -18,4 +18,8 @@ export interface IProfileID {
     createdAt: string
     updatedAt: string
   }
+}
+
+export type PostAvatar = {
+  avatar: FileList
 }
