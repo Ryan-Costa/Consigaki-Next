@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export default function middleware(request: NextRequest) {
-  const token = request.cookies.get('consigaki.token')?.value
+  const token = request.cookies.get('consigaki_token')?.value
 
   const signInURL = new URL('/signin', request.url)
   const dashboardURL = new URL('/dashboard', request.url)

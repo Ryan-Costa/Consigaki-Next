@@ -10,17 +10,17 @@ axiosInstance.interceptors.request.use(
     const isServer = typeof window === 'undefined'
     if (isServer) {
       const { cookies } = await import('next/headers')
-      const token = cookies().get('consigaki.token')?.value
+      const token = cookies().get('consigaki_token')?.value
 
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       } else {
         console.log('deletando cookie')
-        destroyCookie(null, 'consigaki.token')
+        destroyCookie(null, 'consigaki_token')
       }
     } else {
       const token = document.cookie.replace(
-        /(?:(?:^|.*;\s*)consigaki.token\s*=\s*([^;]*).*$)|^.*$/,
+        /(?:(?:^|.*;\s*)consigaki_token\s*=\s*([^;]*).*$)|^.*$/,
         '$1',
       )
 

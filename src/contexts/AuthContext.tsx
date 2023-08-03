@@ -44,7 +44,7 @@ export function AuthProvider({ children }: any) {
       .then((response) => {
         const { data, token } = response.data
 
-        setCookie(undefined, 'consigaki.token', token, {
+        setCookie(undefined, 'consigaki_token', token, {
           maxAge: 60 * 60 * 1, // 1 dia
         })
         setSignInData(data)
