@@ -47,12 +47,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ type, avatarUrl }) => {
 
       startTransition(() =>
         patchRevalidateItems<IAvatar>(urlAvatar, formData).then((response) => {
-          console.log(response)
           if (response) {
             if (Object.values(response).length === 3) {
               toast.success(response.message)
             } else {
-              console.log(response)
               toast.error(response.message)
             }
           }

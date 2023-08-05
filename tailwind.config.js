@@ -10,5 +10,8 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme,
-  plugins: [],
+  plugins: [
+    require('autoprefixer'),
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
 }

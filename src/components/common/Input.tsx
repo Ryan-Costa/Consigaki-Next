@@ -1,7 +1,7 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, ComponentProps } from 'react'
 import { UseFormRegister } from 'react-hook-form'
 
-interface InputProps {
+type InputProps = ComponentProps<'input'> & {
   label: string
   name: string
   type: string

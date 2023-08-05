@@ -1,11 +1,11 @@
-export interface IAgreements {
+export type IAgreements = {
   id?: number
   name: string
   active?: boolean
   createdAt: string
   updatedAt: string
 }
-export interface IAgreementID {
+export type IAgreementID = {
   data: {
     id?: number
     name: string
@@ -15,7 +15,7 @@ export interface IAgreementID {
   }
   message?: string
 }
-export interface IDataAgreements {
+export type IDataAgreements = {
   data: {
     totalItems: number
     agreements: IAgreements[]

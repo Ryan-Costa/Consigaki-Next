@@ -81,21 +81,16 @@ export default function NewUserForm() {
       expoPushToken: 'teste',
     }
 
-    console.log(dataFormatted)
-    console.log(newData.birthDate)
-
     const usersUrl = '/users'
 
     startTransition(() =>
       postRevalidateItems<NewUserFormProps>(usersUrl, dataFormatted).then(
         (response) => {
-          console.log(response)
           if (response) {
             if (Object.values(response).length === 3) {
               toast.success(response.message)
               back()
             } else {
-              console.log(response)
               toast.error(response.message)
             }
           }

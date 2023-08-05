@@ -31,7 +31,6 @@ export default function PersonalData({ data }: { data: IProfileID }) {
   const [, startTransition] = useTransition()
   const profile = data.data
 
-  console.log(profile.avatar)
   const {
     handleSubmit,
     register,
@@ -42,15 +41,12 @@ export default function PersonalData({ data }: { data: IProfileID }) {
 
   const handleFormSubmit = (dataForm: ProfileFormProps) => {
     const { avatar } = dataForm
-    console.log(avatar?.size)
-    console.log('docs', avatar)
     const formData = new FormData()
     formData.append('docs', avatar as File)
 
     startTransition(() =>
       patchRevalidateItems<PostAvatar>('/users/create-avatar', formData)
         .then((response) => {
-          console.log(response)
           toast.success(response.message)
         })
         .catch((error) => {

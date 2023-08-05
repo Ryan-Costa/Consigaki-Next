@@ -9,11 +9,9 @@ export async function postRevalidatePageItems<T = unknown>(
 ) {
   try {
     const response = await api.post<T>(url, data)
-    console.log(response)
     revalidatePath(url)
-    return response.data // Retorna os dados da resposta
+    return response.data
   } catch (error) {
-    console.log(error)
-    return null // Retorna nulo caso ocorra um erro
+    return null
   }
 }

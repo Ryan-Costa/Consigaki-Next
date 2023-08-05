@@ -22,8 +22,6 @@ export default function TableUsers({ userData }: UsersProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const itemsPerPage = 10
 
-  console.log(userData)
-
   useEffect(() => {
     const body = {
       name: '',

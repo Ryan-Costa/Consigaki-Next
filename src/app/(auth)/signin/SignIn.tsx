@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { IconePass } from '../../../../public/icons'
 import { useForm } from 'react-hook-form'
 import { useContext } from 'react'
@@ -103,18 +102,10 @@ export default function SignIn() {
         </div>
 
         <ClickHere />
-        <div>
-          <Link
-            href="/forget-password"
-            className="font-karla font-bold text-click-here underline"
-          >
-            Esqueceu sua senha?
-          </Link>
-        </div>
 
         <button
           type="submit"
-          className={`mt-10 flex justify-center rounded-xl bg-dark-blue px-40 py-5 opacity-80 hover:opacity-100`}
+          className={`mt-4 flex justify-center rounded-xl bg-dark-blue px-40 py-5 opacity-80 hover:opacity-100`}
         >
           Entrar
         </button>

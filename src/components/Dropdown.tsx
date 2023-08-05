@@ -33,8 +33,6 @@ export const Dropdown: React.FC<DropdownProps> = ({
     onSelect?.(value)
   }
 
-  console.log('selectedValue', selectedValue)
-
   return (
     <div
       className={`flex ${

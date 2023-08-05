@@ -24,8 +24,6 @@ export default function DropdownTopbar({
     }
     router.refresh()
   }
-  console.log(isOpen)
-  console.log(dropdownRef)
 
   const handleClickOutside = () => {
     if (dropdownRef.current) {

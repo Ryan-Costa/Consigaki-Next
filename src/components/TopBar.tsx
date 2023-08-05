@@ -10,8 +10,6 @@ export default function Topbar() {
   const [isOpen, setIsOpen] = useState(false)
   const { username } = useContext(AuthContext)
 
-  console.log('isOpen TopBar', isOpen)
-
   const handleOpen = () => setIsOpen((prev) => !prev)
 
   return (

@@ -22,7 +22,6 @@ export default function Loading() {
           )} mt-8 h-[48px] w-[231px] rounded-md ${color}`}
         />
       </div>
-      background-color: rgb(209 213 219
       <div>
         <ul className="bg-gray list-nonespace-y-2 mt-12 pl-6">
           {[...Array(20).keys()].map((i) => (

@@ -60,8 +60,6 @@ export default function SignUp() {
     resolver: zodResolver(createUserFormSchema),
   })
 
-  console.log('teste')
-
   const newUnmaskedCpfData = (data: any) => {
     const removedCpfMask = data.cpf.replace(/\D/g, '')
     const newData = { ...data, cpf: removedCpfMask }
@@ -89,12 +87,13 @@ export default function SignUp() {
             {...register('name')}
             type="text"
             className={`
-                peer mb-2 block w-full appearance-none border-0 
-                border-b-2 border-white bg-transparent px-0 
-                py-2.5 text-sm text-white 
+                peer mb-2 block w-full appearance-none 
+                border-0 border-b-2 border-white bg-transparent 
+                px-0 py-2.5 text-sm text-white
               focus:border-white focus:outline-none focus:ring-0
             `}
             placeholder=" "
+            autoComplete="off"
           />
           {errors.name && (
             <span className="text-sm text-red-500">{errors.name.message}</span>
@@ -125,6 +124,7 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
             `}
             placeholder=" "
+            autoComplete="off"
             value={cpfMask}
             onChange={handleChange}
           />
@@ -155,6 +155,7 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
             `}
             placeholder=" "
+            autoComplete="off"
             {...register('email')}
           />
           {errors.email && (
@@ -185,6 +186,7 @@ export default function SignUp() {
             `}
             placeholder=" "
             {...register('confirmEmail')}
+            autoComplete="off"
           />
           {errors.confirmEmail && (
             <span className="text-sm text-red-500">
@@ -215,6 +217,7 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
               `}
             placeholder=" "
+            autoComplete="off"
             {...register('password')}
           />
           {errors.password && (
@@ -247,6 +250,7 @@ export default function SignUp() {
               `}
             placeholder=" "
             {...register('confirmPassword')}
+            autoComplete="off"
           />
           {errors.confirmPassword && (
             <span className="text-sm text-red-500">

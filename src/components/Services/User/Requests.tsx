@@ -12,8 +12,6 @@ export function Requests({ userId }: RequestsUserProps) {
     api.get<UserRequest>(url).then((res) => res.data.data),
   )
 
-  console.log(data)
-
   if (error) {
     return <div>Error ao carregar os dados</div>
   }

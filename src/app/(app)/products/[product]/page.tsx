@@ -10,7 +10,6 @@ export default async function EditProduct({
 }) {
   const response = await api.get<IProductID>(`/products/${params.product}`)
   const productsById = response.data
-  console.log(productsById)
 
   return <ProductForm data={productsById} />
 }

@@ -14,6 +14,7 @@ import {
   SignUpResponse,
 } from '@/interfaces/AuthProps'
 import { toUpperCase } from '@/functions/toUpperCase'
+import { toast } from 'react-toastify'
 
 export const AuthContext = createContext({} as AuthContextType)
 
@@ -60,7 +61,7 @@ export function AuthProvider({ children }: any) {
         if (error.response) {
           setMessageError(error.response.data)
         } else {
-          console.log('Unexpected error', error)
+          toast.error('Unexpected error | ', error.message)
         }
       })
   }
@@ -76,7 +77,7 @@ export function AuthProvider({ children }: any) {
       })
       const { message } = response.data
 
-      console.log(message)
+      toast.warn(message)
     } catch (err) {}
   }
 

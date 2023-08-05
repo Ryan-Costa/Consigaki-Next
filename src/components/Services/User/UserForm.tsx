@@ -44,7 +44,6 @@ export default function UserForm({ dataUserId }: UserIdProps) {
     const dataFormatted = {
       blocked: convertToBoolean(dataForm.blocked),
     }
-    console.log(dataFormatted.blocked)
 
     let usersUrl: any
 

@@ -52,21 +52,17 @@ export default function AddParameterAgreement({
   })
 
   const handleFormSubmit = (dataForm: NewParameterAgreementProps) => {
-    console.log(dataForm)
-
     const dataFormatted = {
       agreementId: Number(agreementId),
       ...dataForm,
     }
 
-    console.log(dataFormatted)
     startTransition(() =>
       postRevalidateItems<PostAgreementParameter>(
         `/agreement-parameters`,
         dataFormatted,
       )
         .then((response) => {
-          console.log(response)
           if (response.message === 'created') {
             api
               .get<AgreementParameter>(`/agreement-parameters/${agreementId}`)

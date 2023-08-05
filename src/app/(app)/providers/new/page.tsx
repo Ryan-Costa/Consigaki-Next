@@ -41,13 +41,11 @@ export default function NewProviderForm() {
     startTransition(() =>
       postRevalidateItems<NewProviderFormProps>(providerUrl, dataForm).then(
         (response) => {
-          console.log(response)
           if (response) {
             if (Object.values(response).length === 2) {
               toast.success(response.message)
               back()
             } else {
-              console.log(response)
               toast.error(response.message)
             }
           }

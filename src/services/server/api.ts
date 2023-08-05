@@ -15,7 +15,6 @@ axiosInstance.interceptors.request.use(
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       } else {
-        console.log('deletando cookie')
         destroyCookie(null, 'consigaki_token')
       }
     } else {

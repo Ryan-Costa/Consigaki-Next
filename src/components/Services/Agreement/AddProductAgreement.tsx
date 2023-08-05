@@ -75,7 +75,6 @@ export default function AddProductAgreement({
     startTransition(() =>
       postRevalidateItems<PostAgreementProduct>('/agreement-products', formData)
         .then((response) => {
-          console.log(response)
           if (response.message === 'created') {
             api
               .get<AgreementProduct>(`/agreement-products/${agreementId}`)
@@ -90,6 +89,9 @@ export default function AddProductAgreement({
         }),
     )
   }
+
+  const uri =
+    'https://consigaki.s3.sa-east-1.amazonaws.com/loans_62_dc90411f-0d68-457c-b15c-1ea05ce58c5a_photo.jpg'
 
   return (
     <div className={`${roboto.className} flex h-full w-full flex-col px-4`}>

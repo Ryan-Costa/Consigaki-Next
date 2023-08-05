@@ -2,16 +2,17 @@
 
 import { ButtonAdd } from '@/components/Common/ButtonAdd'
 import TextareaWithCounter from '@/components/UI/TextareaWithCounter'
-import { AuthContext } from '@/contexts/AuthContext'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import { PostUserCall, UserCall } from '@/interfaces/UserCalls'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useContext, useState, useTransition } from 'react'
+import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import api from '@/services/server/api'
 import useSWR, { mutate } from 'swr'
 import { toast } from 'react-toastify'
+import { IconArrowDownBlack } from '../../../../public/icons'
+import { toUpperCase } from '@/functions/toUpperCase'
 
 const schemaCallsForm = z.object({
   call: z.string(),
@@ -24,9 +25,9 @@ interface CallUserProps {
 }
 
 export default function Calls({ userId }: CallUserProps) {
-  const { userID } = useContext(AuthContext)
   const [expandedCallId, setExpandedCallId] = useState(null)
   const [valueTextarea, setValueTextarea] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
   const { handleSubmit, register } = useForm<CallsFormProps>({
     resolver: zodResolver(schemaCallsForm),
     defaultValues: {
@@ -37,16 +38,14 @@ export default function Calls({ userId }: CallUserProps) {
   const toggleExpand = (callId: any) => {
     if (expandedCallId === callId) {
       setExpandedCallId(null)
+      setIsOpen(true)
     } else {
       setExpandedCallId(callId)
+      setIsOpen(false)
     }
   }
 
   const [, startTransition] = useTransition()
-  // const callData = data.data
-  // console.log(callData)
-
-  console.log(userID)
 
   const URL = `/users-calls/${userId}`
 
@@ -63,16 +62,12 @@ export default function Calls({ userId }: CallUserProps) {
   }
 
   const handleFormSubmit = (dataForm: CallsFormProps) => {
-    const userCallsUrl = '/users-calls'
-    console.log(dataForm)
-
     const newData = {
-      userId: userID,
+      userId: Number(userId),
       ...dataForm,
     }
 
-    console.log(typeof newData.userId)
-
+    const userCallsUrl = '/users-calls'
     startTransition(() =>
       postRevalidateItems<PostUserCall>(userCallsUrl, newData).then(
         (response) => {
@@ -115,21 +110,21 @@ export default function Calls({ userId }: CallUserProps) {
               <td className="w-1/6 p-4 text-left">
                 {new Date(call.created_at).toLocaleDateString()}
               </td>
-              <td className="w-3/6 p-4 text-left">{call.user.name}</td>
-              <td className="w-1/6 p-4 text-left">
+              <td className="w-3/6 p-4 text-left">
+                {toUpperCase(call.user.name)}
+              </td>
+              <td className="w-2/6 p-4 text-left">
                 <div className="relative">
                   <button
-                    onClick={() => toggleExpand(call.id)}
+                    onClick={() => {
+                      toggleExpand(call.id)
+                    }}
                     className="flex items-center"
                   >
-                    <svg
-                      className="mr-2 h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path fillRule="evenodd" d="M6 8l4 4 4-4H6z" />
-                    </svg>
                     Exibir Histórico
+                    <p className={`ml-2 ${isOpen && 'rotate-180'}`}>
+                      {IconArrowDownBlack}
+                    </p>
                   </button>
                   {expandedCallId === call.id && (
                     <div
@@ -141,10 +136,10 @@ export default function Calls({ userId }: CallUserProps) {
                     >
                       <textarea
                         value={call.call}
-                        className={`mt-2 resize-none rounded border border-gray-400 p-2 ${
+                        className={`mt-2 w-full resize-none rounded-lg border border-gray-400 bg-gray-50 p-2 ${
                           !expandedCallId && 'hidden'
                         }`}
-                        rows={3}
+                        rows={5}
                         readOnly
                       />
                     </div>

@@ -1,22 +1,22 @@
 export interface IProducts {
-  id?: number
+  id: number
   name: string
-  type?: number
-  active?: boolean
+  type: number
+  active: boolean
   createdAt: string
   updatedAt: string
 }
 
-export interface IProductID {
+export type IProductID = {
   data: {
-    id?: number
+    id: number
     name: string
-    type?: number
-    active?: boolean
+    type: number
+    active: boolean
     createdAt: string
     updatedAt: string
   }
-  message?: string
+  message: string
 }
 
 export interface IDataProducts {

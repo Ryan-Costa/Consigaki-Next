@@ -24,8 +24,6 @@ export function Products({ agreementId, allProducts }: ProductAgreementProps) {
     api.get<AgreementProduct>(url).then((res) => res.data.data),
   )
 
-  console.log(productsAgreementById)
-
   if (error) {
     return <div>Error ao carregar os dados</div>
   }

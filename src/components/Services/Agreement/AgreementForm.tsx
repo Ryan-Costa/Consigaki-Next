@@ -39,8 +39,6 @@ export default function AgreementForm({ data }: { data: IAgreementID }) {
   })
 
   const handleFormSubmit = (dataForm: AgreementsFormProps) => {
-    console.log(dataForm)
-
     const agreementsUrl = `/agreements/${agreements.id}`
 
     startTransition(() =>

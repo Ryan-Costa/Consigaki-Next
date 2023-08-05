@@ -24,7 +24,6 @@ export default function LoansForm({ data }: { data: ILoanID }) {
   const [obsPendencies, setObsPendencies] = useState(true)
   const [, startTransition] = useTransition()
   const { back } = useRouter()
-
   const loans = data.data
 
   const { handleSubmit, register } = useForm<LoansFormProps>({
@@ -35,14 +34,11 @@ export default function LoansForm({ data }: { data: ILoanID }) {
   })
 
   const statusChange = (value: string) => {
-    console.log('valor do status:', +value)
     value === '2' ? setObsPendencies(false) : setObsPendencies(true)
   }
-  console.log(loans.status)
 
   const handleFormSubmit = (dataForm: LoansFormProps) => {
     const loansUrl = `/loans/${loans.id}`
-    console.log(dataForm)
 
     if (dataForm.status !== 0) {
       startTransition(() =>
@@ -283,12 +279,12 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           </label>
           <textarea
             name="observacaoPendencias"
-            className="w-full rounded-lg border border-gray-400 px-6 py-2"
+            className="w-full rounded-lg border border-gray-400 bg-gray-50 px-6 py-2"
             disabled={obsPendencies}
           />
         </div>
       </div>
-      <LoansDocuments />
+      <LoansDocuments loans={loans} />
       <ButtonSave type="submit" />
     </form>
   )

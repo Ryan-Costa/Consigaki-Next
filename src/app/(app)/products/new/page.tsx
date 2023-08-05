@@ -40,8 +40,6 @@ export default function NewProductForm() {
       type: Number(type),
     }
 
-    console.log(dataFormFormatted)
-
     const productsUrl = '/products'
 
     startTransition(() =>
@@ -49,13 +47,11 @@ export default function NewProductForm() {
         productsUrl,
         dataFormFormatted,
       ).then((response) => {
-        console.log(response)
         if (response) {
           if (Object.values(response).length === 2) {
             toast.success(response.message)
             back()
           } else {
-            console.log(response)
             toast.error(response.message)
           }
         }

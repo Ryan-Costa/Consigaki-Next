@@ -1,12 +1,12 @@
 export type IUsersID = {
-  id?: number
+  id: number
   name: string
   email: string
   birthDate: string
   cpf: string
   phoneNumber: string
   temp: boolean
-  active?: boolean
+  active: boolean
   role: number
   codeTokenType: number
   blocked: boolean
@@ -17,7 +17,7 @@ export type IUsersID = {
 
 export type IUser = {
   data: IUsersID
-  message?: string
+  message: string
 }
 
 export type IDataUsers = {
@@ -28,4 +28,11 @@ export type IDataUsers = {
     currentPage: number
   }
   message: string
+}
+
+export type IDataUsersID = {
+  totalItems: number
+  users: IUsersID[]
+  totalPages: number
+  currentPage: number
 }

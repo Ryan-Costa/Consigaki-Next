@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 
 export default async function Loans() {
   const loans = await getLoans(1)
-  console.log('esteira', loans)
   return (
     <>
       <div

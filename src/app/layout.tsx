@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={karla.className}>
       <head />
-      <body className="h-screen w-full bg-gradient-to-r from-deg2 to-deg1">
+      <body className="custom-scrollbar h-screen w-full bg-gradient-to-r from-deg2 to-deg1">
         <AuthProvider>
           <ToastComponent />
           {children}

@@ -1,11 +1,17 @@
+import DocumentDownload from '@/components/DocumentDownload'
+import { ILoans, ILoansDocuments } from '@/interfaces/Loan'
 import { Roboto } from 'next/font/google'
-// import DocumentDownload from '../DocumentDownload'
 
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
-export default function LoansDocuments() {
+
+interface LoansDocumentsProps {
+  loans: ILoans
+}
+
+export default function LoansDocuments({ loans }: LoansDocumentsProps) {
   return (
     <>
       <div className="mt-5 flex items-center gap-2">
@@ -21,12 +27,17 @@ export default function LoansDocuments() {
         <div className="h-[1px] w-full bg-line-gray" />
       </div>
       <p className="text-base">Imagens menos que 16MB</p>
-      <div className="mt-5 flex gap-8">
-        {/* <DocumentDownload />
-        <DocumentDownload />
-        <DocumentDownload />
-        <DocumentDownload /> */}
+      <div className="scroll-container mt-5 flex gap-8 overflow-hidden">
+        {loans.loansDocuments.map((doc: ILoansDocuments) => (
+          <>
+            <DocumentDownload fileUrl={doc.uri} key={doc.id} />
+            <DocumentDownload fileUrl={doc.uri} key={doc.id} />
+            <DocumentDownload fileUrl={doc.uri} key={doc.id} />
+          </>
+        ))}
       </div>
     </>
   )
 }
+
+// scrollbar-thin scrollbar-thumb-slate-200 scrollbar-thumb-rounded

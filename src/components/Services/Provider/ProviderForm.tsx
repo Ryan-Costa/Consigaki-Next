@@ -35,8 +35,6 @@ export default function ProviderForm({ data }: { data: IProviderID }) {
   })
 
   const handleFormSubmit = (dataForm: ProvidersFormProps) => {
-    console.log(dataForm)
-
     const providersUrl = `/providers/${providers.id}`
 
     startTransition(() =>

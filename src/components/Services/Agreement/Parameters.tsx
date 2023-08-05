@@ -22,8 +22,6 @@ export function Parameters({ agreementId }: ParametersAgreementProps) {
     api.get<AgreementParameter>(url).then((res) => res.data.data),
   )
 
-  console.log(parameterAgreementById)
-
   if (error) {
     return <div>Error ao carregar os dados</div>
   }
@@ -36,10 +34,6 @@ export function Parameters({ agreementId }: ParametersAgreementProps) {
         toast.success(res.data.message)
       })
       .catch((err) => {
-        console.log(err)
-        console.log(err.response)
-        console.log(err.response.data)
-        console.log(err.response.data.message)
         toast.error(err.response.data.message)
       })
   }

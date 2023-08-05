@@ -49,7 +49,6 @@ export default function ChangePassword() {
   })
 
   const handleFormSubmit = (dataForm: ChangePassowrdFormDataProps) => {
-    console.log(dataForm)
     // api.put<ChangePassowrd>('/users/user/change-password')
   }
 

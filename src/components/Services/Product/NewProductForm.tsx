@@ -40,8 +40,6 @@ export default function NewProductForm() {
       type: Number(type),
     }
 
-    console.log(dataFormFormatted)
-
     const productsUrl = '/products'
 
     startTransition(() =>

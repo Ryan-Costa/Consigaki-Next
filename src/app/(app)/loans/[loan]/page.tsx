@@ -9,7 +9,6 @@ export default async function EditLoans({
 }) {
   const response = await api.get<ILoanID>(`/loans/${params.loan}`)
   const loansById = response.data
-  console.log(loansById)
 
   return <LoansForm data={loansById} />
 }

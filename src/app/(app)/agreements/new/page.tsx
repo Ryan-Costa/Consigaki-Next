@@ -40,18 +40,15 @@ export default function NewAgreementForm() {
 
   const handleFormSubmit = (dataForm: NewAgreementFormProps) => {
     const agreementUrl = '/agreements'
-    console.log(dataForm)
 
     startTransition(() =>
       postRevalidateItems<NewAgreementFormProps>(agreementUrl, dataForm).then(
         (response) => {
-          console.log(response)
           if (response) {
             if (Object.values(response).length === 2) {
               toast.success(response.message)
               back()
             } else {
-              console.log(response)
               toast.error(response.message)
             }
           }
@@ -78,8 +75,22 @@ export default function NewAgreementForm() {
         </span>
       )}
       <div className="mb-6 mt-6 flex gap-6">
-        <Input label="Cadastro" name="" type="text" placeholder="00/00/0000" />
-        <Input label="Alterado" name="" type="text" placeholder="00/00/0000" />
+        <Input
+          label="Cadastro"
+          name=""
+          type="text"
+          placeholder="00/00/0000"
+          readOnly
+          disabled
+        />
+        <Input
+          label="Alterado"
+          name=""
+          type="text"
+          placeholder="00/00/0000"
+          readOnly
+          disabled
+        />
       </div>
       <ButtonSave />
     </form>

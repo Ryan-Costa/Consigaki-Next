@@ -26,10 +26,11 @@ export default function InputMask({ register, name, errors }: InputMaskProps) {
         className={`
                 peer block w-full appearance-none border-0 border-b-2 
                 border-white bg-transparent px-0 py-2.5 
-                text-sm text-white focus:border-white 
-                focus:outline-none focus:ring-0
+                text-sm text-white 
+                focus:border-white focus:outline-none focus:ring-0
               `}
         placeholder=" "
+        autoComplete="off"
         value={cpfMask}
         onChange={handleChange}
       />

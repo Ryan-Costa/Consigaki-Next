@@ -1,5 +1,6 @@
 import { IDataUsers } from '@/interfaces/User'
 import api from '@/services/server/api'
+import { toast } from 'react-toastify'
 
 export const getUsers = async (pageNumber: number) => {
   const body = {
@@ -7,11 +8,10 @@ export const getUsers = async (pageNumber: number) => {
     page: pageNumber,
     size: 10,
   }
-  try {
-    const response = await api.post<IDataUsers>('/users/get-all', body)
-    console.log(response)
-    return response.data
-  } catch (error) {
-    console.log(error)
-  }
+  return api
+    .post<IDataUsers>('/users/get-all', body)
+    .then((res) => res.data)
+    .catch((error) => {
+      toast.error('Unexpected Error | ', error.message)
+    })
 }

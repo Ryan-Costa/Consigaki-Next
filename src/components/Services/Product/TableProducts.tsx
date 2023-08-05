@@ -58,7 +58,6 @@ export default function TableProducts({ productData }: ProductsProps) {
   }, [searchTerm, products, currentPage])
 
   const handlePageChange = (pageNumber: number) => {
-    console.log('currentpage')
     setCurrentPage(pageNumber)
   }
 

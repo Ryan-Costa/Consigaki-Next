@@ -32,9 +32,6 @@ export function ProductProvider({ children }: ProductContextType) {
 
   setProduct(data)
 
-  console.log(data)
-  console.log(product)
-
   if (!product) {
     return <div>Carregando...</div>
   }

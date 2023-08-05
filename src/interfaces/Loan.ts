@@ -1,7 +1,20 @@
 import { Product, Provider, User, UserAgreements } from './IProps'
 
-export interface ILoans {
-  id?: number
+// export type ILoansDocuments = {
+//   loansDocuments: {
+//     id: number
+//     uri: string
+//     documentType: 99
+//   }
+// }
+
+export type ILoansDocuments = {
+  id: number
+  uri: string
+  documentType: number
+}
+export type ILoans = {
+  id: number
   userAgreementId: number
   userId: number
   providerId: number
@@ -23,11 +36,12 @@ export interface ILoans {
   userAgreements: UserAgreements
   provider: Provider
   product: Product
+  loansDocuments: ILoansDocuments[]
 }
 
-export interface ILoanID {
+export type ILoanID = {
   data: {
-    id?: number
+    id: number
     userAgreementId: number
     userId: number
     providerId: number
@@ -49,6 +63,7 @@ export interface ILoanID {
     userAgreements: UserAgreements
     provider: Provider
     product: Product
+    loansDocuments: ILoansDocuments[]
   }
   message: string
 }

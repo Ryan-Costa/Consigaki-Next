@@ -24,7 +24,7 @@ const TextareaWithCounter: React.FC<TextareaWithCounterProps> = ({
         <textarea
           name={name}
           {...(register && register(name))}
-          className="h-[176px] w-full resize-none rounded-lg border border-gray-400 px-4 py-4 outline-none"
+          className="h-[176px] w-full resize-none rounded-lg border border-gray-400 bg-gray-50 px-4 py-4 outline-none"
           value={text}
           onChange={handleChange}
           maxLength={maxLength}

@@ -6,11 +6,8 @@ export default async function Profile() {
   try {
     const response = await api.get<IProfileID>(`/users/user`)
     const profileData = response.data
-    console.log(profileData)
     return <PersonalData data={profileData} />
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 }
 
 export async function generateMetadata() {
