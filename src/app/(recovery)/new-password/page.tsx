@@ -38,7 +38,7 @@ export default function NewPassword() {
   }
   return (
     <>
-      <div className="flex h-screen w-full font-bold">
+      <div className="flex h-full w-full font-bold">
         <div className="w-7/12 py-60 pl-64 pr-40">
           <div className="w-full">
             <h1 className="text-2xl font-bold uppercase tracking-tight text-white">
@@ -125,10 +125,10 @@ export default function NewPassword() {
             <pre className="text-white">{output}</pre>
           </div>
         </div>
-        <div className="z-1 relative flex h-full w-5/12 items-center justify-center bg-white">
+        <div className="z-1 relative flex min-h-screen w-5/12 items-center justify-center bg-white">
           <Image
             src="/images/nova_senha.png"
-            className="h-auto w-auto"
+            className="h-auto w-auto max-2xl:h-[450px]"
             priority
             width={520}
             height={520}
@@ -136,14 +136,14 @@ export default function NewPassword() {
           ></Image>
           <Image
             src="/images/bg-img-senha.png"
-            className="absolute right-96 top-0 h-auto w-auto"
+            className="absolute right-96 top-0 h-auto w-auto max-5xl:left-28 max-5xl:h-[170px]"
             width={370}
             height={370}
             alt="logo image"
           ></Image>
           <Image
             src="/images/bg-img-senha-2.png"
-            className="absolute bottom-0 right-0 h-auto w-auto"
+            className="absolute bottom-0 right-0 h-auto w-auto max-4xl:h-[220px]"
             width={370}
             height={370}
             alt="logo image"

@@ -17,7 +17,10 @@ export const metadata: Metadata = {
 }
 
 const loginUserFormSchema = z.object({
-  cpf: z.string().nonempty('O CPF é obrigatório').min(14, 'O CPF é inválido'),
+  cpf: z
+    .string()
+    .nonempty('O CPF é obrigatório')
+    .min(14, 'Formato do CPF é inválido'),
   password: z.string().min(6, 'A senha precisa de no mínimo 9 caracteres'),
 })
 

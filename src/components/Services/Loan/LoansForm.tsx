@@ -284,7 +284,12 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           />
         </div>
       </div>
-      <LoansDocuments loans={loans} />
+      {loans.loansDocuments.length > 0 ? (
+        <LoansDocuments loans={loans} />
+      ) : (
+        <h2 className="font-semibold">Não há documentos</h2>
+      )}
+
       <ButtonSave type="submit" />
     </form>
   )

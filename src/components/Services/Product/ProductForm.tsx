@@ -11,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { DropdownForm } from '../../DropdownForm'
 import { useTransition } from 'react'
 import ToggleSwitch from '../../ToggleSwitch'
+import { toast } from 'react-toastify'
 
 const schemaProductForm = z.object({
   name: z.string().toUpperCase().nonempty('Nome do Produto não pode ser vazio'),
@@ -37,6 +38,8 @@ export default function ProductForm({ data }: { data: IProductID }) {
     },
   })
 
+  console.log(products.type)
+
   const handleFormSubmit = (dataForm: ProductsFormProps) => {
     const { name, type } = dataForm
     const dataFormFormatted = {
@@ -47,9 +50,15 @@ export default function ProductForm({ data }: { data: IProductID }) {
     const productsUrl = `/products/${products.id}`
 
     startTransition(() =>
-      patchRevalidateItems<ProductsFormProps>(productsUrl, dataFormFormatted),
+      patchRevalidateItems<ProductsFormProps>(
+        productsUrl,
+        dataFormFormatted,
+      ).then((response) => {
+        console.log(response)
+        toast.success(response.message)
+        back()
+      }),
     )
-    back()
   }
 
   return (

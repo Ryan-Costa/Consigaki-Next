@@ -47,6 +47,7 @@ export default function NewProductForm() {
         productsUrl,
         dataFormFormatted,
       ).then((response) => {
+        console.log(response)
         if (response) {
           if (Object.values(response).length === 2) {
             toast.success(response.message)

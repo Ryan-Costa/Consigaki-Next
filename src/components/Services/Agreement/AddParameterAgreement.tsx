@@ -188,12 +188,7 @@ export default function AddParameterAgreement({
               </span>
             )}
           </div>
-          <ButtonAdd
-            name=""
-            styled="tableAgreement"
-            type="submit"
-            className="w-full"
-          />
+          <ButtonAdd name="" type="submit" className="w-full" />
         </div>
       </form>
     </>

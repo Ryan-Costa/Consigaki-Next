@@ -15,7 +15,10 @@ export const metadata: Metadata = {
 
 const createUserFormSchema = z
   .object({
-    cpf: z.string().nonempty('O CPF é obrigatório').min(14, 'O CPF é inválido'),
+    cpf: z
+      .string()
+      .nonempty('O CPF é obrigatório')
+      .min(14, 'Formato do CPF é inválido'),
     name: z
       .string()
       .nonempty('O Nome é obrigatório')
@@ -79,12 +82,14 @@ export default function SignUp() {
   return (
     <div className="mr-64 flex w-492 flex-col">
       <form
+        autoComplete="off"
         onSubmit={handleSubmit(handleSignUp)}
         className="flex w-full flex-col gap-5"
       >
         <div className="relative z-0">
           <input
             {...register('name')}
+            autoComplete="no"
             type="text"
             className={`
                 peer mb-2 block w-full appearance-none 
@@ -93,7 +98,6 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
             `}
             placeholder=" "
-            autoComplete="off"
           />
           {errors.name && (
             <span className="text-sm text-red-500">{errors.name.message}</span>
@@ -124,7 +128,6 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
             `}
             placeholder=" "
-            autoComplete="off"
             value={cpfMask}
             onChange={handleChange}
           />
@@ -147,6 +150,7 @@ export default function SignUp() {
         </div>
         <div className="relative z-0">
           <input
+            {...register('email')}
             type="text"
             className={`
                 peer mb-2 block w-full appearance-none border-0 
@@ -155,8 +159,6 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
             `}
             placeholder=" "
-            autoComplete="off"
-            {...register('email')}
           />
           {errors.email && (
             <span className="text-sm text-red-500">{errors.email.message}</span>
@@ -186,7 +188,6 @@ export default function SignUp() {
             `}
             placeholder=" "
             {...register('confirmEmail')}
-            autoComplete="off"
           />
           {errors.confirmEmail && (
             <span className="text-sm text-red-500">
@@ -217,7 +218,6 @@ export default function SignUp() {
               focus:border-white focus:outline-none focus:ring-0
               `}
             placeholder=" "
-            autoComplete="off"
             {...register('password')}
           />
           {errors.password && (
@@ -250,7 +250,6 @@ export default function SignUp() {
               `}
             placeholder=" "
             {...register('confirmPassword')}
-            autoComplete="off"
           />
           {errors.confirmPassword && (
             <span className="text-sm text-red-500">

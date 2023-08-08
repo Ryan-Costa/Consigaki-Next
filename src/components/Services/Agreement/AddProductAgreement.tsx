@@ -90,9 +90,6 @@ export default function AddProductAgreement({
     )
   }
 
-  const uri =
-    'https://consigaki.s3.sa-east-1.amazonaws.com/loans_62_dc90411f-0d68-457c-b15c-1ea05ce58c5a_photo.jpg'
-
   return (
     <div className={`${roboto.className} flex h-full w-full flex-col px-4`}>
       <div className="flex h-full flex-col items-start justify-start">

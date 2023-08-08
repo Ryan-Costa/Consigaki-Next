@@ -56,7 +56,7 @@ interface DocumentDownloadProps {
 }
 
 const DocumentDownload = ({ fileUrl }: DocumentDownloadProps) => {
-  const [previewUrl, setPreviewUrl] = useState('')
+  const [previewUrl, setPreviewUrl] = useState(fileUrl)
 
   useEffect(() => {
     setPreviewUrl(fileUrl)

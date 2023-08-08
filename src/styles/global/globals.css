@@ -36,8 +36,24 @@
     background-color: #555
   }
 
-  .scroll-container {
-    overflow: auto;
-    height: 300px; 
+  .scroll-container-docs::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .scroll-container-docs::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+  
+  .scroll-container-docs::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+  }
+  
+  .scroll-container-docs::-webkit-scrollbar-button {
+    display: none;
+  }
+  
+  .scroll-container-docs::-webkit-scrollbar-corner {
+    background-color: #f1f1f1;
   }
 }

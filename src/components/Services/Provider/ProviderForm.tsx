@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useTransition } from 'react'
 import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
 import ToggleSwitch from '../../ToggleSwitch'
+import { toast } from 'react-toastify'
 
 const schemaProvidersForm = z.object({
   name: z.string().nonempty('Razão Social não pode ser vazio'),
@@ -38,10 +39,13 @@ export default function ProviderForm({ data }: { data: IProviderID }) {
     const providersUrl = `/providers/${providers.id}`
 
     startTransition(() =>
-      patchRevalidateItems<ProvidersFormProps>(providersUrl, dataForm),
+      patchRevalidateItems<ProvidersFormProps>(providersUrl, dataForm).then(
+        (response) => {
+          toast.success(response.message)
+          back()
+        },
+      ),
     )
-
-    back()
   }
 
   return (

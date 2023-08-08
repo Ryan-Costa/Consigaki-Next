@@ -11,8 +11,8 @@ import { Input } from '@/components/Common/Input'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import api from '@/services/server/api'
-import { ChangePassowrd } from '@/interfaces/ChangePassword'
+// import api from '@/services/server/api'
+// import { ChangePassowrd } from '@/interfaces/ChangePassword'
 const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '700'],

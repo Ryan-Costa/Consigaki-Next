@@ -1,7 +1,5 @@
-'use client'
-
 import React, { useState } from 'react'
-import { IconSearch } from '../../public/icons'
+import { IconSearchWhite } from '../../public/icons'
 
 interface SearchInputProps {
   onSearch: (value: string) => void
@@ -13,23 +11,31 @@ export function SearchInput({ onSearch }: SearchInputProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     setSearchValue(value)
-    onSearch(value)
+  }
+
+  const handleSearch = () => {
+    onSearch(searchValue)
   }
 
   return (
-    <div className="relative">
+    <div className="relative flex gap-2">
       <input
         type="text"
-        className="rounded-full border border-gray-500 px-4 py-2 pr-12 focus:outline-none"
+        className="rounded-md border border-gray-500 px-4 py-2 pr-12 focus:outline-none"
         value={searchValue}
         onChange={handleChange}
+        placeholder="Buscar"
       />
-      {searchValue.length === 0 && (
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-xs">
-          {IconSearch}
-          <span className="ml-1 text-bs-gray">Search...</span>
-        </div>
-      )}
+      <button
+        className={`flex cursor-pointer items-center rounded-md bg-bs-teal-2 px-2 active:bg-gray-300 ${
+          searchValue.length < 3 &&
+          'cursor-not-allowed bg-bs-teal-2 opacity-60 active:bg-bs-teal-2'
+        }`}
+        onClick={handleSearch}
+        disabled={searchValue.length <= 3}
+      >
+        {IconSearchWhite}
+      </button>
     </div>
   )
 }

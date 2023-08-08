@@ -16,6 +16,7 @@ import { toUpperCase } from '@/functions/toUpperCase'
 
 import { convertToBoolean } from '@/functions/convertToBoolean'
 import { putRevalidateItems } from '@/functions/putRevalidateItems'
+import { useRouter } from 'next/navigation'
 
 const schemaUserForm = z.object({
   blocked: z.string(),
@@ -29,6 +30,7 @@ type UsersFormProps = z.infer<typeof schemaUserForm>
 
 export default function UserForm({ dataUserId }: UserIdProps) {
   const [, startTransition] = useTransition()
+  const { back } = useRouter()
 
   const users = dataUserId.data
 
@@ -56,6 +58,7 @@ export default function UserForm({ dataUserId }: UserIdProps) {
     startTransition(() =>
       putRevalidateItems<UsersFormProps>(usersUrl).then((response) => {
         toast.success(response.message)
+        back()
       }),
     )
   }

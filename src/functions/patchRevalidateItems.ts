@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 export async function patchRevalidateItems<T = unknown>(
   url: string,
-  data: any,
+  data?: any,
 ) {
   return api
     .patch<T>(url, data)

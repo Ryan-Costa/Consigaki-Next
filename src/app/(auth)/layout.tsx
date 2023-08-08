@@ -31,17 +31,18 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
           CADASTRO
         </Link>
       </nav>
-      <div className="flex">
-        <div className="text-white">{children}</div>
+      <div className="flex ">
+        <div className="w-full text-white">{children}</div>
         <div className="">
           <Image
             src="/images/logo.png"
-            className="h-auto w-auto"
+            className="absolute right-[450px] top-72 hidden h-[366px] w-[373px] 3xl:flex"
             priority
             width={500}
             height={500}
             alt="logo image"
           />
+          {/* absolute right-96 hidden h-auto w-auto 3xl:flex */}
         </div>
       </div>
     </div>
