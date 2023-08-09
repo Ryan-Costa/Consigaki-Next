@@ -2,12 +2,17 @@
 
 import Link from 'next/link'
 
-export default function ClickHere() {
+interface ClickHereProps {
+  message: string
+  href: string
+}
+
+export default function ClickHere({ message, href }: ClickHereProps) {
   return (
     <>
       <div className="mb-6 flex gap-2">
-        <p>Não é cadastrado?</p>
-        <Link href="/signup" className="text-click-here">
+        <p>{message}</p>
+        <Link href={href} className="text-click-here">
           Clique Aqui
         </Link>
       </div>

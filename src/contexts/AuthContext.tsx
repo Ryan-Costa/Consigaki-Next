@@ -67,18 +67,25 @@ export function AuthProvider({ children }: any) {
   }
 
   async function signUp({ cpf, name, email, password }: SignUpData) {
-    try {
-      const response = await api.post<SignUpResponse>('/users/backoffice', {
+    api
+      .post<SignUpResponse>('/users/backoffice', {
         cpf,
         name,
         email,
         password,
         expoPushToken: 'teste',
       })
-      const { message } = response.data
-
-      toast.warn(message)
-    } catch (err) {}
+      .then((response) => {
+        console.log(response)
+        toast.success(response.data.message)
+      })
+      .catch((err) => {
+        if (err.response) {
+          toast.error(err.response.data.message)
+        } else {
+          toast.error(err.message)
+        }
+      })
   }
 
   return (

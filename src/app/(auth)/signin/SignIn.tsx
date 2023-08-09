@@ -2,7 +2,7 @@
 
 import { IconePass } from '../../../../public/icons'
 import { useForm } from 'react-hook-form'
-import { useContext } from 'react'
+import { useContext, useTransition } from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ClickHere from '@/components/ClickHere'
@@ -27,6 +27,7 @@ const loginUserFormSchema = z.object({
 type LoginUserFormData = z.infer<typeof loginUserFormSchema>
 
 export default function SignIn() {
+  const [isPending, startTransition] = useTransition()
   const { signIn, messageError } = useContext(AuthContext)
   const {
     register,
@@ -52,9 +53,10 @@ export default function SignIn() {
 
   const handleSignIn = (data: any) => {
     const newData = newUnmaskedCpfData(data)
-    signIn(newData)
+    startTransition(() => signIn(newData))
   }
 
+  console.log(isPending)
   return (
     <div className="mr-64 flex w-492 flex-col">
       <form
@@ -104,13 +106,13 @@ export default function SignIn() {
           </label>
         </div>
 
-        <ClickHere />
+        <ClickHere message="Não é cadastrado?" href="/signup" />
 
         <button
           type="submit"
           className={`mt-4 flex justify-center rounded-xl bg-dark-blue px-40 py-5 opacity-80 hover:opacity-100`}
         >
-          Entrar
+          {isPending ? 'CARREGANDO' : 'ENTRAR'}
         </button>
       </form>
     </div>

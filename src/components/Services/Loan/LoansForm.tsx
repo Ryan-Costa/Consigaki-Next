@@ -4,7 +4,7 @@ import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
 import { ILoanID } from '@/interfaces/Loan'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { useState, useTransition } from 'react'
+import { ChangeEvent, useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { ButtonSave } from '../../Common/ButtonSave'
@@ -12,42 +12,89 @@ import { Input } from '../../Common/Input'
 import { DropdownForm } from '../../DropdownForm'
 import LoansDocuments from './LoansDocuments'
 import { putRevalidateItems } from '@/functions/putRevalidateItems'
+import { toast } from 'react-toastify'
 
 const schemaLoansForm = z.object({
-  status: z.number(),
-  observation: z.string(),
+  status: z.string(),
+  comments: z.string().optional(),
 })
 
 type LoansFormProps = z.infer<typeof schemaLoansForm>
 
 export default function LoansForm({ data }: { data: ILoanID }) {
-  const [obsPendencies, setObsPendencies] = useState(true)
+  const [valueTextPendencies, setValueTextPendencies] = useState('')
   const [, startTransition] = useTransition()
   const { back } = useRouter()
   const loans = data.data
-
-  const { handleSubmit, register } = useForm<LoansFormProps>({
+  const [obsPendencies, setObsPendencies] = useState(loans.status !== 2)
+  const {
+    handleSubmit,
+    register,
+    reset,
+    setError,
+    formState: { errors },
+  } = useForm<LoansFormProps>({
     resolver: zodResolver(schemaLoansForm),
     defaultValues: {
-      status: loans.status,
+      status: String(loans.status),
     },
   })
 
   const statusChange = (value: string) => {
-    value === '2' ? setObsPendencies(false) : setObsPendencies(true)
+    if (value === '2') {
+      setObsPendencies(false)
+    } else {
+      setObsPendencies(true)
+      setValueTextPendencies('')
+      reset({
+        comments: undefined,
+      })
+    }
+  }
+
+  const handleChangePendencies = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = event.target
+    setValueTextPendencies(value)
   }
 
   const handleFormSubmit = (dataForm: LoansFormProps) => {
-    const loansUrl = `/loans/${loans.id}`
+    const updateStatusUrl = `/loans/${loans.id}/${dataForm.status}`
+    const setPendingUrl = `/loans/${loans.id}/set-pending`
+    console.log('dados do formulário', dataForm)
 
-    if (dataForm.status !== 0) {
-      startTransition(() =>
-        patchRevalidateItems<LoansFormProps>(loansUrl, dataForm),
-      )
-      back()
+    if (dataForm.status === '2') {
+      if (dataForm.comments === undefined || dataForm.comments === '') {
+        console.log('seta o erro')
+        setError('comments', {
+          type: 'custom',
+          message: 'Digite o motivo da pendência',
+        })
+      } else {
+        console.log('seta pendencia')
+
+        startTransition(() =>
+          patchRevalidateItems<LoansFormProps>(setPendingUrl, dataForm.comments)
+            .then((response) => {
+              toast.success(response.message)
+            })
+            .catch((error) => {
+              toast.error(error.response.message)
+            }),
+        )
+        // back()
+      }
     } else {
+      console.log('atualiza o status')
+
       startTransition(() =>
-        putRevalidateItems<LoansFormProps>(loansUrl, dataForm),
+        putRevalidateItems<LoansFormProps>(updateStatusUrl)
+          .then((res) => {
+            toast.success(res.response.message)
+          })
+          .catch((error) => {
+            console.log('ERRO ===>', error)
+            // toast.error(error.response.message)
+          }),
       )
     }
   }
@@ -60,70 +107,65 @@ export default function LoansForm({ data }: { data: ILoanID }) {
       </div>
       <div className="mb-6 mt-6 flex gap-6">
         <Input
-          register={register}
           label="Nome"
           name="username"
           type="text"
           readOnly
-          value={loans.user.name}
+          value={loans.user.name ?? 'Não possui'}
           className="w-full"
         />
         <Input
-          register={register}
           label="E-mail"
           name="email"
           type="text"
           readOnly
-          value={loans.user.email}
+          value={loans.user.email ?? 'Não possui'}
           className="w-full"
         />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
         <Input
-          register={register}
           label="CPF"
           name="cpf"
           type="text"
           readOnly
-          value={loans.user.cpf}
+          value={loans.user.cpf ?? 'Não possui'}
           className="w-full"
         />
         <Input
-          register={register}
           label="Celular"
           name="phoneNumber"
           type="text"
           readOnly
-          value={loans.user.phoneNumber}
+          value={loans.user.phoneNumber ?? 'Não possui'}
           className="w-full"
         />
         <Input
-          register={register}
           label="Data de Nascimento"
           name="birthDate"
           type="text"
           readOnly
-          value={new Date(loans.user.birthDate).toLocaleDateString()}
+          value={
+            new Date(loans.user.birthDate).toLocaleDateString() ?? 'Não possui'
+          }
           className="w-full"
         />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
         <Input
-          register={register}
           label="Cadastro"
           name="createdAt"
           type="text"
           disabled
-          value={new Date(loans.createdAt).toLocaleDateString()}
+          value={new Date(loans.createdAt).toLocaleDateString() ?? 'Não possui'}
           className="w-full"
         />
         <Input
-          register={register}
           label="Alterado"
           name="updatedAt"
           type="text"
           disabled
-          value={new Date(loans.updatedAt).toLocaleDateString()}
+          value={new Date(loans.updatedAt).toLocaleDateString() ?? 'Não possui'}
           className="w-full"
         />
       </div>
@@ -133,54 +175,48 @@ export default function LoansForm({ data }: { data: ILoanID }) {
       </div>
       <div className="mt-5 flex gap-6">
         <Input
-          register={register}
           label="Convênio"
           name="agreement"
           type="text"
           readOnly
-          value={loans.userAgreements.agreement.name}
+          value={loans.userAgreements.agreement.name ?? 'Não possui'}
           className="w-full"
         />
         <Input
-          register={register}
           label="Matrícula"
           name="registration"
           type="text"
           readOnly
-          value={loans.userAgreements.registration}
+          value={loans.userAgreements.registration ?? 'Não possui'}
           className="w-full"
         />
       </div>
       <div className="mb-6 mt-6 flex gap-6">
         <Input
-          register={register}
           label="Cargo"
           name="occupation"
           type="text"
           readOnly
-          value={loans.userAgreements.job_title}
+          value={loans.userAgreements.job_title ?? 'Não possui'}
           className="w-full"
         />
         <Input
-          register={register}
           label="Vínculo"
           name="position"
           type="text"
           readOnly
-          value={loans.userAgreements.position}
+          value={loans.userAgreements.position ?? 'Não possui'}
           className="w-full"
         />
         <Input
-          register={register}
           label="Consignatária"
           name="provider"
           type="text"
           readOnly
-          value={loans.provider.name}
+          value={loans.provider.name ?? 'Não possui'}
           className="w-full"
         />
         <Input
-          register={register}
           label="Liberado"
           name="liberado"
           type="text"
@@ -190,37 +226,33 @@ export default function LoansForm({ data }: { data: ILoanID }) {
       </div>
       <div className="mb-6 mt-6 flex gap-6">
         <Input
-          register={register}
           label="Parcela"
           name="installment"
           type="text"
           readOnly
-          value={loans.installment}
+          value={loans.installment ?? 'Não possui'}
           className="w-full"
         />
         <Input
-          register={register}
           label="Prazo"
           name="term"
           type="text"
           readOnly
-          value={loans.term}
+          value={loans.term ?? 'Não possui'}
           className="w-full"
         />
         <Input
-          register={register}
           label="Taxa"
           name="fee"
           type="text"
           readOnly
-          value={loans.fee}
+          value={loans.fee ?? 'Não possui'}
           className="w-full"
         />
         <Input
-          register={register}
           label="ADF"
           name="adf"
-          value={loans.adf}
+          value={loans.adf ?? 'Não possui'}
           readOnly
           type="text"
           className="w-full"
@@ -228,7 +260,6 @@ export default function LoansForm({ data }: { data: ILoanID }) {
       </div>
       <div className="mb-6 mt-6 flex gap-6">
         <Input
-          register={register}
           label="Data Averbação" // rever este campo
           name="dataAverbacao"
           type="text"
@@ -236,7 +267,6 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           className="w-full"
         />
         <Input
-          register={register}
           label="Data Solicitação" // rever este campo
           name="dataSolicitacao"
           type="text"
@@ -244,7 +274,6 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           className="w-full"
         />
         <Input
-          register={register}
           label="Data Pagamento" // rever este campo
           name="dataPagamento"
           type="text"
@@ -256,9 +285,8 @@ export default function LoansForm({ data }: { data: ILoanID }) {
             Status
           </label>
           <DropdownForm
-            name="Status"
             register={register}
-            defaultValue={loans.status}
+            name="status"
             valueSelected={statusChange}
             options={[
               { name: 'solicitado', displayName: 'Solicitado', value: 0 },
@@ -278,10 +306,17 @@ export default function LoansForm({ data }: { data: ILoanID }) {
             Observação de pendências
           </label>
           <textarea
-            name="observacaoPendencias"
-            className="w-full rounded-lg border border-gray-400 bg-gray-50 px-6 py-2"
+            {...register('comments')}
+            className="h-[150px] w-full resize-none rounded-lg border border-gray-400 px-6 py-2"
             disabled={obsPendencies}
+            value={valueTextPendencies}
+            onChange={handleChangePendencies}
           />
+          {errors.comments?.message && (
+            <span className="text-md font-bold tracking-wide text-red-600">
+              {errors.comments.message}
+            </span>
+          )}
         </div>
       </div>
       {loans.loansDocuments.length > 0 ? (

@@ -27,12 +27,8 @@ export function SearchInput({ onSearch }: SearchInputProps) {
         placeholder="Buscar"
       />
       <button
-        className={`flex cursor-pointer items-center rounded-md bg-bs-teal-2 px-2 active:bg-gray-300 ${
-          searchValue.length < 3 &&
-          'cursor-not-allowed bg-bs-teal-2 opacity-60 active:bg-bs-teal-2'
-        }`}
+        className={`flex cursor-pointer items-center rounded-md bg-bs-teal-2 px-2 active:bg-gray-300`}
         onClick={handleSearch}
-        disabled={searchValue.length <= 3}
       >
         {IconSearchWhite}
       </button>

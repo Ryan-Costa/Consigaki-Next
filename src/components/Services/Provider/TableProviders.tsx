@@ -14,8 +14,7 @@ interface ProviderProps {
 
 export default function TableProviders({ providerData }: ProviderProps) {
   const [, startTransition] = useTransition()
-  const totalPages = providerData.data.totalPages
-  const [currentItems, setCurrentItems] = useState<IProviders[]>([])
+  const [totalPages, setTotalPages] = useState(providerData.data.totalPages)
   const [providers, setProviders] = useState<IProviders[]>(
     providerData.data.providers,
   )
@@ -25,9 +24,9 @@ export default function TableProviders({ providerData }: ProviderProps) {
 
   useEffect(() => {
     const body = {
-      name: '',
+      keyword: searchTerm,
       page: currentPage,
-      size: 10,
+      size: itemsPerPage,
     }
     const urlProvidersGetAll = '/providers/get-all'
     startTransition(() =>
@@ -35,26 +34,12 @@ export default function TableProviders({ providerData }: ProviderProps) {
         (response) => {
           if (response) {
             setProviders(response.data.providers)
+            setTotalPages(response.data.totalPages)
           }
         },
       ),
     )
-  }, [currentPage])
-
-  useEffect(() => {
-    const filteredData = providers.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()),
-    )
-
-    const indexOfLastItem = Math.min(
-      currentPage * itemsPerPage,
-      filteredData.length,
-    )
-
-    const indexOfFirstItem = Math.max(indexOfLastItem - itemsPerPage, 0)
-
-    setCurrentItems(filteredData.slice(indexOfFirstItem, indexOfLastItem))
-  }, [searchTerm, providers, currentPage])
+  }, [currentPage, searchTerm])
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber)
@@ -88,7 +73,7 @@ export default function TableProviders({ providerData }: ProviderProps) {
               <th className="p-4 text-left">Editar</th>
             </tr>
           </thead>
-          <TBodyProviders data={currentItems} />
+          <TBodyProviders data={providers} />
         </table>
         <div className="mt-8 flex gap-2">
           <button

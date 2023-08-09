@@ -15,8 +15,7 @@ interface ProductsProps {
 
 export default function TableProducts({ productData }: ProductsProps) {
   const [, startTransition] = useTransition()
-  const totalPages = productData.data.totalPages
-  const [currentItems, setCurrentItems] = useState<IProducts[]>([])
+  const [totalPages, setTotalPages] = useState(productData.data.totalPages)
   const [products, setProducts] = useState<IProducts[]>(
     productData.data.products,
   )
@@ -26,9 +25,9 @@ export default function TableProducts({ productData }: ProductsProps) {
 
   useEffect(() => {
     const body = {
-      name: '',
+      keyword: searchTerm,
       page: currentPage,
-      size: 10,
+      size: itemsPerPage,
     }
     const urlProductsGetAll = '/products/get-all'
     startTransition(() =>
@@ -36,26 +35,12 @@ export default function TableProducts({ productData }: ProductsProps) {
         (response) => {
           if (response) {
             setProducts(response.data.products)
+            setTotalPages(response.data.totalPages)
           }
         },
       ),
     )
-  }, [currentPage])
-
-  useEffect(() => {
-    const filteredData = products?.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()),
-    )
-
-    const indexOfLastItem = Math.min(
-      currentPage * itemsPerPage,
-      filteredData.length,
-    )
-
-    const indexOfFirstItem = Math.max(indexOfLastItem - itemsPerPage, 0)
-
-    setCurrentItems(filteredData.slice(indexOfFirstItem, indexOfLastItem))
-  }, [searchTerm, products, currentPage])
+  }, [currentPage, searchTerm])
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber)
@@ -88,7 +73,7 @@ export default function TableProducts({ productData }: ProductsProps) {
             <th className="p-4 text-left">Editar</th>
           </tr>
         </thead>
-        <TBodyProducts data={currentItems} />
+        <TBodyProducts data={products} />
       </table>
       <div className="mt-8 flex gap-2">
         <button

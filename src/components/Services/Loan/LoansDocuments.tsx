@@ -29,11 +29,7 @@ export default function LoansDocuments({ loans }: LoansDocumentsProps) {
       <p className="text-base">Imagens menos que 16MB</p>
       <div className="scroll-container-docs mt-5 flex h-[330px] gap-8 overflow-auto">
         {loans.loansDocuments.map((doc: ILoansDocuments) => (
-          <>
-            <DocumentDownload fileUrl={doc.uri} key={doc.id} />
-            <DocumentDownload fileUrl={doc.uri} key={doc.id} />
-            <DocumentDownload fileUrl={doc.uri} key={doc.id} />
-          </>
+          <DocumentDownload fileUrl={doc.uri} key={doc.id} />
         ))}
       </div>
     </>

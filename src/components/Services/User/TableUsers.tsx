@@ -15,8 +15,7 @@ interface UsersProps {
 
 export default function TableUsers({ userData }: UsersProps) {
   const [, startTransition] = useTransition()
-  const totalPages = userData.data.totalPages
-  const [currentItems, setCurrentItems] = useState<IUsersID[]>([])
+  const [totalPages, setTotalPages] = useState(userData.data.totalPages)
   const [users, setUsers] = useState<IUsersID[]>(userData.data.users)
   const [currentPage, setCurrentPage] = useState(userData.data.currentPage)
   const [searchTerm, setSearchTerm] = useState('')
@@ -24,9 +23,9 @@ export default function TableUsers({ userData }: UsersProps) {
 
   useEffect(() => {
     const body = {
-      name: '',
+      keyword: searchTerm,
       page: currentPage,
-      size: 10,
+      size: itemsPerPage,
     }
     const urlUsersGetAll = '/users/get-all'
     startTransition(() =>
@@ -34,33 +33,15 @@ export default function TableUsers({ userData }: UsersProps) {
         (response) => {
           if (response) {
             setUsers(response.data.users)
+            setTotalPages(response.data.totalPages)
           }
         },
       ),
     )
-  }, [currentPage])
-
-  useEffect(() => {
-    const filteredData = users?.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()),
-    )
-
-    const indexOfLastItem = Math.min(
-      currentPage * itemsPerPage,
-      filteredData.length,
-    )
-
-    const indexOfFirstItem = Math.max(indexOfLastItem - itemsPerPage, 0)
-
-    setCurrentItems(filteredData.slice(indexOfFirstItem, indexOfLastItem))
-  }, [searchTerm, users, currentPage])
+  }, [currentPage, searchTerm])
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber)
-  }
-
-  const handleSearch = (value: string) => {
-    setSearchTerm(value)
   }
 
   return (
@@ -70,7 +51,7 @@ export default function TableUsers({ userData }: UsersProps) {
           Usuários {IconPartners}
         </h2>
         <div className="flex items-center justify-center">
-          <SearchInput onSearch={handleSearch} />
+          <SearchInput onSearch={(value: string) => setSearchTerm(value)} />
         </div>
       </div>
       <Link href={`/users/new`}>
@@ -85,7 +66,7 @@ export default function TableUsers({ userData }: UsersProps) {
             <th className="p-4 text-left">Editar</th>
           </tr>
         </thead>
-        <TBodyUsers data={currentItems} />
+        <TBodyUsers data={users} />
       </table>
       <div className="mt-8 flex gap-2">
         <button

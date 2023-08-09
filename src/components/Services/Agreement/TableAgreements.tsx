@@ -14,8 +14,7 @@ interface AgreementsProps {
 
 export default function TableAgreements({ agreementData }: AgreementsProps) {
   const [, startTransition] = useTransition()
-  const totalPages = agreementData.data.totalPages
-  const [currentItems, setCurrentItems] = useState<IAgreements[]>([])
+  const [totalPages, setTotalPages] = useState(agreementData.data.totalPages)
   const [agreements, setAgreements] = useState<IAgreements[]>(
     agreementData.data.agreements,
   )
@@ -25,9 +24,9 @@ export default function TableAgreements({ agreementData }: AgreementsProps) {
 
   useEffect(() => {
     const body = {
-      name: '',
+      keyword: searchTerm,
       page: currentPage,
-      size: 10,
+      size: itemsPerPage,
     }
     const urlAgreementsGetAll = '/agreements/get-all'
     startTransition(() =>
@@ -35,26 +34,12 @@ export default function TableAgreements({ agreementData }: AgreementsProps) {
         (response) => {
           if (response) {
             setAgreements(response.data.agreements)
+            setTotalPages(response.data.totalPages)
           }
         },
       ),
     )
-  }, [currentPage])
-
-  useEffect(() => {
-    const filteredData = agreements.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()),
-    )
-
-    const indexOfLastItem = Math.min(
-      currentPage * itemsPerPage,
-      filteredData.length,
-    )
-
-    const indexOfFirstItem = Math.max(indexOfLastItem - itemsPerPage, 0)
-
-    setCurrentItems(filteredData.slice(indexOfFirstItem, indexOfLastItem))
-  }, [searchTerm, agreements, currentPage])
+  }, [currentPage, searchTerm])
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber)
@@ -88,7 +73,7 @@ export default function TableAgreements({ agreementData }: AgreementsProps) {
               <th className="p-4 text-left">Editar</th>
             </tr>
           </thead>
-          <TBodyAgreements data={currentItems} />
+          <TBodyAgreements data={agreements} />
         </table>
         <div className="mt-8 flex gap-2">
           <button

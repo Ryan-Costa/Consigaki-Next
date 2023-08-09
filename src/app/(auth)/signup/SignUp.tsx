@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { CpfMask } from '@/components/Mask/CpfMask'
 import { AuthContext } from '@/contexts/AuthContext'
 import { Metadata } from 'next'
+import ClickHere from '@/components/ClickHere'
 
 export const metadata: Metadata = {
   title: 'Cadastro',
@@ -36,10 +37,10 @@ const createUserFormSchema = z
       .string()
       .nonempty('A confirmação de e-mail é obrigatória')
       .toLowerCase(),
-    password: z.string().min(6, 'A senha precisa de no mínimo 6 caracteres'),
+    password: z.string().min(9, 'A senha precisa de no mínimo 9 caracteres'),
     confirmPassword: z
       .string()
-      .min(6, 'A senha precisa de no mínimo 6 caracteres'),
+      .min(9, 'A senha precisa de no mínimo 9 caracteres'),
   })
   .refine((fields) => fields.email === fields.confirmEmail, {
     path: ['confirmEmail'],
@@ -63,15 +64,21 @@ export default function SignUp() {
     resolver: zodResolver(createUserFormSchema),
   })
 
-  const newUnmaskedCpfData = (data: any) => {
-    const removedCpfMask = data.cpf.replace(/\D/g, '')
-    const newData = { ...data, cpf: removedCpfMask }
+  const transformData = (cpf: any) => {
+    const removedCpfMask = cpf.replace(/\D/g, '')
+    const newData = removedCpfMask
 
     return newData
   }
 
   const handleSignUp = (data: CreateUserFormData) => {
-    const newData = newUnmaskedCpfData(data)
+    const newData = {
+      cpf: transformData(data.cpf),
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    }
+    console.log(newData)
     signUp(newData)
   }
 
@@ -269,9 +276,10 @@ export default function SignUp() {
             Repetir Senha
           </label>
         </div>
+        <ClickHere message="Já tem cadastro?" href="/signin" />
         <button
           type="submit"
-          className="mt-10 rounded-xl bg-dark-blue px-32 py-5 uppercase opacity-80 hover:opacity-100"
+          className="mt-4 rounded-xl bg-dark-blue px-32 py-5 uppercase opacity-80 hover:opacity-100"
         >
           Cadastrar
         </button>

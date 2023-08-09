@@ -3,60 +3,46 @@
 import { IDataLoans, ILoans } from '@/interfaces/Loan'
 import { useEffect, useState, useTransition } from 'react'
 import { IconArrow, IconPartners } from '../../../../public/icons'
-import { SearchInput } from '../../SearchInput'
 import TBodyLoans from './TBodyLoans'
 import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
+import { SearchInput } from '@/components/SearchInput'
 interface LoansProps {
   loanData: IDataLoans
 }
 
 export function TableLoans({ loanData }: LoansProps) {
   const [, startTransition] = useTransition()
-  const totalPages = loanData.data.totalPages
-  const [currentItems, setCurrentItems] = useState<ILoans[]>([])
+  const [totalPages, setTotalPages] = useState(loanData.data.totalPages)
   const [loans, setLoans] = useState<ILoans[]>(loanData.data.loans)
   const [currentPage, setCurrentPage] = useState(loanData.data.currentPage)
   const [searchTerm, setSearchTerm] = useState('')
   const itemsPerPage = 10
 
+  console.log(searchTerm)
+
   useEffect(() => {
     const body = {
-      name: '',
+      keyword: searchTerm,
       page: currentPage,
-      size: 10,
+      size: itemsPerPage,
     }
     const urlLoansGetAll = '/loans/get-all'
     startTransition(() =>
       postRevalidatePageItems<IDataLoans>(urlLoansGetAll, body).then(
         (response) => {
           if (response) {
+            console.log(response)
             setLoans(response.data.loans)
+            setTotalPages(response.data.totalPages)
           }
         },
       ),
     )
-  }, [currentPage])
-
-  useEffect(() => {
-    const filteredData = loans?.filter((item) =>
-      item.user.name.toLowerCase().includes(searchTerm.toLowerCase()),
-    )
-
-    const indexOfLastItem = Math.min(
-      currentPage * itemsPerPage,
-      filteredData.length,
-    )
-
-    const indexOfFirstItem = Math.max(indexOfLastItem - itemsPerPage, 0)
-
-    setCurrentItems(filteredData.slice(indexOfFirstItem, indexOfLastItem))
-  }, [searchTerm, loans, currentPage])
+  }, [searchTerm, currentPage])
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber)
   }
-
-  const handleSearch = (value: string) => setSearchTerm(value)
 
   return (
     <div>
@@ -65,7 +51,7 @@ export function TableLoans({ loanData }: LoansProps) {
           Esteira {IconPartners}
         </h2>
         <div className="flex items-center justify-center">
-          <SearchInput onSearch={handleSearch} />
+          <SearchInput onSearch={(value: string) => setSearchTerm(value)} />
         </div>
       </div>
       <table className="mt-28 w-full text-left">
@@ -83,7 +69,7 @@ export function TableLoans({ loanData }: LoansProps) {
             <th className="p-3 text-left">Editar</th>
           </tr>
         </thead>
-        <TBodyLoans data={currentItems} />
+        <TBodyLoans data={loans} />
       </table>
       <div className="mt-8 flex gap-2">
         <button
