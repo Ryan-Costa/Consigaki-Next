@@ -87,7 +87,7 @@ export default function SignUp() {
   }
 
   return (
-    <div className="mr-64 flex w-492 flex-col">
+    <div className="flex w-492 flex-col">
       <form
         autoComplete="off"
         onSubmit={handleSubmit(handleSignUp)}

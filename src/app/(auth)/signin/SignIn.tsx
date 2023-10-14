@@ -58,7 +58,7 @@ export default function SignIn() {
 
   console.log(isPending)
   return (
-    <div className="mr-64 flex w-492 flex-col">
+    <div className="flex w-492 flex-col">
       <form
         onSubmit={handleSubmit(handleSignIn)}
         className="flex w-full flex-col"
