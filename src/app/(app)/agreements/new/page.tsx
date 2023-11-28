@@ -1,7 +1,6 @@
 'use client'
 
 import { ButtonSave } from '@/components/Common/ButtonSave'
-import { Input } from '@/components/Common/Input'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
@@ -9,6 +8,7 @@ import { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
+import { Input } from '../../../../components/Common/Input'
 
 const schemaNewAgreementForm = z.object({
   name: z

@@ -1,19 +1,14 @@
 'use client'
 
-import { z } from 'zod'
-import { Input } from '@/components/Common/Input'
-import { useForm } from 'react-hook-form'
-import { Metadata } from 'next'
-import { useRouter } from 'next/navigation'
 import { ButtonSave } from '@/components/Common/ButtonSave'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useTransition } from 'react'
+import { Input } from '@/components/Common/Input'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-
-export const metadata: Metadata = {
-  title: 'Nova Consignatária',
-}
+import { z } from 'zod'
 
 const schemaNewProviderForm = z.object({
   name: z.string().nonempty('Razão Social não pode ser vazio').toUpperCase(),

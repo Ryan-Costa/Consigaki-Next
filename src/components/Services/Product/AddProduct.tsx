@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import { IconPartners } from '../../../../public/icons'
-import { ButtonGoBack } from '../../Common/ButtonBack'
+import { ButtonGoBack } from '../../Common/ButtonGoBack'
 import NewProductForm from './NewProductForm'
 
 const inter = Inter({

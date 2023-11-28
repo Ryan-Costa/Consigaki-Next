@@ -1,4 +1,4 @@
-import { ButtonGoBack } from '@/components/Common/ButtonBack'
+import { ButtonGoBack } from '@/components/Common/ButtonGoBack'
 import { Inter, Roboto } from 'next/font/google'
 import { ReactNode } from 'react'
 import { IconInsumo } from '../../../../public/icons'
