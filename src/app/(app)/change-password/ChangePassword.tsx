@@ -3,15 +3,14 @@
 import { Metadata } from 'next'
 import { Inter, Roboto } from 'next/font/google'
 
+import { ButtonGoBack } from '@/components/Common/ButtonGoBack'
+import { ButtonSave } from '@/components/Common/ButtonSave'
+import { Input } from '@/components/Common/Input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { IconInsumo } from '../../../../public/icons'
-// import { ButtonGoBack } from '../../../components/Common/ButtonBack'
-import { ButtonGoBack } from '../../../components/Common/ButtonGoBack'
-import { ButtonSave } from '../../../components/Common/ButtonSave'
-import { Input } from '../../../components/Common/Input'
 // import api from '@/services/server/api'
 // import { ChangePassowrd } from '@/interfaces/ChangePassword'
 const inter = Inter({
