@@ -1,18 +1,18 @@
 'use client'
 
 import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
+import { putRevalidateItems } from '@/functions/putRevalidateItems'
 import { ILoanID } from '@/interfaces/Loan'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { ChangeEvent, useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import { z } from 'zod'
 import { ButtonSave } from '../../Common/ButtonSave'
 import { Input } from '../../Common/Input'
 import { DropdownForm } from '../../DropdownForm'
 import LoansDocuments from './LoansDocuments'
-import { putRevalidateItems } from '@/functions/putRevalidateItems'
-import { toast } from 'react-toastify'
 
 const schemaLoansForm = z.object({
   status: z.string(),
@@ -24,7 +24,7 @@ type LoansFormProps = z.infer<typeof schemaLoansForm>
 export default function LoansForm({ data }: { data: ILoanID }) {
   const [valueTextPendencies, setValueTextPendencies] = useState('')
   const [, startTransition] = useTransition()
-  const { back } = useRouter()
+  //   const { back } = useRouter()
   const loans = data.data
   const [obsPendencies, setObsPendencies] = useState(loans.status !== 2)
   const {
