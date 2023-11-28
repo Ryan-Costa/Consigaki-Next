@@ -1,7 +1,7 @@
+import { ButtonGoBack } from '@/components/Common/ButtonBack'
 import { Inter, Roboto } from 'next/font/google'
 import { ReactNode } from 'react'
 import { IconInsumo } from '../../../../public/icons'
-import ButtonGoBack from '@/components/Common/ButtonBack'
 
 const inter = Inter({
   subsets: ['latin'],

@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react'
+import { ButtonGoBack } from '@/components/Common/ButtonBack'
 import { Roboto } from 'next/font/google'
-import ButtonGoBack from '@/components/Common/ButtonBack'
+import { ReactNode } from 'react'
 import { IconPartners } from '../../../../../public/icons'
 
 const roboto = Roboto({

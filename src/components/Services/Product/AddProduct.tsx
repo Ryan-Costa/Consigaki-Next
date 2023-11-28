@@ -1,8 +1,7 @@
-import React from 'react'
-import { IconPartners } from '../../../../public/icons'
 import { Inter } from 'next/font/google'
+import { IconPartners } from '../../../../public/icons'
+import { ButtonGoBack } from '../../Common/ButtonBack'
 import NewProductForm from './NewProductForm'
-import ButtonGoBack from '../../Common/ButtonBack'
 
 const inter = Inter({
   subsets: ['latin'],

@@ -1,9 +1,9 @@
 'use client'
 
-import { IconArrowBack } from '../../../public/icons'
 import { useRouter } from 'next/navigation'
+import { IconArrowBack } from '../../../public/icons'
 
-export default function ButtonGoBack() {
+export function ButtonGoBack() {
   const router = useRouter()
 
   return (

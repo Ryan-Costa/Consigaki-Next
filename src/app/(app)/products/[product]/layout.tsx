@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react'
+import { ButtonGoBack } from '@/components/Common/ButtonBack'
 import { Roboto } from 'next/font/google'
+import { ReactNode } from 'react'
 import { IconPartners } from '../../../../../public/icons'
-import ButtonGoBack from '@/components/Common/ButtonBack'
 
 const roboto = Roboto({
   subsets: ['latin'],

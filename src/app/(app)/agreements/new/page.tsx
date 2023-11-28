@@ -1,19 +1,14 @@
 'use client'
 
-import { z } from 'zod'
-import { Metadata } from 'next'
-import { useTransition } from 'react'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { postRevalidateItems } from '@/functions/postRevalidateItems'
-import { Input } from '@/components/Common/Input'
 import { ButtonSave } from '@/components/Common/ButtonSave'
+import { Input } from '@/components/Common/Input'
+import { postRevalidateItems } from '@/functions/postRevalidateItems'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-
-export const metadata: Metadata = {
-  title: 'Novo Convênio',
-}
+import { z } from 'zod'
 
 const schemaNewAgreementForm = z.object({
   name: z

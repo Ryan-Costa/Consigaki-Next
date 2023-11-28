@@ -1,8 +1,8 @@
-import ButtonGoBack from '@/components/Common/ButtonBack'
-import { Roboto, Inter } from 'next/font/google'
-import { IconPartners } from '../../../../../public/icons'
-import { ReactNode } from 'react'
+import { ButtonGoBack } from '@/components/Common/ButtonBack'
 import { Metadata } from 'next'
+import { Inter, Roboto } from 'next/font/google'
+import { ReactNode } from 'react'
+import { IconPartners } from '../../../../../public/icons'
 
 const inter = Inter({
   subsets: ['latin'],
