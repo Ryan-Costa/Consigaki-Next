@@ -3,11 +3,6 @@ import AgreementForm from '@/components/Services/Agreement/AgreementForm'
 import { IAgreementID } from '@/interfaces/Agreement'
 import { ProductGetAll } from '@/interfaces/AgreementProduct'
 import api from '@/services/server/api'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Consignatárias',
-}
 
 export default async function EditAgreement({
   params,
@@ -51,6 +46,6 @@ export async function generateMetadata({
   params: { agreement: string }
 }) {
   return {
-    title: `Editar Consignatária ${params.agreement}`,
+    title: `Editar Convênio ${params.agreement}`,
   }
 }
