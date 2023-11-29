@@ -7,8 +7,8 @@ import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import ToggleSwitch from "../../ToggleSwitch";
-import { ButtonSave } from "../../common/ButtonSave";
-import { Input } from "../../common/Input";
+import { ButtonSave } from "../../compCommon/ButtonSave";
+import { Input } from "../../compCommon/Input";
 
 const schemaNewProviderForm = z.object({
   name: z.string().nonempty("Digite o nome do produto").toUpperCase(),

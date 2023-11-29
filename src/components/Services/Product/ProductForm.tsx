@@ -10,8 +10,8 @@ import { z } from "zod";
 import { patchRevalidateItems } from "../../../functions/patchRevalidateItems";
 import { DropdownForm } from "../../DropdownForm";
 import ToggleSwitch from "../../ToggleSwitch";
-import { ButtonSave } from "../../common/ButtonSave";
-import { Input } from "../../common/Input";
+import { ButtonSave } from "../../compCommon/ButtonSave";
+import { Input } from "../../compCommon/Input";
 
 const schemaProductForm = z.object({
   name: z.string().toUpperCase().nonempty("Nome do Produto não pode ser vazio"),

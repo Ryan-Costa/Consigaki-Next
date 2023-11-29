@@ -1,7 +1,7 @@
 'use client'
 
 import { SearchInput } from '@/components/SearchInput'
-import { ButtonAdd } from '@/components/common/ButtonAdd'
+import { ButtonAdd } from '@/components/compCommon/ButtonAdd'
 import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
 import { IDataUsers, IUsersID } from '@/interfaces/User'
 import Link from 'next/link'

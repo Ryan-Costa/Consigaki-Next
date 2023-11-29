@@ -12,7 +12,7 @@ import { z } from "zod";
 import { CpfMask } from "../Mask/CpfMask";
 import { TelMask } from "../Mask/TelMask";
 import ImageUploadProductAgreement from "../UI/ImageUploadProductAgreement";
-import { ButtonSave } from "../common/ButtonSave";
+import { ButtonSave } from "../compCommon/ButtonSave";
 
 const roboto = Roboto({
   subsets: ["latin"],

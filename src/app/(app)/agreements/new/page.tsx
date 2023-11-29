@@ -1,7 +1,7 @@
 "use client";
 
-import { ButtonSave } from "@/components/common/ButtonSave";
-import { Input } from "@/components/common/Input";
+import { ButtonSave } from "@/components/compCommon/ButtonSave";
+import { Input } from "@/components/compCommon/Input";
 import { postRevalidateItems } from "@/functions/postRevalidateItems";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";

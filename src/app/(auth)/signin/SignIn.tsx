@@ -1,7 +1,7 @@
 'use client'
 
 import ClickHere from '@/components/ClickHere'
-import InputMask from '@/components/common/InputMask'
+import InputMask from '@/components/compCommon/InputMask'
 import { AuthContext } from '@/contexts/AuthContext'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Metadata } from 'next'

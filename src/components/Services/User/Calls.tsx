@@ -1,7 +1,7 @@
 'use client'
 
 import TextareaWithCounter from '@/components/UI/TextareaWithCounter'
-import { ButtonAdd } from '@/components/common/ButtonAdd'
+import { ButtonAdd } from '@/components/compCommon/ButtonAdd'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import { toUpperCase } from '@/functions/toUpperCase'
 import { PostUserCall, UserCall } from '@/interfaces/UserCalls'

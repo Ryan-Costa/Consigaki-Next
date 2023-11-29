@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import { IconPartners } from "../../../../public/icons";
-import { ButtonGoBack } from "../../common/ButtonGoBack";
+import { ButtonGoBack } from "../../compCommon/ButtonGoBack";
 import NewProviderForm from "./NewProviderForm";
 const inter = Inter({
   subsets: ["latin"],

@@ -1,5 +1,5 @@
-import { ButtonAdd } from '@/components/common/ButtonAdd'
-import { Input } from '@/components/common/Input'
+import { ButtonAdd } from '@/components/compCommon/ButtonAdd'
+import { Input } from '@/components/compCommon/Input'
 import { DropdownForm } from '@/components/DropdownForm'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import {

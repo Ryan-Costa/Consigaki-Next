@@ -9,8 +9,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
 import ToggleSwitch from "../../ToggleSwitch";
-import { ButtonSave } from "../../common/ButtonSave";
-import { Input } from "../../common/Input";
+import { ButtonSave } from "../../compCommon/ButtonSave";
+import { Input } from "../../compCommon/Input";
 
 const schemaAgreementForm = z.object({
   name: z

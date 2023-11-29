@@ -11,8 +11,8 @@ import { toast } from "react-toastify";
 import { z } from "zod";
 import { DropdownForm } from "../../DropdownForm";
 import ToggleSwitch from "../../ToggleSwitch";
-import { ButtonSave } from "../../common/ButtonSave";
-import { Input } from "../../common/Input";
+import { ButtonSave } from "../../compCommon/ButtonSave";
+import { Input } from "../../compCommon/Input";
 
 import { convertToBoolean } from "@/functions/convertToBoolean";
 import { putRevalidateItems } from "@/functions/putRevalidateItems";

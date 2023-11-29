@@ -10,8 +10,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
 import { DropdownForm } from "../../DropdownForm";
-import { ButtonSave } from "../../common/ButtonSave";
-import { Input } from "../../common/Input";
+import { ButtonSave } from "../../compCommon/ButtonSave";
+import { Input } from "../../compCommon/Input";
 import LoansDocuments from "./LoansDocuments";
 
 const schemaLoansForm = z.object({

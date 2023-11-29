@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import "../styles/global/globals.css";
 
-import ToastComponent from "@/components/common/ToastComponent";
+import ToastComponent from "@/components/compCommon/ToastComponent";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { Metadata } from "next";
 import { Karla } from "next/font/google";

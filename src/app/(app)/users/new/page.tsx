@@ -1,7 +1,7 @@
 'use client'
 
-import { ButtonSave } from '@/components/common/ButtonSave'
-import { Input } from '@/components/common/Input'
+import { ButtonSave } from '@/components/compCommon/ButtonSave'
+import { Input } from '@/components/compCommon/Input'
 import { DropdownForm } from '@/components/DropdownForm'
 import { CpfMask } from '@/components/Mask/CpfMask'
 import { DateMask } from '@/components/Mask/DateMask'

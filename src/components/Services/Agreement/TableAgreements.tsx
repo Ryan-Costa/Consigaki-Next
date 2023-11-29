@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useEffect, useState, useTransition } from "react";
 import { IconArrow, IconPartners } from "../../../../public/icons";
 import { SearchInput } from "../../SearchInput";
-import { ButtonAdd } from "../../common/ButtonAdd";
+import { ButtonAdd } from "../../compCommon/ButtonAdd";
 import TBodyAgreements from "./TBodyAgreements";
 interface AgreementsProps {
   agreementData: IDataAgreements;

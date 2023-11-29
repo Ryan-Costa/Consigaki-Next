@@ -1,7 +1,7 @@
 import { UserBankAccount } from "@/interfaces/UserBankAccount";
 import api from "@/services/server/api";
 import useSWR from "swr";
-import { Input } from "../../common/Input";
+import { Input } from "../../compCommon/Input";
 
 interface BankDataUserProps {
   userId: string;

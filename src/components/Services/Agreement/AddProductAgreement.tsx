@@ -1,6 +1,6 @@
 import { DropdownForm } from '@/components/DropdownForm'
 import ImageUploadProductAgreement from '@/components/UI/ImageUploadProductAgreement'
-import { ButtonAdd } from '@/components/common/ButtonAdd'
+import { ButtonAdd } from '@/components/compCommon/ButtonAdd'
 import { formatString } from '@/functions/formatString'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import { AgreementProduct, PostAgreementProduct, ProductGetAll } from '@/interfaces/AgreementProduct'
