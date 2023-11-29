@@ -1,18 +1,18 @@
-import { ReactNode } from 'react'
-import '../styles/global/globals.css'
+import { ReactNode } from "react";
+import "../styles/global/globals.css";
 
-import { Karla } from 'next/font/google'
-import { AuthProvider } from '@/contexts/AuthContext'
-import { Metadata } from 'next'
-import ToastComponent from '@/components/Common/ToastComponent'
-const karla = Karla({ subsets: ['latin'] })
+import ToastComponent from "@/components/common/ToastComponent";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { Metadata } from "next";
+import { Karla } from "next/font/google";
+const karla = Karla({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Consigaki',
-    default: 'Consigaki',
+    template: "%s | Consigaki",
+    default: "Consigaki",
   },
-}
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -25,5 +25,5 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </AuthProvider>
       </body>
     </html>
-  )
+  );
 }

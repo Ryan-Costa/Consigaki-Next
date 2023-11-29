@@ -1,28 +1,28 @@
-'use client'
+"use client";
 
-import { z } from 'zod'
-import { Input } from '../../Common/Input'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
-import { ButtonSave } from '../../Common/ButtonSave'
-import { IProviderID } from '@/interfaces/Provider'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useTransition } from 'react'
-import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
-import ToggleSwitch from '../../ToggleSwitch'
-import { toast } from 'react-toastify'
+import { patchRevalidateItems } from "@/functions/patchRevalidateItems";
+import { IProviderID } from "@/interfaces/Provider";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { z } from "zod";
+import ToggleSwitch from "../../ToggleSwitch";
+import { ButtonSave } from "../../common/ButtonSave";
+import { Input } from "../../common/Input";
 
 const schemaProvidersForm = z.object({
-  name: z.string().nonempty('Razão Social não pode ser vazio'),
-})
+  name: z.string().nonempty("Razão Social não pode ser vazio"),
+});
 
-type ProvidersFormProps = z.infer<typeof schemaProvidersForm>
+type ProvidersFormProps = z.infer<typeof schemaProvidersForm>;
 
 export default function ProviderForm({ data }: { data: IProviderID }) {
-  const [, startTransition] = useTransition()
-  const { back } = useRouter()
+  const [, startTransition] = useTransition();
+  const { back } = useRouter();
 
-  const providers = data.data
+  const providers = data.data;
 
   const {
     handleSubmit,
@@ -33,20 +33,20 @@ export default function ProviderForm({ data }: { data: IProviderID }) {
     defaultValues: {
       name: providers.name,
     },
-  })
+  });
 
   const handleFormSubmit = (dataForm: ProvidersFormProps) => {
-    const providersUrl = `/providers/${providers.id}`
+    const providersUrl = `/providers/${providers.id}`;
 
     startTransition(() =>
       patchRevalidateItems<ProvidersFormProps>(providersUrl, dataForm).then(
         (response) => {
-          toast.success(response.message)
-          back()
-        },
-      ),
-    )
-  }
+          toast.success(response.message);
+          back();
+        }
+      )
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -85,5 +85,5 @@ export default function ProviderForm({ data }: { data: IProviderID }) {
       <ToggleSwitch isChecked={providers.active} />
       <ButtonSave type="submit" />
     </form>
-  )
+  );
 }

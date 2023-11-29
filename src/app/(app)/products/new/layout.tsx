@@ -1,27 +1,27 @@
-import { ButtonGoBack } from '@/components/Common/ButtonGoBack'
-import { Metadata } from 'next'
-import { Inter, Roboto } from 'next/font/google'
-import { ReactNode } from 'react'
-import { IconPartners } from '../../../../../public/icons'
+import { ButtonGoBack } from "@/components/common/ButtonGoBack";
+import { Metadata } from "next";
+import { Inter, Roboto } from "next/font/google";
+import { ReactNode } from "react";
+import { IconPartners } from "../../../../../public/icons";
 
 const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export const metadata: Metadata = {
-  title: 'Novo Produto',
-}
+  title: "Novo Produto",
+};
 
 export default function EditProductLayout({
   children,
 }: {
-  children: ReactNode
+  children: ReactNode;
 }) {
   return (
     <div
@@ -41,5 +41,5 @@ export default function EditProductLayout({
         {children}
       </div>
     </div>
-  )
+  );
 }

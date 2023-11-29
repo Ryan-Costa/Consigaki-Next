@@ -1,10 +1,10 @@
-import { ButtonAdd } from '@/components/Common/ButtonAdd'
-import { Input } from '@/components/Common/Input'
+import { ButtonAdd } from '@/components/common/ButtonAdd'
+import { Input } from '@/components/common/Input'
 import { DropdownForm } from '@/components/DropdownForm'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import {
-  AgreementParameter,
-  PostAgreementParameter,
+    AgreementParameter,
+    PostAgreementParameter,
 } from '@/interfaces/AgreementParameter'
 import api from '@/services/server/api'
 import { zodResolver } from '@hookform/resolvers/zod'

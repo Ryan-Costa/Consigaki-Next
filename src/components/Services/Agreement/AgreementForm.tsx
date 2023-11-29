@@ -1,31 +1,31 @@
-'use client'
+"use client";
 
-import { z } from 'zod'
-import { Input } from '../../Common/Input'
-import { useForm } from 'react-hook-form'
-import { ButtonSave } from '../../Common/ButtonSave'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { IAgreementID } from '@/interfaces/Agreement'
-import { useTransition } from 'react'
-import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
-import ToggleSwitch from '../../ToggleSwitch'
-import { toast } from 'react-toastify'
-import { useRouter } from 'next/navigation'
+import { patchRevalidateItems } from "@/functions/patchRevalidateItems";
+import { IAgreementID } from "@/interfaces/Agreement";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { z } from "zod";
+import ToggleSwitch from "../../ToggleSwitch";
+import { ButtonSave } from "../../common/ButtonSave";
+import { Input } from "../../common/Input";
 
 const schemaAgreementForm = z.object({
   name: z
     .string()
-    .nonempty('Nome do Convênio não pode ser vazio')
+    .nonempty("Nome do Convênio não pode ser vazio")
     .toUpperCase(),
-})
+});
 
-type AgreementsFormProps = z.infer<typeof schemaAgreementForm>
+type AgreementsFormProps = z.infer<typeof schemaAgreementForm>;
 
 export default function AgreementForm({ data }: { data: IAgreementID }) {
-  const [, startTransition] = useTransition()
-  const { back } = useRouter()
+  const [, startTransition] = useTransition();
+  const { back } = useRouter();
 
-  const agreements = data.data
+  const agreements = data.data;
 
   const {
     handleSubmit,
@@ -36,20 +36,20 @@ export default function AgreementForm({ data }: { data: IAgreementID }) {
     defaultValues: {
       name: agreements.name,
     },
-  })
+  });
 
   const handleFormSubmit = (dataForm: AgreementsFormProps) => {
-    const agreementsUrl = `/agreements/${agreements.id}`
+    const agreementsUrl = `/agreements/${agreements.id}`;
 
     startTransition(() =>
       patchRevalidateItems<AgreementsFormProps>(agreementsUrl, dataForm).then(
         (response) => {
-          toast.success(response.message)
-          back()
-        },
-      ),
-    )
-  }
+          toast.success(response.message);
+          back();
+        }
+      )
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -88,5 +88,5 @@ export default function AgreementForm({ data }: { data: IAgreementID }) {
       <ToggleSwitch isChecked={agreements.active} />
       <ButtonSave />
     </form>
-  )
+  );
 }

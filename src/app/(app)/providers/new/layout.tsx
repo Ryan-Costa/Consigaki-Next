@@ -1,4 +1,4 @@
-import { ButtonGoBack } from '@/components/Common/ButtonGoBack'
+import { ButtonGoBack } from '@/components/common/ButtonGoBack'
 import { Metadata } from 'next'
 import { Inter, Roboto } from 'next/font/google'
 import { ReactNode } from 'react'

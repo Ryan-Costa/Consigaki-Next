@@ -1,67 +1,67 @@
-'use client'
+"use client";
 
-import { z } from 'zod'
-import { Input } from '../../Common/Input'
-import { useForm } from 'react-hook-form'
-import { IUser } from '@/interfaces/User'
-import { CpfMask } from '@/components/Mask/CpfMask'
-import { DateMask } from '@/components/Mask/DateMask'
-import { TelMask } from '@/components/Mask/TelMask'
-import { ButtonSave } from '../../Common/ButtonSave'
-import { DropdownForm } from '../../DropdownForm'
-import { useTransition, useEffect } from 'react'
-import ToggleSwitch from '../../ToggleSwitch'
-import { toast } from 'react-toastify'
-import { toUpperCase } from '@/functions/toUpperCase'
+import { CpfMask } from "@/components/Mask/CpfMask";
+import { DateMask } from "@/components/Mask/DateMask";
+import { TelMask } from "@/components/Mask/TelMask";
+import { toUpperCase } from "@/functions/toUpperCase";
+import { IUser } from "@/interfaces/User";
+import { useEffect, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { z } from "zod";
+import { DropdownForm } from "../../DropdownForm";
+import ToggleSwitch from "../../ToggleSwitch";
+import { ButtonSave } from "../../common/ButtonSave";
+import { Input } from "../../common/Input";
 
-import { convertToBoolean } from '@/functions/convertToBoolean'
-import { putRevalidateItems } from '@/functions/putRevalidateItems'
-import { useRouter } from 'next/navigation'
+import { convertToBoolean } from "@/functions/convertToBoolean";
+import { putRevalidateItems } from "@/functions/putRevalidateItems";
+import { useRouter } from "next/navigation";
 
 const schemaUserForm = z.object({
   blocked: z.string(),
-})
+});
 
 interface UserIdProps {
-  dataUserId: IUser
+  dataUserId: IUser;
 }
 
-type UsersFormProps = z.infer<typeof schemaUserForm>
+type UsersFormProps = z.infer<typeof schemaUserForm>;
 
 export default function UserForm({ dataUserId }: UserIdProps) {
-  const [, startTransition] = useTransition()
-  const { back } = useRouter()
+  const [, startTransition] = useTransition();
+  const { back } = useRouter();
 
-  const users = dataUserId.data
+  const users = dataUserId.data;
 
-  const { handleSubmit, register, setValue } = useForm<UsersFormProps>()
+  const { handleSubmit, register, setValue } = useForm<UsersFormProps>();
 
-  const initialValue = Number(users.blocked)
+  const initialValue = Number(users.blocked);
 
   useEffect(() => {
-    setValue('blocked', String(initialValue))
-  }, [setValue, initialValue])
+    setValue("blocked", String(initialValue));
+  }, [setValue, initialValue]);
 
   const handleFormSubmit = (dataForm: UsersFormProps) => {
     const dataFormatted = {
       blocked: convertToBoolean(dataForm.blocked),
-    }
+    };
 
-    let usersUrl: any
+    let usersUrl: any;
 
     if (dataFormatted.blocked) {
-      usersUrl = `/users/${users.id}/block`
+      usersUrl = `/users/${users.id}/block`;
     } else {
-      usersUrl = `/users/${users.id}/unblock`
+      usersUrl = `/users/${users.id}/unblock`;
     }
 
     startTransition(() =>
       putRevalidateItems<UsersFormProps>(usersUrl).then((response) => {
-        toast.success(response.message)
-        back()
-      }),
-    )
-  }
+        toast.success(response.message);
+        back();
+      })
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -138,14 +138,14 @@ export default function UserForm({ dataUserId }: UserIdProps) {
             defaultValue={Number(users.blocked)}
             options={[
               {
-                name: 'liberado',
-                displayName: 'Login Liberado',
-                value: '0',
+                name: "liberado",
+                displayName: "Login Liberado",
+                value: "0",
               },
               {
-                name: 'bloqueado',
-                displayName: 'Login Bloqueado',
-                value: '1',
+                name: "bloqueado",
+                displayName: "Login Bloqueado",
+                value: "1",
               },
             ]}
           />
@@ -172,5 +172,5 @@ export default function UserForm({ dataUserId }: UserIdProps) {
       <ToggleSwitch isChecked={users.active} />
       <ButtonSave type="submit" />
     </form>
-  )
+  );
 }

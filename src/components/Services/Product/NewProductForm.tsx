@@ -1,26 +1,26 @@
-'use client'
+"use client";
 
-import ToggleSwitch from '../../ToggleSwitch'
-import { z } from 'zod'
-import { Input } from '../../Common/Input'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
-import { ButtonSave } from '../../Common/ButtonSave'
-import { postRevalidateItems } from '@/functions/postRevalidateItems'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { DropdownForm } from '../../DropdownForm'
-import { useTransition } from 'react'
+import { postRevalidateItems } from "@/functions/postRevalidateItems";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { DropdownForm } from "../../DropdownForm";
+import ToggleSwitch from "../../ToggleSwitch";
+import { ButtonSave } from "../../common/ButtonSave";
+import { Input } from "../../common/Input";
 
 const schemaNewProductForm = z.object({
-  name: z.string().nonempty('Digite o nome do produto').toUpperCase(),
+  name: z.string().nonempty("Digite o nome do produto").toUpperCase(),
   type: z.string(),
-})
+});
 
-type NewProductFormProps = z.infer<typeof schemaNewProductForm>
+type NewProductFormProps = z.infer<typeof schemaNewProductForm>;
 
 export default function NewProductForm() {
-  const [, startTransition] = useTransition()
-  const { back } = useRouter()
+  const [, startTransition] = useTransition();
+  const { back } = useRouter();
   const {
     handleSubmit,
     register,
@@ -28,26 +28,26 @@ export default function NewProductForm() {
   } = useForm<NewProductFormProps>({
     resolver: zodResolver(schemaNewProductForm),
     defaultValues: {
-      name: '',
-      type: '',
+      name: "",
+      type: "",
     },
-  })
+  });
 
   const handleFormSubmit = (dataForm: NewProductFormProps) => {
-    const { name, type } = dataForm
+    const { name, type } = dataForm;
     const dataFormFormatted = {
       name,
       type: Number(type),
-    }
+    };
 
-    const productsUrl = '/products'
+    const productsUrl = "/products";
 
     startTransition(() =>
-      postRevalidateItems<NewProductFormProps>(productsUrl, dataFormFormatted),
-    )
+      postRevalidateItems<NewProductFormProps>(productsUrl, dataFormFormatted)
+    );
 
-    back()
-  }
+    back();
+  };
 
   return (
     <>
@@ -71,11 +71,11 @@ export default function NewProductForm() {
               register={register}
               defaultValue="Selecione o tipo do produto"
               options={[
-                { name: 'cartao', displayName: 'Cartão', value: 0 },
-                { name: 'emprestimo', displayName: 'Empréstimo', value: 1 },
-                { name: 'previdencia', displayName: 'Previdência', value: 2 },
-                { name: 'seguro', displayName: 'Seguro', value: 3 },
-                { name: 'diversos', displayName: 'Diversos', value: 99 },
+                { name: "cartao", displayName: "Cartão", value: 0 },
+                { name: "emprestimo", displayName: "Empréstimo", value: 1 },
+                { name: "previdencia", displayName: "Previdência", value: 2 },
+                { name: "seguro", displayName: "Seguro", value: 3 },
+                { name: "diversos", displayName: "Diversos", value: 99 },
               ]}
             />
           </div>
@@ -103,5 +103,5 @@ export default function NewProductForm() {
         <ButtonSave />
       </form>
     </>
-  )
+  );
 }

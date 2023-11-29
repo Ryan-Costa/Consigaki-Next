@@ -1,12 +1,12 @@
 'use client'
 
+import { SearchInput } from '@/components/SearchInput'
+import { ButtonAdd } from '@/components/common/ButtonAdd'
+import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
+import { IDataUsers, IUsersID } from '@/interfaces/User'
+import Link from 'next/link'
 import { useEffect, useState, useTransition } from 'react'
 import { IconArrow, IconPartners } from '../../../../public/icons'
-import { IDataUsers, IUsersID } from '@/interfaces/User'
-import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
-import { ButtonAdd } from '@/components/Common/ButtonAdd'
-import { SearchInput } from '@/components/SearchInput'
-import Link from 'next/link'
 import TBodyUsers from './TBodyUsers'
 
 interface UsersProps {

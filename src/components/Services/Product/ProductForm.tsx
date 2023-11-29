@@ -1,30 +1,30 @@
-'use client'
+"use client";
 
-import { z } from 'zod'
-import { Input } from '../../Common/Input'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
-import { IProductID } from '@/interfaces/Product'
-import { ButtonSave } from '../../Common/ButtonSave'
-import { patchRevalidateItems } from '../../../functions/patchRevalidateItems'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { DropdownForm } from '../../DropdownForm'
-import { useTransition } from 'react'
-import ToggleSwitch from '../../ToggleSwitch'
-import { toast } from 'react-toastify'
+import { IProductID } from "@/interfaces/Product";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { z } from "zod";
+import { patchRevalidateItems } from "../../../functions/patchRevalidateItems";
+import { DropdownForm } from "../../DropdownForm";
+import ToggleSwitch from "../../ToggleSwitch";
+import { ButtonSave } from "../../common/ButtonSave";
+import { Input } from "../../common/Input";
 
 const schemaProductForm = z.object({
-  name: z.string().toUpperCase().nonempty('Nome do Produto não pode ser vazio'),
+  name: z.string().toUpperCase().nonempty("Nome do Produto não pode ser vazio"),
   type: z.string(),
-})
+});
 
-type ProductsFormProps = z.infer<typeof schemaProductForm>
+type ProductsFormProps = z.infer<typeof schemaProductForm>;
 
 export default function ProductForm({ data }: { data: IProductID }) {
-  const [, startTransition] = useTransition()
-  const { back } = useRouter()
+  const [, startTransition] = useTransition();
+  const { back } = useRouter();
 
-  const products = data.data
+  const products = data.data;
 
   const {
     handleSubmit,
@@ -36,30 +36,30 @@ export default function ProductForm({ data }: { data: IProductID }) {
       name: products.name,
       type: String(products.type),
     },
-  })
+  });
 
-  console.log(products.type)
+  console.log(products.type);
 
   const handleFormSubmit = (dataForm: ProductsFormProps) => {
-    const { name, type } = dataForm
+    const { name, type } = dataForm;
     const dataFormFormatted = {
       name,
       type: Number(type),
-    }
+    };
 
-    const productsUrl = `/products/${products.id}`
+    const productsUrl = `/products/${products.id}`;
 
     startTransition(() =>
       patchRevalidateItems<ProductsFormProps>(
         productsUrl,
-        dataFormFormatted,
+        dataFormFormatted
       ).then((response) => {
-        console.log(response)
-        toast.success(response.message)
-        back()
-      }),
-    )
-  }
+        console.log(response);
+        toast.success(response.message);
+        back();
+      })
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -85,11 +85,11 @@ export default function ProductForm({ data }: { data: IProductID }) {
             name="type"
             register={register}
             options={[
-              { name: 'cartao', displayName: 'Cartão', value: 0 },
-              { name: 'emprestimo', displayName: 'Empréstimo', value: 1 },
-              { name: 'previdencia', displayName: 'Previdência', value: 2 },
-              { name: 'seguro', displayName: 'Seguro', value: 3 },
-              { name: 'diversos', displayName: 'Diversos', value: 99 },
+              { name: "cartao", displayName: "Cartão", value: 0 },
+              { name: "emprestimo", displayName: "Empréstimo", value: 1 },
+              { name: "previdencia", displayName: "Previdência", value: 2 },
+              { name: "seguro", displayName: "Seguro", value: 3 },
+              { name: "diversos", displayName: "Diversos", value: 99 },
             ]}
           />
         </div>
@@ -115,5 +115,5 @@ export default function ProductForm({ data }: { data: IProductID }) {
       <ToggleSwitch isChecked={products.active} />
       <ButtonSave type="submit" />
     </form>
-  )
+  );
 }

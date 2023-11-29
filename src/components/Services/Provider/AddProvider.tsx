@@ -1,11 +1,11 @@
-import { Inter } from 'next/font/google'
-import { IconPartners } from '../../../../public/icons'
-import { ButtonGoBack } from '../../Common/ButtonGoBack'
-import NewProviderForm from './NewProviderForm'
+import { Inter } from "next/font/google";
+import { IconPartners } from "../../../../public/icons";
+import { ButtonGoBack } from "../../common/ButtonGoBack";
+import NewProviderForm from "./NewProviderForm";
 const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default function AddProvider() {
   return (
@@ -23,5 +23,5 @@ export default function AddProvider() {
       </p>
       <NewProviderForm />
     </div>
-  )
+  );
 }

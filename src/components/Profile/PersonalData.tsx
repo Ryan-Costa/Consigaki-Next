@@ -1,35 +1,35 @@
-'use client'
+"use client";
 
-import { ButtonSave } from '../Common/ButtonSave'
-import { Roboto } from 'next/font/google'
-import { IProfileID, PostAvatar } from '@/interfaces/Profile'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { TelMask } from '../Mask/TelMask'
-import { CpfMask } from '../Mask/CpfMask'
-import { toUpperCase } from '@/functions/toUpperCase'
-import ImageUploadProductAgreement from '../UI/ImageUploadProductAgreement'
-import { useTransition } from 'react'
-import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
-import { toast } from 'react-toastify'
+import { patchRevalidateItems } from "@/functions/patchRevalidateItems";
+import { toUpperCase } from "@/functions/toUpperCase";
+import { IProfileID, PostAvatar } from "@/interfaces/Profile";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Roboto } from "next/font/google";
+import { useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { z } from "zod";
+import { CpfMask } from "../Mask/CpfMask";
+import { TelMask } from "../Mask/TelMask";
+import ImageUploadProductAgreement from "../UI/ImageUploadProductAgreement";
+import { ButtonSave } from "../common/ButtonSave";
 
 const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 const schemaProfileForm = z.object({
   avatar: z
     .instanceof(FileList)
     .transform((list) => (list.length > 0 ? list.item(0) : null)),
-})
+});
 
-type ProfileFormProps = z.infer<typeof schemaProfileForm>
+type ProfileFormProps = z.infer<typeof schemaProfileForm>;
 
 export default function PersonalData({ data }: { data: IProfileID }) {
-  const [, startTransition] = useTransition()
-  const profile = data.data
+  const [, startTransition] = useTransition();
+  const profile = data.data;
 
   const {
     handleSubmit,
@@ -37,23 +37,23 @@ export default function PersonalData({ data }: { data: IProfileID }) {
     formState: { errors },
   } = useForm<ProfileFormProps>({
     resolver: zodResolver(schemaProfileForm),
-  })
+  });
 
   const handleFormSubmit = (dataForm: ProfileFormProps) => {
-    const { avatar } = dataForm
-    const formData = new FormData()
-    formData.append('docs', avatar as File)
+    const { avatar } = dataForm;
+    const formData = new FormData();
+    formData.append("docs", avatar as File);
 
     startTransition(() =>
-      patchRevalidateItems<PostAvatar>('/users/create-avatar', formData)
+      patchRevalidateItems<PostAvatar>("/users/create-avatar", formData)
         .then((response) => {
-          toast.success(response.message)
+          toast.success(response.message);
         })
         .catch((error) => {
-          toast.error(error.message)
-        }),
-    )
-  }
+          toast.error(error.message);
+        })
+    );
+  };
 
   return (
     <>
@@ -171,5 +171,5 @@ export default function PersonalData({ data }: { data: IProfileID }) {
         <ButtonSave />
       </form>
     </>
-  )
+  );
 }

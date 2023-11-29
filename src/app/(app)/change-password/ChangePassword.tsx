@@ -3,9 +3,9 @@
 import { Metadata } from 'next'
 import { Inter, Roboto } from 'next/font/google'
 
-import { ButtonGoBack } from '@/components/Common/ButtonGoBack'
-import { ButtonSave } from '@/components/Common/ButtonSave'
-import { Input } from '@/components/Common/Input'
+import { ButtonGoBack } from '@/components/common/ButtonGoBack'
+import { ButtonSave } from '@/components/common/ButtonSave'
+import { Input } from '@/components/common/Input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'

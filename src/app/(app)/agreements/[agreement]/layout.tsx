@@ -1,19 +1,19 @@
-import { ButtonGoBack } from '@/components/Common/ButtonGoBack'
-import { Roboto } from 'next/font/google'
-import { ReactNode } from 'react'
-import { IconPartners } from '../../../../../public/icons'
+import { ButtonGoBack } from "@/components/common/ButtonGoBack";
+import { Roboto } from "next/font/google";
+import { ReactNode } from "react";
+import { IconPartners } from "../../../../../public/icons";
 
 const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default function EditAgreementLayout({
   children,
   params,
 }: {
-  children: ReactNode
-  params: { agreement: string }
+  children: ReactNode;
+  params: { agreement: string };
 }) {
   return (
     <div
@@ -28,5 +28,5 @@ export default function EditAgreementLayout({
       </div>
       {children}
     </div>
-  )
+  );
 }
