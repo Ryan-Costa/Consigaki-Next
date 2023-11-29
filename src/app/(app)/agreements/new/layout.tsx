@@ -1,27 +1,27 @@
-import { ButtonGoBack } from "@/components/compCommon/ButtonGoBack";
-import { Metadata } from "next";
-import { Inter, Roboto } from "next/font/google";
-import { ReactNode } from "react";
-import { IconPartners } from "../../../../../public/icons";
+import { ButtonGoBack } from '@/components/compCommon/ButtonGoBack'
+import { Metadata } from 'next'
+import { Inter, Roboto } from 'next/font/google'
+import { ReactNode } from 'react'
+import { IconPartners } from '../../../../../public/icons'
 
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 export const metadata: Metadata = {
-  title: "Novo Convênio",
-};
+  title: 'Novo Convênio',
+}
 
 export default function NewAgreementLayout({
   children,
 }: {
-  children: ReactNode;
+  children: ReactNode
 }) {
   return (
     <>
@@ -44,5 +44,5 @@ export default function NewAgreementLayout({
         </div>
       </div>
     </>
-  );
+  )
 }

@@ -1,25 +1,25 @@
-import { UserBankAccount } from "@/interfaces/UserBankAccount";
-import api from "@/services/server/api";
-import useSWR from "swr";
-import { Input } from "../../compCommon/Input";
+import { UserBankAccount } from '@/interfaces/UserBankAccount'
+import api from '@/services/server/api'
+import useSWR from 'swr'
+import { Input } from '../../compCommon/Input'
 
 interface BankDataUserProps {
-  userId: string;
+  userId: string
 }
 
 export default function BankData({ userId }: BankDataUserProps) {
-  const URL = `/users-bank-account/${userId}`;
+  const URL = `/users-bank-account/${userId}`
 
   const { data, error } = useSWR(URL, (url) =>
-    api.get<UserBankAccount>(url).then((res) => res.data.data)
-  );
+    api.get<UserBankAccount>(url).then((res) => res.data.data),
+  )
 
   if (error) {
-    return <div>Error ao carregar os dados</div>;
+    return <div>Error ao carregar os dados</div>
   }
 
   if (!data) {
-    return <div>Carregando...</div>;
+    return <div>Carregando...</div>
   }
 
   return (
@@ -79,5 +79,5 @@ export default function BankData({ userId }: BankDataUserProps) {
         />
       </div>
     </>
-  );
+  )
 }

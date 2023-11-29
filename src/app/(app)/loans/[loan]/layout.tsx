@@ -1,12 +1,12 @@
-import { ButtonGoBack } from "@/components/compCommon/ButtonGoBack";
-import { Roboto } from "next/font/google";
-import { ReactNode } from "react";
-import { IconPartners } from "../../../../../public/icons";
+import { ButtonGoBack } from '@/components/compCommon/ButtonGoBack'
+import { Roboto } from 'next/font/google'
+import { ReactNode } from 'react'
+import { IconPartners } from '../../../../../public/icons'
 
 const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 export default function EditLoansLayout({ children }: { children: ReactNode }) {
   return (
@@ -22,5 +22,5 @@ export default function EditLoansLayout({ children }: { children: ReactNode }) {
       </div>
       {children}
     </div>
-  );
+  )
 }

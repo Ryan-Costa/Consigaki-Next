@@ -3,7 +3,11 @@ import ImageUploadProductAgreement from '@/components/UI/ImageUploadProductAgree
 import { ButtonAdd } from '@/components/compCommon/ButtonAdd'
 import { formatString } from '@/functions/formatString'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
-import { AgreementProduct, PostAgreementProduct, ProductGetAll } from '@/interfaces/AgreementProduct'
+import {
+  AgreementProduct,
+  PostAgreementProduct,
+  ProductGetAll,
+} from '@/interfaces/AgreementProduct'
 import api from '@/services/server/api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Roboto } from 'next/font/google'

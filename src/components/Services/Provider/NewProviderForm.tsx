@@ -1,24 +1,24 @@
-"use client";
+'use client'
 
-import { postRevalidateItems } from "@/functions/postRevalidateItems";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import ToggleSwitch from "../../ToggleSwitch";
-import { ButtonSave } from "../../compCommon/ButtonSave";
-import { Input } from "../../compCommon/Input";
+import { postRevalidateItems } from '@/functions/postRevalidateItems'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import ToggleSwitch from '../../ToggleSwitch'
+import { ButtonSave } from '../../compCommon/ButtonSave'
+import { Input } from '../../compCommon/Input'
 
 const schemaNewProviderForm = z.object({
-  name: z.string().nonempty("Digite o nome do produto").toUpperCase(),
-});
+  name: z.string().nonempty('Digite o nome do produto').toUpperCase(),
+})
 
-type NewProviderFormProps = z.infer<typeof schemaNewProviderForm>;
+type NewProviderFormProps = z.infer<typeof schemaNewProviderForm>
 
 export default function NewProviderForm() {
-  const [, startTransition] = useTransition();
-  const { back } = useRouter();
+  const [, startTransition] = useTransition()
+  const { back } = useRouter()
   const {
     handleSubmit,
     register,
@@ -26,19 +26,19 @@ export default function NewProviderForm() {
   } = useForm<NewProviderFormProps>({
     resolver: zodResolver(schemaNewProviderForm),
     defaultValues: {
-      name: "",
+      name: '',
     },
-  });
+  })
 
   const handleFormSubmit = (dataForm: NewProviderFormProps) => {
-    const providerUrl = "/providers";
+    const providerUrl = '/providers'
 
     startTransition(() =>
-      postRevalidateItems<NewProviderFormProps>(providerUrl, dataForm)
-    );
+      postRevalidateItems<NewProviderFormProps>(providerUrl, dataForm),
+    )
 
-    back();
-  };
+    back()
+  }
 
   return (
     <>
@@ -80,5 +80,5 @@ export default function NewProviderForm() {
         <ButtonSave />
       </form>
     </>
-  );
+  )
 }

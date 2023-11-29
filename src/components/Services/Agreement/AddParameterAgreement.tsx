@@ -3,8 +3,8 @@ import { Input } from '@/components/compCommon/Input'
 import { DropdownForm } from '@/components/DropdownForm'
 import { postRevalidateItems } from '@/functions/postRevalidateItems'
 import {
-    AgreementParameter,
-    PostAgreementParameter,
+  AgreementParameter,
+  PostAgreementParameter,
 } from '@/interfaces/AgreementParameter'
 import api from '@/services/server/api'
 import { zodResolver } from '@hookform/resolvers/zod'

@@ -1,54 +1,54 @@
-"use client";
+'use client'
 
-import { postRevalidatePageItems } from "@/functions/postRevalidatePageItems";
-import { IDataProducts, IProducts } from "@/interfaces/Product";
-import Link from "next/link";
-import { useEffect, useState, useTransition } from "react";
-import { IconArrow, IconPartners } from "../../../../public/icons";
-import { SearchInput } from "../../SearchInput";
-import { ButtonAdd } from "../../compCommon/ButtonAdd";
-import TBodyProducts from "./TBodyProducts";
+import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
+import { IDataProducts, IProducts } from '@/interfaces/Product'
+import Link from 'next/link'
+import { useEffect, useState, useTransition } from 'react'
+import { IconArrow, IconPartners } from '../../../../public/icons'
+import { SearchInput } from '../../SearchInput'
+import { ButtonAdd } from '../../compCommon/ButtonAdd'
+import TBodyProducts from './TBodyProducts'
 
 interface ProductsProps {
-  productData: IDataProducts;
+  productData: IDataProducts
 }
 
 export default function TableProducts({ productData }: ProductsProps) {
-  const [, startTransition] = useTransition();
-  const [totalPages, setTotalPages] = useState(productData.data.totalPages);
+  const [, startTransition] = useTransition()
+  const [totalPages, setTotalPages] = useState(productData.data.totalPages)
   const [products, setProducts] = useState<IProducts[]>(
-    productData.data.products
-  );
-  const [currentPage, setCurrentPage] = useState(productData.data.currentPage);
-  const [searchTerm, setSearchTerm] = useState("");
-  const itemsPerPage = 10;
+    productData.data.products,
+  )
+  const [currentPage, setCurrentPage] = useState(productData.data.currentPage)
+  const [searchTerm, setSearchTerm] = useState('')
+  const itemsPerPage = 10
 
   useEffect(() => {
     const body = {
       keyword: searchTerm,
       page: currentPage,
       size: itemsPerPage,
-    };
-    const urlProductsGetAll = "/products/get-all";
+    }
+    const urlProductsGetAll = '/products/get-all'
     startTransition(() =>
       postRevalidatePageItems<IDataProducts>(urlProductsGetAll, body).then(
         (response) => {
           if (response) {
-            setProducts(response.data.products);
-            setTotalPages(response.data.totalPages);
+            setProducts(response.data.products)
+            setTotalPages(response.data.totalPages)
           }
-        }
-      )
-    );
-  }, [currentPage, searchTerm]);
+        },
+      ),
+    )
+  }, [currentPage, searchTerm])
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+    setCurrentPage(pageNumber)
+  }
 
   const handleSearch = (value: string) => {
-    setSearchTerm(value);
-  };
+    setSearchTerm(value)
+  }
 
   return (
     <>
@@ -89,7 +89,7 @@ export default function TableProducts({ productData }: ProductsProps) {
             <div
               key={index}
               className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${
-                index + 1 === currentPage ? "bg-deg1 text-white" : ""
+                index + 1 === currentPage ? 'bg-deg1 text-white' : ''
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
@@ -105,5 +105,5 @@ export default function TableProducts({ productData }: ProductsProps) {
         </button>
       </div>
     </>
-  );
+  )
 }

@@ -1,32 +1,32 @@
-"use client";
+'use client'
 
-import { patchRevalidateItems } from "@/functions/patchRevalidateItems";
-import { putRevalidateItems } from "@/functions/putRevalidateItems";
-import { ILoanID } from "@/interfaces/Loan";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { patchRevalidateItems } from '@/functions/patchRevalidateItems'
+import { putRevalidateItems } from '@/functions/putRevalidateItems'
+import { ILoanID } from '@/interfaces/Loan'
+import { zodResolver } from '@hookform/resolvers/zod'
 // import { useRouter } from 'next/navigation'
-import { ChangeEvent, useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { z } from "zod";
-import { DropdownForm } from "../../DropdownForm";
-import { ButtonSave } from "../../compCommon/ButtonSave";
-import { Input } from "../../compCommon/Input";
-import LoansDocuments from "./LoansDocuments";
+import { ChangeEvent, useState, useTransition } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { z } from 'zod'
+import { DropdownForm } from '../../DropdownForm'
+import { ButtonSave } from '../../compCommon/ButtonSave'
+import { Input } from '../../compCommon/Input'
+import LoansDocuments from './LoansDocuments'
 
 const schemaLoansForm = z.object({
   status: z.string(),
   comments: z.string().optional(),
-});
+})
 
-type LoansFormProps = z.infer<typeof schemaLoansForm>;
+type LoansFormProps = z.infer<typeof schemaLoansForm>
 
 export default function LoansForm({ data }: { data: ILoanID }) {
-  const [valueTextPendencies, setValueTextPendencies] = useState("");
-  const [, startTransition] = useTransition();
+  const [valueTextPendencies, setValueTextPendencies] = useState('')
+  const [, startTransition] = useTransition()
   //   const { back } = useRouter()
-  const loans = data.data;
-  const [obsPendencies, setObsPendencies] = useState(loans.status !== 2);
+  const loans = data.data
+  const [obsPendencies, setObsPendencies] = useState(loans.status !== 2)
   const {
     handleSubmit,
     register,
@@ -38,66 +38,66 @@ export default function LoansForm({ data }: { data: ILoanID }) {
     defaultValues: {
       status: String(loans.status),
     },
-  });
+  })
 
   const statusChange = (value: string) => {
-    if (value === "2") {
-      setObsPendencies(false);
+    if (value === '2') {
+      setObsPendencies(false)
     } else {
-      setObsPendencies(true);
-      setValueTextPendencies("");
+      setObsPendencies(true)
+      setValueTextPendencies('')
       reset({
         comments: undefined,
-      });
+      })
     }
-  };
+  }
 
   const handleChangePendencies = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = event.target;
-    setValueTextPendencies(value);
-  };
+    const { value } = event.target
+    setValueTextPendencies(value)
+  }
 
   const handleFormSubmit = (dataForm: LoansFormProps) => {
-    const updateStatusUrl = `/loans/${loans.id}/${dataForm.status}`;
-    const setPendingUrl = `/loans/${loans.id}/set-pending`;
-    console.log("dados do formulário", dataForm);
+    const updateStatusUrl = `/loans/${loans.id}/${dataForm.status}`
+    const setPendingUrl = `/loans/${loans.id}/set-pending`
+    console.log('dados do formulário', dataForm)
 
-    if (dataForm.status === "2") {
-      if (dataForm.comments === undefined || dataForm.comments === "") {
-        console.log("seta o erro");
-        setError("comments", {
-          type: "custom",
-          message: "Digite o motivo da pendência",
-        });
+    if (dataForm.status === '2') {
+      if (dataForm.comments === undefined || dataForm.comments === '') {
+        console.log('seta o erro')
+        setError('comments', {
+          type: 'custom',
+          message: 'Digite o motivo da pendência',
+        })
       } else {
-        console.log("seta pendencia");
+        console.log('seta pendencia')
 
         startTransition(() =>
           patchRevalidateItems<LoansFormProps>(setPendingUrl, dataForm.comments)
             .then((response) => {
-              toast.success(response.message);
+              toast.success(response.message)
             })
             .catch((error) => {
-              toast.error(error.response.message);
-            })
-        );
+              toast.error(error.response.message)
+            }),
+        )
         // back()
       }
     } else {
-      console.log("atualiza o status");
+      console.log('atualiza o status')
 
       startTransition(() =>
         putRevalidateItems<LoansFormProps>(updateStatusUrl)
           .then((res) => {
-            toast.success(res.response.message);
+            toast.success(res.response.message)
           })
           .catch((error) => {
-            console.log("ERRO ===>", error);
+            console.log('ERRO ===>', error)
             // toast.error(error.response.message)
-          })
-      );
+          }),
+      )
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -111,7 +111,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="username"
           type="text"
           readOnly
-          value={loans.user.name ?? "Não possui"}
+          value={loans.user.name ?? 'Não possui'}
           className="w-full"
         />
         <Input
@@ -119,7 +119,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="email"
           type="text"
           readOnly
-          value={loans.user.email ?? "Não possui"}
+          value={loans.user.email ?? 'Não possui'}
           className="w-full"
         />
       </div>
@@ -129,7 +129,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="cpf"
           type="text"
           readOnly
-          value={loans.user.cpf ?? "Não possui"}
+          value={loans.user.cpf ?? 'Não possui'}
           className="w-full"
         />
         <Input
@@ -137,7 +137,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="phoneNumber"
           type="text"
           readOnly
-          value={loans.user.phoneNumber ?? "Não possui"}
+          value={loans.user.phoneNumber ?? 'Não possui'}
           className="w-full"
         />
         <Input
@@ -146,7 +146,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           type="text"
           readOnly
           value={
-            new Date(loans.user.birthDate).toLocaleDateString() ?? "Não possui"
+            new Date(loans.user.birthDate).toLocaleDateString() ?? 'Não possui'
           }
           className="w-full"
         />
@@ -157,7 +157,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="createdAt"
           type="text"
           disabled
-          value={new Date(loans.createdAt).toLocaleDateString() ?? "Não possui"}
+          value={new Date(loans.createdAt).toLocaleDateString() ?? 'Não possui'}
           className="w-full"
         />
         <Input
@@ -165,7 +165,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="updatedAt"
           type="text"
           disabled
-          value={new Date(loans.updatedAt).toLocaleDateString() ?? "Não possui"}
+          value={new Date(loans.updatedAt).toLocaleDateString() ?? 'Não possui'}
           className="w-full"
         />
       </div>
@@ -179,7 +179,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="agreement"
           type="text"
           readOnly
-          value={loans.userAgreements.agreement.name ?? "Não possui"}
+          value={loans.userAgreements.agreement.name ?? 'Não possui'}
           className="w-full"
         />
         <Input
@@ -187,7 +187,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="registration"
           type="text"
           readOnly
-          value={loans.userAgreements.registration ?? "Não possui"}
+          value={loans.userAgreements.registration ?? 'Não possui'}
           className="w-full"
         />
       </div>
@@ -197,7 +197,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="occupation"
           type="text"
           readOnly
-          value={loans.userAgreements.job_title ?? "Não possui"}
+          value={loans.userAgreements.job_title ?? 'Não possui'}
           className="w-full"
         />
         <Input
@@ -205,7 +205,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="position"
           type="text"
           readOnly
-          value={loans.userAgreements.position ?? "Não possui"}
+          value={loans.userAgreements.position ?? 'Não possui'}
           className="w-full"
         />
         <Input
@@ -213,7 +213,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="provider"
           type="text"
           readOnly
-          value={loans.provider.name ?? "Não possui"}
+          value={loans.provider.name ?? 'Não possui'}
           className="w-full"
         />
         <Input
@@ -230,7 +230,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="installment"
           type="text"
           readOnly
-          value={loans.installment ?? "Não possui"}
+          value={loans.installment ?? 'Não possui'}
           className="w-full"
         />
         <Input
@@ -238,7 +238,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="term"
           type="text"
           readOnly
-          value={loans.term ?? "Não possui"}
+          value={loans.term ?? 'Não possui'}
           className="w-full"
         />
         <Input
@@ -246,13 +246,13 @@ export default function LoansForm({ data }: { data: ILoanID }) {
           name="fee"
           type="text"
           readOnly
-          value={loans.fee ?? "Não possui"}
+          value={loans.fee ?? 'Não possui'}
           className="w-full"
         />
         <Input
           label="ADF"
           name="adf"
-          value={loans.adf ?? "Não possui"}
+          value={loans.adf ?? 'Não possui'}
           readOnly
           type="text"
           className="w-full"
@@ -289,13 +289,13 @@ export default function LoansForm({ data }: { data: ILoanID }) {
             name="status"
             valueSelected={statusChange}
             options={[
-              { name: "solicitado", displayName: "Solicitado", value: 0 },
-              { name: "crivo", displayName: "Crivo", value: 1 },
-              { name: "pendente", displayName: "Pendente", value: 2 },
-              { name: "reprovado", displayName: "Reprovado", value: 3 },
-              { name: "cancelado", displayName: "Cancelado", value: 4 },
-              { name: "integrado", displayName: "Integrado", value: 5 },
-              { name: "pago", displayName: "Pago", value: 99 },
+              { name: 'solicitado', displayName: 'Solicitado', value: 0 },
+              { name: 'crivo', displayName: 'Crivo', value: 1 },
+              { name: 'pendente', displayName: 'Pendente', value: 2 },
+              { name: 'reprovado', displayName: 'Reprovado', value: 3 },
+              { name: 'cancelado', displayName: 'Cancelado', value: 4 },
+              { name: 'integrado', displayName: 'Integrado', value: 5 },
+              { name: 'pago', displayName: 'Pago', value: 99 },
             ]}
           />
         </div>
@@ -306,7 +306,7 @@ export default function LoansForm({ data }: { data: ILoanID }) {
             Observação de pendências
           </label>
           <textarea
-            {...register("comments")}
+            {...register('comments')}
             className="h-[150px] w-full resize-none rounded-lg border border-gray-400 px-6 py-2"
             disabled={obsPendencies}
             value={valueTextPendencies}
@@ -327,5 +327,5 @@ export default function LoansForm({ data }: { data: ILoanID }) {
 
       <ButtonSave type="submit" />
     </form>
-  );
+  )
 }

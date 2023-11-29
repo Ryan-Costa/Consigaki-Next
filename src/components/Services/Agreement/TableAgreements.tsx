@@ -1,55 +1,53 @@
-"use client";
+'use client'
 
-import { postRevalidatePageItems } from "@/functions/postRevalidatePageItems";
-import { IAgreements, IDataAgreements } from "@/interfaces/Agreement";
-import Link from "next/link";
-import { useEffect, useState, useTransition } from "react";
-import { IconArrow, IconPartners } from "../../../../public/icons";
-import { SearchInput } from "../../SearchInput";
-import { ButtonAdd } from "../../compCommon/ButtonAdd";
-import TBodyAgreements from "./TBodyAgreements";
+import { postRevalidatePageItems } from '@/functions/postRevalidatePageItems'
+import { IAgreements, IDataAgreements } from '@/interfaces/Agreement'
+import Link from 'next/link'
+import { useEffect, useState, useTransition } from 'react'
+import { IconArrow, IconPartners } from '../../../../public/icons'
+import { SearchInput } from '../../SearchInput'
+import { ButtonAdd } from '../../compCommon/ButtonAdd'
+import TBodyAgreements from './TBodyAgreements'
 interface AgreementsProps {
-  agreementData: IDataAgreements;
+  agreementData: IDataAgreements
 }
 
 export default function TableAgreements({ agreementData }: AgreementsProps) {
-  const [, startTransition] = useTransition();
-  const [totalPages, setTotalPages] = useState(agreementData.data.totalPages);
+  const [, startTransition] = useTransition()
+  const [totalPages, setTotalPages] = useState(agreementData.data.totalPages)
   const [agreements, setAgreements] = useState<IAgreements[]>(
-    agreementData.data.agreements
-  );
-  const [currentPage, setCurrentPage] = useState(
-    agreementData.data.currentPage
-  );
-  const [searchTerm, setSearchTerm] = useState("");
-  const itemsPerPage = 10;
+    agreementData.data.agreements,
+  )
+  const [currentPage, setCurrentPage] = useState(agreementData.data.currentPage)
+  const [searchTerm, setSearchTerm] = useState('')
+  const itemsPerPage = 10
 
   useEffect(() => {
     const body = {
       keyword: searchTerm,
       page: currentPage,
       size: itemsPerPage,
-    };
-    const urlAgreementsGetAll = "/agreements/get-all";
+    }
+    const urlAgreementsGetAll = '/agreements/get-all'
     startTransition(() =>
       postRevalidatePageItems<IDataAgreements>(urlAgreementsGetAll, body).then(
         (response) => {
           if (response) {
-            setAgreements(response.data.agreements);
-            setTotalPages(response.data.totalPages);
+            setAgreements(response.data.agreements)
+            setTotalPages(response.data.totalPages)
           }
-        }
-      )
-    );
-  }, [currentPage, searchTerm]);
+        },
+      ),
+    )
+  }, [currentPage, searchTerm])
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+    setCurrentPage(pageNumber)
+  }
 
   const handleSearch = (value: string) => {
-    setSearchTerm(value);
-  };
+    setSearchTerm(value)
+  }
 
   return (
     <>
@@ -61,7 +59,7 @@ export default function TableAgreements({ agreementData }: AgreementsProps) {
           <SearchInput onSearch={handleSearch} />
         </div>
       </div>
-      <Link href={"/agreements/new"}>
+      <Link href={'/agreements/new'}>
         <ButtonAdd name="Convênio" />
       </Link>
 
@@ -91,7 +89,7 @@ export default function TableAgreements({ agreementData }: AgreementsProps) {
               <div
                 key={index}
                 className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm border border-black ${
-                  index + 1 === currentPage ? "bg-deg1 text-white" : ""
+                  index + 1 === currentPage ? 'bg-deg1 text-white' : ''
                 }`}
                 onClick={() => handlePageChange(index + 1)}
               >
@@ -108,5 +106,5 @@ export default function TableAgreements({ agreementData }: AgreementsProps) {
         </div>
       </div>
     </>
-  );
+  )
 }
